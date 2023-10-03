@@ -25,3 +25,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.myfont-xl {
+  font-size: 2.5rem;
+}

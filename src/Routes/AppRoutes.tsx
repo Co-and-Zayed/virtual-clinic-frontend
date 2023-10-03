@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { routes } from "Routes/routes";
+import { routes } from "Routes/VirtualClinicRoutes/routes";
 
 const AppRoutes = () => {
   return (

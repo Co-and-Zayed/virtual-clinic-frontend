@@ -8,6 +8,7 @@ import CommonDashboardScreen from "screens/VirtualClinicScreens/CommonScreens/Co
 import CommonSettingsScreen from "screens/VirtualClinicScreens/CommonScreens/CommonSettingsScreen/CommonSettingsScreen";
 
 import PatientDoctorsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/DoctorsScreen";
+import PrescriptionsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PrescriptionsScreen/PrescriptionsScreen";
 import DoctorPatientsScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/PatientsScreen/PatientsScreen";
 export const routes = [
   {
@@ -38,4 +39,9 @@ export const routes = [
     element: <CommonSettingsScreen />,
     parent: <ProtectedRoutes />,
   },
+  {
+    path: Routes.PRESCRIPTIONS_PATH,
+    element: <PrescriptionsScreen />,
+    parent: <ProtectedRoutes />,
+  }
 ];

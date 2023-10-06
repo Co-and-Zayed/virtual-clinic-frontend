@@ -5,4 +5,5 @@ export const DASHBOARD_PATH = "/dashboard";
 export const PATIENTS_PATH = "/patients";
 export const DOCTORS_PATH = "/doctors";
 export const SETTINGS_PATH = "/settings";
-export const PRESCRIPTIONS_PATH = "/prescriptions/:id";
+export const PRESCRIPTIONS_PATH = "/prescriptions";
+export const PRESCRIPTION_PATH = "/prescriptions/:id";

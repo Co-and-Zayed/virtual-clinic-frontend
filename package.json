@@ -1,4 +1,5 @@
 {
+  "proxy": "http://127.0.0.1:8000",
   "name": "co-and-zayed-frontend",
   "version": "0.1.0",
   "private": true,

@@ -1,0 +1,12 @@
+.packageItem {
+  background-color: pink;
+  padding-block: 1rem;
+  padding-left: 1rem;
+  padding-right: 4rem;
+  border-radius: 1rem;
+}
+
+.packageItem h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}

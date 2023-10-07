@@ -9,6 +9,11 @@ import CommonSettingsScreen from "screens/VirtualClinicScreens/CommonScreens/Com
 
 import PatientDoctorsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/DoctorsScreen";
 import DoctorPatientsScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/PatientsScreen/PatientsScreen";
+
+import AdminDoctorsScreen from "screens/VirtualClinicScreens/User Screens/Admin Screens/DoctorsScreen/DoctorsScreen";
+import AdminPackagesScreen from "screens/VirtualClinicScreens/User Screens/Admin Screens/PackagesScreen/PackagesScreen";
+import AdminAdminsScreen from "screens/VirtualClinicScreens/User Screens/Admin Screens/AdminsScreen/AdminsScreen";
+
 export const routes = [
   {
     path: Routes.HOME_PATH,
@@ -36,6 +41,21 @@ export const routes = [
   {
     path: Routes.SETTINGS_PATH,
     element: <CommonSettingsScreen />,
+    parent: <ProtectedRoutes />,
+  },
+  {
+    path: Routes.ADMINS_PATH,
+    element: <AdminAdminsScreen />,
+    parent: <ProtectedRoutes />,
+  },
+  {
+    path: Routes.PACKAGES_PATH,
+    element: <AdminPackagesScreen />,
+    parent: <ProtectedRoutes />,
+  },
+  {
+    path: Routes.VIEW_DOCTORS_PATH,
+    element: <AdminDoctorsScreen />,
     parent: <ProtectedRoutes />,
   },
 ];

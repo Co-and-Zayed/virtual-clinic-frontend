@@ -1,6 +1,7 @@
 export const listAllUsers = () => {
-  return "userAPI/getUsers";
+  return `userAPI/getUsers`;
 };
+
 
 export const listAllPrescriptions = () => {
   return "prescriptionAPI/getPrescriptions";

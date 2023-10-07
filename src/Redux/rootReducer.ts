@@ -3,9 +3,10 @@ import { listAllUsersReducer } from "./VirtualClinicRedux/ListAllUsers/listAllUs
 
 import { listAllPatientsReducer } from "./VirtualClinicRedux/ListAllPatients/listAllPatientsReducer";
 import { listPatientInfoReducer } from "./VirtualClinicRedux/ListPatientInfo/listPatientInfoReducer";
+import { listPatientByNameReducer } from "./VirtualClinicRedux/ListPatientByName/listPatientByNameReducer";
 
 export const appReducer = combineReducers({
-  listAllUsersReducer, listAllPatientsReducer, listPatientInfoReducer
+  listAllUsersReducer, listAllPatientsReducer, listPatientInfoReducer, listPatientByNameReducer
 });
 
 export const rootReducers = (state: any, action: any) => {

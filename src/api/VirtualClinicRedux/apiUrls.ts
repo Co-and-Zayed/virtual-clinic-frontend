@@ -8,12 +8,12 @@ export const listAllPatients = () => {
  
 };
 
-export const listPatientInfo = (_id:any) => {
-  return `doctor/getPatientInfo/${_id}`;
+export const listPatientInfo = () => {
+  return `doctor/getPatientInfo/`;
 };
 
-export const listPatientByName = (name:any) => {
-  return `doctor/getPatientByName/${name}`;
+export const listPatientByName = () => {
+  return `doctor/getPatientsByName/`;
 };
 
 export const listUpcomingAptmnts = (doctor:any) => {

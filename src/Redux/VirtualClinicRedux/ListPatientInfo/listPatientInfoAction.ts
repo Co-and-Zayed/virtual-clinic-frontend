@@ -15,7 +15,7 @@ export const listPatientInfoAction = (requestBody?: any) => async (dispatch: Dis
     
 
     const response = await api.post(
-        listPatientInfo({}), // we need to pass the id
+        listPatientInfo(), // we need to pass the id
         requestBody , // (for requests with a body)
     );
 

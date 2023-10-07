@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import { listAllUsersReducer } from "./VirtualClinicRedux/ListAllUsers/listAllUsersReducer";
+import { getDoctorInfoReducer } from "./VirtualClinicRedux/GetDoctorInfo/getDoctorInfoReducer";
 
 export const appReducer = combineReducers({
-  listAllUsersReducer,
+  getDoctorInfoReducer,
 });
 
 export const rootReducers = (state: any, action: any) => {

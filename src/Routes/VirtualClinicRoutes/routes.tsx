@@ -9,6 +9,9 @@ import CommonSettingsScreen from "screens/VirtualClinicScreens/CommonScreens/Com
 
 import PatientDoctorsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/DoctorsScreen";
 import DoctorPatientsScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/PatientsScreen/PatientsScreen";
+
+import RegisterScreen from "screens/VirtualClinicScreens/RegisterScreens/RegisterScreen";
+
 export const routes = [
   {
     path: Routes.HOME_PATH,
@@ -38,4 +41,8 @@ export const routes = [
     element: <CommonSettingsScreen />,
     parent: <ProtectedRoutes />,
   },
+  {
+    path: Routes.REGISTER_PATH,
+    element: <RegisterScreen />
+  }
 ];

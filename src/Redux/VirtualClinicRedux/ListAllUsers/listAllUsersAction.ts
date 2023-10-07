@@ -5,7 +5,7 @@ import {
   USERS_DATA_LOADING,
   USERS_DATA_SUCCESS,
   USERS_DATA_FAILURE,
-} from "redux/VirtualClinicRedux/types"; // Import your action types here
+} from "Redux/VirtualClinicRedux/types"; // Import your action types here
 
 export const listAllUsersAction = (requestBody?: any) => async (dispatch: Dispatch) => {
   try {

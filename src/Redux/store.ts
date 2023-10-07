@@ -1,4 +1,4 @@
-import { rootReducers } from "redux/rootReducers";
+import { rootReducers } from "redux/rootReducer";
 import { applyMiddleware, createStore } from "redux";
 import { persistReducer, persistStore } from "redux-persist";
 

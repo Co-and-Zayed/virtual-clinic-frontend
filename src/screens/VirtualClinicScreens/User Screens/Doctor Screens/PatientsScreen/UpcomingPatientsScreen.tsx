@@ -3,21 +3,21 @@ import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "Redux/rootReducer";
-import { listAllPatientsAction } from "Redux/VirtualClinicRedux/ListAllPatients/listAllPatientsAction";
+import { listUpcomingPatientsAction } from "Redux/VirtualClinicRedux/ListUpcomingPatients/listUpcomingPatientsAction";
 import PatientInfoScreen from "./PatientInfoScreen";
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
 
 
-const PatientsScreen = () => {
+const UpcomingPatientsScreen = () => {
   const dispatch: any = useDispatch();
 
   const { patientsLoading, allPatients } = useSelector(
-    (state: RootState) => state.listAllPatientsReducer
+    (state: RootState) => state.listUpcomingPatientsReducer
   );
 
   useEffect(() => {
-    dispatch(listAllPatientsAction({doctor:"jawad@gmail.com"})); // sending the request, and update the states
-    console.log(allPatients);
+    dispatch(listUpcomingPatientsAction({doctor:"jawad@gmail.com"})); // sending the request, and update the states
+    //console.log(allPatients);
   }, []);
 
   const navigate = useNavigate()
@@ -26,10 +26,10 @@ const PatientsScreen = () => {
     <div className={`w-full flex flex-col items-start justify-center`}>
       <h1>Doctor Patients Screen</h1>
       <button className={styles.button} onClick={() => {
-                navigate(Routes.DOCTORS_UPCOMING_PATIENTS_PATH, {
+                navigate(Routes.PATIENTS_PATH, {
                 });
-              }}>Filter by upcoming appointments
-      </button> 
+              }}>Remove Filter
+      </button>      
       {patientsLoading ? (
         <h1>Loading...</h1>
       ) : (
@@ -49,4 +49,4 @@ const PatientsScreen = () => {
   );
 };
 
-export default PatientsScreen;
+export default UpcomingPatientsScreen;

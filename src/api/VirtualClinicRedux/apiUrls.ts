@@ -5,7 +5,6 @@ export const listAllUsers = () => {
 
 export const listAllPatients = () => {
     return `doctor/getPatients`;
- 
 };
 
 export const listPatientInfo = (_id:any) => {
@@ -16,8 +15,12 @@ export const listPatientByName = (name:any) => {
   return `doctor/getPatientByName/${name}`;
 };
 
-export const listUpcomingAptmnts = (doctor:any) => {
-  return `doctor/getUpcomingAptmnts/${doctor}`;
+// export const listUpcomingPatients = (doctor:any) => {
+//   return `doctor/getUpcomingAptmnts/${doctor}`;
+// };
+
+export const listUpcomingPatients = () => {
+  return `doctor/getUpcomingAptmnts`;
 };
 
 export const editSettings = (_id:any) => {

@@ -14,7 +14,6 @@ export const listAllPatientsAction = (requestBody?: any) => async (dispatch: Dis
     const response = await api.post(
       listAllPatients(), // Your Endpoint
       requestBody , // (for requests with a body)
-      
     );
 
     dispatch({ type: PATIENTS_DATA_SUCCESS, payload: response.data });

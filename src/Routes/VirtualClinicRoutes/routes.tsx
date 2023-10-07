@@ -7,6 +7,7 @@ import CommonSettingsScreen from "screens/VirtualClinicScreens/CommonScreens/Com
 import PatientDoctorsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/DoctorsScreen";
 import DoctorPatientsScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/PatientsScreen/PatientsScreen";
 import DoctorPatientInfoScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/PatientsScreen/PatientInfoScreen";
+import DoctorUpcomingPatientsScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/PatientsScreen/UpcomingPatientsScreen";
 
 export const routes = [
   {
@@ -25,6 +26,11 @@ export const routes = [
   {
     path: Routes.PATIENTS_PATH,
     element: <DoctorPatientsScreen />,
+    parent: <ProtectedRoutes />,
+  },
+  {
+    path: Routes.DOCTORS_UPCOMING_PATIENTS_PATH,
+    element: <DoctorUpcomingPatientsScreen />,
     parent: <ProtectedRoutes />,
   },
   {

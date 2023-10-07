@@ -9,7 +9,7 @@ import {
     prescriptions: null,
   };
   
-  export const listAllPrescriptionReducer = (state = initialState, action: any) => {
+  export const listAllPrescriptionsReducer = (state = initialState, action: any) => {
     switch (action.type) {
       case PRESCRIPTIONS_DATA_LOADING:
         return { ...state, prescriptionsLoading: action.payload };

@@ -1,24 +1,24 @@
 import { SearchOutlined } from "@ant-design/icons";
 import React, { useRef, useState, useEffect } from "react";
 import type { InputRef } from "antd";
-import { Button, Input, Space, Table } from "antd";
+import { Button, Input, Space, Table, DatePicker } from "antd";
 import type { ColumnType, ColumnsType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "Redux/rootReducer";
+import { listAllPrescriptionsAction } from "Redux/VirtualClinicRedux/ListAllPrescriptions/listAllPrescriptionsAction";
+import moment from "moment";
 
 const PrescriptionsScreen: React.FC = () => {
-  const [prescriptions, setPrescriptions] = useState([]);
+  const dispatch: any = useDispatch();
+
+  const { prescriptionsLoading, prescriptions } = useSelector(
+    (state: RootState) => state.listAllPrescriptionsReducer
+  );
 
   useEffect(() => {
-    const fetchPrescriptions = async () => {
-      const res = await fetch("http://localhost:8000/prescriptions");
-      const data = await res.json();
-
-      if (res.ok) {
-        setPrescriptions(data);
-      }
-    };
-    fetchPrescriptions();
+    dispatch(listAllPrescriptionsAction());
   }, []);
 
   interface DataType {
@@ -55,7 +55,7 @@ const PrescriptionsScreen: React.FC = () => {
 
   const handleReset = (clearFilters: () => void) => {
     clearFilters();
-    setSearchText('');
+    setSearchText("");
   };
 
   const getColumnSearchProps = (
@@ -136,12 +136,105 @@ const PrescriptionsScreen: React.FC = () => {
         setTimeout(() => searchInput.current?.select(), 100);
       }
     },
-    render: (text) =>
-      searchedColumn === dataIndex ? (
-        <div style={{ backgroundColor: "#e6f7ff" }}>{text}</div>
-      ) : (
-        <div>{text}</div>
-      ),
+  });
+
+  const [searchDate, setSearchDate] = useState("");
+  const [searchedDateColumn, setSearchedDateColumn] = useState("");
+  const searchDateInput = useRef<InputRef>(null);
+
+  const handleDateSearch = (
+    selectedKeys: string[],
+    confirm: (param?: FilterConfirmProps) => void,
+    dataIndex: DataIndex
+  ) => {
+    confirm();
+    setSearchDate(selectedKeys[0]);
+    setSearchedDateColumn(dataIndex);
+  };
+
+  const handleDateReset = (clearFilters: () => void) => {
+    clearFilters();
+    setSearchDate("");
+  };
+
+  //column that search and filter on date
+  const getDateSearchProps = (dataIndex: DataIndex): ColumnType<DataType> => ({
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+      close,
+    }) => (
+      <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
+        <Input
+          type="date"
+          ref={searchInput}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
+          onPressEnter={() =>
+            handleSearch(selectedKeys as string[], confirm, dataIndex)
+          }
+          style={{ marginBottom: 8, display: "block" }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() =>
+              handleDateSearch(selectedKeys as string[], confirm, dataIndex)
+            }
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90, backgroundColor: "#1677ff", padding: 0 }}
+          >
+            Search
+          </Button>
+          <Button
+            onClick={() => {
+              setSelectedKeys([]);
+              clearFilters && handleDateReset(clearFilters);
+            }}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Reset
+          </Button>
+          <Button
+            type="link"
+            size="small"
+            onClick={() => {
+              confirm({ closeDropdown: false });
+              setSearchDate((selectedKeys as string[])[0]);
+              setSearchedDateColumn(dataIndex);
+            }}
+          >
+            Filter
+          </Button>
+          <Button
+            type="link"
+            size="small"
+            onClick={() => {
+              close();
+            }}
+          >
+            close
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: (filtered: boolean) => (
+      <SearchOutlined style={{ color: filtered ? "#1677ff" : undefined }} />
+    ),
+    onFilter: (value, record) =>
+      moment(record[dataIndex]).format("YYYY-MM-DD") === value,
+    onFilterDropdownOpenChange: (visible) => {
+      if (visible) {
+        setTimeout(() => searchDateInput.current?.select(), 100);
+      }
+    },
   });
 
   const columns: ColumnsType<DataType> = [
@@ -156,7 +249,11 @@ const PrescriptionsScreen: React.FC = () => {
       title: "Date",
       dataIndex: "date",
       key: "date",
+      width: "20%",
+      ...getDateSearchProps("date"),
     },
+    //add prop that filter for date
+
     {
       title: "Status",
       dataIndex: "filled",
@@ -174,20 +271,11 @@ const PrescriptionsScreen: React.FC = () => {
       onFilter: (value, record) => {
         return record.filled === value;
       },
-      render: (text, record) => {
-        let color = record.filled === "Filled" ? "green" : "red";
-        return {
-          props: {
-            style: { color: color },
-          },
-          children: <div>{text}</div>,
-        };
-      },
     },
     {
       title: "Action",
       key: "action",
-      render: (text : any, record: any) => (
+      render: (text: any, record: any) => (
         <Link
           to={`/prescriptions/${record.key}`}
           type="primary"
@@ -206,7 +294,14 @@ const PrescriptionsScreen: React.FC = () => {
 
   return (
     <div>
-      <Table columns={columns} dataSource={data} />
+      <h1>Prescriptions Screen</h1>
+      <div>
+        {prescriptionsLoading ? (
+          <h1>Loading...</h1>
+        ) : (
+          <Table columns={columns} dataSource={data} />
+        )}
+      </div>
     </div>
   );
 };

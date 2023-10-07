@@ -2,29 +2,31 @@ import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/Pat
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "redux/rootReducer";
-import { listAllUsersAction } from "redux/VirtualClinicRedux/ListAllUsers/listAllUsersAction";
+import { RootState } from "Redux/rootReducer";
+//import { listAllUsersAction } from "Redux/VirtualClinicRedux/ListAllUsers/listAllUsersAction";
+import { listAllPatientsAction } from "Redux/VirtualClinicRedux/ListAllPatients/listAllPatientsAction";
+
 
 const PatientsScreen = () => {
   const dispatch: any = useDispatch();
 
-  const { usersLoading, allUsers } = useSelector(
-    (state: RootState) => state.listAllUsersReducer
+  const { patientsLoading, allPatients } = useSelector(
+    (state: RootState) => state.listAllPatientsReducer
   );
 
   useEffect(() => {
-    dispatch(listAllUsersAction()); // sending the request, and update the states
-    console.log(allUsers);
+    dispatch(listAllPatientsAction({doctor:"jawad@gmail.com"})); // sending the request, and update the states
+    console.log(allPatients);
   }, []);
 
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
       <h1>Doctor Patients Screen</h1>
-      {usersLoading ? (
+      {patientsLoading ? (
         <h1>Loading...</h1>
       ) : (
-        allUsers.map((user: any) => (
-          <div key={user._id} className="m-5">
+        allPatients?.map((user: any) => (
+          <div key={user.email} className="m-5">
             <h1>{user.name}</h1>
             <h1>{user.email}</h1>
           </div>

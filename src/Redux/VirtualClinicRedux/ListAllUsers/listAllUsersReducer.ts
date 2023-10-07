@@ -2,7 +2,7 @@ import {
   USERS_DATA_LOADING,
   USERS_DATA_SUCCESS,
   USERS_DATA_FAILURE,
-} from "redux/VirtualClinicRedux/types";
+} from "Redux/VirtualClinicRedux/types";
 
 const initialState = {
   usersLoading: false,

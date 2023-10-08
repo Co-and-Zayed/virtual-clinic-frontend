@@ -85,6 +85,11 @@ const PatientsScreen = () => {
         ))
       )}
 
+      <button className={styles.button} onClick={() => {
+                navigate(Routes.DOCTORS_UPCOMING_PATIENTS_PATH, {
+                });
+              }}>Filter by upcoming appointments
+      </button>
 
       {patientsLoading ? (
         <h1>Loading...</h1>
@@ -93,7 +98,7 @@ const PatientsScreen = () => {
           <div key={user.email} className="m-5">
             <h1>{user.name}</h1>
             <h1>{user.email}</h1>
-            <button value ={user._id} onClick={() => handleViewInfo(user._id)}>View Info</button>
+            <button className={styles.button} value ={user._id} onClick={() => handleViewInfo(user._id)}>View Info</button>
           </div>
         ))
       )}

@@ -22,6 +22,12 @@ export const appReducer = combineReducers({
   getAppointmentsReducer,
   updateAppointmentReducer,
   deleteAppointmentReducer,
+  listAllPatientsReducer,
+  listUpcomingPatientsReducer,
+  listPatientInfoReducer,
+  listDoctorSettingsReducer,
+  editSettingsReducer,
+  listPatientByNameReducer,
 });
 
 export const rootReducers = (state: any, action: any) => {

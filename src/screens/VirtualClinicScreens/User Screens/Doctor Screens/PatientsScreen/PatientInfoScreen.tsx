@@ -2,19 +2,16 @@ import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/Pat
 import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "Redux/rootReducer";
-import { listPatientInfoAction } from "Redux/VirtualClinicRedux/ListPatientInfo/listPatientInfoAction";
+import { RootState } from "redux/rootReducer";
+import { listPatientInfoAction } from "redux/VirtualClinicRedux/ListPatientInfo/listPatientInfoAction";
 import { useLocation } from "react-router-dom";
 
-
 const PatientInfoScreen = () => {
-    const dispatch: any = useDispatch();
-    
+  const dispatch: any = useDispatch();
 
-    const location = useLocation();
-    const _id = location.state._id;
-    console.log("!! here"+_id)
-
+  const location = useLocation();
+  const _id = location.state._id;
+  console.log("!! here" + _id);
 
   const { patientInfoLoading, patientInfo } = useSelector(
     (state: RootState) => state.listPatientInfoReducer
@@ -22,7 +19,7 @@ const PatientInfoScreen = () => {
 
   useEffect(() => {
     dispatch(listPatientInfoAction()); // sending the request, and update the states
-    console.log(patientInfo+"there")
+    console.log(patientInfo + "there");
   }, []);
 
   return (

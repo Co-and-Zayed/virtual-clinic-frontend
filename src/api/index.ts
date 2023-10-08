@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
-import store from "Redux/store";
+import store from "redux/store";
 import { notification } from "antd";
 
 // Change The Api Url

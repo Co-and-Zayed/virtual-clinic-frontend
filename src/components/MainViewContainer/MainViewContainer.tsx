@@ -44,7 +44,7 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
         </h1>
 
         <ul>
-          {currentNavLinks.map((link: any, index: any) => (
+          {currentNavLinks?.map((link: any, index: any) => (
             <li
               key={index}
               className={`${currentLink === index ? styles.activeLink : ""}`}

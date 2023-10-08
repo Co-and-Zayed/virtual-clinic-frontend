@@ -11,7 +11,7 @@ export const editSettingsAction = (requestBody?: any) => async (dispatch: Dispat
   try {
     dispatch({ type: EDIT_DOCTOR_SETTINGS_DATA_LOADING, payload: true });
     
-     const response = await api.post(
+     const response = await api.patch(
       editSettings(), // Your Endpoint
       requestBody , // (for requests with a body)
       

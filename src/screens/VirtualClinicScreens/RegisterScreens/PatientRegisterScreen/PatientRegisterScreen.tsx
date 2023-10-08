@@ -2,115 +2,119 @@ import { DatePicker, Input, Select, Spin } from "antd";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { RootState } from "Redux/rootReducer";
+import { RootState } from "redux/rootReducer";
 import PatientRegisterModel from "models/PatientRegisterModel";
-import { regsiterAction } from "Redux/Register/registerAction";
+import { regsiterAction } from "redux/Register/registerAction";
 
 const PatientRegisterScreen = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const dispatch: any = useDispatch();
+  const dispatch: any = useDispatch();
 
-    const { registerLoading } = useSelector((state: RootState) => state.registerReducer)
- 
-    const formik = useFormik({
-        initialValues: {
-            name: "",
-            email: "",
-            username: "",
-            password: "",
-            gender: "",
-            date_of_birth: "",
-            mobileNumber: "",
-            healthRecords: "",
-            emergencyContactName: "",
-            emergenyContactNumber: ""
-        }, 
-        onSubmit: async (values: PatientRegisterModel) => {
-            var errorExists = false;
-            if (values.name.trim() === "") {
-                console.log("name")
-                errorExists = true;
-                formik.setFieldError("name", "");
-            }
-            if (values.email.trim() === "") {
-                console.log("email");
-                errorExists = true;
-                formik.setFieldError("email", "");
-            }
-            if (values.username.trim() === "") {
-                console.log("username")
-                errorExists = true;
-                formik.setFieldError("username", "");
-            }
-            if (values.password.trim() === "") {
-                console.log("password")
-                errorExists = true;
-                formik.setFieldError("password", "");
-            }
-            if (values.date_of_birth.trim() === "") {
-                console.log("date");
-                errorExists = true;
-                formik.setFieldError("date_of_birth", "");
-            }
-            if (values.gender.trim() === "") {
-                console.log("gender")
-                errorExists = true;
-                formik.setFieldError("gender", "");
-            }
-            if (values.mobileNumber.trim() === "") {
-                console.log("mobilenumb")
-                errorExists = true;
-                formik.setFieldError("mobileNumber", "");
-            }
-            if (values.healthRecords.trim() === "") {
-                console.log("health")
-                errorExists = true;
-                formik.setFieldError("healthRecords", "");
-            }
-            if (values.emergencyContactName.trim() === "") {
-                console.log("contatc nam")
-                errorExists = true;
-                formik.setFieldError("emergencyContactName", "");
-            }
-            if (values.emergenyContactNumber.trim() === "") {
-                console.log("contact numbe")
-                errorExists = true;
-                formik.setFieldError("emergencyContactNumber", "");
-            }
-            
-            if (!errorExists) {
-                await dispatch(regsiterAction({
-                    name: values.name,
-                    email: values.email,
-                    type: "PATIENT",
-                    username: values.username,
-                    password: values.password,
-                    date_of_birth: values.date_of_birth,
-                    gender: values.gender,
-                    mobileNumber: values.mobileNumber,
-                    healthRecords: values.healthRecords,
-                    emergencyContactName: values.emergencyContactName,
-                    emergencyContactNumber: values.emergenyContactNumber
-                }));
-                navigate("/dashboard");
-            }
-        }
-    });
+  const { registerLoading } = useSelector(
+    (state: RootState) => state.registerReducer
+  );
 
-    const GENDER_VALUES = [
-        {
-          label: "Male",
-          value: "MALE",
-        },
-        {
-          label: "Female",
-          value: "FEMALE",
-        },
-    ];
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      username: "",
+      password: "",
+      gender: "",
+      date_of_birth: "",
+      mobileNumber: "",
+      healthRecords: "",
+      emergencyContactName: "",
+      emergenyContactNumber: "",
+    },
+    onSubmit: async (values: PatientRegisterModel) => {
+      var errorExists = false;
+      if (values.name.trim() === "") {
+        console.log("name");
+        errorExists = true;
+        formik.setFieldError("name", "");
+      }
+      if (values.email.trim() === "") {
+        console.log("email");
+        errorExists = true;
+        formik.setFieldError("email", "");
+      }
+      if (values.username.trim() === "") {
+        console.log("username");
+        errorExists = true;
+        formik.setFieldError("username", "");
+      }
+      if (values.password.trim() === "") {
+        console.log("password");
+        errorExists = true;
+        formik.setFieldError("password", "");
+      }
+      if (values.date_of_birth.trim() === "") {
+        console.log("date");
+        errorExists = true;
+        formik.setFieldError("date_of_birth", "");
+      }
+      if (values.gender.trim() === "") {
+        console.log("gender");
+        errorExists = true;
+        formik.setFieldError("gender", "");
+      }
+      if (values.mobileNumber.trim() === "") {
+        console.log("mobilenumb");
+        errorExists = true;
+        formik.setFieldError("mobileNumber", "");
+      }
+      if (values.healthRecords.trim() === "") {
+        console.log("health");
+        errorExists = true;
+        formik.setFieldError("healthRecords", "");
+      }
+      if (values.emergencyContactName.trim() === "") {
+        console.log("contatc nam");
+        errorExists = true;
+        formik.setFieldError("emergencyContactName", "");
+      }
+      if (values.emergenyContactNumber.trim() === "") {
+        console.log("contact numbe");
+        errorExists = true;
+        formik.setFieldError("emergencyContactNumber", "");
+      }
 
-    return (
-        <div className="w-full flex flex-col items-center gap-y-3">
+      if (!errorExists) {
+        await dispatch(
+          regsiterAction({
+            name: values.name,
+            email: values.email,
+            type: "PATIENT",
+            username: values.username,
+            password: values.password,
+            date_of_birth: values.date_of_birth,
+            gender: values.gender,
+            mobileNumber: values.mobileNumber,
+            healthRecords: values.healthRecords,
+            emergencyContactName: values.emergencyContactName,
+            emergencyContactNumber: values.emergenyContactNumber,
+          })
+        );
+        navigate("/dashboard");
+      }
+    },
+  });
+
+  const GENDER_VALUES = [
+    {
+      label: "Male",
+      value: "MALE",
+    },
+    {
+      label: "Female",
+      value: "FEMALE",
+    },
+  ];
+
+  return (
+    <div className="w-full flex flex-col items-center gap-y-3">
       <h1>Patient Regsitration</h1>
       <form
         onSubmit={formik.handleSubmit}
@@ -244,7 +248,7 @@ const PatientRegisterScreen = () => {
         )}
       </form>
     </div>
-    );
-}
+  );
+};
 
 export default PatientRegisterScreen;

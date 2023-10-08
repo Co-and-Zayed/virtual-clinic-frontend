@@ -8,7 +8,7 @@ import {
   navLinksAdmin,
 } from "utils/VirtualClinicUtils/navigationLinks";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "Redux/rootReducer";
+import { RootState } from "redux/rootReducer";
 
 interface MainViewContainerProps {
   children: React.ReactNode;
@@ -21,18 +21,21 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
   const [currentLink, setCurrentLink] = useState(0);
   const [currentNavLinks, setCurrentNavLinks] = useState<any>(null);
 
-  const { loginLoading, userType } = useSelector((state: RootState) => state.loginReducer);
-  const { registerLoading } = useSelector((state: RootState) => state.registerReducer);
+  const { loginLoading, userType } = useSelector(
+    (state: RootState) => state.loginReducer
+  );
+  const { registerLoading } = useSelector(
+    (state: RootState) => state.registerReducer
+  );
 
   useEffect(() => {
     if (userType === "DOCTOR") {
       setCurrentNavLinks(navLinksDoctor);
     } else if (userType === "PATIENT") {
       setCurrentNavLinks(navLinksPatient);
-    } else {
+    } else if (userType === "ADMIN") {
       setCurrentNavLinks(navLinksAdmin);
-    }
-    else {
+    } else {
       window.location.pathname = "/login";
     }
   }, [userType, loginLoading, registerLoading]);
@@ -70,7 +73,7 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
               {link.name}
             </li>
           ))}
-          <li onClick={() => dispatch({type: "LOG_OUT"})}>Logout</li>
+          <li onClick={() => dispatch({ type: "LOG_OUT" })}>Logout</li>
         </ul>
 
         <hr />

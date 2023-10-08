@@ -9,8 +9,8 @@ import { adminListAllPatientsReducer } from "./VirtualClinicRedux/AdminListAllPa
 import { createPackageReducer } from "./VirtualClinicRedux/CreatePackage/createPackageReducer";
 import { updatePackageReducer } from "./VirtualClinicRedux/UpdatePackage/updatePackageReducer";
 import { deletePackageReducer } from "./VirtualClinicRedux/DeletePackage/deletePackageReducer";
-import { loginReducer } from "Redux/Login/loginReducer";
-import { registerReducer } from "Redux/Register/registerReducer";
+import { loginReducer } from "redux/Login/loginReducer";
+import { registerReducer } from "redux/Register/registerReducer";
 
 export const appReducer = combineReducers({
   listAllUsersReducer,

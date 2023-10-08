@@ -2,9 +2,9 @@ import { DatePicker, Input, Select, Spin } from "antd";
 import { useFormik } from "formik";
 import DoctorRegisterModel from "models/DoctorRegisterModel";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "Redux/rootReducer";
+import { RootState } from "redux/rootReducer";
 import { useNavigate } from "react-router";
-import { regsiterAction } from "Redux/Register/registerAction";
+import { regsiterAction } from "redux/Register/registerAction";
 
 const DoctorRegisterScreen = () => {
   const navigate = useNavigate();
@@ -31,51 +31,51 @@ const DoctorRegisterScreen = () => {
     onSubmit: async (values: DoctorRegisterModel) => {
       var errorExists = false;
       if (values.name.trim() === "") {
-          console.log("name")
-          formik.setFieldError("name", "");
-          errorExists = true;
+        console.log("name");
+        formik.setFieldError("name", "");
+        errorExists = true;
       }
       if (values.email.trim() === "") {
-          console.log("email")
-          formik.setFieldError("email", "");
-          errorExists = true;
+        console.log("email");
+        formik.setFieldError("email", "");
+        errorExists = true;
       }
       if (values.username.trim() === "") {
-          console.log("username")
-          formik.setFieldError("username", "");
-          errorExists = true;
+        console.log("username");
+        formik.setFieldError("username", "");
+        errorExists = true;
       }
       if (values.password.trim() === "") {
-          console.log("password")
-          formik.setFieldError("password", "");
-          errorExists = true;
+        console.log("password");
+        formik.setFieldError("password", "");
+        errorExists = true;
       }
       if (values.gender.trim() === "") {
-          console.log("gender")
-          formik.setFieldError("gender", "");
-          errorExists = true;
+        console.log("gender");
+        formik.setFieldError("gender", "");
+        errorExists = true;
       }
       if (values.specialty.trim() === "") {
-          console.log("specialty")
-          formik.setFieldError("specialty", "");
-          errorExists = true;
+        console.log("specialty");
+        formik.setFieldError("specialty", "");
+        errorExists = true;
       }
       if (values.date_of_birth.trim() === "") {
-          console.log("date")
-          formik.setFieldError("date_of_birth", "");
-          errorExists = true;
+        console.log("date");
+        formik.setFieldError("date_of_birth", "");
+        errorExists = true;
       }
       if (values.affiliation.trim() === "") {
-          formik.setFieldError("affiliation", "");
-          errorExists = true;
+        formik.setFieldError("affiliation", "");
+        errorExists = true;
       }
       if (values.educationalBackground.trim() === "") {
-          formik.setFieldError("educationalBackground", "");
-          errorExists = true;
+        formik.setFieldError("educationalBackground", "");
+        errorExists = true;
       }
       if (values.hourlyRate.trim() === "") {
-          formik.setFieldError("hourlyRate", "");
-          errorExists = true;
+        formik.setFieldError("hourlyRate", "");
+        errorExists = true;
       }
 
       if (!errorExists) {

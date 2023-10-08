@@ -1,7 +1,15 @@
 import { combineReducers } from "redux";
+import { listAllUsersReducer } from "./VirtualClinicRedux/ListAllUsers/listAllUsersReducer";
+import { patientGetDoctorsReducer } from "./VirtualClinicRedux/PatientGetDoctors/patientGetDoctorsReducer";
+import { patientSearchDoctorsReducer } from "./VirtualClinicRedux/PatientSearchDoctors/patientSearchDoctorsReducer";
+import { allSpecialitiesReducer } from "./VirtualClinicRedux/Dropdowns/AllSpecialities/allSpecialitiesReducer";
 import { getDoctorInfoReducer } from "./VirtualClinicRedux/GetDoctorInfo/getDoctorInfoReducer";
 
 export const appReducer = combineReducers({
+  listAllUsersReducer,
+  patientGetDoctorsReducer,
+  patientSearchDoctorsReducer,
+  allSpecialitiesReducer,
   getDoctorInfoReducer,
 });
 

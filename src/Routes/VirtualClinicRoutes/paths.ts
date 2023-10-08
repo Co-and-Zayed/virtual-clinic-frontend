@@ -10,3 +10,4 @@ export const PRESCRIPTIONS_PATH = "/prescriptions/:id";
 export const ADMINS_PATH = "/admins";
 export const PACKAGES_PATH = "/packages";
 export const VIEW_DOCTORS_PATH = "/view-doctors";
+export const VIEW_PATIENTS_PATH = "/view-patients";

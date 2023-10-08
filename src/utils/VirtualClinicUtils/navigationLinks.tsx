@@ -51,4 +51,8 @@ export const navLinksAdmin = [
     name: "Doctors",
     route: Routes.VIEW_DOCTORS_PATH,
   },
+  {
+    name: "Patients",
+    route: Routes.VIEW_PATIENTS_PATH,
+  },
 ];

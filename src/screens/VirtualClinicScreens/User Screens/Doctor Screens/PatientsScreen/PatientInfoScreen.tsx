@@ -9,10 +9,11 @@ import { useLocation } from "react-router-dom";
 
 const PatientInfoScreen = () => {
     const dispatch: any = useDispatch();
-    const navigate = useNavigate();
+    
 
     const location = useLocation();
     const _id = location.state._id;
+    console.log("!! here"+_id)
 
 
   const { patientInfoLoading, patientInfo } = useSelector(
@@ -21,6 +22,7 @@ const PatientInfoScreen = () => {
 
   useEffect(() => {
     dispatch(listPatientInfoAction()); // sending the request, and update the states
+    console.log(patientInfo+"there")
   }, []);
 
   return (

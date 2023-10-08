@@ -12,6 +12,8 @@ import * as Routes from "Routes/VirtualClinicRoutes/paths";
 import { getValue } from "@testing-library/user-event/dist/utils";
 
 
+
+
 const PatientsScreen = () => {
   const dispatch: any = useDispatch();
 
@@ -98,7 +100,11 @@ const PatientsScreen = () => {
           <div key={user.email} className="m-5">
             <h1>{user.name}</h1>
             <h1>{user.email}</h1>
-            <button className={styles.button} value ={user._id} onClick={() => handleViewInfo(user._id)}>View Info</button>
+            <button onClick={() => {
+                navigate(Routes.DOCTORS_PATIENT_INFO_PATH, {
+                state: { _id: user._id } // pass the user._id as a state object
+                     });
+}} >View info</button>
           </div>
         ))
       )}

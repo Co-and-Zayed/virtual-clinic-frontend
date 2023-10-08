@@ -9,17 +9,20 @@ export const listAllPatients = () => {
 };
 
 export const listPatientInfo = () => {
-  return `doctor/getPatientInfo/`;
+  return `doctor/getPatientInfo`;
 };
 
-export const listPatientByName = () => {
-  return `doctor/getPatientsByName/`;
+export const listPatientByName = (name:any) => {
+  return `doctor/getPatientByName/${name}`;
 };
 
-export const listUpcomingPatients = () => {
-  return `doctor/getUpcomingAptmnts`;
+export const listUpcomingAptmnts = (doctor:any) => {
+  return `doctor/getUpcomingAptmnts/${doctor}`;
 };
 
-export const editSettings = (_id:any) => {
-  return `doctor/editSettings/${_id}`;
+export const viewSettings = () => {
+  return `doctor/viewSettings`;
+};
+export const editSettings = () => {
+  return `doctor/editSettings`;
 };

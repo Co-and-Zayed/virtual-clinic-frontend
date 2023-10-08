@@ -110,7 +110,7 @@ const AdminsScreen = () => {
   const generateFieldRow = (fields: any) => {
     return (
       <div className="w-full flex justify-center items-start gap-x-3">
-        {fields.map((field: any) => (
+        {fields?.map((field: any) => (
           <div className="w-full flex flex-col justify-center items-start mb-5">
             <h1 className="mb-2">{field.title}</h1>
             <Input

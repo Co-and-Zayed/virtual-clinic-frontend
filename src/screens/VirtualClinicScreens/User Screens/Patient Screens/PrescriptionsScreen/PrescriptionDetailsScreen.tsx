@@ -23,18 +23,20 @@ const PrescriptionDetailsScreen = () => {
       ) : (
         <div className={`w-full flex flex-col items-start justify-center`}>
           <h3 className={`font-bold`}>Patient Name:</h3>
-          <p className={`ml-1`}> {prescription.patientName}</p>
+          <p className={`ml-1`}> {prescription?.patientName}</p>
           <h3 className={`font-bold`}>Doctor Name:</h3>
-          <p className={`ml-1`}>{prescription.doctorName}</p>
+          <p className={`ml-1`}>{prescription?.doctorName}</p>
           <h3 className={`font-bold`}>Date:</h3>
-          <p className={`ml-1`}>{prescription.date.toString().split("T")[0]}</p>
+          <p className={`ml-1`}>
+            {prescription?.date.toString().split("T")[0]}
+          </p>
           <h3 className={`font-bold`}>Status:</h3>
           <p className={`ml-1`}>
-            {prescription.filled ? "Filled" : "Unfilled"}
+            {prescription?.filled ? "Filled" : "Unfilled"}
           </p>
           <h3 className={`font-bold`}>Medicines:</h3>
           <p>
-            {prescription.medicines.map((medicine: any, index: any) => {
+            {prescription?.medicines?.map((medicine: any, index: any) => {
               return (
                 <div>
                   <h1 className={`font-bold`}>Medicine Name:</h1>

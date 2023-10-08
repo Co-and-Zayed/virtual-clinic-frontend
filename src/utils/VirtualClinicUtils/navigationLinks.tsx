@@ -33,3 +33,22 @@ export const navLinksDoctor = [
     route: Routes.SETTINGS_PATH,
   },
 ];
+
+export const navLinksAdmin = [
+  {
+    name: "Admins",
+    route: Routes.ADMINS_PATH,
+  },
+  {
+    name: "Packages",
+    route: Routes.PACKAGES_PATH,
+  },
+  {
+    name: "Doctors",
+    route: Routes.VIEW_DOCTORS_PATH,
+  },
+  {
+    name: "Patients",
+    route: Routes.VIEW_PATIENTS_PATH,
+  },
+];

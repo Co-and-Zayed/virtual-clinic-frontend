@@ -30,12 +30,12 @@ const PrescriptionsScreen: React.FC = () => {
 
   type DataIndex = keyof DataType;
 
-  const data: DataType[] = prescriptions.map((prescription: any) => {
+  const data: DataType[] = prescriptions?.map((prescription: any) => {
     return {
-      key: prescription._id,
-      doctor: prescription.doctorName,
-      date: prescription.date.toString().split("T")[0],
-      filled: prescription.filled ? "Filled" : "Unfilled",
+      key: prescription?._id,
+      doctor: prescription?.doctorName,
+      date: prescription?.date.toString().split("T")[0],
+      filled: prescription?.filled ? "Filled" : "Unfilled",
     };
   });
 

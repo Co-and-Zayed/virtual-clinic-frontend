@@ -97,29 +97,6 @@ const PatientsScreen = () => {
           </div>
         ))
       )}
-
-{patientInfoLoading ? (
-  <h1>Loading...</h1>
-) : (
-  Object.keys(patientInfo).map((key) => {
-    // Define an array of keys to skip
-    const keysToSkip = ['_id','password'];
-
-    // Check if the current key should be skipped
-    if (keysToSkip.includes(key)) {
-      return null; // Skip rendering for this key
-    }
-
-    // Render the information for the key
-    return (
-      <div key={key} className="m-5">
-        <h1>{key}</h1>
-        <p>{patientInfo[key]}</p>
-      </div>
-    );
-  })
-)}
-        <button onClick={handleRemove}>Remove</button>
     </div>
   );
 };

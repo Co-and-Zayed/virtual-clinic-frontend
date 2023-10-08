@@ -1,0 +1,5 @@
+export const LOG_OUT = "LOG_OUT";
+
+export const USERS_DATA_LOADING = "USERS_DATA_LOADING";
+export const USERS_DATA_SUCCESS = "USERS_DATA_SUCCESS";
+export const USERS_DATA_FAILURE = "USERS_DATA_FAILURE";

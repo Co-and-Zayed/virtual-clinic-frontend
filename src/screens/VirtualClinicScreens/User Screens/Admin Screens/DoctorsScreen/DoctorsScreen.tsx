@@ -11,12 +11,14 @@ import {
 } from "@ant-design/icons";
 import { adminListAllDoctorsAction } from "redux/VirtualClinicRedux/AdminListAllDoctors/adminListAllDoctorsAction";
 import { deleteDoctorAction } from "redux/VirtualClinicRedux/DeleteDoctor/deleteDoctorAction";
+import { set } from "mongoose";
 
 const DoctorsScreen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   const dispatch: any = useDispatch();
 
-  const currentAdminID = "65228d6a23d0c632b8998176";
+  const [showDoctorDetails, setShowDoctorDetails] = useState(false);
+  const [currentDoctor, setCurrentDoctor] = useState<any>();
 
   const { adminDoctorsLoading, adminDoctors } = useSelector(
     (state: RootState) => state.adminListAllDoctorsReducer
@@ -32,7 +34,10 @@ const DoctorsScreen = () => {
   };
 
   useEffect(() => {
+    console.log("Sending Request");
     dispatch(adminListAllDoctorsAction());
+    setShowDoctorDetails(false);
+    setCurrentDoctor(null);
     console.log("All Doctors", adminDoctors);
   }, []);
 
@@ -51,9 +56,21 @@ const DoctorsScreen = () => {
               <div
                 key={currDoctor._id}
                 className={`${styles.packageItem} mt-5 mr-5`}
+                onClick={() => {
+                  setCurrentDoctor(currDoctor);
+                  setShowDoctorDetails(true);
+                }}
               >
                 <div className="w-full flex justify-between items-center mb-2">
-                  <h1>{currDoctor?.name}</h1>
+                  <h1
+                    style={
+                      currDoctor?.name === currentDoctor?.name
+                        ? { color: "green" }
+                        : {}
+                    }
+                  >
+                    {currDoctor?.name}
+                  </h1>
                   {/* <p className={`${styles.editLink}`}>Edit</p> */}
                   <DeleteOutlined
                     style={{ color: "red" }}
@@ -63,6 +80,18 @@ const DoctorsScreen = () => {
                 <p>Email: {currDoctor?.email}</p>
               </div>
             ))}
+        </div>
+      )}
+      {showDoctorDetails && (
+        <div className="mt-12">
+          <h1>{currentDoctor?.name}</h1>
+          <p>Email: {currentDoctor?.email}</p>
+          <p>Speciality: {currentDoctor?.specialty}</p>
+          <p>Affiliation: {currentDoctor?.affiliatoin}</p>
+          <p>
+            Educational Background: {currentDoctor?.educationalBackground}
+          </p>
+          <p>Hourly rate: EGP {currentDoctor?.hourlyRate} / hr</p>
         </div>
       )}
     </div>

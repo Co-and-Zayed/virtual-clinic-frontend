@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+
 import { listAllUsersReducer } from "./VirtualClinicRedux/ListAllUsers/listAllUsersReducer";
 import { listAllPackagesReducer } from "./VirtualClinicRedux/ListAllPackages/listAllPackagesReducer";
 import { listAllAdminsReducer } from "./VirtualClinicRedux/ListAllAdmins/listAllAdminsReducer";
@@ -8,6 +9,8 @@ import { adminListAllPatientsReducer } from "./VirtualClinicRedux/AdminListAllPa
 import { createPackageReducer } from "./VirtualClinicRedux/CreatePackage/createPackageReducer";
 import { updatePackageReducer } from "./VirtualClinicRedux/UpdatePackage/updatePackageReducer";
 import { deletePackageReducer } from "./VirtualClinicRedux/DeletePackage/deletePackageReducer";
+import { loginReducer } from "Redux/Login/loginReducer";
+import { registerReducer } from "Redux/Register/registerReducer";
 
 export const appReducer = combineReducers({
   listAllUsersReducer,
@@ -19,6 +22,8 @@ export const appReducer = combineReducers({
   createPackageReducer,
   updatePackageReducer,
   deletePackageReducer,
+  loginReducer,
+  registerReducer,
 });
 
 export const rootReducers = (state: any, action: any) => {

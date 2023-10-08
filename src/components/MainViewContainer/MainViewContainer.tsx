@@ -1,12 +1,14 @@
 import styles from "components/MainViewContainer/MainViewContainer.module.css";
 import { FC } from "react";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import {
   navLinksDoctor,
   navLinksPatient,
   navLinksAdmin,
 } from "utils/VirtualClinicUtils/navigationLinks";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "Redux/rootReducer";
 
 interface MainViewContainerProps {
   children: React.ReactNode;
@@ -14,20 +16,26 @@ interface MainViewContainerProps {
 
 const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
   const navigate = useNavigate();
+  const dispatch: any = useDispatch();
+
   const [currentLink, setCurrentLink] = useState(0);
   const [currentNavLinks, setCurrentNavLinks] = useState<any>(null);
 
-  var currentUser = process.env.REACT_APP_CURRENT_USER;
+  const { loginLoading, userType } = useSelector((state: RootState) => state.loginReducer);
+  const { registerLoading } = useSelector((state: RootState) => state.registerReducer);
 
   useEffect(() => {
-    if (currentUser === "Doctor") {
+    if (userType === "DOCTOR") {
       setCurrentNavLinks(navLinksDoctor);
-    } else if (currentUser === "Patient") {
+    } else if (userType === "PATIENT") {
       setCurrentNavLinks(navLinksPatient);
     } else {
       setCurrentNavLinks(navLinksAdmin);
     }
-  }, []);
+    else {
+      window.location.pathname = "/login";
+    }
+  }, [userType, loginLoading, registerLoading]);
 
   useEffect(() => {
     console.log("PATH NAAAME", window.location.pathname);
@@ -47,7 +55,7 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
         className={`${styles.sideBar} w-full flex flex-col items-start justify-center`}
       >
         <h1 className="w-full flex justify-center items-center myfont-xl font-bold">
-          {currentUser}
+          {userType}
         </h1>
 
         <ul>
@@ -62,7 +70,7 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
               {link.name}
             </li>
           ))}
-          <li>Logout</li>
+          <li onClick={() => dispatch({type: "LOG_OUT"})}>Logout</li>
         </ul>
 
         <hr />

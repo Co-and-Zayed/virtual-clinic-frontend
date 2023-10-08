@@ -17,7 +17,6 @@ import DoctorUpcomingPatientsScreen from "screens/VirtualClinicScreens/User Scre
 import CommonAppointmentsScreen from "screens/VirtualClinicScreens/CommonScreens/CommonAppointmentsScreen/CommonAppoitmentScreen";
 import FamilyMembersScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/FamilyMembersScreen/FamilyMembersScreen";
 
-
 import PrescriptionDetailsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PrescriptionsScreen/PrescriptionDetailsScreen";
 
 import AdminDoctorsScreen from "screens/VirtualClinicScreens/User Screens/Admin Screens/DoctorsScreen/DoctorsScreen";
@@ -76,6 +75,7 @@ export const routes = [
     element: <FamilyMembersScreen />,
     parent: <ProtectedRoutes />,
   },
+  {
     path: Routes.PRESCRIPTIONS_PATH,
     element: <PrescriptionsScreen />,
     parent: <ProtectedRoutes />,

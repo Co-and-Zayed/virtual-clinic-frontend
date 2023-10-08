@@ -1,6 +1,7 @@
 import PatientDashboardScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/DashboardScreen/DashboardScreen";
 import PatientDoctorsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/DoctorsScreen";
 import PatientSettingsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/SettingsScreen";
+import PrescriptionsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PrescriptionsScreen/PrescriptionsScreen";
 
 import DoctorDashboardScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/DashboardScreen/DashboardScreen";
 import DoctorPatientsScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/PatientsScreen/PatientsScreen";
@@ -21,6 +22,11 @@ export const navLinksPatient = [
     name: "Settings",
     route: Routes.SETTINGS_PATH,
   },
+  {
+    name: "Prescriptions",
+    screen: <PrescriptionsScreen />,
+    route: Routes.PRESCRIPTIONS_PATH,
+  }
 ];
 
 export const navLinksDoctor = [

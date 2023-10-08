@@ -8,8 +8,10 @@ import CommonDashboardScreen from "screens/VirtualClinicScreens/CommonScreens/Co
 import CommonSettingsScreen from "screens/VirtualClinicScreens/CommonScreens/CommonSettingsScreen/CommonSettingsScreen";
 
 import PatientDoctorsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/DoctorsScreen";
+import PrescriptionsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PrescriptionsScreen/PrescriptionsScreen";
 import DoctorPatientsScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/PatientsScreen/PatientsScreen";
 
+import PrescriptionDetailsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PrescriptionsScreen/PrescriptionDetailsScreen";
 
 import AdminDoctorsScreen from "screens/VirtualClinicScreens/User Screens/Admin Screens/DoctorsScreen/DoctorsScreen";
 import AdminPatientsScreen from "screens/VirtualClinicScreens/User Screens/Admin Screens/PatientsScreen/PatientsScreen";
@@ -17,7 +19,6 @@ import AdminPackagesScreen from "screens/VirtualClinicScreens/User Screens/Admin
 import AdminAdminsScreen from "screens/VirtualClinicScreens/User Screens/Admin Screens/AdminsScreen/AdminsScreen";
 
 import RegisterScreen from "screens/VirtualClinicScreens/RegisterScreens/RegisterScreen";
-
 
 export const routes = [
   {
@@ -49,6 +50,15 @@ export const routes = [
     parent: <ProtectedRoutes />,
   },
   {
+    path: Routes.PRESCRIPTIONS_PATH,
+    element: <PrescriptionsScreen />,
+    parent: <ProtectedRoutes />,
+  },
+  {
+    path: Routes.PRESCRIPTION_DETAILS_PATH,
+    element: <PrescriptionDetailsScreen />,
+    parent: <ProtectedRoutes />,
+
     path: Routes.ADMINS_PATH,
     element: <AdminAdminsScreen />,
     parent: <ProtectedRoutes />,

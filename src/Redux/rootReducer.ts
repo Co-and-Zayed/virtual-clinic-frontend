@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
 
 import { listAllUsersReducer } from "./VirtualClinicRedux/ListAllUsers/listAllUsersReducer";
+import { listAllPrescriptionsReducer } from "./VirtualClinicRedux/ListAllPrescriptions/listAllPrescriptionsReducer";
+import { listSinglePrescriptionReducer } from "./VirtualClinicRedux/ListSinglePrescription/listSinglePrescriptionReducer";
 import { listAllPackagesReducer } from "./VirtualClinicRedux/ListAllPackages/listAllPackagesReducer";
 import { listAllAdminsReducer } from "./VirtualClinicRedux/ListAllAdmins/listAllAdminsReducer";
 import { createAdminReducer } from "./VirtualClinicRedux/CreateAdmin/createAdminReducer";
@@ -14,6 +16,8 @@ import { registerReducer } from "redux/Register/registerReducer";
 
 export const appReducer = combineReducers({
   listAllUsersReducer,
+  listAllPrescriptionsReducer,
+  listSinglePrescriptionReducer,
   listAllPackagesReducer,
   listAllAdminsReducer,
   createAdminReducer,

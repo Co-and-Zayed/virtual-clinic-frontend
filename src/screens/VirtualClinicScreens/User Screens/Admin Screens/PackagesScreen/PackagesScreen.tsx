@@ -40,11 +40,11 @@ const PackagesScreen = () => {
 
   const handlePackageClick = (packageItem: any) => {
     formik.setValues({
-      name: packageItem.name,
-      price: packageItem.price,
-      sessionDiscount: packageItem.sessionDiscount,
-      medicineDiscount: packageItem.medicineDiscount,
-      familyDiscount: packageItem.familyDiscount,
+      name: packageItem.type,
+      price: packageItem.price_per_year,
+      sessionDiscount: packageItem.doctor_session_discount,
+      medicineDiscount: packageItem.medicine_discount,
+      familyDiscount: packageItem.family_discount,
     });
     setSelectedPackage(packageItem);
     setShowSinglePackage(true);
@@ -229,17 +229,17 @@ const PackagesScreen = () => {
                 >
                   <div className="w-full flex justify-between items-center mb-2">
                     <div className="flex items-center">
-                      <h1 className="mr-2">{packageItem.name}</h1>
+                      <h1 className="mr-2">{packageItem.type}</h1>
                       <p>| {packageItem.tier}</p>
                     </div>
                     <p className={`${styles.editLink}`}>Edit</p>
                   </div>
-                  <p>EGP {packageItem.price}</p>
-                  <p>Session Discount: {packageItem.sessionDiscount * 100}%</p>
+                  <p>EGP {packageItem.price_per_year}</p>
+                  <p>Session Discount: {packageItem.doctor_session_discount * 100}%</p>
                   <p>
-                    Medicine Discount: {packageItem.medicineDiscount * 100}%
+                    Medicine Discount: {packageItem.medicine_discount * 100}%
                   </p>
-                  <p>Family Discount: {packageItem.familyDiscount * 100}%</p>
+                  <p>Family Discount: {packageItem.family_discount * 100}%</p>
                 </div>
               ))}
             <div className={`${styles.plusIcon}`} onClick={handleAddClick}>

@@ -9,6 +9,8 @@ import PatientInfoScreen from "./PatientInfoScreen";
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
 
 
+
+
 const PatientsScreen = () => {
   const dispatch: any = useDispatch();
 
@@ -35,9 +37,9 @@ const PatientsScreen = () => {
             <h1>{user.email}</h1>
             <button onClick={() => {
                 navigate(Routes.DOCTORS_PATIENT_INFO_PATH, {
-                  state: { _id: user._id } // pass the user._id as a state object
-                });
-              }} >View info</button>
+                state: { _id: user._id } // pass the user._id as a state object
+                     });
+}} >View info</button>
           </div>
         ))
       )}

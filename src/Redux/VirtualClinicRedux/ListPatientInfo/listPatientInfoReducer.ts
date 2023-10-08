@@ -6,7 +6,7 @@ import {
   
   const initialState = {
     patientInfoLoading: false,
-    patientInfo: null,
+    patientInfo: [],
   };
   
   export const listPatientInfoReducer = (state = initialState, action: any) => {
@@ -15,8 +15,8 @@ import {
         return { ...state, patientInfoLoading: action.payload };
       case PATIENT_INFO_DATA_SUCCESS:
         return {
-          ...state,
-          patientInfo: action.payload,
+          ...state,patientInfo: action.payload,
+         
         };
       case PATIENT_INFO_DATA_FAILURE:
         return { ...state, errors: action.payload };

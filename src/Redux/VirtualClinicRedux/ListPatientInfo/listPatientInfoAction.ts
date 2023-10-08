@@ -14,10 +14,21 @@ export const listPatientInfoAction = (requestBody?: any) => async (dispatch: Dis
     
     
 
-    const response = await api.post(
-        listPatientInfo({}), // we need to pass the id
-        requestBody , // (for requests with a body)
-    );
+    const location = useLocation();
+
+// Get the _id from the location.state._id property
+        const _id = location.state._id;
+        console.log(_id+"###"); 
+// Use the _id as a parameter for listPatientInfo
+        const response = await api.post(
+          listPatientInfo(), // Your Endpoint
+          
+          requestBody , // (for requests with a body)
+);
+        console.log(location+"###"); // prints the whole location object
+        console.log(location.pathname+"###"); // prints the current pathname
+        console.log(location.search+"###"); // prints the current query string
+
 
     dispatch({ type: PATIENT_INFO_DATA_SUCCESS, payload: response.data });
   } catch (err) {

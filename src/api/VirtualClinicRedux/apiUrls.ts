@@ -8,8 +8,8 @@ export const listAllPatients = () => {
  
 };
 
-export const listPatientInfo = (_id:any) => {
-  return `doctor/getPatientInfo/${_id}`;
+export const listPatientInfo = () => {
+  return `doctor/getPatientInfo`;
 };
 
 export const listPatientByName = (name:any) => {
@@ -20,6 +20,9 @@ export const listUpcomingAptmnts = (doctor:any) => {
   return `doctor/getUpcomingAptmnts/${doctor}`;
 };
 
-export const editSettings = (_id:any) => {
-  return `doctor/editSettings/${_id}`;
+export const viewSettings = () => {
+  return `doctor/viewSettings`;
+};
+export const editSettings = () => {
+  return `doctor/editSettings`;
 };

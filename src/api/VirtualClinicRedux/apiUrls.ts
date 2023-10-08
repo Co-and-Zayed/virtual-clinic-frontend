@@ -1,6 +1,33 @@
 export const listAllUsers = () => {
   return `userAPI/getUsers`;
 };
+
+//// NEVEEN URLs
+export const listAllPatients = () => {
+    return `doctor/getPatients`;
+};
+
+export const listPatientInfo = () => {
+  return `doctor/getPatientInfo`;
+};
+
+export const listPatientByName = () => {
+  return `doctor/getPatientByName/`;
+};
+
+export const listUpcomingPatients = () => {
+  return `doctor/getUpcomingAptmnts/`;
+};
+
+export const viewSettings = () => {
+  return `doctor/viewSettings`;
+};
+
+export const editSettings = () => {
+  return `doctor/editSettings`;
+};
+
+//// MOSTAFA URLs
 export const createAppointment = ()=> {
   return `patientAPI/createAppointment`;
 };
@@ -19,3 +46,4 @@ export const addFamilyMember = ()=> {
 export const getFamilyMembers = ()=>{
   return "patientAPI/getFamilyMembers";
 };
+

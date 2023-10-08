@@ -38,9 +38,11 @@ const PrescriptionDetailsScreen = () => {
             <div >
               <h1 className={`font-bold`}>Medicine Name:</h1>
               <p className={`ml-1`}>{medicine.name}</p>
-              <h1 className={`font-bold`}>Medicine Dosage:</h1>
+              <h1 className={`font-bold`}>Dosage:</h1>
               <p className={`ml-1`}>{medicine.dosage}</p>
-              <h1 className={`font-bold`}>Medicine Duration:</h1>
+              <h1 className={`font-bold`}>Quantity:</h1>
+              <p className={`ml-1`}>{medicine.quantity}</p>
+              <h1 className={`font-bold`}>Duration:</h1>
               <p className={`ml-1`}>{medicine.duration}</p>
               <hr />
             </div>

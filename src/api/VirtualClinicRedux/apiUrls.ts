@@ -2,6 +2,7 @@ export const listAllUsers = () => {
   return `userAPI/getUsers`;
 };
 
+// SHADY URLs
 // Patient Get All Doctors 
 export const patientGetDoctors = () => {
   return `patient/getDoctors`;
@@ -15,4 +16,9 @@ export const patientSearchDoctors = () => {
 // List All Specialities
 export const allSpecialities = () => {
   return `dropdown/specialities`;
+};
+
+// ZEINA URLs
+export const getDoctorInfo = () => {
+  return "patient/getDoctordetails";
 };

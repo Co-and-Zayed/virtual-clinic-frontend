@@ -3,15 +3,15 @@ import { listAllUsersReducer } from "./VirtualClinicRedux/ListAllUsers/listAllUs
 import { patientGetDoctorsReducer } from "./VirtualClinicRedux/PatientGetDoctors/patientGetDoctorsReducer";
 import { patientSearchDoctorsReducer } from "./VirtualClinicRedux/PatientSearchDoctors/patientSearchDoctorsReducer";
 import { allSpecialitiesReducer } from "./VirtualClinicRedux/Dropdowns/AllSpecialities/allSpecialitiesReducer";
+import { getDoctorInfoReducer } from "./VirtualClinicRedux/GetDoctorInfo/getDoctorInfoReducer";
 
 export const appReducer = combineReducers({
   listAllUsersReducer,
   patientGetDoctorsReducer,
   patientSearchDoctorsReducer,
   allSpecialitiesReducer,
+  getDoctorInfoReducer,
 });
-
-
 
 export const rootReducers = (state: any, action: any) => {
   if (action.type === "LOG_OUT") {

@@ -38,6 +38,23 @@ const DashboardScreen = () => {
   const [searchedColumn, setSearchedColumn] = useState('');
   const [selectedKeys, setSelectedKeys] = useState([]);
   const navigate = useNavigate()
+  const [selectedRowKey, setSelectedRowKey] = useState<string>('');
+  const [expandedRowKeys, setExpandedRowKeys] = useState<string[]>([]);
+  
+  const handleExpand = (expanded: boolean, record: DataType) => {
+    const key = record.key.toString();
+    if (expanded) {
+      setExpandedRowKeys([...expandedRowKeys, key]);
+    } else {
+      setExpandedRowKeys(expandedRowKeys.filter((k) => k !== key));
+    }
+  };
+
+  const handleRowSelect = (record: DataType) => {
+    const key = record.key.toString();
+    setSelectedRowKey(key);
+    handleExpand(true, record);
+  };
 
 
   const handleSearch = (selectedKeys:any, confirm:any, dataIndex:any) => {
@@ -124,23 +141,6 @@ const DashboardScreen = () => {
     { title: 'Health Records', dataIndex: 'healthRecords', key: 'healthRecords' },
   ];
 
-  const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);
-
-  const handleExpand = (expanded: boolean, record: DataType) => {
-    if (expanded) {
-      setExpandedRowKeys([record.key]);
-    } else {
-      setExpandedRowKeys([]);
-    }
-  };
-
-  const rowSelection = {
-    type: 'radio',
-    selectedRowKeys: expandedRowKeys,
-    onSelect: (record: DataType) => {
-      handleExpand(true, record);
-    },
-  };
 
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
@@ -155,11 +155,19 @@ const DashboardScreen = () => {
       
       <Table
         columns={columns}
-        rowSelection={{}}
-        expandable={{
-          expandedRowRender: (record) => generateExpandable(record),onExpand: (expanded, record) => handleExpand(expanded, record),
+        rowSelection={{
+          type: 'radio',
+          selectedRowKeys: [selectedRowKey],
+          onSelect: (record: DataType) => handleRowSelect(record),
         }}
-        dataSource={allPatients}
+        expandable={{
+          expandedRowRender: (record) => generateExpandable(record),
+          onExpand: (expanded, record) => handleExpand(expanded, record),
+        }}
+        dataSource={allPatients.map((patient:any, index:any) => ({
+          ...patient,
+          key: patient.key || index.toString(), // Use index as a fallback key
+        }))}
         expandedRowKeys={expandedRowKeys}
       />
     </div>

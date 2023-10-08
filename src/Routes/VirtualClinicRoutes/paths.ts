@@ -8,3 +8,5 @@ export const DOCTORS_UPCOMING_PATIENTS_PATH = "/doctors/Upcomingpatients";
 export const DOCTORS_PATIENT_INFO_PATH = "/doctors/patientInfo";
 export const SETTINGS_PATH = "/settings";
 export const PRESCRIPTIONS_PATH = "/prescriptions/:id";
+export const APPOINTMENTS_PATH = "/appointments";
+export const FAMILYMEMBERS_PATH = "/familymembers/:id";

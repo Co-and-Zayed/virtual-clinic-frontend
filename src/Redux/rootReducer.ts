@@ -1,5 +1,11 @@
 import { combineReducers } from "redux";
 import { listAllUsersReducer } from "./VirtualClinicRedux/ListAllUsers/listAllUsersReducer";
+import { addFamilyMemberReducer } from "./VirtualClinicRedux/AddFamilyMember/addFamilyMemberReducer";
+import { getFamilyMembersReducer } from "./VirtualClinicRedux/GetFamilyMembers/getFamilyMembersReducer";
+import { createAppointmentReducer } from "./VirtualClinicRedux/CreateAppointment/createAppointmentReducer";
+import { getAppointmentsReducer } from "./VirtualClinicRedux/GetAppointments/getAppointmentsReducer";
+import { updateAppointmentReducer } from "./VirtualClinicRedux/UpdateAppointment/updateAppointmentReducer";
+import { deleteAppointmentReducer } from "./VirtualClinicRedux/DeleteAppointment/deleteAppointmentReducer";
 
 import { listAllPatientsReducer } from "./VirtualClinicRedux/ListAllPatients/listAllPatientsReducer";
 import { listUpcomingPatientsReducer } from "./VirtualClinicRedux/ListUpcomingPatients/listUpcomingPatientsReducer";
@@ -9,7 +15,13 @@ import { editSettingsReducer } from "./VirtualClinicRedux/EditSettings/editSetti
 import { listPatientByNameReducer } from "./VirtualClinicRedux/ListPatientByName/listPatientByNameReducer";
 
 export const appReducer = combineReducers({
-  listAllUsersReducer, listAllPatientsReducer, listPatientInfoReducer, listPatientByNameReducer, listUpcomingPatientsReducer,listDoctorSettingsReducer,editSettingsReducer
+  listAllUsersReducer,
+  createAppointmentReducer,
+  addFamilyMemberReducer,
+  getFamilyMembersReducer,
+  getAppointmentsReducer,
+  updateAppointmentReducer,
+  deleteAppointmentReducer,
 });
 
 export const rootReducers = (state: any, action: any) => {

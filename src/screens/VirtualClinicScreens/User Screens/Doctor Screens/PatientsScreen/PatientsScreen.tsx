@@ -96,8 +96,8 @@ const PatientsScreen = () => {
       {patientsLoading ? (
         <h1>Loading...</h1>
       ) : (
-        allPatients?.map((user: any) => (
-          <div key={user.email} className="m-5">
+        allUsers?.map((user: any) => (
+          <div key={user._id} className="m-5">
             <h1>{user.name}</h1>
             <h1>{user.email}</h1>
             <button onClick={() => {

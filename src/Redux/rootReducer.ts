@@ -1,6 +1,10 @@
 import { combineReducers } from "redux";
 
 import { listAllUsersReducer } from "./VirtualClinicRedux/ListAllUsers/listAllUsersReducer";
+import { patientGetDoctorsReducer } from "./VirtualClinicRedux/PatientGetDoctors/patientGetDoctorsReducer";
+import { patientSearchDoctorsReducer } from "./VirtualClinicRedux/PatientSearchDoctors/patientSearchDoctorsReducer";
+import { allSpecialitiesReducer } from "./VirtualClinicRedux/Dropdowns/AllSpecialities/allSpecialitiesReducer";
+import { getDoctorInfoReducer } from "./VirtualClinicRedux/GetDoctorInfo/getDoctorInfoReducer";
 
 import { addFamilyMemberReducer } from "./VirtualClinicRedux/AddFamilyMember/addFamilyMemberReducer";
 import { getFamilyMembersReducer } from "./VirtualClinicRedux/GetFamilyMembers/getFamilyMembersReducer";
@@ -31,6 +35,10 @@ import { registerReducer } from "redux/Register/registerReducer";
 
 export const appReducer = combineReducers({
   listAllUsersReducer,
+  patientGetDoctorsReducer,
+  patientSearchDoctorsReducer,
+  allSpecialitiesReducer,
+  getDoctorInfoReducer,
   listAllPrescriptionsReducer,
   listSinglePrescriptionReducer,
   listAllPackagesReducer,
@@ -43,7 +51,6 @@ export const appReducer = combineReducers({
   deletePackageReducer,
   loginReducer,
   registerReducer,
-  
   createAppointmentReducer,
   addFamilyMemberReducer,
   getFamilyMembersReducer,

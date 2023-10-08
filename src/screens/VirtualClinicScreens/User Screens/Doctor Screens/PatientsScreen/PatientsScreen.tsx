@@ -3,6 +3,12 @@ import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";
+import { listAllUsersAction } from "redux/VirtualClinicRedux/ListAllUsers/listAllUsersAction";
+import { getDoctorInfoAction } from "redux/VirtualClinicRedux/GetDoctorInfo/getDoctorInfoAction";
+const PatientsScreen = () => {
+  const dispatch: any = useDispatch();
+  const { doctorLoading, docinfo } = useSelector(
+    (state: RootState) => state.getDoctorInfoReducer
 //import { listAllUsersAction } from "redux/VirtualClinicRedux/ListAllUsers/listAllUsersAction";
 import { listAllPatientsAction } from "redux/VirtualClinicRedux/ListAllPatients/listAllPatientsAction";
 import { listPatientByNameAction } from "redux/VirtualClinicRedux/ListPatientByName/listPatientByNameAction";

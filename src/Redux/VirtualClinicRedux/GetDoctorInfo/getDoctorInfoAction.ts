@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 import api from "api";
-import { getDoctorInfo } from "api/VirtualClinicRedux/apiUrls"; // Import your api url here
-import {
+import  { getDoctorInfo} from "api/VirtualClinicRedux/apiUrls"; // Import your api url here  wich one
+import {                   
   DOCTOR_DATA_LOADING,
   DOCTOR_DATA_SUCCESS,
   DOCTOR_DATA_FAILURE,

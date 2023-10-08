@@ -63,7 +63,7 @@ instance.interceptors.response.use(
       case 400:
         notificationParam.message = "Bad Request";
         notificationParam.description = "Check that data is being sent";
-        window.location.href = "/404";
+       // window.location.href = "/404";
         break;
       case 404:
         notificationParam.message = "Not Found";

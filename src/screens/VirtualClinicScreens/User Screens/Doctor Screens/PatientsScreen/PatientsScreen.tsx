@@ -14,7 +14,17 @@ const PatientsScreen = () => {
 
   useEffect(() => {
     dispatch(getDoctorInfoAction({
-     id:"777"
+     
+        name:"hh" ,
+        email:"fff",
+        username:"ddd",
+        password:"fjhg",
+        speciality:"hjkl",
+       date_of_birth:"gg",
+        affiliation:"af",
+        educationalBackground:"trghj",
+        hourlyRate:67
+    
      
     })); // sending the request, and update the states
     console.log(docinfo);

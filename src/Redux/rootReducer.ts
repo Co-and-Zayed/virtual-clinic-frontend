@@ -1,5 +1,7 @@
 import { combineReducers } from "redux";
+
 import { listAllUsersReducer } from "./VirtualClinicRedux/ListAllUsers/listAllUsersReducer";
+
 import { addFamilyMemberReducer } from "./VirtualClinicRedux/AddFamilyMember/addFamilyMemberReducer";
 import { getFamilyMembersReducer } from "./VirtualClinicRedux/GetFamilyMembers/getFamilyMembersReducer";
 import { createAppointmentReducer } from "./VirtualClinicRedux/CreateAppointment/createAppointmentReducer";
@@ -14,8 +16,34 @@ import { listDoctorSettingsReducer } from "./VirtualClinicRedux/ListDoctorSettin
 import { editSettingsReducer } from "./VirtualClinicRedux/EditSettings/editSettingsReducer";
 import { listPatientByNameReducer } from "./VirtualClinicRedux/ListPatientByName/listPatientByNameReducer";
 
+import { listAllPrescriptionsReducer } from "./VirtualClinicRedux/ListAllPrescriptions/listAllPrescriptionsReducer";
+import { listSinglePrescriptionReducer } from "./VirtualClinicRedux/ListSinglePrescription/listSinglePrescriptionReducer";
+import { listAllPackagesReducer } from "./VirtualClinicRedux/ListAllPackages/listAllPackagesReducer";
+import { listAllAdminsReducer } from "./VirtualClinicRedux/ListAllAdmins/listAllAdminsReducer";
+import { createAdminReducer } from "./VirtualClinicRedux/CreateAdmin/createAdminReducer";
+import { adminListAllDoctorsReducer } from "./VirtualClinicRedux/AdminListAllDoctors/adminListAllDoctorsReducer";
+import { adminListAllPatientsReducer } from "./VirtualClinicRedux/AdminListAllPatients/adminListAllPatientsReducer";
+import { createPackageReducer } from "./VirtualClinicRedux/CreatePackage/createPackageReducer";
+import { updatePackageReducer } from "./VirtualClinicRedux/UpdatePackage/updatePackageReducer";
+import { deletePackageReducer } from "./VirtualClinicRedux/DeletePackage/deletePackageReducer";
+import { loginReducer } from "redux/Login/loginReducer";
+import { registerReducer } from "redux/Register/registerReducer";
+
 export const appReducer = combineReducers({
   listAllUsersReducer,
+  listAllPrescriptionsReducer,
+  listSinglePrescriptionReducer,
+  listAllPackagesReducer,
+  listAllAdminsReducer,
+  createAdminReducer,
+  adminListAllDoctorsReducer,
+  adminListAllPatientsReducer,
+  createPackageReducer,
+  updatePackageReducer,
+  deletePackageReducer,
+  loginReducer,
+  registerReducer,
+  
   createAppointmentReducer,
   addFamilyMemberReducer,
   getFamilyMembersReducer,

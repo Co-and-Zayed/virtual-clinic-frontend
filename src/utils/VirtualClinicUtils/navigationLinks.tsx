@@ -29,7 +29,7 @@ export const navLinksPatient = [
     route: Routes.SETTINGS_PATH,
   },
   {
-    name: "Appoitnments",
+    name: "Appointments",
     screen: <PatientAppointmentsScreen />,
     route: Routes.APPOINTMENTS_PATH,
   },
@@ -57,7 +57,7 @@ export const navLinksDoctor = [
     route: Routes.SETTINGS_PATH,
   },
   {
-    name: "Appoitnments",
+    name: "Appointments",
     screen: <DoctorAppointmentsScreen />,
     route: Routes.APPOINTMENTS_PATH,
   },

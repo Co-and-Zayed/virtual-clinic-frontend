@@ -1,10 +1,17 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/AppointmentsScreen/AppoitmentsScreen.module.css";
 import { useNavigate } from "react-router";
 import { useEffect, useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "redux/rootReducer";
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, InputRef, TableProps } from 'antd';
-import type { ColumnType, ColumnsType, FilterValue, SorterResult,FilterConfirmProps } from 'antd/es/table/interface';
+import { Button, Input, Space, Table, InputRef, TableProps,Popconfirm} from 'antd';
+import type { ColumnType, ColumnsType, FilterValue, SorterResult, FilterConfirmProps} from 'antd/es/table/interface';
+import { createAppointmentAction } from "redux/VirtualClinicRedux/CreateAppointment/createAppoinmentAction";
+import { getAppointmentsAction } from "redux/VirtualClinicRedux/GetAppointments/getAppoinmentsAction";
+import { updateAppointmentAction } from "redux/VirtualClinicRedux/UpdateAppointment/updateAppointmentAction";
+import { deleteAppointmentAction } from "redux/VirtualClinicRedux/DeleteAppointment/deleteAppointmentAction";
+
 
 
 interface DataType {
@@ -18,57 +25,89 @@ interface DataType {
 type DataIndex = keyof DataType;
 
 const AppointmentsScreen = () => {
+
+    // const { addingFamMemLoading, confirm } = useSelector(
+  //   (state: RootState) => state.createAppointmentReducer
+  // );
   
-  const data: DataType[] = [
-    {
-      patientEmail: 'Ali@gmail.com',
-      doctorEmail: 'Dr.Wael@gmail.com',
-      date: "2023-10-06",
-      time:"12:00:00pm",
-      status: "COMPLETED",
-      key: "1",
-    },
-    {
-      patientEmail: "Omar@gmail.com",
-      doctorEmail: "Dr.Ahmed@gmail.com",
-      date: "2023-10-10",
-      time:"05:00:00pm",
-      status: "UPCOMING",
-      key: "2",
-    },
-    {
-      patientEmail: "Hatem@gmail.com",
-      doctorEmail: "Dr.Medhat@gmail.com",
-      date: "2023-10-12",
-      time:"08:00:00am",
-      status: "CANCELLED",
-      key: "3",
-    },
-    {
-      patientEmail: "Hazem@gmail.com",
-      doctorEmail: "Dr.Medhat@gmail.com",
-      date: "2023-10-12",
-      time:"10:30:00pm",
-      status: "CANCELLED",
-      key: "4",
-    },
-    {
-      patientEmail: "Hatem@gmail.com",
-      doctorEmail: "Dr.Zo3nof@gmail.com",
-      date: "2023-10-12",
-      time:"03:00:00pm",
-      status: "COMPLETED",
-      key: "5",
-    },
-    {
-      patientEmail: "Seif.Naguib@gmail.com",
-      doctorEmail: "Dr.Zo3nof@gmail.com",
-      date: "2023-10-12",
-      time:"1:00:00pm",
-      status: "COMPLETED",
-      key: "6",
-    }, 
-  ];
+  const { appointmentLoading, userAppointments } = useSelector(
+    (state: RootState) => state.getAppointmentsReducer
+    );
+
+  const dispatch : any = useDispatch();
+
+  const data: DataType[] =                
+  userAppointments?.map((appointment: any) => (
+  {
+    patientEmail: appointment.patientEmail,      
+    doctorEmail: appointment.doctorEmail,
+    date: appointment.date,
+    time: appointment.time,
+    status: appointment.status,
+    key: appointment._id,
+  }
+  ));
+
+  useEffect(() => {
+    dispatch(getAppointmentsAction(
+      {
+        email: "Mosta",
+        type: "DOCTOR"
+      }
+      ));
+      console.log(userAppointments);
+}, []);
+  
+  // const data: DataType[] = [
+  //   {
+  //     patientEmail: 'Ali@gmail.com',
+  //     doctorEmail: 'Dr.Wael@gmail.com',
+  //     date: "2023-10-06",
+  //     time:"12:00:00pm",
+  //     status: "COMPLETED",
+  //     key: "1",
+  //   },
+  //   {
+  //     patientEmail: "Omar@gmail.com",
+  //     doctorEmail: "Dr.Ahmed@gmail.com",
+  //     date: "2023-10-10",
+  //     time:"05:00:00pm",
+  //     status: "UPCOMING",
+  //     key: "2",
+  //   },
+  //   {
+  //     patientEmail: "Hatem@gmail.com",
+  //     doctorEmail: "Dr.Medhat@gmail.com",
+  //     date: "2023-10-12",
+  //     time:"08:00:00am",
+  //     status: "CANCELLED",
+  //     key: "3",
+  //   },
+  //   {
+  //     patientEmail: "Hazem@gmail.com",
+  //     doctorEmail: "Dr.Medhat@gmail.com",
+  //     date: "2023-10-12",
+  //     time:"10:30:00pm",
+  //     status: "CANCELLED",
+  //     key: "4",
+  //   },
+  //   {
+  //     patientEmail: "Hatem@gmail.com",
+  //     doctorEmail: "Dr.Zo3nof@gmail.com",
+  //     date: "2023-10-12",
+  //     time:"03:00:00pm",
+  //     status: "COMPLETED",
+  //     key: "5",
+  //   },
+  //   {
+  //     patientEmail: "Seif.Naguib@gmail.com",
+  //     doctorEmail: "Dr.Zo3nof@gmail.com",
+  //     date: "2023-10-12",
+  //     time:"1:00:00pm",
+  //     status: "COMPLETED",
+  //     key: "6",
+  //   }, 
+  // ];
 
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
@@ -211,6 +250,15 @@ const AppointmentsScreen = () => {
       ],
       onFilter: (value: React.Key | boolean, record) => record.status.indexOf(value as string) === 0,    
       ellipsis: true,
+    },
+    {
+      title: 'Action',
+      key: 'operation',
+      fixed: 'right',
+      width: 100,
+      render: () => <Popconfirm title="Sure to delete?">
+      <a>Delete</a>
+    </Popconfirm>
     },
   ];
 

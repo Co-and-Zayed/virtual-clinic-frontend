@@ -2,8 +2,8 @@ import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/Pat
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "Redux/rootReducer";
-import { listAllUsersAction } from "Redux/VirtualClinicRedux/ListAllUsers/listAllUsersAction";
+import { RootState } from "redux/rootReducer";
+import { listAllUsersAction } from "redux/VirtualClinicRedux/ListAllUsers/listAllUsersAction";
 
 const PatientsScreen = () => {
   const dispatch: any = useDispatch();

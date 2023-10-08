@@ -6,8 +6,8 @@ import type { ColumnType, ColumnsType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "Redux/rootReducer";
-import { listAllPrescriptionsAction } from "Redux/VirtualClinicRedux/ListAllPrescriptions/listAllPrescriptionsAction";
+import { RootState } from "redux/rootReducer";
+import { listAllPrescriptionsAction } from "redux/VirtualClinicRedux/ListAllPrescriptions/listAllPrescriptionsAction";
 import moment from "moment";
 
 const PrescriptionsScreen: React.FC = () => {

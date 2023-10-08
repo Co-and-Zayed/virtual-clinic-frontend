@@ -5,7 +5,7 @@ import {
   PRESCRIPTIONS_DATA_SUCCESS,
   PRESCRIPTIONS_DATA_FAILURE,
   PRESCRIPTIONS_DATA_LOADING,
-} from "Redux/VirtualClinicRedux/types"; // Import your action types here
+} from "redux/VirtualClinicRedux/types"; // Import your action types here
 
 export const listAllPrescriptionsAction =
   (requestBody?: any) => async (dispatch: Dispatch) => {

@@ -4,9 +4,8 @@ import { listSinglePrescription } from "api/VirtualClinicRedux/apiUrls"; // Impo
 import {
   PRESCRIPTIONS_DETAILS_DATA_SUCCESS,
   PRESCRIPTIONS_DETAILS_DATA_FAILURE,
-  PRESCRIPTIONS_DETAILS_DATA_LOADING
-
-} from "Redux/VirtualClinicRedux/types"; // Import your action types here
+  PRESCRIPTIONS_DETAILS_DATA_LOADING,
+} from "redux/VirtualClinicRedux/types"; // Import your action types here
 
 export const listSinglePrescriptionAction =
   (id?: any) => async (dispatch: Dispatch) => {
@@ -14,11 +13,14 @@ export const listSinglePrescriptionAction =
       dispatch({ type: PRESCRIPTIONS_DETAILS_DATA_LOADING, payload: true });
 
       const response = await api.get(
-        listSinglePrescription(id)// Your Endpoint
+        listSinglePrescription(id) // Your Endpoint
         // requestBody, // (for requests with a body)
       );
 
-      dispatch({ type: PRESCRIPTIONS_DETAILS_DATA_SUCCESS, payload: response.data });
+      dispatch({
+        type: PRESCRIPTIONS_DETAILS_DATA_SUCCESS,
+        payload: response.data,
+      });
     } catch (err) {
       dispatch({ type: PRESCRIPTIONS_DETAILS_DATA_FAILURE, payload: err });
     } finally {

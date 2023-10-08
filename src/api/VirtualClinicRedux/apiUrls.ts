@@ -12,12 +12,12 @@ export const listPatientInfo = () => {
   return `doctor/getPatientInfo`;
 };
 
-export const listPatientByName = (name:any) => {
-  return `doctor/getPatientByName/${name}`;
+export const listPatientByName = () => {
+  return `doctor/getPatientByName/`;
 };
 
-export const listUpcomingAptmnts = (doctor:any) => {
-  return `doctor/getUpcomingAptmnts/${doctor}`;
+export const listUpcomingPatients = () => {
+  return `doctor/getUpcomingAptmnts/`;
 };
 
 export const viewSettings = () => {

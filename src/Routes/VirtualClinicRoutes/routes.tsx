@@ -58,7 +58,8 @@ export const routes = [
     path: Routes.PRESCRIPTION_DETAILS_PATH,
     element: <PrescriptionDetailsScreen />,
     parent: <ProtectedRoutes />,
-
+  },
+  {
     path: Routes.ADMINS_PATH,
     element: <AdminAdminsScreen />,
     parent: <ProtectedRoutes />,
@@ -80,6 +81,6 @@ export const routes = [
   },
   {
     path: Routes.REGISTER_PATH,
-    element: <RegisterScreen />
-  }
+    element: <RegisterScreen />,
+  },
 ];

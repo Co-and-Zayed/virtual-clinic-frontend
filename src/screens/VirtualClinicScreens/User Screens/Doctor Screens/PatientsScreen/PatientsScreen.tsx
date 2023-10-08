@@ -8,27 +8,25 @@ import { getDoctorInfoAction } from "redux/VirtualClinicRedux/GetDoctorInfo/getD
 const PatientsScreen = () => {
   const dispatch: any = useDispatch();
   const { doctorLoading, docinfo } = useSelector(
-      (state: RootState) => state.getDoctorInfoReducer
-     );
-
+    (state: RootState) => state.getDoctorInfoReducer
+  );
 
   useEffect(() => {
-    dispatch(getDoctorInfoAction({
-     
-        name:"hh" ,
-        email:"fff",
-        username:"ddd",
-        password:"fjhg",
-        speciality:"hjkl",
-       date_of_birth:"gg",
-        affiliation:"af",
-        educationalBackground:"trghj",
-        hourlyRate:67
-    
-     
-    })); // sending the request, and update the states
+    dispatch(
+      getDoctorInfoAction({
+        name: "hh",
+        email: "fff",
+        username: "ddd",
+        password: "fjhg",
+        speciality: "hjkl",
+        date_of_birth: "gg",
+        affiliation: "af",
+        educationalBackground: "trghj",
+        hourlyRate: 67,
+      })
+    ); // sending the request, and update the states
     console.log(docinfo);
-   }, []);
+  }, []);
 
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>

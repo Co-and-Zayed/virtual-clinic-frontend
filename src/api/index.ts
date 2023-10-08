@@ -74,7 +74,6 @@ instance.interceptors.response.use(
         break;
       case 500:
         notificationParam.message = "Internal Server Error";
-        // window.location.href = "/404";
         break;
       case 508:
         notificationParam.message = "Time Out";

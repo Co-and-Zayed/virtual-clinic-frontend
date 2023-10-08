@@ -4,7 +4,7 @@ import { routes } from "Routes/VirtualClinicRoutes/routes";
 const AppRoutes = () => {
   return (
     <Routes>
-      {routes.map(({ path, element, parent }, index) => {
+      {routes?.map(({ path, element, parent }, index) => {
         if (parent) {
           return (
             <Route key={index} element={parent}>

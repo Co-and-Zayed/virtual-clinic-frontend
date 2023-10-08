@@ -1,15 +1,22 @@
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
-
 import ProtectedRoutes from "Routes/ProtectedRoutes";
-
 import HomeScreen from "screens/VirtualClinicScreens/HomeScreen/HomeScreen";
 import LoginScreen from "screens/VirtualClinicScreens/LoginScreen/LoginScreen";
 import CommonDashboardScreen from "screens/VirtualClinicScreens/CommonScreens/CommonDashboardScreen/CommonDashboardScreen";
 import CommonSettingsScreen from "screens/VirtualClinicScreens/CommonScreens/CommonSettingsScreen/CommonSettingsScreen";
 
+// NEVEEN SCREENS
 import PatientDoctorsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/DoctorsScreen";
 import PrescriptionsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PrescriptionsScreen/PrescriptionsScreen";
 import DoctorPatientsScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/PatientsScreen/PatientsScreen";
+
+import DoctorPatientInfoScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/PatientsScreen/PatientInfoScreen";
+import DoctorUpcomingPatientsScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/PatientsScreen/UpcomingPatientsScreen";
+
+// MOSTAFA SCREENS
+import CommonAppointmentsScreen from "screens/VirtualClinicScreens/CommonScreens/CommonAppointmentsScreen/CommonAppoitmentScreen";
+import FamilyMembersScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/FamilyMembersScreen/FamilyMembersScreen";
+
 
 import PrescriptionDetailsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PrescriptionsScreen/PrescriptionDetailsScreen";
 
@@ -40,6 +47,16 @@ export const routes = [
     parent: <ProtectedRoutes />,
   },
   {
+    path: Routes.DOCTORS_UPCOMING_PATIENTS_PATH,
+    element: <DoctorUpcomingPatientsScreen />,
+    parent: <ProtectedRoutes />,
+  },
+  {
+    path: Routes.DOCTORS_PATIENT_INFO_PATH,
+    element: <DoctorPatientInfoScreen />,
+    parent: <ProtectedRoutes />,
+  },
+  {
     path: Routes.DOCTORS_PATH,
     element: <PatientDoctorsScreen />,
     parent: <ProtectedRoutes />,
@@ -50,6 +67,15 @@ export const routes = [
     parent: <ProtectedRoutes />,
   },
   {
+    path: Routes.APPOINTMENTS_PATH,
+    element: <CommonAppointmentsScreen />,
+    parent: <ProtectedRoutes />,
+  },
+  {
+    path: Routes.FAMILYMEMBERS_PATH,
+    element: <FamilyMembersScreen />,
+    parent: <ProtectedRoutes />,
+  },
     path: Routes.PRESCRIPTIONS_PATH,
     element: <PrescriptionsScreen />,
     parent: <ProtectedRoutes />,

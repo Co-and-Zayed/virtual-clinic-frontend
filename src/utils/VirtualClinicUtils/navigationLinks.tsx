@@ -14,8 +14,16 @@ export const navLinksPatient = [
     route: Routes.SETTINGS_PATH,
   },
   {
+    name: "Appointments",
+    route: Routes.APPOINTMENTS_PATH,
+  },
+  {
+    name: "Family Members",
+    route: Routes.FAMILYMEMBERS_PATH,
+}, {
     name: "Prescriptions",
     route: Routes.PRESCRIPTIONS_PATH,
+
   },
 ];
 
@@ -31,6 +39,10 @@ export const navLinksDoctor = [
   {
     name: "Settings",
     route: Routes.SETTINGS_PATH,
+  },
+  {
+    name: "Appointments",
+    route: Routes.APPOINTMENTS_PATH,
   },
 ];
 

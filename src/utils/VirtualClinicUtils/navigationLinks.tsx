@@ -12,17 +12,14 @@ import * as Routes from "Routes/VirtualClinicRoutes/paths";
 export const navLinksPatient = [
   {
     name: "Dashboard",
-    screen: <PatientDashboardScreen />,
     route: Routes.DASHBOARD_PATH,
   },
   {
     name: "Doctors",
-    screen: <PatientDoctorsScreen />,
     route: Routes.DOCTORS_PATH,
   },
   {
     name: "Settings",
-    screen: <PatientSettingsScreen />,
     route: Routes.SETTINGS_PATH,
   },
   {
@@ -35,17 +32,33 @@ export const navLinksPatient = [
 export const navLinksDoctor = [
   {
     name: "Dashboard",
-    screen: <DoctorDashboardScreen />,
     route: Routes.DASHBOARD_PATH,
   },
   {
     name: "Patients",
-    screen: <DoctorPatientsScreen />,
     route: Routes.PATIENTS_PATH,
   },
   {
     name: "Settings",
-    screen: <DoctorSettingsScreen />,
     route: Routes.SETTINGS_PATH,
+  },
+];
+
+export const navLinksAdmin = [
+  {
+    name: "Admins",
+    route: Routes.ADMINS_PATH,
+  },
+  {
+    name: "Packages",
+    route: Routes.PACKAGES_PATH,
+  },
+  {
+    name: "Doctors",
+    route: Routes.VIEW_DOCTORS_PATH,
+  },
+  {
+    name: "Patients",
+    route: Routes.VIEW_PATIENTS_PATH,
   },
 ];

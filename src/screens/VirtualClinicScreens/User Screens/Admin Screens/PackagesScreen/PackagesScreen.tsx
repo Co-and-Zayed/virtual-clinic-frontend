@@ -40,11 +40,11 @@ const PackagesScreen = () => {
 
   const handlePackageClick = (packageItem: any) => {
     formik.setValues({
-      name: packageItem.type,
-      price: packageItem.price_per_year,
-      sessionDiscount: packageItem.doctor_session_discount,
-      medicineDiscount: packageItem.medicine_discount,
-      familyDiscount: packageItem.family_discount,
+      type: packageItem.type,
+      price_per_year: packageItem.price_per_year,
+      doctor_session_discount: packageItem.doctor_session_discount,
+      medicine_discount: packageItem.medicine_discount,
+      family_discount: packageItem.family_discount,
     });
     setSelectedPackage(packageItem);
     setShowSinglePackage(true);
@@ -53,11 +53,11 @@ const PackagesScreen = () => {
 
   const handleAddClick = () => {
     formik.setValues({
-      name: null,
-      price: null,
-      sessionDiscount: null,
-      medicineDiscount: null,
-      familyDiscount: null,
+      type: null,
+      price_per_year: null,
+      doctor_session_discount: null,
+      medicine_discount: null,
+      family_discount: null,
     });
 
     setSelectedPackage(null);
@@ -67,11 +67,11 @@ const PackagesScreen = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: null,
-      price: null,
-      sessionDiscount: null,
-      medicineDiscount: null,
-      familyDiscount: null,
+      type: null,
+      price_per_year: null,
+      doctor_session_discount: null,
+      medicine_discount: null,
+      family_discount: null,
     },
     onSubmit: async (values: PackageModel, actions: any) => {
       // await dispatch(
@@ -203,7 +203,11 @@ const PackagesScreen = () => {
 
   useEffect(() => {
     dispatch(listAllPackagesAction()); // sending the request, and update the states
+    setSelectedPackage(null);
+    setShowSinglePackage(false);
     console.log(allPackages);
+    console.log("YBNY ER7AMNY")
+    console.log(selectedPackage);
   }, []);
 
   return (
@@ -221,8 +225,8 @@ const PackagesScreen = () => {
               allPackages?.map((packageItem: any) => (
                 <div
                   key={packageItem._id}
-                  className={`${styles.packageItem} ${
-                    selectedPackage?.name === packageItem.name &&
+                  className={`${styles.packageItem} ${selectedPackage?.type} ${packageItem.type} ${
+                    selectedPackage?.type === packageItem.type &&
                     styles.currentPackage
                   } mt-5 mr-5`}
                   onClick={() => handlePackageClick(packageItem)}
@@ -235,7 +239,10 @@ const PackagesScreen = () => {
                     <p className={`${styles.editLink}`}>Edit</p>
                   </div>
                   <p>EGP {packageItem.price_per_year}</p>
-                  <p>Session Discount: {packageItem.doctor_session_discount * 100}%</p>
+                  <p>
+                    Session Discount:{" "}
+                    {packageItem.doctor_session_discount * 100}%
+                  </p>
                   <p>
                     Medicine Discount: {packageItem.medicine_discount * 100}%
                   </p>
@@ -253,42 +260,42 @@ const PackagesScreen = () => {
             {generateFieldRow([
               {
                 title: "Package Name",
-                name: "name",
-                value: formik.values.name,
-                status: formik.errors.name ? "error" : "",
-                error: formik.errors.name,
+                name: "type",
+                value: formik.values.type,
+                status: formik.errors.type ? "error" : "",
+                error: formik.errors.type,
               },
               {
                 title: "Price",
-                name: "price",
-                value: formik.values.price,
-                status: formik.errors.price ? "error" : "",
-                error: formik.errors.price,
+                name: "price_per_year",
+                value: formik.values.price_per_year,
+                status: formik.errors.price_per_year ? "error" : "",
+                error: formik.errors.price_per_year,
               },
             ])}
             {generateFieldRow([
               {
                 title: "Session Discount",
-                name: "sessionDiscount",
-                value: formik.values.sessionDiscount,
-                status: formik.errors.sessionDiscount ? "error" : "",
-                error: formik.errors.sessionDiscount,
+                name: "doctor_session_discount",
+                value: formik.values.doctor_session_discount,
+                status: formik.errors.doctor_session_discount ? "error" : "",
+                error: formik.errors.doctor_session_discount,
               },
               {
                 title: "Medicine Discount",
-                name: "medicineDiscount",
-                value: formik.values.medicineDiscount,
-                status: formik.errors.medicineDiscount ? "error" : "",
-                error: formik.errors.medicineDiscount,
+                name: "medicine_discount",
+                value: formik.values.medicine_discount,
+                status: formik.errors.medicine_discount ? "error" : "",
+                error: formik.errors.medicine_discount,
               },
             ])}
             {generateFieldRow([
               {
                 title: "Family Discount",
-                name: "familyDiscount",
-                value: formik.values.familyDiscount,
-                status: formik.errors.familyDiscount ? "error" : "",
-                error: formik.errors.familyDiscount,
+                name: "family_discount",
+                value: formik.values.family_discount,
+                status: formik.errors.family_discount ? "error" : "",
+                error: formik.errors.family_discount,
               },
             ])}
             <div className="w-full flex justify-end gap-x-2">

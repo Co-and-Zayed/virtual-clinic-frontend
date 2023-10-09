@@ -1,5 +1,5 @@
 interface LoginModel {
-    email: String;
+    username: String;
     password: String;
 }
 

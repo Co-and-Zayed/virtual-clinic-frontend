@@ -3,18 +3,21 @@ import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import PatientDashboardScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/DashboardScreen/DashboardScreen";
 import DoctorDashboardScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/DashboardScreen/DashboardScreen";
+import { RootState } from "~/redux/rootReducer";
+import { useSelector } from "react-redux";
+import AdminsScreen from "../../User Screens/Admin Screens/AdminsScreen/AdminsScreen";
 
 const CommonDashboardScreen = () => {
-  var currentUser = process.env.REACT_APP_CURRENT_USER;
+  const { loginLoading, userType } = useSelector(
+    (state: RootState) => state.userReducer
+  );
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, []);
-
-  return currentUser === "Doctor" ? (
+  return userType === "DOCTOR" ? (
     <DoctorDashboardScreen />
-  ) : (
+  ) : userType === "PATIENT" ? (
     <PatientDashboardScreen />
+  ) : (
+    <AdminsScreen />
   );
 };
 

@@ -5,7 +5,7 @@ import LoginModel from "models/LoginModel";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "redux/rootReducer";
 import { useNavigate } from "react-router";
-import { loginAction } from "redux/Login/loginAction";
+import { loginAction } from "redux/User/userAction";
 
 const LoginScreen = () => {
   const navigate = useNavigate();
@@ -13,45 +13,47 @@ const LoginScreen = () => {
   const dispatch: any = useDispatch();
 
   const { loginLoading, userType } = useSelector(
-    (state: RootState) => state.loginReducer
+    (state: RootState) => state.userReducer
   );
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
     onSubmit: async (values: LoginModel) => {
       var errorExists = false;
-      if (values.email.trim() === "") {
+      if (values.username.trim() === "") {
         formik.setFieldError("email", "Enter Email");
         errorExists = true;
       }
-      if (values.email.trim() === "") {
-        formik.setFieldError("password", "Enter Email");
+      if (values.password.trim() === "") {
+        formik.setFieldError("password", "Enter Password");
         errorExists = true;
       }
       if (!errorExists) {
         await dispatch(
           loginAction({
-            email: values.email,
+            username: values.username,
             password: values.password,
           })
         );
-
-        if (userType === "DOCTOR") {
-          console.log(userType);
-          navigate("/dashboard");
-        }
       }
     },
   });
 
-  useEffect(() => {
+  const navigateToMainScreen = () => {
     if (userType === "DOCTOR" || userType === "PATIENT") {
       navigate("/dashboard");
+    } else if (userType === "ADMIN") {
+      navigate("/admins");
     }
-  }, [loginLoading, userType]);
+    console.log("USER TYPE WHEN NAVIGATING: ", userType);
+  };
+
+  useEffect(() => {
+    navigateToMainScreen();
+  }, [userType]);
 
   return (
     <div className="w-full h-[100vh] flex flex-col justify-center items-center">
@@ -64,14 +66,13 @@ const LoginScreen = () => {
           <Input
             className="w-[12rem]"
             size="large"
-            type="email"
-            name="email"
-            placeholder="Email@example.com"
-            status={formik.errors.email ? "error" : ""}
+            name="username"
+            placeholder="Username"
+            status={formik.errors.username ? "error" : ""}
             onChange={formik.handleChange}
           />
-          {formik.errors.email && (
-            <p className="text-[red]">Please Enter Email</p>
+          {formik.errors.username && (
+            <p className="text-[red]">Please Enter Username</p>
           )}
         </div>
         <div className="w-full flex flex-col items-center gap-y-2">
@@ -87,6 +88,15 @@ const LoginScreen = () => {
           {formik.errors.password && (
             <p className="text-[red]">Please Enter Password</p>
           )}
+        </div>
+        <div className="w-full flex flex-row items-center justify-center gap-x-1">
+          <p>Don't Have An Account Yet ? Register</p>
+          <p
+            className="text-[blue] hover:cursor-pointer"
+            onClick={() => navigate("/register")}
+          >
+            here
+          </p>
         </div>
         {loginLoading ? (
           <Spin />

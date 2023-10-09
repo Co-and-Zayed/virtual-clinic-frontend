@@ -22,7 +22,7 @@ const AdminsScreen = () => {
   const [showAddFields, setShowAddFields] = useState<boolean>(false);
   const [actionType, setActionType] = useState<string>();
 
-  const currentAdminID = "65228d6a23d0c632b8998176";
+  const { userData } = useSelector((state: RootState) => state.userReducer);
   const hasMounted = useRef(false);
 
   const { adminsLoading, allAdmins } = useSelector(
@@ -43,7 +43,7 @@ const AdminsScreen = () => {
 
   const handleDeleteClick = async (username: any) => {
     await dispatch(deleteAdminAction({ username: username }));
-    await dispatch(listAllAdminsAction(currentAdminID));
+    await dispatch(listAllAdminsAction(userData?._id));
     notification.success({
       message: "Admin deleted Successfully",
       placement: "topRight",
@@ -78,7 +78,7 @@ const AdminsScreen = () => {
       });
       return "fail";
     }
-    dispatch(listAllAdminsAction(currentAdminID));
+    dispatch(listAllAdminsAction(userData?._id));
     setSelectedPackage(null);
     setShowAddFields(false);
     return "success";
@@ -129,7 +129,7 @@ const AdminsScreen = () => {
   };
 
   useEffect(() => {
-    dispatch(listAllAdminsAction(currentAdminID));
+    dispatch(listAllAdminsAction(userData?._id));
     console.log("All Admins", allAdmins);
   }, []);
 

@@ -30,8 +30,9 @@ import { adminListAllPatientsReducer } from "./VirtualClinicRedux/AdminListAllPa
 import { createPackageReducer } from "./VirtualClinicRedux/CreatePackage/createPackageReducer";
 import { updatePackageReducer } from "./VirtualClinicRedux/UpdatePackage/updatePackageReducer";
 import { deletePackageReducer } from "./VirtualClinicRedux/DeletePackage/deletePackageReducer";
-import { loginReducer } from "redux/Login/loginReducer";
+import { userReducer } from "redux/User/userReducer";
 import { registerReducer } from "redux/Register/registerReducer";
+import { logoutReducer } from "redux/Logout/logoutReducer";
 
 export const appReducer = combineReducers({
   listAllUsersReducer,
@@ -49,7 +50,7 @@ export const appReducer = combineReducers({
   createPackageReducer,
   updatePackageReducer,
   deletePackageReducer,
-  loginReducer,
+  userReducer,
   registerReducer,
   createAppointmentReducer,
   addFamilyMemberReducer,
@@ -63,6 +64,7 @@ export const appReducer = combineReducers({
   listDoctorSettingsReducer,
   editSettingsReducer,
   listPatientByNameReducer,
+  logoutReducer,
 });
 
 export const rootReducers = (state: any, action: any) => {

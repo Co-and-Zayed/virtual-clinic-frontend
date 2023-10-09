@@ -12,7 +12,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "redux/rootReducer";
 import { logoutAction } from "redux/User/userAction";
 import { refreshAccessTokenService } from "services/refreshAccessTokenService";
-import { UPDATE_ACCESS_TOKEN } from "redux/User/loginTypes";
+import {
+  UPDATE_ACCESS_TOKEN,
+} from "redux/User/loginTypes";
 
 interface MainViewContainerProps {
   children: React.ReactNode;
@@ -25,29 +27,12 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
   const [currentLink, setCurrentLink] = useState(0);
   const [currentNavLinks, setCurrentNavLinks] = useState<any>(null);
 
-  const { userData, userType, accessToken, refreshToken } = useSelector(
-    (state: RootState) => state.userReducer
-  );
-
-  async function refreshTokenMethod() {
-    try {
-      if (accessToken !== null || refreshToken !== null) {
-        const newAccessToken = (await refreshAccessTokenService()).data;
-        dispatch({
-          type: UPDATE_ACCESS_TOKEN,
-          payload: newAccessToken?.accessToken,
-        });
-      }
-      setTimeout(refreshTokenMethod, 10000);
-    } catch (err) {
-      setTimeout(refreshTokenMethod, 10000);
-    }
-  }
-
-  useEffect(() => {
-    // This effect will be triggered whenever `createdAdmin` changes.
-    refreshTokenMethod();
-  }, []);
+  const {
+    userData,
+    userType,
+    accessToken,
+    refreshToken,
+  } = useSelector((state: RootState) => state.userReducer);
 
   useEffect(() => {
     console.log("CURRENT USER TYPE: ", userType);

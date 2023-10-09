@@ -5,3 +5,6 @@ export const UPDATE_ACCESS_TOKEN = "UPDATE_ACCESS_TOKEN";
 
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
+
+export const SHOULD_REFRESH = "SHOULD_REFRESH";
+export const REFRESH_TIMEOUT = "REFRESH_TIMEOUT";

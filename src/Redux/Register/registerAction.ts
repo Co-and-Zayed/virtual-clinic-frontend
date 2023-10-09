@@ -4,6 +4,8 @@ import {
   REGISTER_FAILURE,
 } from "redux/Register/registerTypes";
 
+import { LOGIN_USER } from "redux/User/loginTypes";
+
 import { Dispatch } from "redux";
 
 import { registerService } from "services/registerService";
@@ -14,8 +16,7 @@ export const regsiterAction = (data: any) => async (dispatch: Dispatch) => {
     dispatch({ type: REGISTER_LOADING, payload: true });
     const response = await registerService(data);
     console.log(response);
-    dispatch({ type: REGISTER_SUCCESS, payload: response.data });
-    dispatch({ type: LOGIN_SUCCESS, payload: response.data });
+    dispatch({ type: LOGIN_USER, payload: response.data });
   } catch (err) {
     dispatch({ type: REGISTER_FAILURE, payload: false });
   } finally {

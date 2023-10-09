@@ -17,13 +17,12 @@ const DashboardScreen = () => {
     (state: RootState) => state.listAllPatientsReducer
   );
 
-  const { userData } = useSelector(
-    (state: RootState) => state.userReducer
-  );
+  const { userData } = useSelector((state: RootState) => state.userReducer);
 
   useEffect(() => {
     dispatch(listAllPatientsAction({ doctor: "jawad@gmail.com" })); // sending the request, and update the states
   }, []);
+
   const generateExpandable = (record: any) => {
     return (
       <div>

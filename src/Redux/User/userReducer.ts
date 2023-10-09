@@ -2,8 +2,11 @@ import {
   LOGIN_LOADING,
   LOGIN_USER,
   LOGOUT_USER,
+  SHOULD_REFRESH,
+  REFRESH_TIMEOUT,
   UPDATE_ACCESS_TOKEN,
 } from "./loginTypes";
+import store from "redux/store";
 
 const initialState = {
   loginLoading: false,
@@ -11,6 +14,8 @@ const initialState = {
   userData: null as any,
   accessToken: null as any,
   refreshToken: null as any,
+  refreshTimeout: null as any,
+  shouldRefresh: "OFF",
 };
 
 export const userReducer = (state = initialState, action: any) => {
@@ -29,7 +34,23 @@ export const userReducer = (state = initialState, action: any) => {
       };
     case LOGOUT_USER:
       return { ...state, userType: null };
+    case SHOULD_REFRESH:
+      if (action.payload === "OFF" && state.refreshTimeout) {
+        clearTimeout(state.refreshTimeout);
+        console.log("Timeout cleared");
+      }
+      return {
+        ...state,
+        shouldRefresh: action.payload,
+      };
+    case REFRESH_TIMEOUT:
+      return {
+        ...state,
+        refreshTimeout: action.payload,
+      };
     default:
       return state;
   }
 };
+
+

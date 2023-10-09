@@ -54,22 +54,22 @@ export const editSettings = () => {
 
 //// MOSTAFA URLs
 export const createAppointment = () => {
-  return `patientAPI/createAppointment`;
+  return `patient/createAppointment`;
 };
 export const getAppointments = (type: any) => {
-  return `patientAPI/getAppointments/${type}`;
+  return `${type.toLowerCase()}/getAppointments/${type}`;
 };
 export const deleteAppointment = (id: any) => {
-  return `patientAPI/deleteAppointment/${id}`;
+  return `patient/deleteAppointment/${id}`;
 };
 export const updateAppointment = (id: any) => {
-  return `patientAPI/updateAppointment/${id}`;
+  return `patient/updateAppointment/${id}`;
 };
 export const addFamilyMember = () => {
-  return "patientAPI/addFamilyMember";
+  return "patient/addFamilyMember";
 };
 export const getFamilyMembers = () => {
-  return "patientAPI/getFamilyMembers";
+  return "patient/getFamilyMembers";
 };
 
 // YOUSSEF URLs

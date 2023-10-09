@@ -2,9 +2,8 @@ export const listAllUsers = () => {
   return `userAPI/getUsers`;
 };
 
-
 // SHADY URLs
-// Patient Get All Doctors 
+// Patient Get All Doctors
 export const patientGetDoctors = () => {
   return `patient/getDoctors`;
 };
@@ -19,15 +18,14 @@ export const allSpecialities = () => {
   return `dropdown/specialities`;
 };
 
-
 // ZEINA URLs
 export const getDoctorInfo = () => {
   return "patient/getDoctordetails";
+};
 
-  
 //// NEVEEN URLs
 export const listAllPatients = () => {
-    return `doctor/getPatients`;
+  return `doctor/getPatients`;
 };
 
 export const listPatientInfo = () => {
@@ -51,22 +49,22 @@ export const editSettings = () => {
 };
 
 //// MOSTAFA URLs
-export const createAppointment = ()=> {
+export const createAppointment = () => {
   return `patientAPI/createAppointment`;
 };
-export const getAppointments = (type: any)=> {
+export const getAppointments = (type: any) => {
   return `patientAPI/getAppointments/${type}`;
 };
-export const deleteAppointment = (id: any)=> {
+export const deleteAppointment = (id: any) => {
   return `patientAPI/deleteAppointment/${id}`;
 };
-export const updateAppointment = (id: any)=> {
+export const updateAppointment = (id: any) => {
   return `patientAPI/updateAppointment/${id}`;
 };
-export const addFamilyMember = ()=> {
+export const addFamilyMember = () => {
   return "patientAPI/addFamilyMember";
 };
-export const getFamilyMembers = ()=>{
+export const getFamilyMembers = () => {
   return "patientAPI/getFamilyMembers";
 };
 
@@ -77,7 +75,7 @@ export const listAllPrescriptions = () => {
 
 export const listSinglePrescription = (id: any) => {
   return `prescriptionAPI/getPrescription/${id}`;
-}
+};
 
 // SEIF URLs
 export const listAllPackages = () => {

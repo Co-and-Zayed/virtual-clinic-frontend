@@ -7,7 +7,7 @@ import {
 import { Dispatch } from "redux";
 
 import { registerService } from "services/registerService";
-import { LOGIN_SUCCESS } from "redux/Login/loginTypes";
+import { LOGIN_SUCCESS } from "redux/User/loginTypes";
 
 export const regsiterAction = (data: any) => async (dispatch: Dispatch) => {
   try {

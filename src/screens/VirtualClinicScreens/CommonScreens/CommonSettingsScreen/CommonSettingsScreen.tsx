@@ -4,15 +4,15 @@ import { useEffect, useState } from "react";
 
 import PatientSettingsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/SettingsScreen";
 import DoctorSettingsScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/SettingsScreen/SettingsScreen";
+import { useSelector } from "react-redux";
+import { RootState } from "redux/rootReducer";
 
 const CommonSettingsScreen = () => {
-  var currentUser = process.env.REACT_APP_CURRENT_USER;
+  const { loginLoading, userType } = useSelector(
+    (state: RootState) => state.userReducer
+  );
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, []);
-
-  return currentUser === "Doctor" ? (
+  return userType === "DOCTOR" ? (
     <DoctorSettingsScreen />
   ) : (
     <PatientSettingsScreen />

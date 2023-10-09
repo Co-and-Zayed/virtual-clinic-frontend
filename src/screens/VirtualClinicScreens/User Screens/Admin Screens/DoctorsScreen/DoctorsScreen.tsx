@@ -11,7 +11,6 @@ import {
 } from "@ant-design/icons";
 import { adminListAllDoctorsAction } from "redux/VirtualClinicRedux/AdminListAllDoctors/adminListAllDoctorsAction";
 import { deleteDoctorAction } from "redux/VirtualClinicRedux/DeleteDoctor/deleteDoctorAction";
-import { set } from "mongoose";
 
 const DoctorsScreen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;

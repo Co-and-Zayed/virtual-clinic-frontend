@@ -1,8 +1,9 @@
-.button{
-    border-color: grey;
-    border-width:thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 2px;
-    padding-bottom: 2px;
+.button {
+  border-color: blue !important;
+  color: blue !important;
+  border-width: thin;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }

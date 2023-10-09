@@ -4,15 +4,15 @@ import { useEffect, useState } from "react";
 
 import PatientAppointmentsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/AppointmentsScreen/AppointmentsScreen";
 import DoctorAppointmentsScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/AppointmentsScreen/AppointmentsScreen";
+import { RootState } from "redux/rootReducer";
+import { useSelector } from "react-redux";
 
 const CommonAppointmentsScreen = () => {
-  var currentUser = process.env.REACT_APP_CURRENT_USER;
+  const { loginLoading, userType } = useSelector(
+    (state: RootState) => state.userReducer
+  );
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, []);
-
-  return currentUser === "Doctor" ? (
+  return userType === "DOCTOR" ? (
     <DoctorAppointmentsScreen />
   ) : (
     <PatientAppointmentsScreen />

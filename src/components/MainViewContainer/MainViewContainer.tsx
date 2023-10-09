@@ -1,6 +1,6 @@
 import styles from "components/MainViewContainer/MainViewContainer.module.css";
 import { FC } from "react";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import {
   navLinksDoctor,
@@ -8,7 +8,11 @@ import {
   navLinksAdmin,
 } from "utils/VirtualClinicUtils/navigationLinks";
 import { useSelector, useDispatch } from "react-redux";
+
 import { RootState } from "redux/rootReducer";
+import { logoutAction } from "redux/User/userAction";
+import { refreshAccessTokenService } from "services/refreshAccessTokenService";
+import { UPDATE_ACCESS_TOKEN } from "redux/User/loginTypes";
 
 interface MainViewContainerProps {
   children: React.ReactNode;
@@ -21,14 +25,32 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
   const [currentLink, setCurrentLink] = useState(0);
   const [currentNavLinks, setCurrentNavLinks] = useState<any>(null);
 
-  const { loginLoading, userType } = useSelector(
-    (state: RootState) => state.loginReducer
-  );
-  const { registerLoading } = useSelector(
-    (state: RootState) => state.registerReducer
+  const { userData, userType, accessToken, refreshToken } = useSelector(
+    (state: RootState) => state.userReducer
   );
 
+  async function refreshTokenMethod() {
+    try {
+      if (accessToken !== null || refreshToken !== null) {
+        const newAccessToken = (await refreshAccessTokenService()).data;
+        dispatch({
+          type: UPDATE_ACCESS_TOKEN,
+          payload: newAccessToken?.accessToken,
+        });
+      }
+      setTimeout(refreshTokenMethod, 10000);
+    } catch (err) {
+      setTimeout(refreshTokenMethod, 10000);
+    }
+  }
+
   useEffect(() => {
+    // This effect will be triggered whenever `createdAdmin` changes.
+    refreshTokenMethod();
+  }, []);
+
+  useEffect(() => {
+    console.log("CURRENT USER TYPE: ", userType);
     if (userType === "DOCTOR") {
       setCurrentNavLinks(navLinksDoctor);
     } else if (userType === "PATIENT") {
@@ -36,21 +58,31 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
     } else if (userType === "ADMIN") {
       setCurrentNavLinks(navLinksAdmin);
     } else {
-      window.location.pathname = "/login";
+      navigate("/login");
     }
-  }, [userType, loginLoading, registerLoading]);
+  }, [userType]);
+
+  const handleLogoutClick = async () => {
+    await dispatch(logoutAction());
+    navigate("/login");
+  };
 
   useEffect(() => {
-    console.log("PATH NAAAME", window.location.pathname);
     for (let i = 0; i < currentNavLinks?.length; i++) {
       console.log(currentNavLinks[i]?.route, window.location.pathname);
       console.log(currentNavLinks[i]?.route === window.location.pathname);
       if (currentNavLinks[i]?.route === window.location.pathname) {
-        console.log("SETTING CURRENT LINK", i);
         setCurrentLink(i);
       }
     }
   }, [window.location.pathname, currentNavLinks]);
+
+  useEffect(() => {
+    console.log("USER DATA: ", userData);
+    console.log("USER TYPE: ", userType);
+    console.log("ACCESS TOKEN: ", accessToken);
+    console.log("REFRESH TOKEN: ", refreshToken);
+  }, [userData, userType, accessToken, refreshToken]);
 
   return (
     <div className={styles.mainViewContainer}>
@@ -73,7 +105,14 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
               {link.name}
             </li>
           ))}
-          <li onClick={() => dispatch({ type: "LOG_OUT" })}>Logout</li>
+
+          {
+            // logoutLoading
+            // ?
+            //   <Spin />
+            // :
+            <li onClick={handleLogoutClick}>Logout</li>
+          }
         </ul>
 
         <hr />

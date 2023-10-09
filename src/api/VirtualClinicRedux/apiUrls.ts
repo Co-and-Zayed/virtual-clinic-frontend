@@ -20,7 +20,7 @@ export const allSpecialities = () => {
 
 // ZEINA URLs
 export const getDoctorInfo = () => {
-  return "patient/getDoctordetails";
+  return `patient/getDoctordetails`;
 };
 
 //// NEVEEN URLs
@@ -36,8 +36,12 @@ export const listPatientByName = () => {
   return `doctor/getPatientByName/`;
 };
 
-export const listUpcomingPatients = () => {
+export const listUpcomingAppointments = () => {
   return `doctor/getUpcomingAptmnts/`;
+};
+
+export const listPatientAppointments = (userType: any) => {
+  return `patient/getAppointments/${userType}`;
 };
 
 export const viewSettings = () => {

@@ -3,7 +3,7 @@ import MainViewContainer from "components/MainViewContainer/MainViewContainer";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { refreshAccessTokenService } from "services/refreshAccessTokenService";
-import { UPDATE_ACCESS_TOKEN } from "Redux/Login/loginTypes";
+import { UPDATE_ACCESS_TOKEN } from "redux/Login/loginTypes";
 
 const ProtectedRoutes = () => {
   const dispatch: any = useDispatch();
@@ -15,7 +15,7 @@ const ProtectedRoutes = () => {
         dispatch({type: UPDATE_ACCESS_TOKEN, payload: newAccessToken?.accessToken});
         setTimeout(refreshToken, 50000); 
       } catch (err) {
-        return;
+        setTimeout(refreshToken, 50000); 
       }
     }
 

@@ -10,9 +10,10 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 
 import { RootState } from "redux/rootReducer";
-import { logoutAction } from "Redux/Logout/logoutAction";
+import { logoutAction } from "redux/Logout/logoutAction";
 import { Spin } from "antd";
-
+import { LOG_OUT } from "redux/VirtualClinicRedux/types";
+import { LOGIN_SUCCESS } from "redux/Login/loginTypes";
 
 interface MainViewContainerProps {
   children: React.ReactNode;
@@ -25,11 +26,18 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
   const [currentLink, setCurrentLink] = useState(0);
   const [currentNavLinks, setCurrentNavLinks] = useState<any>(null);
 
-  const { loginLoading, userType } = useSelector((state: RootState) => state.loginReducer);
-  const { registerLoading } = useSelector((state: RootState) => state.registerReducer);
-  const { logoutLoading } = useSelector((state: RootState) => state.logoutReducer);
+  const { loginLoading, userType } = useSelector(
+    (state: RootState) => state.loginReducer
+  );
+  const { registerLoading } = useSelector(
+    (state: RootState) => state.registerReducer
+  );
+  const { logoutLoading } = useSelector(
+    (state: RootState) => state.logoutReducer
+  );
 
   useEffect(() => {
+    // dispatch({type: LOG_OUT})
     if (userType === "DOCTOR") {
       setCurrentNavLinks(navLinksDoctor);
     } else if (userType === "PATIENT") {
@@ -76,11 +84,17 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
           ))}
 
           {
-            logoutLoading 
+            logoutLoading
             ?
               <Spin />
             :
-            <li onClick={() => dispatch(logoutAction())}>Logout</li>
+            <li
+              onClick={() => {
+                dispatch(logoutAction());
+              }}
+            >
+              Logout
+            </li>
           }
         </ul>
 

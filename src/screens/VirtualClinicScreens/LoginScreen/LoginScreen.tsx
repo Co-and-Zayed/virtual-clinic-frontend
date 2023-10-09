@@ -18,23 +18,23 @@ const LoginScreen = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
     onSubmit: async (values: LoginModel) => {
       var errorExists = false;
-      if (values.email.trim() === "") {
+      if (values.username.trim() === "") {
         formik.setFieldError("email", "Enter Email");
         errorExists = true;
       }
-      if (values.email.trim() === "") {
-        formik.setFieldError("password", "Enter Email");
+      if (values.password.trim() === "") {
+        formik.setFieldError("password", "Enter Password");
         errorExists = true;
       }
       if (!errorExists) {
         await dispatch(
           loginAction({
-            email: values.email,
+            username: values.username,
             password: values.password,
           })
         );
@@ -48,6 +48,7 @@ const LoginScreen = () => {
   });
 
   useEffect(() => {
+    console.log(userType);
     if (userType === "DOCTOR" || userType === "PATIENT") {
       navigate("/dashboard");
     }
@@ -64,14 +65,13 @@ const LoginScreen = () => {
           <Input
             className="w-[12rem]"
             size="large"
-            type="email"
-            name="email"
-            placeholder="Email@example.com"
-            status={formik.errors.email ? "error" : ""}
+            name="username"
+            placeholder="Username"
+            status={formik.errors.username ? "error" : ""}
             onChange={formik.handleChange}
           />
-          {formik.errors.email && (
-            <p className="text-[red]">Please Enter Email</p>
+          {formik.errors.username && (
+            <p className="text-[red]">Please Enter Username</p>
           )}
         </div>
         <div className="w-full flex flex-col items-center gap-y-2">

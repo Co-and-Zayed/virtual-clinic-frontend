@@ -1,12 +1,12 @@
 import api from "api";
 import { refreshAccessTokenUrl } from "api/apiUrls";
-import store from "Redux/store";
+import store from "redux/store";
 
 export const refreshAccessTokenService = async () => {
     const response = await api.post(
         refreshAccessTokenUrl(),
         {
-            email : store.getState()?.loginReducer?.userData?.email,
+            username : store.getState()?.loginReducer?.userData?.username,
             token : store.getState()?.loginReducer?.refreshToken
         },
         {

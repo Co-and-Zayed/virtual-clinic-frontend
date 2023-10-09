@@ -4,7 +4,7 @@ import
     LOGOUT_SUCCESS,
     LOGOUT_FAILURE
 }
-from "Redux/Logout/logoutTypes";
+from "redux/Logout/logoutTypes";
 
 const initialState = {
     logoutLoading: false,

@@ -6,7 +6,7 @@ import
     LOGIN_FAILURE,
     UPDATE_ACCESS_TOKEN
 }
-from "Redux/Login/loginTypes";
+from "redux/Login/loginTypes";
 
 const initialState = {
   loginLoading: false,
@@ -24,10 +24,10 @@ export const loginReducer = (state = initialState, action: any) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        userType: action.payload.user.type,
-        userData: action.payload.data,
-        accessToken: action.payload.tokens.accessToken,
-        refreshToken: action.payload.tokens.refreshToken,
+        userType: action.payload?.user?.type,
+        userData: action.payload?.data,
+        accessToken: action.payload?.tokens?.accessToken,
+        refreshToken: action.payload?.tokens?.refreshToken,
       };
     case LOGIN_FAILURE:
       return { ...state, errors: action.payload };

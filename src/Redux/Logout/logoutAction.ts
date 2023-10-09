@@ -4,9 +4,9 @@ import
     LOGOUT_SUCCESS,
     LOGOUT_FAILURE
 }
-from "Redux/Logout/logoutTypes";
+from "redux/Logout/logoutTypes";
 
-import { LOG_OUT } from "Redux/VirtualClinicRedux/types";
+import { LOG_OUT } from "redux/VirtualClinicRedux/types";
 
 import { Dispatch } from "redux";
 

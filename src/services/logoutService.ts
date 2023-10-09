@@ -1,12 +1,12 @@
 import api from "api";
 import { logoutUrl } from "api/apiUrls";
-import store from "Redux/store";
+import store from "redux/store";
 
 export const logoutService = async () => {
     const response = await api.post(
         logoutUrl(),
         {
-            email : store.getState()?.loginReducer?.userData?.email
+            username : store.getState()?.loginReducer?.userData?.username
         },
         {
             headers : {

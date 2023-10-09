@@ -4,7 +4,7 @@ import HomeScreen from "screens/VirtualClinicScreens/HomeScreen/HomeScreen";
 import LoginScreen from "screens/VirtualClinicScreens/LoginScreen/LoginScreen";
 import CommonDashboardScreen from "screens/VirtualClinicScreens/CommonScreens/CommonDashboardScreen/CommonDashboardScreen";
 import CommonSettingsScreen from "screens/VirtualClinicScreens/CommonScreens/CommonSettingsScreen/CommonSettingsScreen";
-
+import DoctorDashboardScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/DashboardScreen/DashboardScreen";
 // NEVEEN SCREENS
 import PatientDoctorsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/DoctorsScreen";
 import PrescriptionsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PrescriptionsScreen/PrescriptionsScreen";
@@ -42,7 +42,7 @@ export const routes = [
   },
   {
     path: Routes.PATIENTS_PATH,
-    element: <DoctorPatientsScreen />,
+    element: <DoctorDashboardScreen />,
     parent: <ProtectedRoutes />,
   },
   {

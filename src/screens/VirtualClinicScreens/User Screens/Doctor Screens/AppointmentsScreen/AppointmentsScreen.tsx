@@ -1,4 +1,4 @@
-import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/AppointmentsScreen/AppoitmentsScreen.module.css";
+import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/SettingsScreen/SettingsScreen.module.css";
 import { useNavigate } from "react-router";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";

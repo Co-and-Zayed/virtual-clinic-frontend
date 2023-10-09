@@ -22,7 +22,7 @@ export const userReducer = (state = initialState, action: any) => {
     case LOGIN_USER:
       return {
         ...state,
-        userType: action.payload?.user?.type,
+        userType: action.payload?.type,
         userData: action.payload?.data,
         accessToken: action.payload?.tokens?.accessToken,
         refreshToken: action.payload?.tokens?.refreshToken,

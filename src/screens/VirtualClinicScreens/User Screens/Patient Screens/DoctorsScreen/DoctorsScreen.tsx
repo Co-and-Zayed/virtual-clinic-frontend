@@ -17,57 +17,25 @@ const DoctorsScreen = () => {
   const { allDoctors, doctorsLoading } = useSelector(
     (state: RootState) => state.patientGetDoctorsReducer
   );
-
+  const { userData } = useSelector((state: RootState) => state.userReducer);
   const dispatch: any = useDispatch();
-
-  const doctors = [
-    {
-      name: "Shady Hani",
-      email: "doc.shady@gmail.com",
-      specialty: "Dentist",
-      date_of_birth: new Date("1999-01-01"),
-      affiliation: "German University in Cairo",
-      educationalBackground: "Phd",
-      hourlyRate: 350,
-      session_price: 500.0,
-    },
-    {
-      name: "Seif Hany",
-      email: "doc.seif@gmail.com",
-      specialty: "Physician",
-      date_of_birth: new Date("1999-01-01"),
-      affiliation: "German University in Cairo",
-      educationalBackground: "Phdzz",
-      hourlyRate: 500,
-      session_price: 450.0,
-    },
-    {
-      name: "Deema Magdy",
-      email: "doc.deema@gmail.com",
-      specialty: "Researcher",
-      date_of_birth: new Date("1999-01-01"),
-      affiliation: "German University in Cairo",
-      educationalBackground: "Phd",
-      hourlyRate: 400,
-      session_price: 350.0,
-    },
-  ];
 
   const [searchSpeciality, setSearchSpeciality] = useState(null);
   const [searchName, setSearchName] = useState("");
 
   useEffect(() => {
+    console.log("USER DATA", userData);
     dispatch(allSpecialitiesAction());
     dispatch(
       patientGetDoctorsAction({
-        email: "shady.hani1@gmail.com",
+        email: userData?.email,
       })
     );
   }, []);
 
   useEffect(() => {
-    console.log(allSpecialities);
-  }, [allSpecialities]);
+    console.log(allDoctors);
+  }, [allDoctors]);
 
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>

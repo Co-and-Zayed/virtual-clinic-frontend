@@ -36,7 +36,7 @@ export const listPatientByName = () => {
   return `doctor/getPatientByName/`;
 };
 
-export const listUpcomingPatients = () => {
+export const listUpcomingAppointments = () => {
   return `doctor/getUpcomingAptmnts/`;
 };
 

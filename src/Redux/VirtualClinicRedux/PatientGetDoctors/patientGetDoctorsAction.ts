@@ -6,6 +6,7 @@ import {
   PATIENT_GET_DOCTORS_SUCCESS,
   PATIENT_GET_DOCTORS_FAILURE,
 } from "redux/VirtualClinicRedux/types"; // Import your action types here
+import store from "redux/store";
 
 export const patientGetDoctorsAction =
   (requestBody?: any) => async (dispatch: Dispatch) => {

@@ -5,7 +5,7 @@ import LoginModel from "models/LoginModel";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "redux/rootReducer";
 import { useNavigate } from "react-router";
-import { loginAction } from "redux/Login/loginAction";
+import { loginAction } from "redux/User/userAction";
 
 const LoginScreen = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const LoginScreen = () => {
   const dispatch: any = useDispatch();
 
   const { loginLoading, userType } = useSelector(
-    (state: RootState) => state.loginReducer
+    (state: RootState) => state.userReducer
   );
 
   const formik = useFormik({
@@ -38,21 +38,22 @@ const LoginScreen = () => {
             password: values.password,
           })
         );
-
-        if (userType === "DOCTOR") {
-          console.log(userType);
-          navigate("/dashboard");
-        }
       }
     },
   });
 
-  useEffect(() => {
-    console.log(userType);
+  const navigateToMainScreen = () => {
     if (userType === "DOCTOR" || userType === "PATIENT") {
       navigate("/dashboard");
+    } else if (userType === "ADMIN") {
+      navigate("/admins");
     }
-  }, [loginLoading, userType]);
+    console.log("USER TYPE WHEN NAVIGATING: ", userType);
+  };
+
+  useEffect(() => {
+    navigateToMainScreen();
+  }, [userType]);
 
   return (
     <div className="w-full h-[100vh] flex flex-col justify-center items-center">
@@ -89,15 +90,13 @@ const LoginScreen = () => {
           )}
         </div>
         <div className="w-full flex flex-row items-center justify-center gap-x-1">
-            <p>
-              Don't Have An Account Yet ? Register
-            </p>
-            <p
-              className="text-[blue] hover:cursor-pointer"
-              onClick={() => navigate("/register")}
-            >
-              here
-            </p>
+          <p>Don't Have An Account Yet ? Register</p>
+          <p
+            className="text-[blue] hover:cursor-pointer"
+            onClick={() => navigate("/register")}
+          >
+            here
+          </p>
         </div>
         {loginLoading ? (
           <Spin />

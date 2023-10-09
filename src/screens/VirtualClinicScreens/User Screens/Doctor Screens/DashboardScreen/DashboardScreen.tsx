@@ -16,9 +16,13 @@ const DashboardScreen = () => {
   const { patientsLoading, allPatients } = useSelector(
     (state: RootState) => state.listAllPatientsReducer
   );
+
+  const { userData } = useSelector(
+    (state: RootState) => state.userReducer
+  );
+
   useEffect(() => {
     dispatch(listAllPatientsAction({ doctor: "jawad@gmail.com" })); // sending the request, and update the states
-    console.log(allPatients);
   }, []);
   const generateExpandable = (record: any) => {
     return (

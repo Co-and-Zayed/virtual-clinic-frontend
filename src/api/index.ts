@@ -15,20 +15,23 @@ const instance = axios.create({
     to insert the token in the Authorization header
 */
 
-// if (store.getState()?.loginReducer?.user?.token) {
-//   instance.interceptors.request.use(
-//     async (config: any) => {
-//       const token = store.getState()?.loginReducer?.user?.token;
-//       if (token) {
-//         config.headers!.Authorization = `Bearer ${token}`;
-//       }
-//       return config;
-//     },
-//     async (error) => {
-//       return await Promise.reject(error);
-//     }
-//   );
-// }
+instance.interceptors.request.use(
+  async (config: any) => {
+    const token = store.getState()?.userReducer?.accessToken;
+    console.log("Access Token ?????:", token); // Add this line for debugging
+    if (token) {
+      config.headers!.Authorization = `Bearer ${token}`;
+      config.data = {
+        ...config.data,
+        refreshToken: store.getState()?.userReducer?.refreshToken,
+      };
+    }
+    return config;
+  },
+  async (error) => {
+    return await Promise.reject(error);
+  }
+);
 
 const checkAuth = (notificationParam: any) => {
   if (window.location.pathname === "/login") {

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
-import store from "Redux/store";
+import store from "redux/store";
 import { notification } from "antd";
 
 // Change The Api Url
@@ -13,7 +13,7 @@ const instance = axios.create({
 /*
     When The login reducer is setup change this code accordingly 
     to insert the token in the Authorization header
-*/ 
+*/
 
 // if (store.getState()?.loginReducer?.user?.token) {
 //   instance.interceptors.request.use(
@@ -29,7 +29,6 @@ const instance = axios.create({
 //     }
 //   );
 // }
-
 
 const checkAuth = (notificationParam: any) => {
   if (window.location.pathname === "/login") {
@@ -64,7 +63,6 @@ instance.interceptors.response.use(
       case 400:
         notificationParam.message = "Bad Request";
         notificationParam.description = "Check that data is being sent";
-        // window.location.href = "/404";
         break;
       case 404:
         notificationParam.message = "Not Found";
@@ -76,7 +74,6 @@ instance.interceptors.response.use(
         break;
       case 500:
         notificationParam.message = "Internal Server Error";
-        // window.location.href = "/404";
         break;
       case 508:
         notificationParam.message = "Time Out";

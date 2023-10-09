@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { Input, Spin } from "antd";
 import LoginModel from "models/LoginModel";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "Redux/rootReducer";
+import { RootState } from "redux/rootReducer";
 import { useNavigate } from "react-router";
-import { loginAction } from "Redux/Login/loginAction";
+import { loginAction } from "redux/Login/loginAction";
 
 const LoginScreen = () => {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ const LoginScreen = () => {
 
         if (userType === "DOCTOR") {
           console.log(userType);
-            navigate("/dashboard");
+          navigate("/dashboard");
         }
       }
     },

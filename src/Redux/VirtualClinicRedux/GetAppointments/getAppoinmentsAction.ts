@@ -1,9 +1,6 @@
 import { Dispatch } from "redux";
 import api from "api";
-import {
-  getAppointments,
-  listUpcomingAppointments,
-} from "api/VirtualClinicRedux/apiUrls"; // Import your api url here
+import { listPatientAppointments } from "api/VirtualClinicRedux/apiUrls"; // Import your api url here
 import {
   GET_APPOINTMENTS_DATA_FAILURE,
   GET_APPOINTMENTS_DATA_LOADING,
@@ -16,7 +13,7 @@ export const getAppointmentsAction =
       dispatch({ type: GET_APPOINTMENTS_DATA_LOADING, payload: true });
 
       const response = await api.post(
-        listUpcomingAppointments(), // Your Endpoint
+        listPatientAppointments(requestBody.type), // Your Endpoint
         requestBody // (for requests with a body)
       );
 

@@ -7,33 +7,6 @@ import { UPDATE_ACCESS_TOKEN } from "redux/User/loginTypes";
 import { RootState } from "redux/rootReducer";
 
 const ProtectedRoutes = () => {
-  const dispatch: any = useDispatch();
-
-  // const hasMounted = useRef(false);
-  const { loginLoading, userType, accessToken, refreshToken } = useSelector(
-    (state: RootState) => state.userReducer
-  );
-
-  async function refreshTokenMethod() {
-    try {
-      if (accessToken !== null || refreshToken !== null) {
-        const newAccessToken = (await refreshAccessTokenService()).data;
-        dispatch({
-          type: UPDATE_ACCESS_TOKEN,
-          payload: newAccessToken?.accessToken,
-        });
-      }
-      setTimeout(refreshTokenMethod, 10000);
-    } catch (err) {
-      setTimeout(refreshTokenMethod, 10000);
-    }
-  }
-
-  useEffect(() => {
-    // This effect will be triggered whenever `createdAdmin` changes.
-    refreshTokenMethod();
-  }, []);
-
   return (
     <MainViewContainer>
       <Outlet />

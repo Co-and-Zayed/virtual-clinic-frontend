@@ -8,6 +8,8 @@ import { SearchOutlined } from "@ant-design/icons";
 import { patientGetDoctorsAction } from "redux/VirtualClinicRedux/PatientGetDoctors/patientGetDoctorsAction";
 import { allSpecialitiesAction } from "redux/VirtualClinicRedux/Dropdowns/AllSpecialities/allSpecialitiesAction";
 import { patientSearchDoctorsAction } from "redux/VirtualClinicRedux/PatientSearchDoctors/patientSearchDoctorsAction";
+import { getDoctorInfoAction } from "redux/VirtualClinicRedux/GetDoctorInfo/getDoctorInfoAction";
+import DoctorInfoScreen from "./DoctorInfoScreen";
 
 const DoctorsScreen = () => {
   const { allSpecialities, specialitiesLoading } = useSelector(
@@ -17,6 +19,11 @@ const DoctorsScreen = () => {
   const { allDoctors, doctorsLoading } = useSelector(
     (state: RootState) => state.patientGetDoctorsReducer
   );
+
+  // const {  doctorLoading, docinfo } = useSelector(
+  //   (state: RootState) => state.getDoctorInfoReducer
+  // );
+
 
   const dispatch: any = useDispatch();
 
@@ -56,6 +63,8 @@ const DoctorsScreen = () => {
   const [searchSpeciality, setSearchSpeciality] = useState(null);
   const [searchName, setSearchName] = useState("");
 
+
+ 
   useEffect(() => {
     dispatch(allSpecialitiesAction());
     dispatch(
@@ -68,6 +77,17 @@ const DoctorsScreen = () => {
   useEffect(() => {
     console.log(allSpecialities);
   }, [allSpecialities]);
+
+
+const getDoctorName = () => {
+  
+  dispatch(getDoctorInfoAction({ name: searchName }));
+};
+
+
+
+
+
 
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
@@ -244,9 +264,16 @@ const DoctorsScreen = () => {
                                   minimumFractionDigits: 2,
                                   maximumFractionDigits: 2,
                                 }
+
+                                
                               )}
+                              <button onClick={getDoctorName}>View</button>
                             </>
-                          ) : (
+                          ) : 
+                          /*  button */
+                        /*<button onClick={getDoctorName}>View</button>*/
+                          
+                          (
                             <span>
                               EGP{" "}
                               {doctor?.session_price?.toLocaleString(
@@ -256,6 +283,7 @@ const DoctorsScreen = () => {
                                   maximumFractionDigits: 2,
                                 }
                               )}
+
                             </span>
                           )}
                         </div>
@@ -269,6 +297,7 @@ const DoctorsScreen = () => {
         </div>
       </div>
     </div>
+    
   );
 };
 

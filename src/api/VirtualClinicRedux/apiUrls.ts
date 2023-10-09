@@ -20,7 +20,7 @@ export const allSpecialities = () => {
 
 // ZEINA URLs
 export const getDoctorInfo = () => {
-  return "patient/getDoctordetails";
+  return `patient/getDoctordetails`;    
 };
 
 //// NEVEEN URLs

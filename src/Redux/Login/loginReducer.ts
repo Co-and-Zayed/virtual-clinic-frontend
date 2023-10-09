@@ -2,7 +2,8 @@ import
 {
     LOGIN_LOADING,
     LOGIN_SUCCESS,
-    LOGIN_FAILURE
+    LOGIN_FAILURE,
+    UPDATE_ACCESS_TOKEN
 }
 from "Redux/Login/loginTypes";
 
@@ -21,6 +22,8 @@ export const loginReducer = (state = initialState, action: any) => {
             return {...state, loginLoading: action.payload};
         case LOGIN_SUCCESS :
             return {...state, userType: action.payload.user.type, userData: action.payload.data, accessToken: action.payload.tokens.accessToken, refreshToken: action.payload.tokens.refreshToken};
+        case UPDATE_ACCESS_TOKEN :
+            return {...state, accessToken: action.payload};
         case LOGIN_FAILURE :
             return {...state, errors: action.payload};
         default:

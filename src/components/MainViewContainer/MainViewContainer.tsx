@@ -1,6 +1,6 @@
 import styles from "components/MainViewContainer/MainViewContainer.module.css";
 import { FC } from "react";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import {
   navLinksDoctor,
@@ -8,6 +8,8 @@ import {
 } from "utils/VirtualClinicUtils/navigationLinks";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "Redux/rootReducer";
+import { logoutAction } from "Redux/Logout/logoutAction";
+import { Spin } from "antd";
 
 interface MainViewContainerProps {
   children: React.ReactNode;
@@ -22,6 +24,7 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
 
   const { loginLoading, userType } = useSelector((state: RootState) => state.loginReducer);
   const { registerLoading } = useSelector((state: RootState) => state.registerReducer);
+  const { logoutLoading } = useSelector((state: RootState) => state.logoutReducer);
 
   useEffect(() => {
     if (userType === "DOCTOR") {
@@ -63,7 +66,13 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
               {link.name}
             </li>
           ))}
-          <li onClick={() => dispatch({type: "LOG_OUT"})}>Logout</li>
+          {
+            logoutLoading 
+            ?
+              <Spin />
+            :
+            <li onClick={() => dispatch(logoutAction())}>Logout</li>
+          }
         </ul>
 
         <hr />

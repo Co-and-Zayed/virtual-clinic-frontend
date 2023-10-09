@@ -1,8 +1,12 @@
-import {
-  LOGIN_LOADING,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-} from "redux/Login/loginTypes";
+
+import
+{
+    LOGIN_LOADING,
+    LOGIN_SUCCESS,
+    LOGIN_FAILURE,
+    UPDATE_ACCESS_TOKEN
+}
+from "Redux/Login/loginTypes";
 
 const initialState = {
   loginLoading: false,

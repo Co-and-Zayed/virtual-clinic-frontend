@@ -32,6 +32,8 @@ import { updatePackageReducer } from "./VirtualClinicRedux/UpdatePackage/updateP
 import { deletePackageReducer } from "./VirtualClinicRedux/DeletePackage/deletePackageReducer";
 import { loginReducer } from "redux/Login/loginReducer";
 import { registerReducer } from "redux/Register/registerReducer";
+import { logoutReducer } from "redux/Logout/logoutReducer";
+
 
 export const appReducer = combineReducers({
   listAllUsersReducer,
@@ -63,6 +65,7 @@ export const appReducer = combineReducers({
   listDoctorSettingsReducer,
   editSettingsReducer,
   listPatientByNameReducer,
+  logoutReducer
 });
 
 export const rootReducers = (state: any, action: any) => {

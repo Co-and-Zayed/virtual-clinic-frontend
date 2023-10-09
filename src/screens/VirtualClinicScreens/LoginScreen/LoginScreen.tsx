@@ -88,6 +88,17 @@ const LoginScreen = () => {
             <p className="text-[red]">Please Enter Password</p>
           )}
         </div>
+        <div className="w-full flex flex-row items-center justify-center gap-x-1">
+            <p>
+              Don't Have An Account Yet ? Register
+            </p>
+            <p
+              className="text-[blue] hover:cursor-pointer"
+              onClick={() => navigate("/register")}
+            >
+              here
+            </p>
+        </div>
         {loginLoading ? (
           <Spin />
         ) : (

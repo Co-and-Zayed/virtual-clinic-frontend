@@ -59,38 +59,6 @@ const PatientsScreen = () => {
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
       <h1>Doctor Patients Screen</h1>
-      {/* Search input */}
-      <input
-        type="text"
-        placeholder="Enter patient name"
-        value={searchName}
-        onChange={(e) => setSearchName(e.target.value)}
-      />
-      {/* Search button */}
-      <button onClick={handleSearch}>Search</button>
-
-      {searchPatient ? (
-        <h1>Loading...</h1>
-      ) : (
-        patient?.map((detail: any) => (
-          <div key={detail._id} className="m-5">
-            <h1>{detail.name}</h1>
-            <h1>{detail.email}</h1>
-            <h1>{detail.healthRecords}</h1>
-            <h1>{detail.date_of_birth}</h1>
-            <button onClick={handleRemove}>Remove</button>
-          </div>
-        ))
-      )}
-
-      <button
-        className={styles.button}
-        onClick={() => {
-          navigate(Routes.DOCTORS_UPCOMING_PATIENTS_PATH, {});
-        }}
-      >
-        Filter by upcoming appointments
-      </button>
     </div>
   );
 };

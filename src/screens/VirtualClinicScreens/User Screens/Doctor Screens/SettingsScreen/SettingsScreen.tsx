@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";
 import { listDoctorSettingsAction } from "redux/VirtualClinicRedux/ListDoctorSettings/listDoctorSettingsAction";
 import { editSettingsAction } from "redux/VirtualClinicRedux/EditSettings/editSettingsAction";
+import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/SettingsScreen/SettingsScreen.module.css";
 
 const SettingsScreen = () => {
   const dispatch: any = useDispatch();
@@ -78,6 +79,7 @@ const SettingsScreen = () => {
                   />
 
                   <button
+                    className={`${styles.customButton}`}
                     onClick={() =>
                       handleUpdate(
                         key,

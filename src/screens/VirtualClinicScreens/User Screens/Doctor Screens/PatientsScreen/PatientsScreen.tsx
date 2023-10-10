@@ -30,8 +30,10 @@ const PatientsScreen = () => {
   const [searchName, setSearchName] = useState(""); // State to store the search input
   const [viewedUserId, setViewedUserId] = useState(null);
 
+  const { userData } = useSelector((state: RootState) => state.userReducer);
+
   useEffect(() => {
-    dispatch(listAllPatientsAction({ doctor: "jawad@gmail.com" })); // sending the request, and update the states
+    dispatch(listAllPatientsAction({ doctor: userData?.email })); // sending the request, and update the states
     console.log(allPatients);
   }, []);
 

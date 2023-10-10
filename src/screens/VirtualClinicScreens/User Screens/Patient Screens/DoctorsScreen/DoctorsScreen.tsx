@@ -26,8 +26,6 @@ const DoctorsScreen = () => {
   const [searchSpeciality, setSearchSpeciality] = useState(null);
   const [searchName, setSearchName] = useState("");
 
-
- 
   useEffect(() => {
     console.log("USER DATA", userData);
     dispatch(allSpecialitiesAction());
@@ -42,11 +40,9 @@ const DoctorsScreen = () => {
     console.log(allDoctors);
   }, [allDoctors]);
 
-
-const getDoctorName = () => {
-  
-  dispatch(getDoctorInfoAction({ name: searchName }));
-};
+  const getDoctorName = () => {
+    dispatch(getDoctorInfoAction({ name: searchName }));
+  };
 
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
@@ -102,7 +98,7 @@ const getDoctorName = () => {
                     onClick={() => {
                       dispatch(
                         patientGetDoctorsAction({
-                          email: "shady.hani1@gmail.com",
+                          email: userData?.email,
                           name: searchName,
                           specialty: searchSpeciality,
                         })
@@ -223,16 +219,13 @@ const getDoctorName = () => {
                                   minimumFractionDigits: 2,
                                   maximumFractionDigits: 2,
                                 }
-
-                                
                               )}
                               <button onClick={getDoctorName}>View</button>
                             </>
-                          ) : 
-                          /*  button */
-                        /*<button onClick={getDoctorName}>View</button>*/
-                          
-                          (
+                          ) : (
+                            /*  button */
+                            /*<button onClick={getDoctorName}>View</button>*/
+
                             <span>
                               EGP{" "}
                               {doctor?.session_price?.toLocaleString(
@@ -242,7 +235,6 @@ const getDoctorName = () => {
                                   maximumFractionDigits: 2,
                                 }
                               )}
-
                             </span>
                           )}
                         </div>
@@ -256,7 +248,6 @@ const getDoctorName = () => {
         </div>
       </div>
     </div>
-    
   );
 };
 

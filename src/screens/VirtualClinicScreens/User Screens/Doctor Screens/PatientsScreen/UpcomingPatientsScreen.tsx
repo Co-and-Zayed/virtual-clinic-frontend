@@ -17,8 +17,11 @@ const UpcomingPatientsScreen = () => {
   const { patientsLoading, allPatients } = useSelector(
     (state: RootState) => state.listUpcomingPatientsReducer
   );
+
+  const { userData } = useSelector((state: RootState) => state.userReducer);
+
   useEffect(() => {
-    dispatch(listUpcomingPatientsAction({ doctor: "jawad@gmail.com" })); // sending the request, and update the states
+    dispatch(listUpcomingPatientsAction({ doctor: userData?.email })); // sending the request, and update the states
     //console.log(allPatients);
   }, []);
   const generateExpandable = (record: any) => {

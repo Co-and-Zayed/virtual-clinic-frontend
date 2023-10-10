@@ -16,9 +16,14 @@ const PrescriptionsScreen: React.FC = () => {
   const { prescriptionsLoading, prescriptions } = useSelector(
     (state: RootState) => state.listAllPrescriptionsReducer
   );
+  const { userData } = useSelector((state: RootState) => state.userReducer);
 
   useEffect(() => {
-    dispatch(listAllPrescriptionsAction());
+    dispatch(
+      listAllPrescriptionsAction({
+        patientEmail: userData?.email,
+      })
+    );
   }, []);
 
   interface DataType {

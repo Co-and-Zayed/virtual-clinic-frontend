@@ -25,6 +25,7 @@ export const userReducer = (state = initialState, action: any) => {
     case UPDATE_ACCESS_TOKEN:
       return { ...state, accessToken: action.payload };
     case LOGIN_USER:
+      console.log("LOGIN USERRRR: ", action.payload)
       return {
         ...state,
         userType: action.payload?.type,

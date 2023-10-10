@@ -12,9 +12,9 @@ export const listAllPrescriptionsAction =
     try {
       dispatch({ type: PRESCRIPTIONS_DATA_LOADING, payload: true });
 
-      const response = await api.get(
-        listAllPrescriptions() // Your Endpoint
-        // requestBody, // (for requests with a body)
+      const response = await api.post(
+        listAllPrescriptions(), // Your Endpoint
+        requestBody // (for requests with a body)
       );
 
       dispatch({ type: PRESCRIPTIONS_DATA_SUCCESS, payload: response.data });

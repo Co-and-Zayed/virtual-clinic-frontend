@@ -16,9 +16,9 @@ const CommonDashboardScreen = () => {
     <DoctorDashboardScreen />
   ) : userType === "PATIENT" ? (
     <PatientDashboardScreen />
-  ) : (
+  ) : userType === "ADMIN" ? (
     <AdminsScreen />
-  );
+  ) : <>User type not valid</>
 };
 
 export default CommonDashboardScreen;

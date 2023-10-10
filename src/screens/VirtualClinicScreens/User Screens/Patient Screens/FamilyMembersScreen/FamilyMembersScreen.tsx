@@ -43,12 +43,13 @@ const { Option } = Select;
 
 const FamilyMembersScreen = () => {
   const formRef = React.useRef<FormInstance>(null);
-  const currPatientEmail = "mostafa@gmail.com";
+
+  const { userData } = useSelector((state: RootState) => state.userReducer);
 
   const onFinish = async (values: any) => {
     await dispatch(
       addFamilyMemberAction({
-        patientEmail: currPatientEmail,
+        patientEmail: userData?.email,
         name: values.name,
         nationalID: values.nationalID,
         age: Number(values.age),
@@ -59,7 +60,7 @@ const FamilyMembersScreen = () => {
     onReset();
     dispatch(
       getFamilyMembersAction({
-        patientEmail: currPatientEmail,
+        patientEmail: userData?.email,
       })
     );
     console.log("values: ", values);
@@ -92,7 +93,7 @@ const FamilyMembersScreen = () => {
   useEffect(() => {
     dispatch(
       getFamilyMembersAction({
-        patientEmail: currPatientEmail,
+        patientEmail: userData?.email,
       })
     );
     console.log(userFamilyMembers);

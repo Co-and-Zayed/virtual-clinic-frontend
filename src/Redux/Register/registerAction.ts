@@ -4,7 +4,7 @@ import {
   REGISTER_FAILURE,
 } from "redux/Register/registerTypes";
 
-import { LOGIN_USER } from "redux/User/loginTypes";
+import { LOGIN_USER, SHOULD_REFRESH } from "redux/User/loginTypes";
 
 import { Dispatch } from "redux";
 
@@ -17,7 +17,10 @@ export const regsiterAction = (data: any) => async (dispatch: Dispatch) => {
     const response = await registerService(data);
     console.log(response);
     dispatch({ type: LOGIN_USER, payload: response.data });
+    dispatch({ type: SHOULD_REFRESH, payload: "START" });
+
   } catch (err) {
+    console.log("ERRORR REGISTER");
     dispatch({ type: REGISTER_FAILURE, payload: false });
   } finally {
     dispatch({ type: REGISTER_LOADING, payload: false });

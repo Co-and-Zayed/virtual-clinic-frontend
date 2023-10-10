@@ -3,25 +3,40 @@ import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { RootState } from "redux/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Input, Select, Spin } from "antd";
+import {
+  Button,
+  DatePicker,
+  Input,
+  Select,
+  Spin,
+  TimePicker,
+  notification,
+} from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { patientGetDoctorsAction } from "redux/VirtualClinicRedux/PatientGetDoctors/patientGetDoctorsAction";
 import { allSpecialitiesAction } from "redux/VirtualClinicRedux/Dropdowns/AllSpecialities/allSpecialitiesAction";
 import { patientSearchDoctorsAction } from "redux/VirtualClinicRedux/PatientSearchDoctors/patientSearchDoctorsAction";
 import { getDoctorInfoAction } from "redux/VirtualClinicRedux/GetDoctorInfo/getDoctorInfoAction";
 import DoctorInfoScreen from "./DoctorInfoScreen";
+import { patientFilterDoctorsAction } from "redux/VirtualClinicRedux/PatientFilterDoctors/patientFilterDoctorsAction";
+import { createAppointmentAction } from "redux/VirtualClinicRedux/CreateAppointment/createAppoinmentAction";
 
 const DoctorsScreen = () => {
   const { allSpecialities, specialitiesLoading } = useSelector(
     (state: RootState) => state.allSpecialitiesReducer
   );
 
-  const { allDoctors, doctorsLoading } = useSelector(
+  var { allDoctors, doctorsLoading } = useSelector(
     (state: RootState) => state.patientGetDoctorsReducer
   );
   const { userData } = useSelector((state: RootState) => state.userReducer);
 
   const dispatch: any = useDispatch();
+
+  const [specialityFilter, setSpecialityFilter] = useState<any>(null);
+  const [dateFilter, setDateFilter] = useState<any>(null);
+  const [timeFilter, setTimeFilter] = useState<any>(null);
+  // const [specialitiesFilter, setSpecialitiesFilter] = useState<any>([]);
 
   const [searchSpeciality, setSearchSpeciality] = useState(null);
   const [searchName, setSearchName] = useState("");
@@ -29,20 +44,79 @@ const DoctorsScreen = () => {
   useEffect(() => {
     console.log("USER DATA", userData);
     dispatch(allSpecialitiesAction());
-    dispatch(
-      patientGetDoctorsAction({
-        email: userData?.email,
-      })
-    );
+    dispatch(patientGetDoctorsAction());
   }, []);
 
-  useEffect(() => {
-    console.log(allDoctors);
-  }, [allDoctors]);
+  // useEffect(() => {
+  //   // Get all unique specialities from all doctors
+  //   let uniqueSpecialities: any = [];
+  //   allDoctors?.map((doctor: any) => {
+  //     if (!uniqueSpecialities.includes(doctor?.specialty)) {
+  //       uniqueSpecialities.push(doctor?.specialty);
+  //     }
+  //   });
+  //   setSpecialitiesFilter(uniqueSpecialities);
+  //   console.log("UNIQUE SPECIALITIES", uniqueSpecialities);
+  //   console.log("SPECIALITIES FILTER", specialitiesFilter);
+  // }, [allDoctors]);
 
   const getDoctorName = () => {
     dispatch(getDoctorInfoAction({ name: searchName }));
   };
+
+  // Filter allDoctors
+  function filterDoctors() {
+    // Check if all filters are null
+    if (!specialityFilter && !dateFilter && !timeFilter) {
+      return;
+    }
+
+    console.log("SPECIALITY FILTER", specialityFilter);
+    console.log("DATE FILTER", dateFilter);
+    console.log("TIME FILTER", timeFilter);
+
+    // Date and time filters must be selected together
+    if ((dateFilter && !timeFilter) || (!dateFilter && timeFilter)) {
+      notification.warning({
+        message: "Please select both date and time filters",
+      });
+      return;
+    }
+
+    dispatch(
+      patientFilterDoctorsAction({
+        specialty: specialityFilter,
+        date: dateFilter,
+        time: timeFilter,
+      })
+    );
+  }
+
+  function createAppointment() {
+    if (!dateFilter || !timeFilter) {
+      notification.warning({
+        message:
+          "Please select both date and time filters to create appointment",
+      });
+      return;
+    }
+
+    // combine date and time
+    const date = new Date(dateFilter);
+    const time = new Date(timeFilter);
+    date.setHours(time.getHours());
+    date.setMinutes(0);
+    date.setSeconds(0);
+
+    dispatch(
+      createAppointmentAction({
+        doctorEmail: "jawad@gmail.com",
+        patientEmail: userData?.email,
+        date: date,
+        status: "UPCOMING",
+      })
+    );
+  }
 
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
@@ -107,6 +181,17 @@ const DoctorsScreen = () => {
                   >
                     Search
                   </Button>
+
+                  {/* FOR TESTING */}
+                  {/* <Button
+                    type="default"
+                    icon={<SearchOutlined />}
+                    onClick={() => {
+                      createAppointment();
+                    }}
+                  >
+                    Create Appointment
+                  </Button> */}
                 </div>
               </div>
             </div>
@@ -124,28 +209,71 @@ const DoctorsScreen = () => {
                   <h1 className={`text-2xl font-bold`}>Filters</h1>
                   <div className={`flex text-base gap-x-2 items-center`}>
                     <i className="w-[20px] fa-solid fa-stethoscope"></i>
-                    <select
-                      className={`border border-gray-300 rounded-md w-52 h-10 px-2`}
-                    >
-                      <option value="Dentist">Dentist</option>
-                      <option value="Physician">Physician</option>
-                      <option value="Researcher">Researcher</option>
-                    </select>
+                    <Select
+                      className={`rounded-md w-52 h-10`}
+                      placeholder="Speciality"
+                      showSearch
+                      allowClear
+                      onClear={() => {
+                        setSpecialityFilter(null);
+                      }}
+                      value={specialityFilter}
+                      onSelect={(value) => {
+                        setSpecialityFilter(value);
+                      }}
+                      optionFilterProp="children"
+                      options={allSpecialities?.map((speciality: any) => ({
+                        value: speciality,
+                        label: speciality,
+                      }))}
+                      filterOption={(input, option: any) =>
+                        option?.children
+                          ?.toLowerCase()
+                          .indexOf(input.toLowerCase()) >= 0
+                      }
+                    />
                   </div>
                   <div className={`flex text-base gap-x-2 items-center`}>
                     <i className="w-[20px] fa-regular fa-calendar-alt"></i>
-                    <input
-                      type="date"
-                      className={`border border-gray-300 rounded-md w-52 h-10 px-2`}
+                    <DatePicker
+                      className={`rounded-md w-52 h-10`}
+                      format={"DD/MM/YYYY"}
+                      value={dateFilter}
+                      onChange={(value) => {
+                        setDateFilter(value);
+                      }}
+                      allowClear
                     />
                   </div>
                   <div className={`flex text-base gap-x-2 items-center`}>
                     <i className="w-[20px] fa-regular fa-clock"></i>
-                    <input
-                      type="time"
-                      className={`border border-gray-300 rounded-md w-52 h-10 px-2`}
+                    <TimePicker
+                      className={`rounded-md w-52 h-10`}
+                      format={"hh a"}
+                      onSelect={(value) => {
+                        setTimeFilter(value);
+                      }}
+                      onChange={(value) => {
+                        setTimeFilter(value);
+                      }}
+                      value={timeFilter}
+                      allowClear
                     />
                   </div>
+
+                  <div className="h-8"></div>
+
+                  {/* APPLY FILTERS */}
+                  <Button
+                    type="default"
+                    className={`w-3/4 h-10`}
+                    style={{ alignSelf: "center" }}
+                    onClick={() => {
+                      filterDoctors();
+                    }}
+                  >
+                    Apply Filters
+                  </Button>
                 </div>
               </div>
             </div>

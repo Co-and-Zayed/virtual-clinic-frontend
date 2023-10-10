@@ -1,7 +1,7 @@
 import {
     PATIENT_GET_DOCTORS_LOADING,
     PATIENT_GET_DOCTORS_SUCCESS,
-    PATIENT_SEARCH_DOCTORS_FAILURE,
+    PATIENT_FILTER_DOCTORS_FAILURE,
   } from "redux/VirtualClinicRedux/types";
   
   const initialState = {
@@ -9,7 +9,7 @@ import {
     allDoctors: [],
   };
   
-  export const patientSearchDoctorsReducer = (state = initialState, action: any) => {
+  export const patientFilterDoctorsReducer = (state = initialState, action: any) => {
     switch (action.type) {
       case PATIENT_GET_DOCTORS_LOADING:
         return { ...state, doctorsLoading: action.payload };
@@ -18,7 +18,7 @@ import {
           ...state,
           allDoctors: action.payload,
         };
-      case PATIENT_SEARCH_DOCTORS_FAILURE:
+      case PATIENT_FILTER_DOCTORS_FAILURE:
         return { ...state, errors: action.payload };
       default:
         return state;

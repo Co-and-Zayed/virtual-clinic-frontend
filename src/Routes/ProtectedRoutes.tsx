@@ -18,7 +18,7 @@ const ProtectedRoutes = () => {
     (state: RootState) => state.userReducer
   );
 
-  var refreshInterval = 10; // IN SECONDS
+  var refreshInterval = 888; // IN SECONDS
   async function refreshTokenMethod() {
     const currentValue = store.getState()?.userReducer?.shouldRefresh;
     try {

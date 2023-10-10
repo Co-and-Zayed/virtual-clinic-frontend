@@ -13,6 +13,11 @@ export const patientSearchDoctors = () => {
   return `patient/getDoctorsByNameSpeciality`;
 };
 
+// Patient Search for Doctors By Name and/or Speciality
+export const patientFilterDoctors = () => {
+  return `patient/filterDoctors`;
+};
+
 // List All Specialities
 export const allSpecialities = () => {
   return `dropdown/specialities`;

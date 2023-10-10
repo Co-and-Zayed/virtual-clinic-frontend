@@ -12,7 +12,7 @@ import {
   export const patientGetDoctorsReducer = (state = initialState, action: any) => {
     switch (action.type) {
       case PATIENT_GET_DOCTORS_LOADING:
-        return { ...state, usersLoading: action.payload };
+        return { ...state, doctorsLoading: action.payload };
       case PATIENT_GET_DOCTORS_SUCCESS:
         return {
           ...state,

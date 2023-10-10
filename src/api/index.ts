@@ -4,7 +4,7 @@ import store from "redux/store";
 import { notification } from "antd";
 
 // Change The Api Url
-const apiURL = "http://127.0.0.1:8000/";
+const apiURL = process.env.REACT_APP_BACKEND_URL;
 
 const instance = axios.create({
   baseURL: apiURL,

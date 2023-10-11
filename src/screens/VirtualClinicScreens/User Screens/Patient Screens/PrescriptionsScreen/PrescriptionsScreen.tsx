@@ -4,6 +4,7 @@ import type { InputRef } from "antd";
 import { Button, Input, Space, Table, DatePicker } from "antd";
 import type { ColumnType, ColumnsType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
+import Highlighter from "react-highlight-words";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";
@@ -21,7 +22,7 @@ const PrescriptionsScreen: React.FC = () => {
   useEffect(() => {
     dispatch(
       listAllPrescriptionsAction({
-        patientEmail: userData?.email,
+        patientUsername: userData?.username,
       })
     );
   }, []);
@@ -141,6 +142,17 @@ const PrescriptionsScreen: React.FC = () => {
         setTimeout(() => searchInput.current?.select(), 100);
       }
     },
+    render: (text) =>
+      searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+          searchWords={[searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ""}
+        />
+      ) : (
+        text
+      ),
   });
 
   const [searchDate, setSearchDate] = useState("");
@@ -240,6 +252,17 @@ const PrescriptionsScreen: React.FC = () => {
         setTimeout(() => searchDateInput.current?.select(), 100);
       }
     },
+    render: (text) =>
+      searchedDateColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+          searchWords={[searchDate]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ""}
+        />
+      ) : (
+        text
+      ),
   });
 
   const columns: ColumnsType<DataType> = [

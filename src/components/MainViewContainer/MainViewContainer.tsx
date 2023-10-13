@@ -53,9 +53,8 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
   };
 
   useEffect(() => {
+    setCurrentLink(-1);
     for (let i = 0; i < currentNavLinks?.length; i++) {
-      console.log(currentNavLinks[i]?.route, window.location.pathname);
-      console.log(currentNavLinks[i]?.route === window.location.pathname);
       if (currentNavLinks[i]?.route === window.location.pathname) {
         setCurrentLink(i);
       }

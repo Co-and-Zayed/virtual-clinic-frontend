@@ -55,6 +55,10 @@ const LoginScreen = () => {
     navigateToMainScreen();
   }, [userType]);
 
+  // useEffect(() => {
+  //   dispatch({ type: "LOGIN_LOADING", payload: false });
+  // }, []);
+
   return (
     <div className="w-full h-[100vh] flex flex-col justify-center items-center">
       <h1>Login</h1>

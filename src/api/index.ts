@@ -2,9 +2,10 @@
 import axios from "axios";
 import store from "redux/store";
 import { notification } from "antd";
+import { CLEAR_TIMEOUTS, REFRESH_TIMEOUT } from "redux/User/loginTypes";
 
 // Change The Api Url
-const apiURL = process.env.REACT_APP_BACKEND_URL;
+const apiURL = "http://127.0.0.1:8000/";
 
 const instance = axios.create({
   baseURL: apiURL,
@@ -18,7 +19,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   async (config: any) => {
     const token = store.getState()?.userReducer?.accessToken;
-    console.log("Access Token ?????:", token); // Add this line for debugging
+
     if (token) {
       config.headers!.Authorization = `Bearer ${token}`;
       config.data = {
@@ -33,15 +34,18 @@ instance.interceptors.request.use(
   }
 );
 
-const checkAuth = (notificationParam: any) => {
+const checkAuth = async (notificationParam: any) => {
   if (window.location.pathname === "/login") {
-    notificationParam.message = "Authentication Fail";
+    notificationParam.message = "Invalid credentials";
     notificationParam.description = "Please check user name or password";
   } else {
     // store.dispatch(logoutAction());
-    notificationParam.message = "Authentication Fail";
-    notificationParam.description = "Please login again";
-    store.dispatch({ type: "LOG_OUT" });
+    notificationParam.message = "Your session has expired";
+    // notificationParam.description = "Please login again";
+    await store.dispatch({
+      type: CLEAR_TIMEOUTS,
+    });
+    await store.dispatch({ type: "LOG_OUT" });
   }
 };
 

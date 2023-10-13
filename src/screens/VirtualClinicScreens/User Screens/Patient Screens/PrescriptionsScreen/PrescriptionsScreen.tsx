@@ -21,7 +21,7 @@ const PrescriptionsScreen: React.FC = () => {
   useEffect(() => {
     dispatch(
       listAllPrescriptionsAction({
-        patientEmail: userData?.email,
+        patientUsername: userData?.username,
       })
     );
   }, []);

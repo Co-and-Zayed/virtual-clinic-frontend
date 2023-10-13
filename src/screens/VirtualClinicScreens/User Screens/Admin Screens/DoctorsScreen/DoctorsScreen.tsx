@@ -30,6 +30,8 @@ const DoctorsScreen = () => {
       message: "Doctor deleted Successfully",
       placement: "topRight",
     });
+    setShowDoctorDetails(false);
+    setCurrentDoctor(null);
   };
 
   useEffect(() => {
@@ -86,10 +88,8 @@ const DoctorsScreen = () => {
           <h1>{currentDoctor?.name}</h1>
           <p>Email: {currentDoctor?.email}</p>
           <p>Speciality: {currentDoctor?.specialty}</p>
-          <p>Affiliation: {currentDoctor?.affiliatoin}</p>
-          <p>
-            Educational Background: {currentDoctor?.educationalBackground}
-          </p>
+          <p>Affiliation: {currentDoctor?.affiliation}</p>
+          <p>Educational Background: {currentDoctor?.educationalBackground}</p>
           <p>Hourly rate: EGP {currentDoctor?.hourlyRate} / hr</p>
         </div>
       )}

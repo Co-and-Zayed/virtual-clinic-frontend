@@ -50,7 +50,7 @@ const AppointmentsScreen = () => {
   const data: DataType[] = userAppointments?.map((appointment: any) => ({
     patientEmail: appointment.patientEmail,
     doctorEmail: appointment.doctorEmail,
-    date: appointment.date,
+    date: appointment.date.split("T")[0].replace(/-/g, "/"),
     time: appointment.time,
     status: appointment.status,
     key: appointment._id,

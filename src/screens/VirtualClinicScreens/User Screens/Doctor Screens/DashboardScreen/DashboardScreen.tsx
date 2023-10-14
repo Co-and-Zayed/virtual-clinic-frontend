@@ -20,7 +20,7 @@ const DashboardScreen = () => {
   const { userData } = useSelector((state: RootState) => state.userReducer);
 
   useEffect(() => {
-    dispatch(listAllPatientsAction({ doctor: userData?.email })); // sending the request, and update the states
+    dispatch(listAllPatientsAction({ doctorUsername: userData?.username })); // sending the request, and update the states
   }, []);
 
   const generateExpandable = (record: any) => {
@@ -163,6 +163,14 @@ const DashboardScreen = () => {
       title: "Date of Birth",
       dataIndex: "date_of_birth",
       key: "date_of_birth",
+      render: (date_of_birth: Date) => {
+        const date = new Date(date_of_birth);
+        return (
+          <span>
+            {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}
+          </span>
+        );
+      }
     },
     { title: "Gender", dataIndex: "gender", key: "gender" },
     {
@@ -174,7 +182,6 @@ const DashboardScreen = () => {
 
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
-      <h1>Doctor Dashboard Screen</h1>
       <h1>My Patients</h1>
 
       <button

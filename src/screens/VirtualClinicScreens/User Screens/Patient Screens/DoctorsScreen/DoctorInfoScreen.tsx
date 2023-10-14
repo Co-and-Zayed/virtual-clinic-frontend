@@ -19,7 +19,6 @@ const DoctorInfoScreen = () => {
   );
 
   useEffect(() => {
-    dispatch(getDoctorInfoAction());
     console.log(docinfo + "DoctorInfo");
   }, []);
 

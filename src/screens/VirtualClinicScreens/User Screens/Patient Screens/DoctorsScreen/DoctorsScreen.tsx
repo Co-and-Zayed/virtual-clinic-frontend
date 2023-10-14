@@ -32,6 +32,7 @@ const DoctorsScreen = () => {
   const { userData } = useSelector((state: RootState) => state.userReducer);
 
   const dispatch: any = useDispatch();
+  const navigate = useNavigate();
 
   const [specialityFilter, setSpecialityFilter] = useState<any>(null);
   const [dateFilter, setDateFilter] = useState<any>(null);
@@ -60,8 +61,9 @@ const DoctorsScreen = () => {
   //   console.log("SPECIALITIES FILTER", specialitiesFilter);
   // }, [allDoctors]);
 
-  const getDoctorName = () => {
-    dispatch(getDoctorInfoAction({ name: searchName }));
+  const getDoctorName = async (doctorUsername: any) => {
+    await dispatch(getDoctorInfoAction({ username: doctorUsername }));
+    navigate("/doctor-info");
   };
 
   // Filter allDoctors
@@ -348,23 +350,30 @@ const DoctorsScreen = () => {
                                   maximumFractionDigits: 2,
                                 }
                               )}
-                              <button onClick={getDoctorName}>View</button>
                             </>
                           ) : (
                             /*  button */
-                            /*<button onClick={getDoctorName}>View</button>*/
-
-                            <span>
-                              EGP{" "}
-                              {doctor?.session_price?.toLocaleString(
-                                undefined,
-                                {
-                                  minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2,
-                                }
-                              )}
-                            </span>
+                            <>
+                              <span>
+                                EGP{" "}
+                                {doctor?.session_price?.toLocaleString(
+                                  undefined,
+                                  {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                  }
+                                )}
+                              </span>
+                            </>
                           )}
+                          <a
+                            onClick={() => {
+                              getDoctorName(doctor?.username);
+                            }}
+                            className={`text-blue-500 hover:text-blue-700 cursor-pointer`}
+                          >
+                            View
+                          </a>
                         </div>
                       </div>
                     </div>

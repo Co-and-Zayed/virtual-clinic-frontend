@@ -158,7 +158,7 @@ const DashboardScreen = () => {
         ),
     },
     Table.EXPAND_COLUMN,
-    { title: "Email", dataIndex: "Email", key: "Email" },
+    { title: "Email", dataIndex: "email", key: "Email" },
     {
       title: "Date of Birth",
       dataIndex: "date_of_birth",

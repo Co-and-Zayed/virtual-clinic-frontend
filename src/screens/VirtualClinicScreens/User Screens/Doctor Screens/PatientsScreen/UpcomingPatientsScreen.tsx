@@ -21,9 +21,10 @@ const UpcomingPatientsScreen = () => {
   const { userData } = useSelector((state: RootState) => state.userReducer);
 
   useEffect(() => {
-    dispatch(listUpcomingPatientsAction({ doctor: userData?.email })); // sending the request, and update the states
+    dispatch(listUpcomingPatientsAction({ username: userData?.username })); // sending the request, and update the states
     //console.log(allPatients);
   }, []);
+
   const generateExpandable = (record: any) => {
     return (
       <div>
@@ -147,6 +148,14 @@ const UpcomingPatientsScreen = () => {
       title: "Date of Birth",
       dataIndex: "date_of_birth",
       key: "date_of_birth",
+      render: (date_of_birth: Date) => {
+        const date = new Date(date_of_birth);
+        return (
+          <span>
+            {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}
+          </span>
+        );
+      },
     },
     { title: "Gender", dataIndex: "gender", key: "gender" },
     {

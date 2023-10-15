@@ -27,6 +27,7 @@ import AdminAdminsScreen from "screens/VirtualClinicScreens/User Screens/Admin S
 import RegisterScreen from "screens/VirtualClinicScreens/RegisterScreens/RegisterScreen";
 
 import DoctorInfoScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/DoctorInfoScreen";
+import LoginScreen2 from "screens/VirtualClinicScreens/LoginScreen/LoginScreen2";
 
 export const routes = [
   {
@@ -35,7 +36,8 @@ export const routes = [
   },
   {
     path: Routes.LOGIN_PATH,
-    element: <LoginScreen />,
+    // element: <LoginScreen />,
+    element: <LoginScreen2 />,
   },
   {
     path: Routes.DASHBOARD_PATH,

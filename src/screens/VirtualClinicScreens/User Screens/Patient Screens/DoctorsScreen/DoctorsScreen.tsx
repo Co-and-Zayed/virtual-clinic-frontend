@@ -285,76 +285,78 @@ const DoctorsScreen = () => {
               {doctorsLoading ? (
                 <Spin />
               ) : (
-                allDoctors?.map((doctor: any) => (
-                  <div
-                    className={`w-full flex flex-col justify-center items-center`}
-                  >
+                allDoctors?.map((doctor: any) => {
+                  if (doctor?.status === "PENDING") return;
+
+                  return (
                     <div
-                      className={`w-full flex justify-center items-center bg-white rounded-xl shadow-lg my-4 py-4 px-8 gap-x-4`}
+                      className={`w-full flex flex-col justify-center items-center`}
                     >
-                      {/* IMAGE */}
                       <div
-                        className={`w-[7rem] h-[7rem] flex justify-center items-center rounded-full aspect-square`}
-                        style={{
-                          // border
-                          border: "1px solid #000000",
-                        }}
+                        className={`w-full flex justify-center items-center bg-white rounded-xl shadow-lg my-4 py-4 px-8 gap-x-4`}
                       >
-                        {/* placeholder */}
-                        <i className="fa-solid fa-user-doctor fa-2xl"></i>
-                      </div>
-                      {/* ATTRIBUTES */}
-                      <div
-                        className={`w-full flex flex-col justify-center items-start`}
-                      >
-                        <h1 className={`text-2xl font-bold`}>
-                          <span className="text-lg" style={{ fontWeight: 600 }}>
-                            Doctor{" "}
-                          </span>
-                          {doctor?.name}
-                        </h1>
-                        <div className={`flex text-base gap-x-2 items-center`}>
-                          <i className="fa-solid fa-stethoscope"></i>
-                          {doctor?.specialty}
+                        {/* IMAGE */}
+                        <div
+                          className={`w-[7rem] h-[7rem] flex justify-center items-center rounded-full aspect-square`}
+                          style={{
+                            // border
+                            border: "1px solid #000000",
+                          }}
+                        >
+                          {/* placeholder */}
+                          <i className="fa-solid fa-user-doctor fa-2xl"></i>
                         </div>
-                        <div className={`flex text-base gap-x-2 items-center`}>
-                          <i className="fa-regular fa-hospital"></i>
-                          {doctor?.affiliation}
-                        </div>
-                        <div className={`flex text-base gap-x-2 items-center`}>
-                          <i className="fa-solid fa-graduation-cap"></i>
-                          {doctor?.educationalBackground}
-                        </div>
-                        {/* If hourlyRate * 1.1 is less than session price, then display the houlryRate * 1.1 with strikethrough and the session_price next to it */}
-                        {/* Else, display the session price */}
-                        <div className={`flex text-base gap-x-2 items-center`}>
-                          <i className="fa-solid fa-money-bill-wave"></i>
-                          <p>Session Price :</p>
-                          {doctor?.hourlyRate * 1.1 > doctor?.session_price ? (
-                            <>
-                              <span className={`line-through`}>
-                                EGP{" "}
-                                {(doctor?.hourlyRate * 1.1)?.toLocaleString(
-                                  undefined,
-                                  {
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2,
-                                  }
-                                )}
-                              </span>{" "}
-                              EGP{" "}
-                              {doctor?.session_price?.toLocaleString(
-                                undefined,
-                                {
-                                  minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2,
-                                }
-                              )}
-                            </>
-                          ) : (
-                            /*  button */
-                            <>
-                              <span>
+                        {/* ATTRIBUTES */}
+                        <div
+                          className={`w-full flex flex-col justify-center items-start`}
+                        >
+                          <h1 className={`text-2xl font-bold`}>
+                            <span
+                              className="text-lg"
+                              style={{ fontWeight: 600 }}
+                            >
+                              Doctor{" "}
+                            </span>
+                            {doctor?.name}
+                          </h1>
+                          <div
+                            className={`flex text-base gap-x-2 items-center`}
+                          >
+                            <i className="fa-solid fa-stethoscope"></i>
+                            {doctor?.specialty}
+                          </div>
+                          <div
+                            className={`flex text-base gap-x-2 items-center`}
+                          >
+                            <i className="fa-regular fa-hospital"></i>
+                            {doctor?.affiliation}
+                          </div>
+                          <div
+                            className={`flex text-base gap-x-2 items-center`}
+                          >
+                            <i className="fa-solid fa-graduation-cap"></i>
+                            {doctor?.educationalBackground}
+                          </div>
+                          {/* If hourlyRate * 1.1 is less than session price, then display the houlryRate * 1.1 with strikethrough and the session_price next to it */}
+                          {/* Else, display the session price */}
+                          <div
+                            className={`flex text-base gap-x-2 items-center`}
+                          >
+                            <i className="fa-solid fa-money-bill-wave"></i>
+                            <p>Session Price :</p>
+                            {doctor?.hourlyRate * 1.1 >
+                            doctor?.session_price ? (
+                              <>
+                                <span className={`line-through`}>
+                                  EGP{" "}
+                                  {(doctor?.hourlyRate * 1.1)?.toLocaleString(
+                                    undefined,
+                                    {
+                                      minimumFractionDigits: 2,
+                                      maximumFractionDigits: 2,
+                                    }
+                                  )}
+                                </span>{" "}
                                 EGP{" "}
                                 {doctor?.session_price?.toLocaleString(
                                   undefined,
@@ -363,22 +365,36 @@ const DoctorsScreen = () => {
                                     maximumFractionDigits: 2,
                                   }
                                 )}
-                              </span>
-                            </>
-                          )}
-                          <a
-                            onClick={() => {
-                              getDoctorName(doctor?.username);
-                            }}
-                            className={`text-blue-500 hover:text-blue-700 cursor-pointer`}
-                          >
-                            View
-                          </a>
+                              </>
+                            ) : (
+                              /*  button */
+                              <>
+                                <span>
+                                  EGP{" "}
+                                  {doctor?.session_price?.toLocaleString(
+                                    undefined,
+                                    {
+                                      minimumFractionDigits: 2,
+                                      maximumFractionDigits: 2,
+                                    }
+                                  )}
+                                </span>
+                              </>
+                            )}
+                            <a
+                              onClick={() => {
+                                getDoctorName(doctor?.username);
+                              }}
+                              className={`text-blue-500 hover:text-blue-700 cursor-pointer`}
+                            >
+                              View
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))
+                  );
+                })
               )}
             </div>
           </div>

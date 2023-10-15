@@ -78,7 +78,17 @@ const DoctorsScreen = () => {
                     onClick={() => handleDeleteClick(currDoctor?.email)}
                   />
                 </div>
-                <p>Email: {currDoctor?.email}</p>
+                <div className="flex items-center justify-between">
+                  <p>Email: {currDoctor?.email}</p>
+                  {/* If status is PENDING show pending in a rounded container */}
+                  {currDoctor?.status && currDoctor?.status === "PENDING" && (
+                    <div
+                      className={`flex justify-center items-center rounded-md bg-yellow-100 px-2 py-1`}
+                    >
+                      <p>Pending</p>
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
         </div>

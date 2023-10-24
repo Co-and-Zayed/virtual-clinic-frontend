@@ -81,7 +81,7 @@ const LoginScreen2 = () => {
         className={`${styles.background} w-full h-[100vh] flex flex-col justify-center items-center`}
       >
         {/* Logo */}
-        <img src={Logo} alt="Logo" className="w-[5.5rem] mb-5" />
+        <img src={Logo} alt="Logo" className="w-[5.5rem] mb-16" />
 
         <div
           className="h-[35rem] flex justify-center gap-x-20"
@@ -193,20 +193,22 @@ const LoginScreen2 = () => {
           </div>
         </div>
 
-        {/* Horizontal divider with "Virtual Clinic" in the center */}
+        {/* Invisible Spacer */}
+        <div className="h-[7rem]"/>
+      </div>
+      {/* Horizontal divider with "Virtual Clinic" in the center */}
+      <div
+        className={`w-full flex flex-row justify-center items-center gap-x-2 ${styles.footer}`}
+      >
         <div
-          className={`w-full flex flex-row justify-center items-center gap-x-2 ${styles.footer}`}
-        >
-          <div
-            className="w-full h-[1.25px]"
-            style={{ backgroundColor: "var(--light-green)" }}
-          />
-          <p className={`${styles.greenText} px-6 greenText`}>Virtual Clinic</p>
-          <div
-            className="w-full h-[1.25px]"
-            style={{ backgroundColor: "var(--light-green)" }}
-          />
-        </div>
+          className="w-full h-[1.25px]"
+          style={{ backgroundColor: "var(--light-green)" }}
+        />
+        <p className={`${styles.greenText} px-6 greenText`}>Virtual Clinic</p>
+        <div
+          className="w-full h-[1.25px]"
+          style={{ backgroundColor: "var(--light-green)" }}
+        />
       </div>
     </ConfigProvider>
   );

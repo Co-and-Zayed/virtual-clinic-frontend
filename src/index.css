@@ -5,6 +5,7 @@
 :root {
   --light-green: #8AC186;
   --dark-green: #163B45;
+  --blue: #86BEC2;
 }
 
 * {
@@ -19,18 +20,38 @@ html {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Cabin', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* color: black !important; */
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: 'Cabin', sans-serif,
     monospace;
 }
 
 .myfont-xl {
   font-size: 2.5rem;
+}
+
+.greenText {
+  font-family: "Century Gothic", sans-serif;
+  color: var(--el7a2ni---light-green, #8AC186)
+}
+
+/* src/assets/fonts/yourfont.ttf */
+
+@font-face {
+  font-family: 'Century Gothic';
+  src: url('assets/fonts/CenturyGothic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Century Gothic';
+  src: url('assets/fonts/gothicb.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
 }

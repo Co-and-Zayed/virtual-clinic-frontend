@@ -12,9 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "redux/rootReducer";
 import { logoutAction } from "redux/User/userAction";
 import { refreshAccessTokenService } from "services/refreshAccessTokenService";
-import {
-  UPDATE_ACCESS_TOKEN,
-} from "redux/User/loginTypes";
+import { CLEAR_TIMEOUTS } from "redux/User/loginTypes";
 
 interface MainViewContainerProps {
   children: React.ReactNode;
@@ -27,12 +25,9 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
   const [currentLink, setCurrentLink] = useState(0);
   const [currentNavLinks, setCurrentNavLinks] = useState<any>(null);
 
-  const {
-    userData,
-    userType,
-    accessToken,
-    refreshToken,
-  } = useSelector((state: RootState) => state.userReducer);
+  const { userData, userType, accessToken, refreshToken } = useSelector(
+    (state: RootState) => state.userReducer
+  );
 
   useEffect(() => {
     console.log("CURRENT USER TYPE: ", userType);
@@ -48,14 +43,18 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
   }, [userType]);
 
   const handleLogoutClick = async () => {
+    // loop on each element in allTimeouts and clear it
+    await dispatch({
+      type: CLEAR_TIMEOUTS,
+    });
+
     await dispatch(logoutAction());
     navigate("/login");
   };
 
   useEffect(() => {
+    setCurrentLink(-1);
     for (let i = 0; i < currentNavLinks?.length; i++) {
-      console.log(currentNavLinks[i]?.route, window.location.pathname);
-      console.log(currentNavLinks[i]?.route === window.location.pathname);
       if (currentNavLinks[i]?.route === window.location.pathname) {
         setCurrentLink(i);
       }

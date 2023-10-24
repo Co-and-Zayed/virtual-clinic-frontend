@@ -31,6 +31,5 @@ export const logoutAction = () => async (dispatch: Dispatch) => {
     dispatch({ type: SHOULD_REFRESH, payload: "OFF" });
   } catch (err) {
     // dispatch({ type: LOGOUT_FAILURE, payload: err });
-    console.log("LOGOUT ERROR: ", err);
   }
 };

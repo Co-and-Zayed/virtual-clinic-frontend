@@ -8,3 +8,6 @@ export const LOGOUT_USER = "LOGOUT_USER";
 
 export const SHOULD_REFRESH = "SHOULD_REFRESH";
 export const REFRESH_TIMEOUT = "REFRESH_TIMEOUT";
+
+export const ADD_TIMEOUT = "ADD_TIMEOUT";
+export const CLEAR_TIMEOUTS = "CLEAR_TIMEOUTS";

@@ -1,3 +1,4 @@
+import { all } from "axios";
 import {
   LOGIN_LOADING,
   LOGIN_USER,
@@ -5,6 +6,8 @@ import {
   SHOULD_REFRESH,
   REFRESH_TIMEOUT,
   UPDATE_ACCESS_TOKEN,
+  ADD_TIMEOUT,
+  CLEAR_TIMEOUTS,
 } from "./loginTypes";
 import store from "redux/store";
 
@@ -16,6 +19,7 @@ const initialState = {
   refreshToken: null as any,
   refreshTimeout: null as any,
   shouldRefresh: "OFF",
+  allTimeouts: [] as any,
 };
 
 export const userReducer = (state = initialState, action: any) => {
@@ -25,7 +29,6 @@ export const userReducer = (state = initialState, action: any) => {
     case UPDATE_ACCESS_TOKEN:
       return { ...state, accessToken: action.payload };
     case LOGIN_USER:
-      console.log("LOGIN USERRRR: ", action.payload)
       return {
         ...state,
         userType: action.payload?.type,
@@ -38,7 +41,6 @@ export const userReducer = (state = initialState, action: any) => {
     case SHOULD_REFRESH:
       if (action.payload === "OFF" && state.refreshTimeout) {
         clearTimeout(state.refreshTimeout);
-        console.log("Timeout cleared");
       }
       return {
         ...state,
@@ -49,9 +51,24 @@ export const userReducer = (state = initialState, action: any) => {
         ...state,
         refreshTimeout: action.payload,
       };
+    case ADD_TIMEOUT:
+      return {
+        ...state,
+        allTimeouts: [...state.allTimeouts, action.payload],
+      };
+    case CLEAR_TIMEOUTS:
+      console.log("clearing timeouts", state.allTimeouts);
+      if (state.allTimeouts) {
+        for (let i = 0; i < state.allTimeouts.length; i++) {
+          clearTimeout(state.allTimeouts[i]);
+        }
+      }
+      return {
+        ...state,
+        allTimeouts: [] as any,
+      };
+
     default:
       return state;
   }
 };
-
-

@@ -28,8 +28,14 @@ import RegisterScreen from "screens/VirtualClinicScreens/RegisterScreens/Registe
 
 import DoctorInfoScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/DoctorInfoScreen";
 import LoginScreen2 from "screens/VirtualClinicScreens/LoginScreen/LoginScreen2";
+import NotFoundScreen from "screens/VirtualClinicScreens/NotFoundScreen/NotFoundScreen";
 
 export const routes = [
+  {
+    path: "*",
+    element: <NotFoundScreen />,
+    parent: <ProtectedRoutes />,
+  },
   {
     path: Routes.HOME_PATH,
     element: <HomeScreen />,

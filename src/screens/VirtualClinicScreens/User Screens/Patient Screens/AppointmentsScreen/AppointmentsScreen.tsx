@@ -54,7 +54,7 @@ const AppointmentsScreen = () => {
   const data: DataType[] = userAppointments?.map((appointment: any) => ({
     patientEmail: appointment.patientEmail,
     doctorEmail: appointment.doctorEmail,
-    date: new Date(appointment.date).toLocaleDateString(),
+    date: appointment.date.split("T")[0].replace(/-/g, "/"),
     time: appointment.time,
     status: appointment.status,
     key: appointment._id,
@@ -206,7 +206,7 @@ const AppointmentsScreen = () => {
       title: "Date",
       dataIndex: "date",
       key: "date",
-      width: "50%",
+      width: "10%",
       ...getColumnSearchProps("date"),
       sorter: (a, b) => a.date?.localeCompare(b.date),
       sortDirections: ["descend", "ascend"],

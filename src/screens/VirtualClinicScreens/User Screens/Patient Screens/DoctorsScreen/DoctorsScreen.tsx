@@ -25,7 +25,8 @@ import { patientFilterDoctorsAction } from "redux/VirtualClinicRedux/PatientFilt
 import { createAppointmentAction } from "redux/VirtualClinicRedux/CreateAppointment/createAppoinmentAction";
 import SearchButton from "components/SearchButton/SearchButton";
 import InputField from "components/InputField/InputField";
-import Icon from "assets/images/add-circle";
+
+// import Icon from "assets/images/add-circle";
 import DoctorCard from "components/DoctorCard/DoctorCard";
 
 const DoctorsScreen = () => {
@@ -280,9 +281,7 @@ const DoctorsScreen = () => {
               allDoctors?.map((doctor: any) => {
                 if (doctor?.status === "PENDING") return;
 
-                return (
-                 <DoctorCard doctor={doctor} />
-                );
+                return <DoctorCard doctor={doctor} />;
               })
             )}
           </div>

@@ -1,15 +1,13 @@
 .doctorCard {
-  border: 1px solid #CFCFCF;
-  background: #F4F4F4;
-  
+  border: 1px solid #cfcfcf;
+  background: #f4f4f4;
+
   width: 100%;
   display: flex;
   justify-content: stretch;
   align-items: stretch;
   margin: 1rem 0;
 }
-
-
 
 .imageCircle {
   /* w-[7rem] h-[7rem] flex justify-center items-center rounded-full aspect-square */
@@ -21,7 +19,6 @@
   border-radius: 50%;
   aspect-ratio: 1/1;
   background-color: var(--dark-green);
-
 }
 
 /* last item of type cardItem */
@@ -39,7 +36,7 @@
   align-items: center;
   justify-content: center;
 
-  border-right: 1px solid #CFCFCF;
+  border-right: 1px solid #cfcfcf;
 }
 
 .double {

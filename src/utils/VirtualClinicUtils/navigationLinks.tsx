@@ -1,29 +1,42 @@
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
+import {
+  AppointmentsIcon,
+  DashboardIcon,
+  DoctorsIcon,
+  FamilyIcon,
+  PrescriptionsIcon,
+} from "assets/IconComponents";
 
 export const navLinksPatient = [
   {
     name: "Dashboard",
     route: Routes.DASHBOARD_PATH,
+    icon: <DashboardIcon />,
   },
   {
     name: "Doctors",
     route: Routes.DOCTORS_PATH,
-  },
-  {
-    name: "Settings",
-    route: Routes.SETTINGS_PATH,
+    icon: <DoctorsIcon />,
   },
   {
     name: "Appointments",
     route: Routes.APPOINTMENTS_PATH,
+    icon: <AppointmentsIcon />,
   },
   {
     name: "Family Members",
     route: Routes.FAMILYMEMBERS_PATH,
-}, {
+    icon: <FamilyIcon />,
+  },
+  {
     name: "Prescriptions",
     route: Routes.PRESCRIPTIONS_PATH,
-
+    icon: <PrescriptionsIcon />,
+  },
+  {
+    name: "Settings",
+    route: Routes.SETTINGS_PATH,
+    icon: <DashboardIcon />,
   },
 ];
 

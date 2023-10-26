@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --light-green: #8AC186;
-  --dark-green: #163B45;
-  --blue: #86BEC2;
-  --bg-main: #F1F1F1;
+  --light-green: #8ac186;
+  --dark-green: #163b45;
+  --blue: #86bec2;
+  --bg-main: #f1f1f1;
+  --sidebar-width: 21rem;
 }
 
 #root {
@@ -25,7 +26,7 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Cabin', sans-serif;
+  font-family: "Cabin", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-main);
@@ -33,8 +34,7 @@ body {
 }
 
 code {
-  font-family: 'Cabin', sans-serif,
-    monospace;
+  font-family: "Cabin", sans-serif, monospace;
 }
 
 .myfont-xl {
@@ -43,7 +43,7 @@ code {
 
 .greenText {
   font-family: "Century Gothic", sans-serif;
-  color: var(--el7a2ni---light-green, #8AC186)
+  color: var(--el7a2ni---light-green, #8ac186);
 }
 
 .centuryGothic {
@@ -59,21 +59,20 @@ input:-internal-autofill-selected {
 }
 
 .lightInputField {
-
 }
 
 /* src/assets/fonts/yourfont.ttf */
 
 @font-face {
-  font-family: 'Century Gothic';
-  src: url('assets/fonts/CenturyGothic.ttf') format('truetype');
+  font-family: "Century Gothic";
+  src: url("assets/fonts/CenturyGothic.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Century Gothic';
-  src: url('assets/fonts/gothicb.ttf') format('truetype');
+  font-family: "Century Gothic";
+  src: url("assets/fonts/gothicb.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }

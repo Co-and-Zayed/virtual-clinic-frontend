@@ -4,7 +4,7 @@ import { FC } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { getDoctorInfoAction } from "redux/VirtualClinicRedux/GetDoctorInfo/getDoctorInfoAction";
-import DoctorIcon from "assets/images/DoctorIcon";
+import DoctorIcon from "assets/images/SvgComponents/DoctorIcon";
 
 interface DoctorCardProps {
   doctor: any;

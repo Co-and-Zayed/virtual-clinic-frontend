@@ -13,10 +13,6 @@
   transition: all 0.2s ease-in-out;
 }
 
-.sideBar li:hover {
-  cursor: pointer;
-}
-
 .linkContainer {
   font-size: 1.25rem;
   width: 14.0625rem;
@@ -30,6 +26,14 @@
 
 .linkContainer .icon {
   margin-inline-end: 1rem;
+}
+
+.linkContainer:hover {
+  cursor: pointer;
+}
+
+.nonActiveLink:hover {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .activeLink {

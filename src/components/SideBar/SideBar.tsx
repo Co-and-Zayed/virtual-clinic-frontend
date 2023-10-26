@@ -73,22 +73,18 @@ const SideBar: FC<SideBarProps> = ({ className }) => {
         {currentNavLinks?.map((link: any, index: any) => (
           <div
             className={`${styles.linkContainer} ${
-              currentLink === index ? styles.activeLink : ""
+              currentLink === index ? styles.activeLink : styles.nonActiveLink
             } flex items-center`}
+            onClick={() => {
+              navigate(link.route);
+            }}
           >
             <div
               className={`${currentLink === index ? styles.isActive : ""}`}
             ></div>
-            
+
             <div className={`${styles.icon}`}>{link.icon}</div>
-            <li
-              key={index}
-              onClick={() => {
-                navigate(link.route);
-              }}
-            >
-              {link.name}
-            </li>
+            <li key={index}>{link.name}</li>
           </div>
         ))}
 

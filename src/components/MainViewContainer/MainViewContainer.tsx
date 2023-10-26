@@ -1,5 +1,5 @@
 import styles from "components/MainViewContainer/MainViewContainer.module.css";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -13,10 +13,12 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
   const navigate = useNavigate();
   const dispatch: any = useDispatch();
 
+  useEffect(() => {
+    document.body.style.backgroundColor = "var(--bg-main)";
+  }, []);
   return (
     <div className={`${styles.mainViewContainer} flex`}>
       <SideBar />
-
       <div className={`${styles.children}`}>{children}</div>
     </div>
   );

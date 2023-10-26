@@ -67,6 +67,10 @@ const LoginScreen2 = () => {
     navigateToMainScreen();
   }, [userType]);
 
+  useEffect(() => {
+    document.body.style.backgroundColor = "var(--dark-green)";
+  }, []);
+
   function pageContent() {
     switch (page) {
       // login, doctor, patient

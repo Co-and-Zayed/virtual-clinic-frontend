@@ -6,6 +6,7 @@
   --light-green: #8AC186;
   --dark-green: #163B45;
   --blue: #86BEC2;
+  --bg-main: #F1F1F1;
 }
 
 #root {
@@ -27,6 +28,7 @@ body {
   font-family: 'Cabin', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-main);
   /* color: black !important; */
 }
 
@@ -50,6 +52,10 @@ code {
 
 input:-internal-autofill-selected {
   background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+.lightInputField {
+
 }
 
 /* src/assets/fonts/yourfont.ttf */

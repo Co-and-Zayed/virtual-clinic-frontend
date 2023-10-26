@@ -288,16 +288,10 @@ const DoctorRegister: FC<DoctorRegisterProps> = ({ backFn }) => {
                   style={{
                     paddingInline: "0",
                   }}
-                  
                   dropdownStyle={
-                    // color of backgroung
                     {
                       fontFamily: "Century Gothic",
                       fontWeight: "normal",
-                      // backgroundColor: "var(--dark-green)",
-                      // accentColor: "var(--dark-green)",
-                      // color of selected item
-                      // color: "var(--white)",
                     }
                   }
                 />

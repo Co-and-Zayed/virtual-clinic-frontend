@@ -34,4 +34,5 @@ hr {
 .children {
   flex: 1;
   padding-inline: 2.5rem;
+  padding-top: 2.5rem;
 }

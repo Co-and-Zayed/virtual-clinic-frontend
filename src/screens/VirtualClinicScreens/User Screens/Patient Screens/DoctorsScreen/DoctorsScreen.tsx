@@ -1,16 +1,19 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/DoctorsScreen.module.css";
+import inputStyles from "components/InputField/InputField.module.css";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { RootState } from "redux/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
+  ConfigProvider,
   DatePicker,
   Input,
   Select,
   Spin,
   TimePicker,
   notification,
+  theme,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { patientGetDoctorsAction } from "redux/VirtualClinicRedux/PatientGetDoctors/patientGetDoctorsAction";
@@ -20,6 +23,9 @@ import { getDoctorInfoAction } from "redux/VirtualClinicRedux/GetDoctorInfo/getD
 import DoctorInfoScreen from "./DoctorInfoScreen";
 import { patientFilterDoctorsAction } from "redux/VirtualClinicRedux/PatientFilterDoctors/patientFilterDoctorsAction";
 import { createAppointmentAction } from "redux/VirtualClinicRedux/CreateAppointment/createAppoinmentAction";
+import SearchButton from "components/SearchButton/SearchButton";
+import InputField from "components/InputField/InputField";
+import Icon from "assets/images/add-circle";
 
 const DoctorsScreen = () => {
   const { allSpecialities, specialitiesLoading } = useSelector(
@@ -121,56 +127,43 @@ const DoctorsScreen = () => {
   }
 
   return (
-    <div className={`w-full flex flex-col items-start justify-center`}>
-      <div className={`w-full flex justify-center items-center`}>
-        <div className={`w-[80%] flex flex-col justify-center items-center`}>
-          {/* SEARCH BAR */}
-          {/* search for a doctor by name and/or speciality */}
+    <ConfigProvider
+      theme={{
+        // algorithm: theme.compactAlgorithm,
+
+        token: {
+          // colorBgBase: "red",
+          colorPrimary: "#163B45",
+          colorBgContainer: "transparent",
+        },
+
+        components: {},
+      }}
+    >
+      <div className={`w-full flex flex-col items-start justify-center`}>
+        {/* TITLE */}
+        <h1
+          className={`text-4xl font-bold mb-12`}
+          style={{ color: "var(--dark-green)" }}
+        >
+          Doctors
+        </h1>
+        <div className={`w-full flex justify-center items-center`}>
           <div className={`w-full flex justify-center items-center`}>
-            <div className={`w-full flex justify-center items-center`}>
-              <div
-                className={`w-full flex justify-center items-center bg-white rounded-xl shadow-lg my-4 py-4 px-8 gap-x-4`}
-              >
-                <div
-                  className={`w-full flex justify-center items-center gap-x-4`}
-                >
-                  {/* DROPDOWN FOR SPECIALITY */}
-                  <div className={`flex text-base gap-x-2 items-center`}>
-                    <i className="w-[20px] fa-solid fa-stethoscope"></i>
-                    <Select
-                      className={`rounded-md w-52 h-10`}
-                      placeholder="Select a speciality"
-                      showSearch
-                      allowClear
-                      onClear={() => {
-                        setSearchSpeciality(null);
-                      }}
-                      value={searchSpeciality}
-                      onSelect={(value) => {
-                        setSearchSpeciality(value);
-                      }}
-                      optionFilterProp="children"
-                      options={allSpecialities?.map((speciality: any) => ({
-                        value: speciality,
-                        label: speciality,
-                      }))}
-                      filterOption={(input, option: any) =>
-                        option?.children
-                          ?.toLowerCase()
-                          .indexOf(input.toLowerCase()) >= 0
-                      }
-                    />
-                  </div>
+            {/* TOP BAR */}
+            <div className={`w-full flex justify-between items-center`}>
+              {/* SEARCH SECTION */}
+              <div className={`${styles.topRowRow}`}>
+                <div className="flex gap-x-2 items-center">
                   <Input
                     type="text"
-                    placeholder="Search for a doctor by name"
-                    className={`w-96 h-10`}
+                    placeholder="Search by doctor name"
                     value={searchName}
                     onChange={(e) => setSearchName(e.target.value)}
+                    className={`${inputStyles.inputField}`}
+                    style={{ width: "15rem" }}
                   />
-                  <Button
-                    type="default"
-                    icon={<SearchOutlined />}
+                  <SearchButton
                     onClick={() => {
                       dispatch(
                         patientGetDoctorsAction({
@@ -180,12 +173,50 @@ const DoctorsScreen = () => {
                         })
                       );
                     }}
-                  >
-                    Search
-                  </Button>
+                  />
+                </div>
 
-                  {/* FOR TESTING */}
-                  {/* <Button
+                {/* DROPDOWN FOR SPECIALITY */}
+                <div className={`flex text-base gap-x-2 items-center`}>
+                  {/* <i className="w-[20px] fa-solid fa-stethoscope"></i> */}
+                  <Select
+                    placeholder="Select a speciality"
+                    showSearch
+                    allowClear
+                    onClear={() => {
+                      setSearchSpeciality(null);
+                    }}
+                    value={searchSpeciality}
+                    onSelect={(value) => {
+                      setSearchSpeciality(value);
+                    }}
+                    optionFilterProp="children"
+                    options={allSpecialities?.map((speciality: any) => ({
+                      value: speciality,
+                      label: speciality,
+                    }))}
+                    filterOption={(input, option: any) =>
+                      option?.children
+                        ?.toLowerCase()
+                        .indexOf(input.toLowerCase()) >= 0
+                    }
+                    className={`${inputStyles.lightInputField}`}
+                    style={{
+                      paddingInline: "0",
+                      width: "12rem",
+                    }}
+                    dropdownStyle={{
+                      fontFamily: "Century Gothic",
+                      fontWeight: "normal",
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* SEARCH */}
+
+              {/* FOR TESTING */}
+              {/* <Button
                     type="default"
                     icon={<SearchOutlined />}
                     onClick={() => {
@@ -194,169 +225,132 @@ const DoctorsScreen = () => {
                   >
                     Create Appointment
                   </Button> */}
-                </div>
+
+              {/* FILTERS */}
+              <div className={`${styles.topRowRow}`}>
+                <DatePicker
+                  format={"DD/MM/YYYY"}
+                  value={dateFilter}
+                  onChange={(value) => {
+                    setDateFilter(value);
+                  }}
+                  allowClear
+                  placeholder="Select date for appointment"
+                  className={`${inputStyles.lightInputField}`}
+                  style={{
+                    width: "15rem",
+                  }}
+                />
+
+                <TimePicker
+                  className={`${inputStyles.lightInputField}`}
+                  format={"hh a"}
+                  onSelect={(value) => {
+                    setTimeFilter(value);
+                  }}
+                  onChange={(value) => {
+                    setTimeFilter(value);
+                  }}
+                  value={timeFilter}
+                  allowClear
+                  style={{
+                    width: "12rem",
+                  }}
+                />
+
+                {/* APPLY FILTERS */}
+                <SearchButton
+                  noSearchIcon
+                  text="Apply"
+                  onClick={() => {
+                    filterDoctors();
+                  }}
+                />
               </div>
             </div>
           </div>
-          <div className="w-full flex items-start gap-x-4">
-            {/* FILTERS */}
-            {/* filter  a doctor by speciality and/or availability on a certain date and at a specific time */}
-            <div className={`flex flex-col justify-center items-center`}>
-              <div
-                className={`w-full flex justify-center items-center bg-white rounded-xl shadow-lg my-4 py-4 px-8 gap-x-4`}
-              >
-                <div
-                  className={`w-full flex flex-col justify-center items-start gap-y-2`}
-                >
-                  <h1 className={`text-2xl font-bold`}>Filters</h1>
-                  <div className={`flex text-base gap-x-2 items-center`}>
-                    <i className="w-[20px] fa-solid fa-stethoscope"></i>
-                    <Select
-                      className={`rounded-md w-52 h-10`}
-                      placeholder="Speciality"
-                      showSearch
-                      allowClear
-                      onClear={() => {
-                        setSpecialityFilter(null);
-                      }}
-                      value={specialityFilter}
-                      onSelect={(value) => {
-                        setSpecialityFilter(value);
-                      }}
-                      optionFilterProp="children"
-                      options={allSpecialities?.map((speciality: any) => ({
-                        value: speciality,
-                        label: speciality,
-                      }))}
-                      filterOption={(input, option: any) =>
-                        option?.children
-                          ?.toLowerCase()
-                          .indexOf(input.toLowerCase()) >= 0
-                      }
-                    />
-                  </div>
-                  <div className={`flex text-base gap-x-2 items-center`}>
-                    <i className="w-[20px] fa-regular fa-calendar-alt"></i>
-                    <DatePicker
-                      className={`rounded-md w-52 h-10`}
-                      format={"DD/MM/YYYY"}
-                      value={dateFilter}
-                      onChange={(value) => {
-                        setDateFilter(value);
-                      }}
-                      allowClear
-                    />
-                  </div>
-                  <div className={`flex text-base gap-x-2 items-center`}>
-                    <i className="w-[20px] fa-regular fa-clock"></i>
-                    <TimePicker
-                      className={`rounded-md w-52 h-10`}
-                      format={"hh a"}
-                      onSelect={(value) => {
-                        setTimeFilter(value);
-                      }}
-                      onChange={(value) => {
-                        setTimeFilter(value);
-                      }}
-                      value={timeFilter}
-                      allowClear
-                    />
-                  </div>
+        </div>
+        <div className="w-full flex items-start gap-x-4">
+          {/* DOCTORS */}
+          <div className={`w-full flex flex-col justify-center items-center`}>
+            {doctorsLoading ? (
+              <Spin />
+            ) : (
+              allDoctors?.map((doctor: any) => {
+                if (doctor?.status === "PENDING") return;
 
-                  <div className="h-8"></div>
-
-                  {/* APPLY FILTERS */}
-                  <Button
-                    type="default"
-                    className={`w-3/4 h-10`}
-                    style={{ alignSelf: "center" }}
-                    onClick={() => {
-                      filterDoctors();
-                    }}
+                return (
+                  <div
+                    className={`w-full flex flex-col justify-center items-center`}
                   >
-                    Apply Filters
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            {/* DOCTORS */}
-            <div className={`w-full flex flex-col justify-center items-center`}>
-              {doctorsLoading ? (
-                <Spin />
-              ) : (
-                allDoctors?.map((doctor: any) => {
-                  if (doctor?.status === "PENDING") return;
-
-                  return (
                     <div
-                      className={`w-full flex flex-col justify-center items-center`}
+                      className={`w-full flex justify-center items-center bg-white rounded-xl shadow-lg my-4 py-4 px-8 gap-x-4`}
                     >
+                      {/* IMAGE */}
                       <div
-                        className={`w-full flex justify-center items-center bg-white rounded-xl shadow-lg my-4 py-4 px-8 gap-x-4`}
+                        className={`w-[7rem] h-[7rem] flex justify-center items-center rounded-full aspect-square`}
+                        style={{
+                          // border
+                          border: "1px solid #000000",
+                        }}
                       >
-                        {/* IMAGE */}
-                        <div
-                          className={`w-[7rem] h-[7rem] flex justify-center items-center rounded-full aspect-square`}
-                          style={{
-                            // border
-                            border: "1px solid #000000",
-                          }}
-                        >
-                          {/* placeholder */}
-                          <i className="fa-solid fa-user-doctor fa-2xl"></i>
+                        {/* <svg
+                          fill="red"
+                        > */}
+                        <i className="fa-solid fa-user-doctor fa-2xl"></i>
+                      </div>
+                      {/* ATTRIBUTES */}
+                      <div
+                        className={`w-full flex flex-col justify-center items-start`}
+                      >
+                        <h1 className={`text-2xl font-bold`}>
+                          <span className="text-lg" style={{ fontWeight: 600 }}>
+                            Doctor{" "}
+                          </span>
+                          {doctor?.name}
+                        </h1>
+                        <div className={`flex text-base gap-x-2 items-center`}>
+                          <i className="fa-solid fa-stethoscope"></i>
+                          {doctor?.specialty}
                         </div>
-                        {/* ATTRIBUTES */}
-                        <div
-                          className={`w-full flex flex-col justify-center items-start`}
-                        >
-                          <h1 className={`text-2xl font-bold`}>
-                            <span
-                              className="text-lg"
-                              style={{ fontWeight: 600 }}
-                            >
-                              Doctor{" "}
-                            </span>
-                            {doctor?.name}
-                          </h1>
-                          <div
-                            className={`flex text-base gap-x-2 items-center`}
-                          >
-                            <i className="fa-solid fa-stethoscope"></i>
-                            {doctor?.specialty}
-                          </div>
-                          <div
-                            className={`flex text-base gap-x-2 items-center`}
-                          >
-                            <i className="fa-regular fa-hospital"></i>
-                            {doctor?.affiliation}
-                          </div>
-                          <div
-                            className={`flex text-base gap-x-2 items-center`}
-                          >
-                            <i className="fa-solid fa-graduation-cap"></i>
-                            {doctor?.educationalBackground}
-                          </div>
-                          {/* If hourlyRate * 1.1 is less than session price, then display the houlryRate * 1.1 with strikethrough and the session_price next to it */}
-                          {/* Else, display the session price */}
-                          <div
-                            className={`flex text-base gap-x-2 items-center`}
-                          >
-                            <i className="fa-solid fa-money-bill-wave"></i>
-                            <p>Session Price :</p>
-                            {doctor?.hourlyRate * 1.1 >
-                            doctor?.session_price ? (
-                              <>
-                                <span className={`line-through`}>
-                                  EGP{" "}
-                                  {(doctor?.hourlyRate * 1.1)?.toLocaleString(
-                                    undefined,
-                                    {
-                                      minimumFractionDigits: 2,
-                                      maximumFractionDigits: 2,
-                                    }
-                                  )}
-                                </span>{" "}
+                        <div className={`flex text-base gap-x-2 items-center`}>
+                          <i className="fa-regular fa-hospital"></i>
+                          {doctor?.affiliation}
+                        </div>
+                        <div className={`flex text-base gap-x-2 items-center`}>
+                          <i className="fa-solid fa-graduation-cap"></i>
+                          {doctor?.educationalBackground}
+                        </div>
+                        {/* If hourlyRate * 1.1 is less than session price, then display the houlryRate * 1.1 with strikethrough and the session_price next to it */}
+                        {/* Else, display the session price */}
+                        <div className={`flex text-base gap-x-2 items-center`}>
+                          <i className="fa-solid fa-money-bill-wave"></i>
+                          <p>Session Price :</p>
+                          {doctor?.hourlyRate * 1.1 > doctor?.session_price ? (
+                            <>
+                              <span className={`line-through`}>
+                                EGP{" "}
+                                {(doctor?.hourlyRate * 1.1)?.toLocaleString(
+                                  undefined,
+                                  {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                  }
+                                )}
+                              </span>{" "}
+                              EGP{" "}
+                              {doctor?.session_price?.toLocaleString(
+                                undefined,
+                                {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                }
+                              )}
+                            </>
+                          ) : (
+                            /*  button */
+                            <>
+                              <span>
                                 EGP{" "}
                                 {doctor?.session_price?.toLocaleString(
                                   undefined,
@@ -365,42 +359,28 @@ const DoctorsScreen = () => {
                                     maximumFractionDigits: 2,
                                   }
                                 )}
-                              </>
-                            ) : (
-                              /*  button */
-                              <>
-                                <span>
-                                  EGP{" "}
-                                  {doctor?.session_price?.toLocaleString(
-                                    undefined,
-                                    {
-                                      minimumFractionDigits: 2,
-                                      maximumFractionDigits: 2,
-                                    }
-                                  )}
-                                </span>
-                              </>
-                            )}
-                            <a
-                              onClick={() => {
-                                getDoctorName(doctor?.username);
-                              }}
-                              className={`text-blue-500 hover:text-blue-700 cursor-pointer`}
-                            >
-                              View
-                            </a>
-                          </div>
+                              </span>
+                            </>
+                          )}
+                          <a
+                            onClick={() => {
+                              getDoctorName(doctor?.username);
+                            }}
+                            className={`text-blue-500 hover:text-blue-700 cursor-pointer`}
+                          >
+                            View
+                          </a>
                         </div>
                       </div>
                     </div>
-                  );
-                })
-              )}
-            </div>
+                  </div>
+                );
+              })
+            )}
           </div>
         </div>
       </div>
-    </div>
+    </ConfigProvider>
   );
 };
 

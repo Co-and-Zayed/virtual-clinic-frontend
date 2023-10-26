@@ -1,21 +1,22 @@
-h1 {
+.h1 {
   color: var(--el7a2ni---bg, #FFF);
   text-align: center;
   font-family: Century Gothic;
-  font-size: 2.5rem;
+  font-size: 1.7rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-h2 {
+.h2 {
   color: var(--el7a2ni---light-green, #8AC186);
   font-family: Century Gothic;
-  font-size: 1.5625rem;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
+
 
 .background {
   background-color: var(--dark-green);
@@ -25,49 +26,7 @@ h2 {
 /*       */
 /* LOGIN */
 /*       */
-.loginBtn {
-  padding-block: 0.5rem;
-  background-color: var(--light-green);
-  border-radius: 0.3rem;
 
-  transition: all 0.3s ease-in-out;
-
-  /* Glow around */
-  /* filter: drop-shadow(0px 6px 20px rgba(138, 193, 134, 0.25)); */
-}
-
-.loginBtn:hover {
-  background-color: var(--light-green);
-  filter: drop-shadow(0px 6px 20px rgba(138, 193, 134, 0.25));
-}
-
-.inputField {
-  width: 100%;
-  height: 2.2rem;
-  padding-inline: 0.7rem;
-  border-radius: 0.3125rem;
-  border: 1.5px solid rgba(97, 108, 120, 0.50);
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-
-  font-family: "Century Gothic", sans-serif;
-  font-size: 1rem;
-
-  transition: border 0.3s ease-in-out;
-}
-
-/* border of the input field when focused */
-.inputField:focus {
-  border: 1.5px solid var(--light-green);
-  filter: drop-shadow(0px 6px 20px rgba(138, 193, 134, 0.25));
-  outline: none;
-}
-
-/* hover effect  */
-.inputField:hover {
-  border: 1.5px solid var(--light-green);
-  filter: drop-shadow(0px 6px 20px rgba(138, 193, 134, 0.25));
-}
 
 /*                */
 /* REGISTER CARDS */
@@ -142,7 +101,7 @@ h2 {
   font-family: "Century Gothic", sans-serif;
 
   text-align: center;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   line-height: normal;
   white-space: nowrap;
 }
@@ -154,4 +113,23 @@ h2 {
   width: 100%;
   padding-block: 4rem;
   opacity: 0.4;
+}
+
+
+
+
+
+
+/* REGISTER PAGES */
+.titleRow {
+  /* bottom border */
+  border-bottom: 1.5px solid rgba(138, 193, 134, 0.4);
+}
+
+.inputGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0rem 2rem;
+
 }

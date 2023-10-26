@@ -5,6 +5,7 @@ interface DoctorRegisterModel {
     email: String;
     username: String;
     password: String;
+    confirmPassword?: String;
     gender: String;
     specialty: String;
     date_of_birth: String;

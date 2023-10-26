@@ -8,6 +8,10 @@
   --blue: #86BEC2;
 }
 
+#root {
+  height: 100vh;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -38,6 +42,14 @@ code {
 .greenText {
   font-family: "Century Gothic", sans-serif;
   color: var(--el7a2ni---light-green, #8AC186)
+}
+
+.ant-select-selector {
+  border-color: transparent !important;
+}
+
+input:-internal-autofill-selected {
+  background-color: rgba(255, 255, 255, 0.03) !important;
 }
 
 /* src/assets/fonts/yourfont.ttf */

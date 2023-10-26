@@ -69,11 +69,11 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
   }, [userData, userType, accessToken, refreshToken]);
 
   return (
-    <div className={styles.mainViewContainer}>
+    <div className={`${styles.mainViewContainer} flex`}>
       <div
-        className={`${styles.sideBar} w-full flex flex-col items-start justify-center`}
+        className={`${styles.sideBar} flex flex-col items-start gap-y-6`}
       >
-        <h1 className="w-full flex justify-center items-center myfont-xl font-bold">
+        <h1 className="flex justify-center items-center myfont-xl font-bold">
           {userType}
         </h1>
 
@@ -102,7 +102,7 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
         <hr />
       </div>
 
-      {children}
+      <div className={`${styles.children}`}>{children}</div>
     </div>
   );
 };

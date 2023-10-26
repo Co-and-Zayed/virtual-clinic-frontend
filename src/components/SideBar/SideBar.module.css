@@ -10,7 +10,6 @@
 
 .sideBar li {
   user-select: none;
-  transition: all 0.2s ease-in-out;
 }
 
 .linkContainer {
@@ -51,10 +50,10 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  left: calc(-200%);
+  left: calc(-100% - 2.5rem);
   border-radius: 0.5rem;
   background-color: var(--light-green);
-  transition: all 0.5s 0s ease-in-out !important;
+  transition: all 0.2s ease-in-out;
 }
 
 .linkContainer:has(.isActive)::before {

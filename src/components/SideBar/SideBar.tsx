@@ -76,6 +76,10 @@ const SideBar: FC<SideBarProps> = ({ className }) => {
               currentLink === index ? styles.activeLink : ""
             } flex items-center`}
           >
+            <div
+              className={`${currentLink === index ? styles.isActive : ""}`}
+            ></div>
+            
             <div className={`${styles.icon}`}>{link.icon}</div>
             <li
               key={index}

@@ -50,9 +50,9 @@
   left: calc(-200%);
   border-radius: 0.5rem;
   background-color: var(--light-green);
-  transition: all 0.5s ease-in-out;
+  transition: all 0.5s 0s ease-in-out !important;
 }
 
-.linkContainer:hover::before {
+.linkContainer:has(.isActive)::before {
   left: calc(-100% - 1.6rem);
 }

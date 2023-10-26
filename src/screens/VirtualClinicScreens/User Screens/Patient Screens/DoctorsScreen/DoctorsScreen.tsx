@@ -10,7 +10,6 @@ import {
   DatePicker,
   Input,
   Select,
-  Spin,
   TimePicker,
   notification,
   theme,
@@ -25,6 +24,7 @@ import { patientFilterDoctorsAction } from "redux/VirtualClinicRedux/PatientFilt
 import { createAppointmentAction } from "redux/VirtualClinicRedux/CreateAppointment/createAppoinmentAction";
 import SearchButton from "components/SearchButton/SearchButton";
 import InputField from "components/InputField/InputField";
+import { Jelly } from "@uiball/loaders";
 
 // import Icon from "assets/images/add-circle";
 import DoctorCard from "components/DoctorCard/DoctorCard";
@@ -276,7 +276,7 @@ const DoctorsScreen = () => {
           {/* DOCTORS */}
           <div className={`w-full flex flex-col justify-center items-center`}>
             {doctorsLoading ? (
-              <Spin />
+              <Jelly size={30} speed={0.9} color="var(--dark-green)" />
             ) : (
               allDoctors?.map((doctor: any) => {
                 if (doctor?.status === "PENDING") return;

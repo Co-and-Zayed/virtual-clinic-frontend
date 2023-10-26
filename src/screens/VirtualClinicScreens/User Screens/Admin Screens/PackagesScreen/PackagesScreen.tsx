@@ -37,6 +37,7 @@ const PackagesScreen = () => {
   const { deletingPackageLoading, deletedPackage } = useSelector(
     (state: RootState) => state.deletePackageReducer
   );
+  const { userType } = useSelector((state: RootState) => state.userReducer);
 
   const handlePackageClick = (packageItem: any) => {
     formik.setValues({
@@ -206,7 +207,8 @@ const PackagesScreen = () => {
     setSelectedPackage(null);
     setShowSinglePackage(false);
     console.log(allPackages);
-    console.log("YBNY ER7AMNY")
+    console.log(userType);
+    console.log("YBNY ER7AMNY");
     console.log(selectedPackage);
   }, []);
 
@@ -225,7 +227,9 @@ const PackagesScreen = () => {
               allPackages?.map((packageItem: any) => (
                 <div
                   key={packageItem._id}
-                  className={`${styles.packageItem} ${selectedPackage?.type} ${packageItem.type} ${
+                  className={`${styles.packageItem} ${selectedPackage?.type} ${
+                    packageItem.type
+                  } ${
                     selectedPackage?.type === packageItem.type &&
                     styles.currentPackage
                   } mt-5 mr-5`}
@@ -254,7 +258,6 @@ const PackagesScreen = () => {
             </div>
           </div>
         )}
-
         {showSinglePackage && (
           <div className="w-[40rem]  flex flex-col justify-center items-start mt-12">
             {generateFieldRow([

@@ -4,6 +4,7 @@ import {
   DashboardIcon,
   DoctorsIcon,
   FamilyIcon,
+  HealthIcon,
   PrescriptionsIcon,
   SettingsIcon,
 } from "assets/IconComponents";
@@ -23,6 +24,11 @@ export const navLinksPatient = [
     name: "Appointments",
     route: Routes.APPOINTMENTS_PATH,
     icon: <AppointmentsIcon />,
+  },
+  {
+    name: "Health Packages",
+    route: Routes.PACKAGES_PATH,
+    icon: <HealthIcon />,
   },
   {
     name: "Family Members",

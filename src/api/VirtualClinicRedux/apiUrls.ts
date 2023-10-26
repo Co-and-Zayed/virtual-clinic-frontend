@@ -88,7 +88,7 @@ export const listSinglePrescription = (id: any) => {
 
 // SEIF URLs
 export const listAllPackages = () => {
-  return `adminAPI/getPackages`;
+  return `getPackages`;
 };
 
 export const updatePackage = (id: any) => {

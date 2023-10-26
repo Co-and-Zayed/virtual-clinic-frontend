@@ -84,7 +84,9 @@ const SideBar: FC<SideBarProps> = ({ className }) => {
             ></div>
 
             <div className={`${styles.icon}`}>{link.icon}</div>
-            <li key={index}>{link.name}</li>
+            <li className={`${styles.linkName}`} key={index}>
+              {link.name}
+            </li>
           </div>
         ))}
 

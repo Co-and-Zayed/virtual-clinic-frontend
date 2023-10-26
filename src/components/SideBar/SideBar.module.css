@@ -45,6 +45,18 @@
   filter: blur(0.125rem);
 }
 
+/* .activeLink .linkName {
+  animation: shift 0.2s ease-in-out 0.2s forwards;
+} */
+
+@keyframes shift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0.5rem);
+  }
+}
 .linkContainer::before {
   content: "";
   width: 100%;
@@ -53,7 +65,7 @@
   left: calc(-100% - 2.5rem);
   border-radius: 0.5rem;
   background-color: var(--light-green);
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .linkContainer:has(.isActive)::before {

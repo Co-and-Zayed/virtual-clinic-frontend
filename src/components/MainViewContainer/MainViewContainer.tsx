@@ -15,7 +15,7 @@ const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
 
   return (
     <div className={`${styles.mainViewContainer} flex`}>
-      <SideBar className={styles.sideBar} />
+      <SideBar />
 
       <div className={`${styles.children}`}>{children}</div>
     </div>

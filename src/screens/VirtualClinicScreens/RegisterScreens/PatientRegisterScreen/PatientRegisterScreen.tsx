@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { RootState } from "redux/rootReducer";
 import PatientRegisterModel from "models/PatientRegisterModel";
 import { regsiterAction } from "redux/Register/registerAction";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const PatientRegisterScreen = () => {
   const navigate = useNavigate();
@@ -233,7 +234,7 @@ const PatientRegisterScreen = () => {
           </div>
         </div>
         {registerLoading ? (
-          <Spin />
+          <JellyLoader />
         ) : (
           <button
             type="submit"

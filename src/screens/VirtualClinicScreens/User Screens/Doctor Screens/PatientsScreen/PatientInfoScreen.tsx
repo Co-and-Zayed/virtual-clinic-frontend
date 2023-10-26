@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";
 import { listPatientInfoAction } from "redux/VirtualClinicRedux/ListPatientInfo/listPatientInfoAction";
 import { useLocation } from "react-router-dom";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const PatientInfoScreen = () => {
   const dispatch: any = useDispatch();
@@ -26,7 +27,7 @@ const PatientInfoScreen = () => {
     <div className={`w-full flex flex-col items-start justify-center`}>
       <h1>Doctor Patient Info Screen</h1>
       {patientInfoLoading ? (
-        <h1>Loading...</h1>
+        <JellyLoader />
       ) : (
         patientInfo?.map((user: any) => (
           <div key={user._id} className="m-5">

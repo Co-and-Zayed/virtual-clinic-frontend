@@ -14,6 +14,7 @@ import {
 import AdminModel from "models/AdminModel";
 import { createAdminAction } from "redux/VirtualClinicRedux/CreateAdmin/createAdminAction";
 import { deleteAdminAction } from "redux/VirtualClinicRedux/DeleteAdmin/deleteAdminAction";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const AdminsScreen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -140,7 +141,7 @@ const AdminsScreen = () => {
       >
         {adminsLoading ? (
           <div className={`${styles.spinnerContainer}`}>
-            <Spin indicator={antIcon} />
+            <JellyLoader />
           </div>
         ) : (
           <div className="w-full flex flex-wrap justify-start items-center">

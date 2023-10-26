@@ -9,6 +9,7 @@ import { SearchOutlined } from "@ant-design/icons";
 // import { allSpecialitiesAction } from "redux/VirtualClinicRedux/Dropdowns/AllSpecialities/allSpecialitiesAction";
 // import { patientSearchDoctorsAction } from "redux/VirtualClinicRedux/PatientSearchDoctors/patientSearchDoctorsAction";
 import { getDoctorInfoAction } from "redux/VirtualClinicRedux/GetDoctorInfo/getDoctorInfoAction";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const DoctorInfoScreen = () => {
   //const { name } = useParams<{ name: string }>();   //name of dr
@@ -26,7 +27,7 @@ const DoctorInfoScreen = () => {
     <div className={`w-full flex flex-col items-start justify-center`}>
       <h1>Patient Doctor Info Screen</h1>
       {doctorLoading ? (
-        <h1>Loading...</h1>
+        <JellyLoader />
       ) : (
         docinfo?.map((user: any) => (
           <div>

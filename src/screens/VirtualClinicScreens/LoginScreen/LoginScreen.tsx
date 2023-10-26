@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "redux/rootReducer";
 import { useNavigate } from "react-router";
 import { loginAction } from "redux/User/userAction";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const LoginScreen = () => {
   const navigate = useNavigate();
@@ -103,7 +104,7 @@ const LoginScreen = () => {
           </p>
         </div>
         {loginLoading ? (
-          <Spin />
+          <JellyLoader />
         ) : (
           <button
             type="submit"

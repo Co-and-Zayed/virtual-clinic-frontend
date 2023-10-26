@@ -11,6 +11,7 @@ import Back from "assets/images/back.svg";
 import SubmitButton from "components/SubmitButton/SubmitButton";
 import { FC, useState } from "react";
 import InputField from "components/InputField/InputField";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 
 interface DoctorRegisterProps {
   backFn: () => void;
@@ -122,7 +123,7 @@ const DoctorRegister: FC<DoctorRegisterProps> = ({ backFn }) => {
         formik.setFieldError("specialty", "Please enter your specialty");
         errorExists = true;
       }
-      
+
       if (values.affiliation.trim() === "") {
         formik.setFieldError("affiliation", "Please enter your affiliation");
         errorExists = true;
@@ -237,15 +238,15 @@ const DoctorRegister: FC<DoctorRegisterProps> = ({ backFn }) => {
               name="date_of_birth"
               customInput={
                 <DatePicker
-                format={"DD/MM/YYYY"}
-                className={`${inputStyles.inputField}`}
-                value={dateOfBirth}
-                status={formik.errors.date_of_birth ? "error" : ""}
-                onChange={(date: any, dateString: any) => {
-                  formik.setFieldValue("date_of_birth", dateString);
-                  setDateOfBirth(date);
-                }}
-              />
+                  format={"DD/MM/YYYY"}
+                  className={`${inputStyles.inputField}`}
+                  value={dateOfBirth}
+                  status={formik.errors.date_of_birth ? "error" : ""}
+                  onChange={(date: any, dateString: any) => {
+                    formik.setFieldValue("date_of_birth", dateString);
+                    setDateOfBirth(date);
+                  }}
+                />
               }
               error={formik.errors.date_of_birth}
             />
@@ -288,12 +289,10 @@ const DoctorRegister: FC<DoctorRegisterProps> = ({ backFn }) => {
                   style={{
                     paddingInline: "0",
                   }}
-                  dropdownStyle={
-                    {
-                      fontFamily: "Century Gothic",
-                      fontWeight: "normal",
-                    }
-                  }
+                  dropdownStyle={{
+                    fontFamily: "Century Gothic",
+                    fontWeight: "normal",
+                  }}
                 />
               }
             />
@@ -344,7 +343,7 @@ const DoctorRegister: FC<DoctorRegisterProps> = ({ backFn }) => {
             // }}
           />
         ) : registerLoading ? (
-          <Spin />
+          <JellyLoader />
         ) : (
           <SubmitButton text="Register" className="px-6 py-2 mt-12" />
         )}

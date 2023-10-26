@@ -15,6 +15,7 @@ import DoctorRegister from "./Register/DoctorRegister";
 import PatientRegister from "./Register/PatientRegister";
 import SubmitButton from "components/SubmitButton/SubmitButton";
 import InputField from "components/InputField/InputField";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const LoginScreen2 = () => {
   const navigate = useNavigate();
@@ -89,7 +90,7 @@ const LoginScreen2 = () => {
       >
         {/* REGISTER */}
         <div className="w-[40rem] flex flex-col">
-        <h2 className={`${styles.h2} mb-[2rem]`}>Register</h2>
+          <h2 className={`${styles.h2} mb-[2rem]`}>Register</h2>
           <div className="flex justify-between flex-1">
             {/* DOCTOR */}
             <div
@@ -181,7 +182,9 @@ const LoginScreen2 = () => {
             </div>
 
             {loginLoading ? (
-              <Spin />
+              <div className="w-full flex items-center justify-center">
+                <JellyLoader color={"var(--light-green)"} />
+              </div>
             ) : (
               <SubmitButton text="Login" className="w-full" />
             )}
@@ -197,7 +200,6 @@ const LoginScreen2 = () => {
 
   function renderPatient() {
     return <PatientRegister backFn={() => setPage("login")} />;
-
   }
 
   return (

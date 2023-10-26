@@ -11,6 +11,7 @@ import {
 } from "@ant-design/icons";
 import { adminListAllPatientsAction } from "redux/VirtualClinicRedux/AdminListAllPatients/adminListAllPatientsAction";
 import { deletePatientAction } from "redux/VirtualClinicRedux/DeletePatient/deletePatientAction";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const PatientsScreen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -42,7 +43,7 @@ const PatientsScreen = () => {
     >
       {adminPatientsLoading ? (
         <div className={`${styles.spinnerContainer}`}>
-          <Spin indicator={antIcon} />
+          <JellyLoader />
         </div>
       ) : (
         <div className="w-full flex flex-wrap justify-start items-center">

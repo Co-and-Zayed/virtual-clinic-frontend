@@ -12,6 +12,7 @@ import SubmitButton from "components/SubmitButton/SubmitButton";
 import { FC, useEffect, useState } from "react";
 import InputField from "components/InputField/InputField";
 import moment from "moment";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 
 interface PatientRegisterProps {
   backFn: () => void;
@@ -310,7 +311,6 @@ const PatientRegister: FC<PatientRegisterProps> = ({ backFn }) => {
                   style={{
                     paddingInline: "0",
                   }}
-                  
                   dropdownStyle={
                     // color of backgroung
                     {
@@ -380,7 +380,7 @@ const PatientRegister: FC<PatientRegisterProps> = ({ backFn }) => {
             // }}
           />
         ) : registerLoading ? (
-          <Spin />
+          <JellyLoader />
         ) : (
           <SubmitButton text="Register" className="px-6 py-2 mt-12" />
         )}

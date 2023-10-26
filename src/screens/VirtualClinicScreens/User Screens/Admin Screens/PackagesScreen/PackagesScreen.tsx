@@ -12,6 +12,7 @@ import { updatePackageAction } from "redux/VirtualClinicRedux/UpdatePackage/upda
 import { create } from "domain";
 import { createPackageAction } from "redux/VirtualClinicRedux/CreatePackage/createPackageAction";
 import { deletePackageAction } from "redux/VirtualClinicRedux/DeletePackage/deletePackageAction";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const PackagesScreen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -219,7 +220,7 @@ const PackagesScreen = () => {
       >
         {packagesLoading ? (
           <div className={`${styles.spinnerContainer}`}>
-            <Spin indicator={antIcon} />
+            <JellyLoader />
           </div>
         ) : (
           <div className="w-full flex flex-wrap justify-start items-center">

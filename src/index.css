@@ -29,7 +29,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-main);
-  /* color: black !important; */
+  color: var(--dark-green);
 }
 
 code {
@@ -44,6 +44,10 @@ code {
 .greenText {
   font-family: "Century Gothic", sans-serif;
   color: var(--el7a2ni---light-green, #8AC186)
+}
+
+.centuryGothic {
+  font-family: "Century Gothic", sans-serif;
 }
 
 .ant-select-selector {

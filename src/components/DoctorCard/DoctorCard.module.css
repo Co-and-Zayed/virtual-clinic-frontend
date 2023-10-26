@@ -1,0 +1,47 @@
+.doctorCard {
+  border: 1px solid #CFCFCF;
+  background: #F4F4F4;
+  
+  width: 100%;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  margin: 1rem 0;
+}
+
+
+
+.imageCircle {
+  /* w-[7rem] h-[7rem] flex justify-center items-center rounded-full aspect-square */
+  width: 7rem;
+  height: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  background-color: var(--dark-green);
+
+}
+
+/* last item of type cardItem */
+.doctorCard .cardItem:last-of-type {
+  border: none;
+}
+
+.cardItem {
+  flex: 1;
+
+  display: flex;
+  padding: 1rem;
+  /* font-size: 1rem; */
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+
+  border-right: 1px solid #CFCFCF;
+}
+
+.double {
+  flex: 2;
+}

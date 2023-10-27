@@ -247,7 +247,7 @@ const AppointmentsScreen = () => {
 
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
-      <h1>Patient Appointments Screen</h1>
+      <h1 className="pageHeading">Appointments</h1>
       <Table dataSource={data} columns={columns} />
     </div>
   );

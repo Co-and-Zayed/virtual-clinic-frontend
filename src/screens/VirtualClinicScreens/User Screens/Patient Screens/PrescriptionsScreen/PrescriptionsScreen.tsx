@@ -324,7 +324,7 @@ const PrescriptionsScreen: React.FC = () => {
 
   return (
     <div>
-      <h1>Prescriptions Screen</h1>
+      <h1 className="pageHeading">Prescriptions</h1>
       <div>
         {prescriptionsLoading ? (
           <JellyLoader />

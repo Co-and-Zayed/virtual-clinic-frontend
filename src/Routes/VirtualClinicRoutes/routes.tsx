@@ -77,6 +77,16 @@ export const routes = [
     parent: <ProtectedRoutes />,
   },
   {
+    path: Routes.SETTINGS_PATH + Routes.PROFILE_PATH,
+    element: <CommonSettingsScreen />,
+    parent: <ProtectedRoutes />,
+  },
+  {
+    path: Routes.SETTINGS_PATH + Routes.PASSWORD_PATH,
+    element: <CommonSettingsScreen />,
+    parent: <ProtectedRoutes />,
+  },
+  {
     path: Routes.APPOINTMENTS_PATH,
     element: <CommonAppointmentsScreen />,
     parent: <ProtectedRoutes />,

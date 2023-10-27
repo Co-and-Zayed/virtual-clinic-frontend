@@ -145,7 +145,7 @@ const DoctorsScreen = () => {
       <div className={`w-full flex flex-col items-start justify-center`}>
         {/* TITLE */}
         <h1
-          className={`text-4xl font-bold mb-12`}
+          className={`pageHeading font-bold mb-12`}
           style={{ color: "var(--dark-green)" }}
         >
           Doctors

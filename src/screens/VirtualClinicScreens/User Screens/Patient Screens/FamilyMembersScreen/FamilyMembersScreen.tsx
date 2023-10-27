@@ -310,7 +310,7 @@ const FamilyMembersScreen = () => {
 
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
-      <h1>Patient's Family Members Screen</h1>
+      <h1 className="pageHeading">Family Members</h1>
       <Form
         {...layout}
         ref={formRef}

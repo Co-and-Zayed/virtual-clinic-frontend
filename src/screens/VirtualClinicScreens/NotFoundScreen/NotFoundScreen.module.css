@@ -1,0 +1,9 @@
+.notFoundPage p {
+  font-size: 5rem;
+  font-weight: 900;
+  margin-bottom: 4rem;
+}
+
+.notFoundPage {
+  padding-top: 5rem;
+}

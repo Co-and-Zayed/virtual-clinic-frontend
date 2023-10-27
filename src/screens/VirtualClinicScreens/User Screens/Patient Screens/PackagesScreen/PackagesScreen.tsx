@@ -46,33 +46,39 @@ const PackagesScreen = () => {
           <JellyLoader />
         </div>
       ) : (
-        <div className="w-full flex flex-wrap justify-start items-center">
-          {Array.isArray(allPackages) &&
-            allPackages?.map((packageItem: any) => (
-              <div
-                key={packageItem._id}
-                className={`${styles.packageItem} ${selectedPackage?.type} ${
-                  packageItem.type
-                } ${
-                  selectedPackage?.type === packageItem.type &&
-                  styles.currentPackage
-                } mt-5 mr-5`}
-              >
-                <div className="w-full flex justify-between items-center mb-2">
-                  <div className="flex items-center">
-                    <h1 className="mr-2">{packageItem.type}</h1>
-                    <p>| {packageItem.tier}</p>
+        <div>
+          <h1 className="pageHeading">Health Packages</h1>
+          <div className="w-full flex flex-wrap justify-start items-center">
+            {Array.isArray(allPackages) &&
+              allPackages?.map((packageItem: any) => (
+                <div
+                  key={packageItem._id}
+                  className={`${styles.packageItem} ${selectedPackage?.type} ${
+                    packageItem.type
+                  } ${
+                    selectedPackage?.type === packageItem.type &&
+                    styles.currentPackage
+                  } mt-5 mr-5`}
+                >
+                  <div className="w-full flex justify-between items-center mb-2">
+                    <div className="flex items-center">
+                      <h1 className="mr-2">{packageItem.type}</h1>
+                      <p>| {packageItem.tier}</p>
+                    </div>
+                    <p className={`${styles.editLink}`}>Edit</p>
                   </div>
-                  <p className={`${styles.editLink}`}>Edit</p>
+                  <p>EGP {packageItem.price_per_year}</p>
+                  <p>
+                    Session Discount:{" "}
+                    {packageItem.doctor_session_discount * 100}%
+                  </p>
+                  <p>
+                    Medicine Discount: {packageItem.medicine_discount * 100}%
+                  </p>
+                  <p>Family Discount: {packageItem.family_discount * 100}%</p>
                 </div>
-                <p>EGP {packageItem.price_per_year}</p>
-                <p>
-                  Session Discount: {packageItem.doctor_session_discount * 100}%
-                </p>
-                <p>Medicine Discount: {packageItem.medicine_discount * 100}%</p>
-                <p>Family Discount: {packageItem.family_discount * 100}%</p>
-              </div>
-            ))}
+              ))}
+          </div>
         </div>
       )}
     </div>

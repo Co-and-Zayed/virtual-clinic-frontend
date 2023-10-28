@@ -1,9 +1,13 @@
 export { default as AppointmentsIcon } from "./AppointmentsIcon";
 export { default as DashboardIcon } from "./DashboardIcon";
 export { default as DoctorsIcon } from "./DoctorsIcon";
+export { default as DollarIcon } from "./DollarIcon";
+export { default as EducationIcon } from "./EducationIcon";
 export { default as FamilyIcon } from "./FamilyIcon";
 export { default as HealthIcon } from "./HealthIcon";
+export { default as HospitalIcon } from "./HospitalIcon";
 export { default as LogoutIcon } from "./LogoutIcon";
 export { default as PackagesIcon } from "./PackagesIcon";
-export { default as SettingsIcon } from "./SettingsIcon";
 export { default as PrescriptionsIcon } from "./PrescriptionsIcon";
+export { default as RightArrowIcon } from "./RightArrowIcon";
+export { default as SettingsIcon } from "./SettingsIcon";

@@ -28,6 +28,7 @@ import InputField from "components/InputField/InputField";
 // import Icon from "assets/images/add-circle";
 import DoctorCard from "components/DoctorCard/DoctorCard";
 import JellyLoader from "components/JellyLoader/JellyLoader";
+import { AnimatePresence, motion } from "framer-motion";
 
 const DoctorsScreen = () => {
   const { allSpecialities, specialitiesLoading } = useSelector(
@@ -142,7 +143,13 @@ const DoctorsScreen = () => {
         components: {},
       }}
     >
-      <div className={`w-full flex flex-col items-start justify-center`}>
+      <motion.div
+        initial={{ opacity: 0 }} // Use x and y coordinates for initial position
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0, transition: { duration: 0.5 } }}
+        transition={{ duration: 0.3, ease: "easeIn" }}
+        className={`w-full h-full flex flex-col items-start justify-center`}
+      >
         {/* TITLE */}
         <h1
           className={`text-4xl font-bold mb-12`}
@@ -151,142 +158,156 @@ const DoctorsScreen = () => {
           Doctors
         </h1>
         <div className={`w-full flex justify-center items-center`}>
-          <div className={`w-full flex justify-center items-center`}>
-            {/* TOP BAR */}
-            <div className={`w-full flex justify-between items-center`}>
-              {/* SEARCH SECTION */}
-              <div className={`${styles.topRowRow}`}>
-                <div className="flex gap-x-2 items-center">
-                  <Input
-                    type="text"
-                    placeholder="Search by doctor name"
-                    value={searchName}
-                    onChange={(e) => setSearchName(e.target.value)}
-                    className={`${inputStyles.inputField}`}
-                    style={{ width: "15rem" }}
-                  />
-                  <SearchButton
-                    onClick={() => {
-                      dispatch(
-                        patientGetDoctorsAction({
-                          email: userData?.email,
-                          name: searchName,
-                          specialty: searchSpeciality,
-                        })
-                      );
-                    }}
-                  />
-                </div>
-
-                {/* DROPDOWN FOR SPECIALITY */}
-                <div className={`flex text-base gap-x-2 items-center`}>
-                  {/* <i className="w-[20px] fa-solid fa-stethoscope"></i> */}
-                  <Select
-                    placeholder="Select a speciality"
-                    showSearch
-                    allowClear
-                    onClear={() => {
-                      setSearchSpeciality(null);
-                    }}
-                    value={searchSpeciality}
-                    onSelect={(value) => {
-                      setSearchSpeciality(value);
-                    }}
-                    optionFilterProp="children"
-                    options={allSpecialities?.map((speciality: any) => ({
-                      value: speciality,
-                      label: speciality,
-                    }))}
-                    filterOption={(input, option: any) =>
-                      option?.children
-                        ?.toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
-                    }
-                    className={`${inputStyles.lightInputField}`}
-                    style={{
-                      paddingInline: "0",
-                      width: "12rem",
-                    }}
-                    dropdownStyle={{
-                      fontFamily: "Century Gothic",
-                      fontWeight: "normal",
-                    }}
-                  />
-                </div>
+          {/* TOP BAR */}
+          <div className={`w-full flex justify-between items-center`}>
+            {/* SEARCH SECTION */}
+            <div className={`${styles.topRowRow}`}>
+              <div className="flex gap-x-2 items-center">
+                <Input
+                  type="text"
+                  placeholder="Search by doctor name"
+                  value={searchName}
+                  onChange={(e) => setSearchName(e.target.value)}
+                  className={`${inputStyles.inputField}`}
+                  style={{ width: "15rem" }}
+                />
+                <SearchButton
+                  onClick={() => {
+                    dispatch(
+                      patientGetDoctorsAction({
+                        email: userData?.email,
+                        name: searchName,
+                        specialty: searchSpeciality,
+                      })
+                    );
+                  }}
+                />
               </div>
 
-              {/* SEARCH */}
-
-              {/* FOR TESTING */}
-              {/* <Button
-                    type="default"
-                    icon={<SearchOutlined />}
-                    onClick={() => {
-                      createAppointment();
-                    }}
-                  >
-                    Create Appointment
-                  </Button> */}
-
-              {/* FILTERS */}
-              <div className={`${styles.topRowRow}`}>
-                <DatePicker
-                  format={"DD/MM/YYYY"}
-                  value={dateFilter}
-                  onChange={(value) => {
-                    setDateFilter(value);
-                  }}
+              {/* DROPDOWN FOR SPECIALITY */}
+              <div className={`flex text-base gap-x-2 items-center`}>
+                {/* <i className="w-[20px] fa-solid fa-stethoscope"></i> */}
+                <Select
+                  placeholder="Select a speciality"
+                  showSearch
                   allowClear
-                  placeholder="Select date for appointment"
-                  className={`${inputStyles.lightInputField}`}
-                  style={{
-                    width: "15rem",
+                  onClear={() => {
+                    setSearchSpeciality(null);
                   }}
-                />
-
-                <TimePicker
-                  className={`${inputStyles.lightInputField}`}
-                  format={"hh a"}
+                  value={searchSpeciality}
                   onSelect={(value) => {
-                    setTimeFilter(value);
+                    setSearchSpeciality(value);
                   }}
-                  onChange={(value) => {
-                    setTimeFilter(value);
-                  }}
-                  value={timeFilter}
-                  allowClear
+                  optionFilterProp="children"
+                  options={allSpecialities?.map((speciality: any) => ({
+                    value: speciality,
+                    label: speciality,
+                  }))}
+                  filterOption={(input, option: any) =>
+                    option?.children
+                      ?.toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                  className={`${inputStyles.lightInputField}`}
                   style={{
+                    paddingInline: "0",
                     width: "12rem",
                   }}
-                />
-
-                {/* APPLY FILTERS */}
-                <SearchButton
-                  noSearchIcon
-                  text="Apply"
-                  onClick={() => {
-                    filterDoctors();
+                  dropdownStyle={{
+                    fontFamily: "Century Gothic",
+                    fontWeight: "normal",
                   }}
                 />
               </div>
             </div>
-          </div>
-        </div>
-        <div className="w-full flex items-start gap-x-4">
-          {/* DOCTORS */}
-          <div className={`w-full flex flex-col justify-center items-center`}>
-            {doctorsLoading ? (
-              <JellyLoader />
-            ) : (
-              allDoctors?.map((doctor: any) => {
-                if (doctor?.status === "PENDING") return;
 
-                return <DoctorCard doctor={doctor} />;
-              })
-            )}
+            {/* SEARCH */}
+
+            {/* FOR TESTING */}
+            {/* <Button
+                      type="default"
+                      icon={<SearchOutlined />}
+                      onClick={() => {
+                        createAppointment();
+                      }}
+                    >
+                      Create Appointment
+                    </Button> */}
+
+            {/* FILTERS */}
+            <div className={`${styles.topRowRow}`}>
+              <DatePicker
+                format={"DD/MM/YYYY"}
+                value={dateFilter}
+                onChange={(value) => {
+                  setDateFilter(value);
+                }}
+                allowClear
+                placeholder="Select date for appointment"
+                className={`${inputStyles.lightInputField}`}
+                style={{
+                  width: "15rem",
+                }}
+              />
+
+              <TimePicker
+                className={`${inputStyles.lightInputField}`}
+                format={"hh a"}
+                onSelect={(value) => {
+                  setTimeFilter(value);
+                }}
+                onChange={(value) => {
+                  setTimeFilter(value);
+                }}
+                value={timeFilter}
+                allowClear
+                style={{
+                  width: "12rem",
+                }}
+              />
+
+              {/* APPLY FILTERS */}
+              <SearchButton
+                noSearchIcon
+                text="Apply"
+                onClick={() => {
+                  filterDoctors();
+                }}
+              />
+            </div>
           </div>
         </div>
-      </div>
+        {/* DOCTORS */}
+        <div
+          className={`w-full flex flex-col items-center ${styles.doctorsList} mt-4`}
+        >
+          {doctorsLoading ? (
+            <div className="w-full h-full flex items-center justify-center">
+              <JellyLoader />
+            </div>
+          ) : (
+            allDoctors?.map((doctor: any, idx: number) => {
+              if (doctor?.status === "PENDING") return;
+
+              return (
+                <motion.div
+                  className="w-full"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    // ease: "easeIn",
+                    ease: [0.38, 0.01, 0.39, 1.1],
+                    delay: idx * 0.1,
+                  }}
+                >
+                  <DoctorCard doctor={doctor} />
+                </motion.div>
+              );
+            })
+          )}
+        </div>
+      </motion.div>
     </ConfigProvider>
   );
 };

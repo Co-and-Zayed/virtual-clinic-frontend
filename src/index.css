@@ -4,6 +4,8 @@
 
 :root {
   --light-green: #8ac186;
+  --light-green-7: #8ac186b3;
+  --light-green-5: #8ac1868c;
   --dark-green: #163b45;
   --blue: #86bec2;
   --bg-main: #f1f1f1;
@@ -46,6 +48,10 @@ code {
   color: var(--el7a2ni---light-green, #8ac186);
 }
 
+.lineH {
+  line-height: 1.2;
+}
+
 .centuryGothic {
   font-family: "Century Gothic", sans-serif;
 }
@@ -76,3 +82,34 @@ input:-internal-autofill-selected {
   font-weight: bold;
   font-style: normal;
 }
+
+/* Scroll bars */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(217, 217, 217, 1);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--light-green-7);
+  border-radius: 6px;
+
+  transition: background 0.3s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--light-green);
+  transition: background 0.3s ease-in-out;
+
+}
+
+
+/* CALENDAR
+.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+  background-color: var(--dark-green) !important;
+  opacity: 1 !important;
+  color: white !important;
+} */

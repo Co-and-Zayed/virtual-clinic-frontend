@@ -3,10 +3,11 @@
   background: #f4f4f4;
 
   width: 100%;
+  height: 10rem;
   display: flex;
   justify-content: stretch;
   align-items: stretch;
-  margin: 1rem 0;
+  /* margin: 1rem 0; */
 }
 
 .imageCircle {
@@ -28,17 +29,95 @@
 
 .cardItem {
   flex: 1;
-
+  position: relative;
   display: flex;
   padding: 1rem;
-  /* font-size: 1rem; */
+  overflow: hidden;
+
+  display: flex;
   gap: 1.5rem;
   align-items: center;
   justify-content: center;
 
+  /* font-size: 1rem; */
   border-right: 1px solid #cfcfcf;
 }
 
 .double {
   flex: 2;
+}
+
+.bgImage {
+  position: absolute;
+
+  height: 80%;
+  width: auto;
+
+  color: var(--light-green);
+  opacity: 0.075;
+}
+
+.priceCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--dark-green);
+}
+
+.priceLight {
+  position: relative;
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: var(--dark-green);
+  opacity: 0.3;
+}
+
+.lineThrough::before {
+  content: ""; /* Add content to the pseudo-element */
+  position: absolute; /* Position it absolutely within the parent */
+  top: 45%; /* Position it vertically at 50% of the parent's height */
+  left: -0.5rem; /* Start it at the beginning of the text */
+  right: -0.5rem; /* Extend it to the end of the text */
+  border-top: 1px solid var(--dark-green); /* Customize the line's appearance */
+}
+
+.bookSession {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.3rem;
+  line-height: 1.2;
+  font-size: 1rem;
+  position: relative; /* Create a positioning context */
+
+  transition: column-gap 0.1s 0.3s ease-in-out;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: var(--dark-green);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.4s ease-in-out;
+  }
+
+  /* Shrink the border on hover */
+  &:hover::before {
+    width: 0;
+  }
+
+  &:hover {
+    column-gap: 0.7rem;
+  }
 }

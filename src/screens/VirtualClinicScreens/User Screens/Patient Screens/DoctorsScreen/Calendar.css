@@ -1,0 +1,86 @@
+/* CALENDAR */
+.css-1q04gal-MuiDateCalendar-root {
+  margin: 0 !important;
+  height: auto !important;
+}
+
+
+
+/* SELECTED */
+.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root.Mui-selected,
+.css-jgls56-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+  background-color: var(--dark-green) !important;
+  opacity: 1 !important;
+  color: white !important;
+  font-size: small !important;
+
+  transition: all 0.2s ease-in-out;
+
+  /* INNER CIRCLE */
+  &:hover {
+    background-color: var(--dark-green) !important;
+    opacity: 0.8 !important;
+    color: white !important;
+  }
+}
+
+.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root,
+.css-jgls56-MuiButtonBase-root-MuiPickersDay-root {
+  width: 28px !important;
+  height: 28px !important;
+
+  margin-inline: 6px !important;
+  line-height: 1.5 !important;
+}
+
+.css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel {
+  width: 28px !important;
+  margin-inline: 6px !important;
+}
+
+.css-flbe84-MuiDayCalendar-weekContainer {
+  margin-block: 6px !important;
+}
+
+.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* WEEKDAYS */
+.css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel {
+  font-family: "Cabin", sans-serif !important;
+  color: var(--dark-green) !important;
+}
+
+/* HEADER */
+.css-dplwbx-MuiPickersCalendarHeader-label {
+  font-family: "Cabin", sans-serif !important;
+  font-weight: 400;
+}
+
+/* DOWN ARROW ICON */
+.css-1tkx1wf-MuiSvgIcon-root-MuiPickersCalendarHeader-switchViewIcon {
+  color: var(--dark-green) !important;
+}
+
+/* RED BADGE */
+.css-144dnr3-MuiBadge-badge {
+  top: 19% !important;
+  right: 24% !important;
+}
+
+/* MONTHS */
+.css-fldub7-MuiPickersMonth-root,
+.css-bw88rr-MuiPickersMonth-monthButton {
+  line-height: 1.2 !important;
+}
+
+.css-bw88rr-MuiPickersMonth-monthButton.Mui-selected,
+.css-innj4t-MuiPickersYear-yearButton.Mui-selected {
+  background-color: var(--dark-green) !important;
+}
+
+.css-innj4t-MuiPickersYear-yearButton {
+  line-height: 1.2 !important;
+  padding-inline: 0 !important;
+}

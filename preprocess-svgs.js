@@ -13,6 +13,7 @@ fs.readdirSync(svgDirectory).forEach((file) => {
     if (!fs.existsSync(outputFilePath)) {
       const svgContent = fs.readFileSync(filePath, "utf8");
       const $ = cheerio.load(svgContent, { xmlMode: true });
+
       $("path").attr("fill", "currentColor");
       fs.writeFileSync(filePath, $.html());
     }

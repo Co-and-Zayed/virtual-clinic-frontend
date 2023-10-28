@@ -130,6 +130,7 @@ const DoctorCard: FC<DoctorCardProps> = ({ doctor, noBooking }) => {
             className={`${styles.bookSession}`}
           >
             <p>Book a session</p>
+            <div className={`${styles.textGap}`}></div>
             <RightArrowIcon height="10px" />
           </a>
         )}

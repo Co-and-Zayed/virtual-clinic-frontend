@@ -8,6 +8,7 @@ import {
   navLinksDoctor,
   navLinksPatient,
   navLinksAdmin,
+  settingsPatient,
 } from "utils/VirtualClinicUtils/navigationLinks";
 import { RootState } from "redux/rootReducer";
 import { logoutAction } from "redux/User/userAction";
@@ -16,6 +17,8 @@ import { CLEAR_TIMEOUTS } from "redux/User/loginTypes";
 import ErrorBoundary from "antd/es/alert/ErrorBoundary";
 import { SettingsIcon, LogoutIcon } from "assets/IconComponents";
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
+import Logo from "assets/images/Logo.svg";
+import LogoText from "assets/icons/LogoText.svg";
 
 interface SideBarProps {}
 
@@ -25,6 +28,7 @@ const SideBar: FC<SideBarProps> = () => {
 
   const [currentLink, setCurrentLink] = useState(0);
   const [currentNavLinks, setCurrentNavLinks] = useState<any>(null);
+  const [currentSettingsLinks, setCurrentSettingsLinks] = useState<any>(null);
 
   const { userData, userType, accessToken, refreshToken } = useSelector(
     (state: RootState) => state.userReducer
@@ -67,6 +71,7 @@ const SideBar: FC<SideBarProps> = () => {
       setCurrentNavLinks(navLinksDoctor);
     } else if (userType === "PATIENT") {
       setCurrentNavLinks(navLinksPatient);
+      setCurrentSettingsLinks(settingsPatient);
     } else if (userType === "ADMIN") {
       setCurrentNavLinks(navLinksAdmin);
     } else {
@@ -93,42 +98,60 @@ const SideBar: FC<SideBarProps> = () => {
       }
     }
 
-    if (Routes.SETTINGS_PATH === window.location.pathname) {
+    if (window.location.pathname.includes(Routes.SETTINGS_PATH)) {
       setCurrentLink(currentNavLinks?.length + 1);
       return;
     }
   }, [window.location.pathname, currentNavLinks]);
 
   return (
-    <div className={`${styles.sideBar} flex flex-col items-start gap-y-6`}>
-      <h1 className="flex justify-center items-center myfont-xl font-bold">
-        {userType}
-      </h1>
-
-      <ul className={`h-full flex flex-col justify-between pb-12`}>
-        <div>
-          {currentNavLinks?.map((link: any, index: any) =>
-            generateLink({ ...link, index })
-          )}
+    <div className={`${styles.sideBar} flex flex-col items-start gap-y-0`}>
+      {/* LOGO */}
+      <div className={`w-full ${styles.paddingContainer}`}>
+        <div className="w-full flex items-center justify-center mb-16">
+          <img className={`${styles.logoIcon}`} src={Logo} alt="logo" />
+          <img className={`${styles.logoText}`} src={LogoText} alt="logoText" />
         </div>
 
-        <div>
-          {generateLink({
-            name: "Settings",
-            icon: <SettingsIcon />,
-            route: "/settings",
-            index: currentNavLinks?.length + 1,
-          })}
-
-          {generateLink({
-            name: "Logout",
-            icon: <LogoutIcon />,
-            route: window.location.pathname,
-            index: currentNavLinks?.length + 2,
-            onClick: handleLogoutClick,
-          })}
+        {/* WALLET */}
+        <div className={`w-full flex flex-col items-start justify-center`}>
+          <div className={`${styles.walletText} mb-1`}>MY WALLET</div>
+          <div className="flex items-end">
+            <p className={`${styles.walletValue}`}>2,300.00</p>
+            <p className={`${styles.walletCurrency}`}>EGP</p>
+          </div>
         </div>
-      </ul>
+      </div>
+
+      <div className={`w-full ${styles.divider}`}></div>
+
+      <div className={`w-full h-full ${styles.paddingContainer}`}>
+        {/* NAVIGATION LINKS */}
+        <ul className={`h-full flex flex-col justify-between`}>
+          <div>
+            {currentNavLinks?.map((link: any, index: any) =>
+              generateLink({ ...link, index })
+            )}
+          </div>
+
+          <div>
+            {generateLink({
+              name: "Settings",
+              icon: <SettingsIcon />,
+              route: currentSettingsLinks ? currentSettingsLinks[0]?.route : "/settings",
+              index: currentNavLinks?.length + 1,
+            })}
+
+            {generateLink({
+              name: "Logout",
+              icon: <LogoutIcon />,
+              route: window.location.pathname,
+              index: currentNavLinks?.length + 2,
+              onClick: handleLogoutClick,
+            })}
+          </div>
+        </ul>
+      </div>
     </div>
   );
 };

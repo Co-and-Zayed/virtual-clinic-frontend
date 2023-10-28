@@ -26,6 +26,12 @@ html {
   box-sizing: border-box;
 }
 
+.pageHeading {
+  font-size: 3.125rem;
+  font-weight: 900;
+  margin-bottom: 2rem;
+}
+
 body {
   margin: 0;
   font-family: "Cabin", sans-serif;

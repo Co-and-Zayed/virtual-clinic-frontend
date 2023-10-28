@@ -20,4 +20,5 @@ export const PACKAGES_PATH = "/packages";
 export const VIEW_DOCTORS_PATH = "/view-doctors";
 export const VIEW_PATIENTS_PATH = "/view-patients";
 
-
+export const PROFILE_PATH = "/profile";
+export const PASSWORD_PATH = "/password";

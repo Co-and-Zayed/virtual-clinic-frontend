@@ -152,7 +152,7 @@ const DoctorsScreen = () => {
       >
         {/* TITLE */}
         <h1
-          className={`text-4xl font-bold mb-12`}
+          className={`pageHeading font-bold mb-12`}
           style={{ color: "var(--dark-green)" }}
         >
           Doctors

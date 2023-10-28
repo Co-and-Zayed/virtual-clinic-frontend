@@ -1,15 +1,53 @@
 .sideBar {
   height: 100%;
   position: fixed;
-  padding-top: 3rem;
+  padding-block: 3rem;
   width: var(--sidebar-width);
-  padding-inline: 2rem;
   background-color: var(--dark-green);
   color: white;
 }
 
+.sideBar .paddingContainer {
+  padding-inline: 2rem;
+}
+
+.sideBar .divider {
+  height: 0.0625rem;
+  opacity: 0.5;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  background-color: var(--light-green);
+}
+
 .sideBar li {
   user-select: none;
+}
+
+.walletText {
+  --font-size: 1rem;
+  font-size: var(--font-size);
+  color: var(--light-green);
+  letter-spacing: calc(var(--font-size) * 0.15);
+}
+
+.walletValue {
+  line-height: 1.05;
+}
+
+.walletCurrency,
+.walletValue {
+  font-weight: bold;
+}
+
+.walletValue {
+  font-size: 2.1875rem;
+  margin-right: 0.25rem;
+}
+
+.walletCurrency {
+  font-size: 1.25rem;
+  display: inline-block;
+  vertical-align: baseline;
 }
 
 .linkContainer {
@@ -43,6 +81,15 @@
 .activeLink .icon {
   /* blur the icon */
   filter: blur(0.125rem);
+}
+
+.sideBar .logoIcon {
+  height: 3.125rem;
+  margin-inline-end: 1rem;
+}
+
+.sideBar .logoText {
+  height: 1.5rem;
 }
 
 .linkContainer::before {

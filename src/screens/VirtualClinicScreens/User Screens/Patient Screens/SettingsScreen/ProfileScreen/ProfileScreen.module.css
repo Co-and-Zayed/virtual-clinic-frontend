@@ -21,6 +21,12 @@
   background-color: rgba(237, 237, 237, 0.9);
 }
 
+.settingsSection {
+  width: 100%;
+  margin-bottom: 4rem;
+  padding-right: 4rem;
+}
+
 .linkContainer .icon {
   margin-right: 0.75rem;
 }

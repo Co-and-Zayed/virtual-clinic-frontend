@@ -56,7 +56,9 @@ const SettingsScreen = () => {
           })}
         </div>
 
-        <div className="w-full h-full flex flex-col items-start">{currentPage}</div>
+        <div className="w-full h-full flex flex-col items-start">
+          {currentPage}
+        </div>
       </div>
     </div>
   );

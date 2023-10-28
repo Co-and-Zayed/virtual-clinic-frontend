@@ -9,8 +9,8 @@ import {
   PrescriptionsIcon,
   ProfileIcon,
 } from "assets/IconComponents";
-import ProfileScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/ProfileScreen/ProfileScreen";
-import PasswordScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/PasswordScreen/PasswordScreen";
+import PatientProfileScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/ProfileScreen/ProfileScreen";
+import PatientPasswordScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/PasswordScreen/PasswordScreen";
 
 export const navLinksPatient = [
   {
@@ -49,13 +49,43 @@ export const settingsPatient = [
   {
     name: "Profile",
     route: Routes.SETTINGS_PATH + Routes.PROFILE_PATH,
-    sub_page: <ProfileScreen />,
+    sub_page: <PatientProfileScreen />,
     icon: <ProfileIcon />,
   },
   {
     name: "Password",
     route: Routes.SETTINGS_PATH + Routes.PASSWORD_PATH,
-    sub_page: <PasswordScreen />,
+    sub_page: <PatientPasswordScreen />,
+    icon: <LockIcon />,
+  },
+];
+
+export const settingsDoctor = [
+  {
+    name: "Profile",
+    route: Routes.SETTINGS_PATH + Routes.PROFILE_PATH,
+    sub_page: <PatientProfileScreen />,
+    icon: <ProfileIcon />,
+  },
+  {
+    name: "Password",
+    route: Routes.SETTINGS_PATH + Routes.PASSWORD_PATH,
+    sub_page: <PatientPasswordScreen />,
+    icon: <LockIcon />,
+  },
+];
+
+export const settingsAdmin = [
+  {
+    name: "Profile",
+    route: Routes.SETTINGS_PATH + Routes.PROFILE_PATH,
+    sub_page: <PatientProfileScreen />,
+    icon: <ProfileIcon />,
+  },
+  {
+    name: "Password",
+    route: Routes.SETTINGS_PATH + Routes.PASSWORD_PATH,
+    sub_page: <PatientPasswordScreen />,
     icon: <LockIcon />,
   },
 ];

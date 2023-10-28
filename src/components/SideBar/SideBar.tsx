@@ -8,6 +8,7 @@ import {
   navLinksDoctor,
   navLinksPatient,
   navLinksAdmin,
+  settingsPatient,
 } from "utils/VirtualClinicUtils/navigationLinks";
 import { RootState } from "redux/rootReducer";
 import { logoutAction } from "redux/User/userAction";
@@ -27,6 +28,7 @@ const SideBar: FC<SideBarProps> = () => {
 
   const [currentLink, setCurrentLink] = useState(0);
   const [currentNavLinks, setCurrentNavLinks] = useState<any>(null);
+  const [currentSettingsLinks, setCurrentSettingsLinks] = useState<any>(null);
 
   const { userData, userType, accessToken, refreshToken } = useSelector(
     (state: RootState) => state.userReducer
@@ -69,6 +71,7 @@ const SideBar: FC<SideBarProps> = () => {
       setCurrentNavLinks(navLinksDoctor);
     } else if (userType === "PATIENT") {
       setCurrentNavLinks(navLinksPatient);
+      setCurrentSettingsLinks(settingsPatient);
     } else if (userType === "ADMIN") {
       setCurrentNavLinks(navLinksAdmin);
     } else {
@@ -135,7 +138,7 @@ const SideBar: FC<SideBarProps> = () => {
             {generateLink({
               name: "Settings",
               icon: <SettingsIcon />,
-              route: "/settings",
+              route: currentSettingsLinks ? currentSettingsLinks[0]?.route : "/settings",
               index: currentNavLinks?.length + 1,
             })}
 

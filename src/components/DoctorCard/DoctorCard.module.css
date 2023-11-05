@@ -27,6 +27,13 @@
   border: none;
 }
 
+.textGap {
+  background-color: transparent;
+  width: 0.25rem;
+  height: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
 .cardItem {
   flex: 1;
   position: relative;
@@ -62,7 +69,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  gap: 0
+  gap: 0;
 }
 
 .price {
@@ -93,12 +100,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  column-gap: 0.3rem;
   line-height: 1.2;
   font-size: 1rem;
   position: relative; /* Create a positioning context */
 
-  transition: column-gap 0.1s 0.3s ease-in-out;
+  transition: all 0.1s 0.3s ease-in-out;
 
   &::before {
     content: "";
@@ -117,7 +123,8 @@
     width: 0;
   }
 
-  &:hover {
-    column-gap: 0.7rem;
+  &:hover .textGap {
+    /* column-gap: 0.7rem; */
+    width: 0.5rem;
   }
 }

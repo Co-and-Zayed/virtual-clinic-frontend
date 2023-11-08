@@ -138,21 +138,25 @@ const PayWithWallet: FC<PayWithWallet> = ({
 
           {/* APPOINTMENT DATE */}
           {/* DD/MM/YYYY TIME AM/PM */}
-          <div className="flex flex-col items-center justify-center gap-y-2">
-            {/* DATE */}
-            <div className={`${styles.uppercase} font-semibold text-[0.9rem]`}>
-              Appointment Date
-            </div>
-            <div className={`flex items-center justify-center`}>
-              <div className={`${styles.appDate}`}>
-                {appointmentDate?.format("DD/MM/YYYY")}
+          {appointmentDate && (
+            <div className="flex flex-col items-center justify-center gap-y-2">
+              {/* DATE */}
+              <div
+                className={`${styles.uppercase} font-semibold text-[0.9rem]`}
+              >
+                Appointment Date
               </div>
-              {/* TIME */}
-              <div className={`${styles.appTime}`}>
-                {appointmentDate?.format("h:mm A")}
+              <div className={`flex items-center justify-center`}>
+                <div className={`${styles.appDate}`}>
+                  {appointmentDate?.format("DD/MM/YYYY")}
+                </div>
+                {/* TIME */}
+                <div className={`${styles.appTime}`}>
+                  {appointmentDate?.format("h:mm A")}
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className={`flex items-center justify-center gap-x-6`}>

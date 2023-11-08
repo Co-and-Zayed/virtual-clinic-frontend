@@ -117,24 +117,14 @@ const DoctorInfoScreen = () => {
 
   const fetchHighlightedDays = (date: Dayjs) => {
     const controller = new AbortController();
-    fakeFetch(date, {
-      signal: controller.signal,
-    })
-      .then(({ daysToHighlight }) => {
+
         setHighlightedDays([
           // today and tomorrow
-          ...daysToHighlight,
-          dayjs("23/10/2023", "DD/MM/YYYY").date(),
-          dayjs().add(1, "day").date(),
+          // ...daysToHighlight,
+          // dayjs("23/10/2023", "DD/MM/YYYY").date(),
+          // dayjs().add(1, "day").date(),
         ]);
         setIsLoading(false);
-      })
-      .catch((error) => {
-        // ignore the error if it's caused by `controller.abort`
-        if (error.name !== "AbortError") {
-          throw error;
-        }
-      });
 
     requestAbortController.current = controller;
   };
@@ -475,6 +465,9 @@ const DoctorInfoScreen = () => {
                 >
                   {timeSlots.map((timeSlot: any, index: any) => (
                     <div
+                    // /////////////////////////////////////////////////////////////////// //
+                    // TODO: DISABLE BUTTON IF DOCTOR ALREADY HAS AN APPOINTMENT AT THIS TIME
+                    // /////////////////////////////////////////////////////////////////// //
                       key={index}
                       className={`w-[10rem] py-[0.55rem] flex flex-row items-center justify-center rounded-xl border border-solid`}
                       style={{

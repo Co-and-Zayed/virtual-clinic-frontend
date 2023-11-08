@@ -164,35 +164,37 @@ const PayWithCard: FC<PayWithCard> = ({
             )}
           </div>
 
-          <div className="flex flex-col items-center justify-center gap-y-14">
-            {/* APPOINTMENT DATE */}
-            {/* DD/MM/YYYY TIME AM/PM */}
-            <div className="flex flex-col items-center justify-center gap-y-2">
-              {/* DATE */}
-              <div
-                className={`${styles.uppercase} font-semibold text-[0.9rem]`}
-              >
-                Appointment Date
+          {appointmentDate && (
+            <div className="flex flex-col items-center justify-center gap-y-14">
+              {/* APPOINTMENT DATE */}
+              {/* DD/MM/YYYY TIME AM/PM */}
+              <div className="flex flex-col items-center justify-center gap-y-2">
+                {/* DATE */}
+                <div
+                  className={`${styles.uppercase} font-semibold text-[0.9rem]`}
+                >
+                  Appointment Date
+                </div>
+                <div className={`flex items-center justify-center`}>
+                  <div className={`${styles.appDate}`}>
+                    {appointmentDate?.format("DD/MM/YYYY")}
+                  </div>
+                  {/* TIME */}
+                  <div className={`${styles.appTime}`}>
+                    {appointmentDate?.format("h:mm A")}
+                  </div>
+                </div>
               </div>
-              <div className={`flex items-center justify-center`}>
-                <div className={`${styles.appDate}`}>
-                  {appointmentDate?.format("DD/MM/YYYY")}
-                </div>
-                {/* TIME */}
-                <div className={`${styles.appTime}`}>
-                  {appointmentDate?.format("h:mm A")}
-                </div>
+
+              {/* DIVIDER */}
+              <div className="w-full h-[2px] bg-gray-200"></div>
+
+              {/* STRIPE LOGO */}
+              <div className="w-full flex items-center justify-center">
+                <img src={StripeLogo} alt="Stripe Logo" />
               </div>
             </div>
-
-            {/* DIVIDER */}
-            <div className="w-full h-[2px] bg-gray-200"></div>
-
-            {/* STRIPE LOGO */}
-            <div className="w-full flex items-center justify-center">
-              <img src={StripeLogo} alt="Stripe Logo" />
-            </div>
-          </div>
+          )}
         </div>
       </motion.div>
     </ConfigProvider>

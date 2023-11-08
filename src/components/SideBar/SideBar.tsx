@@ -34,6 +34,11 @@ const SideBar: FC<SideBarProps> = () => {
     (state: RootState) => state.userReducer
   );
 
+  useEffect(() => {
+    console.log("SIDEBAR USER DATA:");
+    console.log(userData);
+  }, [userData]);
+
   const generateLink = (link: {
     name: any;
     icon: any;
@@ -117,7 +122,7 @@ const SideBar: FC<SideBarProps> = () => {
         <div className={`w-full flex flex-col items-start justify-center`}>
           <div className={`${styles.walletText} mb-1`}>MY WALLET</div>
           <div className="flex items-end">
-            <p className={`${styles.walletValue}`}>2,300.00</p>
+            <p className={`${styles.walletValue}`}>{userData?.wallet.toLocaleString()}</p>
             <p className={`${styles.walletCurrency}`}>EGP</p>
           </div>
         </div>

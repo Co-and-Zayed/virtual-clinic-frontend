@@ -4,7 +4,15 @@ import { useNavigate, useParams } from "react-router";
 import { FC, useEffect, useRef, useState } from "react";
 import { RootState } from "redux/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Checkbox, ConfigProvider, Input, Select, Spin } from "antd";
+import {
+  Button,
+  Checkbox,
+  ConfigProvider,
+  Input,
+  Select,
+  Spin,
+  notification,
+} from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 // import { patientGetDoctorsAction } from "redux/VirtualClinicRedux/PatientGetDoctors/patientGetDoctorsAction";
 // import { allSpecialitiesAction } from "redux/VirtualClinicRedux/Dropdowns/AllSpecialities/allSpecialitiesAction";
@@ -21,12 +29,15 @@ import Badge from "@mui/material/Badge";
 import { BackIcon, RightArrowIcon } from "assets/IconComponents";
 import InputField from "components/InputField/InputField";
 import RoundedButton from "components/RoundedButton/RoundedButton";
+import { UPDATE_USER_DATA } from "redux/User/loginTypes";
 
 interface PayWithWallet {
   setPage: any;
   priceOriginal: any;
   priceDiscounted: any;
-  appointmentDate: Dayjs;
+  appointmentDate: Dayjs | null;
+  // returns boolean
+  callBack: () => Promise<boolean>;
 }
 
 const PayWithWallet: FC<PayWithWallet> = ({
@@ -34,10 +45,13 @@ const PayWithWallet: FC<PayWithWallet> = ({
   priceOriginal,
   priceDiscounted,
   appointmentDate,
+  callBack,
 }) => {
   const dispatch: any = useDispatch();
 
-  const { userData } = useSelector((state: RootState) => state.userReducer);
+  const { userData, accessToken } = useSelector(
+    (state: RootState) => state.userReducer
+  );
 
   return (
     <ConfigProvider
@@ -131,11 +145,11 @@ const PayWithWallet: FC<PayWithWallet> = ({
             </div>
             <div className={`flex items-center justify-center`}>
               <div className={`${styles.appDate}`}>
-                {appointmentDate.format("DD/MM/YYYY")}
+                {appointmentDate?.format("DD/MM/YYYY")}
               </div>
               {/* TIME */}
               <div className={`${styles.appTime}`}>
-                {appointmentDate.format("h:mm A")}
+                {appointmentDate?.format("h:mm A")}
               </div>
             </div>
           </div>
@@ -154,7 +168,37 @@ const PayWithWallet: FC<PayWithWallet> = ({
             text="Confirm Purchase"
             icon={<RightArrowIcon fontSize={18} style={{ rotate: "-45deg" }} />}
             width={"8rem"}
-            onClick={() => setPage("confirmation")}
+            onClick={async () => {
+              await callBack();
+
+              // Deduct from wallet using API
+
+              console.log("PAYING WITH WALLET");
+              const res = await fetch(
+                `${process.env.REACT_APP_BACKEND_URL}patient/payWithWallet`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${accessToken}`,
+                  },
+                  body: JSON.stringify({
+                    amount: priceDiscounted,
+                  }),
+                }
+              );
+              const data = await res.json();
+              // get "user" from data
+              console.log("PAYED WITH WALLET RESPONSE");
+              console.log(data);
+              if (data.user)
+                dispatch({
+                  type: UPDATE_USER_DATA,
+                  payload: data.user,
+                });
+
+              setPage("confirmation");
+            }}
             colorInverted
             disabled={userData.wallet < priceDiscounted}
           />

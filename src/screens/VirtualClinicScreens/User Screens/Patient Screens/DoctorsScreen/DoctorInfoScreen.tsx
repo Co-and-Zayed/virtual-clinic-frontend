@@ -4,7 +4,15 @@ import { useNavigate, useParams } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import { RootState } from "redux/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Checkbox, ConfigProvider, Input, Select, Spin } from "antd";
+import {
+  Button,
+  Checkbox,
+  ConfigProvider,
+  Input,
+  Select,
+  Spin,
+  notification,
+} from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 // import { patientGetDoctorsAction } from "redux/VirtualClinicRedux/PatientGetDoctors/patientGetDoctorsAction";
 // import { allSpecialitiesAction } from "redux/VirtualClinicRedux/Dropdowns/AllSpecialities/allSpecialitiesAction";
@@ -25,6 +33,7 @@ import PayWithCard from "./PaymentScreens/PayWithCard";
 import ConfirmationScreen from "./PaymentScreens/ConfirmationScreen";
 import RoundedButton from "components/RoundedButton/RoundedButton";
 import PayWithWallet from "./PaymentScreens/PayWithWallet";
+import { createAppointmentAction } from "redux/VirtualClinicRedux/CreateAppointment/createAppoinmentAction";
 
 function getRandomNumber(min: number, max: number) {
   return Math.round(Math.random() * (max - min) + min);
@@ -58,6 +67,8 @@ const DoctorInfoScreen = () => {
   //const { name } = useParams<{ name: string }>();   //name of dr
   const dispatch: any = useDispatch();
 
+  const { userData } = useSelector((state: RootState) => state.userReducer);
+
   var { doctorLoading, docinfo } = useSelector(
     (state: RootState) => state.getDoctorInfoReducer
   );
@@ -71,13 +82,15 @@ const DoctorInfoScreen = () => {
   // booking, paymentMethod, wallet, card, confirmation
   const [page, setPage] = useState("booking");
 
-  const [value, setValue] = useState<Dayjs | null>(dayjs());
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
   const requestAbortController = useRef<AbortController | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [highlightedDays, setHighlightedDays] = useState([1, 2, 15]);
 
   const [timeSlots, setTimeSlots] = useState<any>(generateTimeSlots());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<any>(null);
+
+  const [appointmentDate, setAppointmentDate] = useState<Dayjs | null>(null);
 
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
 
@@ -90,11 +103,17 @@ const DoctorInfoScreen = () => {
   }, []);
 
   useEffect(() => {
-    console.log(docinfo.toString() + " DoctorInfo");
     document.title = "El7a2ni" + (docinfo && " | " + docinfo.name);
 
     dispatch(getDoctorInfoAction({ username: username }));
   }, []);
+
+  useEffect(() => {
+    if (docinfo) {
+      console.log("Doctor: ");
+      console.log(docinfo);
+    }
+  }, [docinfo]);
 
   const fetchHighlightedDays = (date: Dayjs) => {
     const controller = new AbortController();
@@ -211,34 +230,131 @@ const DoctorInfoScreen = () => {
     return timeSlots;
   }
 
+  // useEffect on appointmentDate
+  useEffect(() => {
+    if (appointmentDate) {
+      var date = new Date();
+      date.setUTCDate(appointmentDate?.date());
+      date.setUTCSeconds(0);
+      date.setUTCMilliseconds(0);
+
+      console.log("Converted Date: " + appointmentDate?.toDate());
+      console.log(appointmentDate?.toDate().toString());
+      console.log("NEWWW Date: " + date);
+    }
+  }, [appointmentDate]);
+
+  async function createAppointmentCallback() {
+    console.log("Create Appointment Callback");
+    console.log(
+      "Appointment Date: " + appointmentDate?.format("DD/MM/YYYY hh:mm A")
+    );
+    console.log("Patient:");
+    console.log(userData);
+    console.log("Doctor:");
+    console.log(docinfo);
+
+    var date = appointmentDate?.toDate();
+    // var date = new Date();
+    // date.setUTCDate(appointmentDate?.date() ?? 1);
+    // date.setUTCHours(appointmentDate?.hour() ?? 0);
+    // date.setUTCMinutes(appointmentDate?.minute() ?? 0);
+    // date.setUTCSeconds(0);
+    // date.setUTCMilliseconds(0);
+    console.log("NEW Date: " + date);
+
+    // create appointment
+    // // Params: patientId, doctorId, date, status (enum: ["UPCOMING", "CANCELLED", "COMPLETED"])
+    await dispatch(
+      createAppointmentAction({
+        patientId: userData._id,
+        doctorId: docinfo._id,
+        // date: appointmentDate?.format("DD/MM/YYYY hh:mm A"),
+        date: date,
+        status: "UPCOMING",
+      })
+    );
+  }
+
   function otherPages() {
     switch (page) {
       case "paymentMethod":
-        return <PaymentMethod setPage={setPage} />;
-      case "wallet":
         return (
-          <PayWithWallet
-            setPage={setPage}
+          <PaymentMethod
             priceOriginal={docinfo?.hourlyRate * 1.1}
             priceDiscounted={docinfo?.session_price}
-            appointmentDate={dayjs()}
+            appointmentDate={appointmentDate}
+            backBtnOnClick={() => setPage("booking")}
+            transactionDescription={
+              "Patient: " +
+              userData.name +
+              " | Doctor: " +
+              docinfo.name +
+              " | Appointment Date: " +
+              appointmentDate?.format("DD/MM/YYYY") +
+              " | Appointment Time: " +
+              appointmentDate?.format("h:mm A") +
+              " | Price: " +
+              docinfo?.session_price.toFixed(2) +
+              " EGP"
+            }
+            callBackOnSuccess={createAppointmentCallback}
           />
         );
-      case "card":
-        return (
-          <PayWithCard
-            setPage={setPage}
-            priceOriginal={docinfo?.hourlyRate * 1.1}
-            priceDiscounted={docinfo?.session_price}
-            appointmentDate={dayjs()}
-            docinfo={docinfo}
-          />
-        );
-      case "confirmation":
-        return <ConfirmationScreen 
-        setPage={setPage}
-          />;
     }
+  }
+
+  function handleCheckoutClick(): void {
+    // If no date is selected, show error
+    if (!selectedDate) {
+      // show error
+      notification.error({
+        message: "Error",
+        description: "Please select a date",
+      });
+      return;
+    }
+
+    // If no time slot is selected, show error
+    if (!selectedTimeSlot) {
+      // show error
+      notification.error({
+        message: "Error",
+        description: "Please select a time slot",
+      });
+      return;
+    }
+
+    // Create date object from selected date and time
+    console.log("Selected Date: " + selectedDate.format("DD/MM/YYYY"));
+    console.log("Selected Time Slot: " + selectedTimeSlot.time);
+    // selectedTimeSlot is in the format: 9:00 AM
+    // selectedDate is a dayjs
+    var date = dayjs(
+      selectedDate.format("DD/MM/YYYY") + " " + selectedTimeSlot.time,
+      "DD/MM/YYYY hh:mm A"
+    );
+    console.log("Date: " + date);
+
+    // Set seconds to 0
+    date = date.set("second", 0).set("millisecond", 0);
+
+    // If date is in the past, show error
+    console.log("Date: " + date.format("DD/MM/YYYY hh:mm A"));
+    console.log("Today: " + dayjs());
+    if (date.isBefore(dayjs())) {
+      console.log("Date is in the past");
+      // show error
+      notification.error({
+        message: "Error",
+        description: "Please select a future date",
+      });
+      return;
+    }
+
+    setAppointmentDate(date);
+
+    setPage("paymentMethod");
   }
 
   return (
@@ -333,9 +449,9 @@ const DoctorInfoScreen = () => {
               >
                 <DateCalendar
                   defaultValue={initialValue}
-                  value={value}
+                  value={selectedDate}
                   onChange={(newValue) => {
-                    setValue(newValue);
+                    setSelectedDate(newValue);
                   }}
                   loading={isLoading}
                   onMonthChange={handleMonthChange}
@@ -429,7 +545,7 @@ const DoctorInfoScreen = () => {
                 icon={
                   <RightArrowIcon fontSize={18} style={{ rotate: "-45deg" }} />
                 }
-                onClick={() => setPage("paymentMethod")}
+                onClick={() => handleCheckoutClick()}
               />
             </motion.div>
           ) : (

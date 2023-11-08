@@ -5,9 +5,11 @@ import { BackIcon } from "assets/IconComponents";
 import CofirmTick from "assets/images/ConfirmTick.svg";
 import RoundedButton from "components/RoundedButton/RoundedButton";
 interface ConfirmationScreenProps {
-  setPage: any;
+  backBtnOnClick: any;
 }
-const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({ setPage }) => {
+const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({
+  backBtnOnClick,
+}) => {
   //const { name } = useParams<{ name: string }>();   //name of dr
   const dispatch: any = useDispatch();
 
@@ -40,12 +42,10 @@ const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({ setPage }) => {
         </div>
         <div className="flex flex-col items-center justify-center my-10">
           <RoundedButton
-            text="BACK TO BOOKING"
+            text="BACK"
             icon={<BackIcon fontSize={18} />}
             // width="20rem"
-            onClick={() => {
-              setPage("booking");
-            }}
+            onClick={backBtnOnClick}
           />
         </div>
       </div>

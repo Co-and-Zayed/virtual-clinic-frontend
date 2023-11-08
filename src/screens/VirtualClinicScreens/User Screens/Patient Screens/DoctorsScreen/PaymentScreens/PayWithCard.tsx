@@ -30,8 +30,9 @@ interface PayWithCard {
   setPage: any;
   priceOriginal: any;
   priceDiscounted: any;
-  appointmentDate: Dayjs;
-  docinfo: any;
+  appointmentDate: Dayjs | null;
+  description?: string;
+  callBack: () => Promise<boolean>;
 }
 
 const PayWithCard: FC<PayWithCard> = ({
@@ -39,7 +40,8 @@ const PayWithCard: FC<PayWithCard> = ({
   priceOriginal,
   priceDiscounted,
   appointmentDate,
-  docinfo,
+  description,
+  callBack,
 }) => {
   const dispatch: any = useDispatch();
 
@@ -66,18 +68,7 @@ const PayWithCard: FC<PayWithCard> = ({
       method: "POST",
       body: JSON.stringify({
         amount: priceDiscounted * 100,
-        description:
-          "Patient: " +
-          userData.name +
-          " | Doctor: " +
-          docinfo.name +
-          " | Appointment Date: " +
-          appointmentDate.format("DD/MM/YYYY") +
-          " | Appointment Time: " +
-          appointmentDate.format("h:mm A") +
-          " | Price: " +
-          priceDiscounted +
-          " EGP",
+        description: description,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -163,7 +154,7 @@ const PayWithCard: FC<PayWithCard> = ({
                 className="w-full [20rem] py-4"
               >
                 <Elements stripe={stripePromise} options={{ clientSecret }}>
-                  <CheckoutForm setPage={setPage} />
+                  <CheckoutForm setPage={setPage} callBack={callBack} />
                 </Elements>
               </motion.div>
             ) : (
@@ -178,16 +169,18 @@ const PayWithCard: FC<PayWithCard> = ({
             {/* DD/MM/YYYY TIME AM/PM */}
             <div className="flex flex-col items-center justify-center gap-y-2">
               {/* DATE */}
-              <div className={`${styles.uppercase} font-semibold text-[0.9rem]`}>
+              <div
+                className={`${styles.uppercase} font-semibold text-[0.9rem]`}
+              >
                 Appointment Date
               </div>
               <div className={`flex items-center justify-center`}>
                 <div className={`${styles.appDate}`}>
-                  {appointmentDate.format("DD/MM/YYYY")}
+                  {appointmentDate?.format("DD/MM/YYYY")}
                 </div>
                 {/* TIME */}
                 <div className={`${styles.appTime}`}>
-                  {appointmentDate.format("h:mm A")}
+                  {appointmentDate?.format("h:mm A")}
                 </div>
               </div>
             </div>
@@ -198,7 +191,7 @@ const PayWithCard: FC<PayWithCard> = ({
             {/* STRIPE LOGO */}
             <div className="w-full flex items-center justify-center">
               <img src={StripeLogo} alt="Stripe Logo" />
-              </div>
+            </div>
           </div>
         </div>
       </motion.div>

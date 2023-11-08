@@ -8,9 +8,10 @@ import { notification } from "antd";
 
 interface CheckoutFormProps {
   setPage: any;
+  callBack: () => Promise<boolean>;
 }
 
-export default function CheckoutForm({ setPage }: CheckoutFormProps) {
+export default function CheckoutForm({ setPage, callBack }: CheckoutFormProps) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -40,12 +41,16 @@ export default function CheckoutForm({ setPage }: CheckoutFormProps) {
         description: error.message,
       });
     } else if (paymentIntent && paymentIntent.status === "succeeded") {
+      // SUCCESS ! 
       setMessage("Payment successful! 🎉");
       notification.success({
         message: "Success",
         description: "Payment successful! 🎉",
       });
+
+      await callBack();
       setPage("confirmation");
+      
     } else {
       setMessage("An unexpected error occured.");
       notification.error({

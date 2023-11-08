@@ -127,7 +127,7 @@ export const routes = [
     parent: <ProtectedRoutes />,
   },
   {
-    path: "/doctor-info",
+    path: Routes.DOCTOR_INFO,
     element: <DoctorInfoScreen />,
     parent: <ProtectedRoutes />,
   },

@@ -4,7 +4,7 @@
       .cls-1 {
         font-size: 79.167px;
         fill: #8ac186;
-        font-family: Cabin;
+        font-family: "Cabin", sans-serif;
         font-weight: 600;
         font-style: italic;
         text-transform: uppercase;

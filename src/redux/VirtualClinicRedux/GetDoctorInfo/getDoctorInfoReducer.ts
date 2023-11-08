@@ -12,7 +12,7 @@ const initialState = {
 export const getDoctorInfoReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case DOCTOR_DATA_LOADING:
-      return { ...state, usersLoading: action.payload };
+      return { ...state, doctorLoading: action.payload };
     case DOCTOR_DATA_SUCCESS:
       return {
         ...state,

@@ -54,6 +54,10 @@ code {
   color: var(--el7a2ni---light-green, #8ac186);
 }
 
+.darkGreenText {
+  color: var(--dark-green);
+}
+
 .lineH {
   line-height: 1.2;
 }

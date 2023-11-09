@@ -2,6 +2,7 @@ export const LOGIN_LOADING = "LOGIN_LOADING";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const UPDATE_ACCESS_TOKEN = "UPDATE_ACCESS_TOKEN";
+export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
 
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";

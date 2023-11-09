@@ -25,11 +25,14 @@ import { createAppointmentAction } from "redux/VirtualClinicRedux/CreateAppointm
 import { getAppointmentsAction } from "redux/VirtualClinicRedux/GetAppointments/getAppoinmentsAction";
 import { updateAppointmentAction } from "redux/VirtualClinicRedux/UpdateAppointment/updateAppointmentAction";
 import { deleteAppointmentAction } from "redux/VirtualClinicRedux/DeleteAppointment/deleteAppointmentAction";
+import dayjs from "dayjs";
+import moment from "moment";
 
 interface DataType {
-  patientEmail: string;
-  doctorEmail: string;
-  date: string;
+  patientName: any;
+  doctorName: any;
+  date: Date;
+  dateStr: string;
   time: string;
   status: string;
   key: string;
@@ -51,24 +54,33 @@ const AppointmentsScreen = () => {
 
   const dispatch: any = useDispatch();
 
-  const data: DataType[] = userAppointments?.map((appointment: any) => ({
-    patientEmail: appointment.patientEmail,
-    doctorEmail: appointment.doctorEmail,
-    date: appointment.date.split("T")[0].replace(/-/g, "/"),
-    time: appointment.time,
-    status: appointment.status,
-    key: appointment._id,
-  }));
+  const data: DataType[] = userAppointments?.map((appointment: any) => {
+    const date = moment(appointment.date);
+    return {
+      patientName: appointment.patient.name,
+      doctorName: appointment.doctor.name,
+      date: date.toDate(),
+      dateStr: date.format("dddd, MMMM D, yyyy"),
+      time: date.format("h:mm a"),
+      status: appointment.status,
+      key: appointment._id,
+    };
+  });
 
   useEffect(() => {
     dispatch(
       getAppointmentsAction({
-        email: userData?.email,
+        id: userData?._id,
         type: userType,
       })
     );
     console.log(userAppointments);
   }, []);
+
+  // useEffect(() => {
+    // console.log("userAppointments");
+    // console.log(userAppointments);
+  // }, [userAppointments]);
 
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
@@ -194,21 +206,22 @@ const AppointmentsScreen = () => {
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "Doctor Email",
-      dataIndex: "doctorEmail",
-      key: "doctorEmail",
+      title: "Doctor Name",
+      dataIndex: "doctorName",
+      key: "doctorName",
       width: "30%",
-      ...getColumnSearchProps("doctorEmail"),
-      sorter: (a, b) => a.doctorEmail?.localeCompare(b.doctorEmail),
+      ...getColumnSearchProps("doctorName"),
+      sorter: (a, b) => a.doctorName?.localeCompare(b.doctorName),
       sortDirections: ["descend", "ascend"],
     },
     {
       title: "Date",
-      dataIndex: "date",
+      dataIndex: "dateStr",
       key: "date",
-      width: "10%",
+      width: "30%",
       ...getColumnSearchProps("date"),
-      sorter: (a, b) => a.date?.localeCompare(b.date),
+      // a.date is of type Date
+      sorter: (a, b) =>  a.date.toString().localeCompare(b.date.toString()),
       sortDirections: ["descend", "ascend"],
     },
     {
@@ -238,7 +251,13 @@ const AppointmentsScreen = () => {
       fixed: "right",
       width: 100,
       render: () => (
-        <Popconfirm title="Sure to delete?">
+        <Popconfirm
+          title="Sure to delete?"
+          onConfirm={(e) => {
+            console.log("delete");
+            console.log(e);
+          }}
+        >
           <a>Delete</a>
         </Popconfirm>
       ),

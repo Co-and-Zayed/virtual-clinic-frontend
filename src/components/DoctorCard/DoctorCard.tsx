@@ -37,8 +37,7 @@ const DoctorCard: FC<DoctorCardProps> = ({ doctor, noBooking }) => {
       },
     });
 
-    await dispatch(getDoctorInfoAction({ username: doctorUsername }));
-    navigate("/doctor-info");
+    navigate("/doctor/" + doctorUsername);
   };
 
   return (

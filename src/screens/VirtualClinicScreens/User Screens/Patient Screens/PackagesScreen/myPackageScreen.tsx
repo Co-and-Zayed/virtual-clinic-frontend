@@ -13,9 +13,10 @@ import { create } from "domain";
 import { createPackageAction } from "redux/VirtualClinicRedux/CreatePackage/createPackageAction";
 import { deletePackageAction } from "redux/VirtualClinicRedux/DeletePackage/deletePackageAction";
 import JellyLoader from "components/JellyLoader/JellyLoader";
-import * as Routes from "Routes/VirtualClinicRoutes/paths";
+import axios from 'axios';
+import { viewPackagesAction } from "redux/VirtualClinicRedux/viewPackages/viewPackagesAction";
 
-const PackagesScreen = () => {
+const myPackageScreen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   const dispatch: any = useDispatch();
   const [selectedPackage, setSelectedPackage] = useState<any>(null);
@@ -26,23 +27,29 @@ const PackagesScreen = () => {
   const hasMountedUpdate = useRef(false);
   const hasMountedDelete = useRef(false);
 
-  const { packagesLoading, allPackages } = useSelector(
-    (state: RootState) => state.listAllPackagesReducer
+
+
+
+ 
+  const { viewPackagesLoading, userviewPackages } = useSelector(
+    (state: RootState) => state.viewPackagesReducer
   );
-  const navigate = useNavigate();
+
+
+
   useEffect(() => {
-    dispatch(listAllPackagesAction()); // sending the request, and update the states
+    dispatch(viewPackagesAction()); // sending the request, and update the states
     setSelectedPackage(null);
     setShowSinglePackage(false);
-    console.log(allPackages);
+    console.log(userviewPackages);
     console.log(selectedPackage);
+   
   }, []);
-
   return (
     <div
       className={`w-full flex flex-col flex-wrap items-start justify-center`}
     >
-      {packagesLoading ? (
+      {viewPackagesLoading ? (
         <div className={`${styles.spinnerContainer}`}>
           <JellyLoader />
         </div>
@@ -52,10 +59,7 @@ const PackagesScreen = () => {
           <div className="flex items-center">
               <button
                 className={`${styles.editLink} `}
-                onClick={() => {
-                  navigate(Routes.MY_PACKAGE_PATH, {
-                  });
-                }}
+                //onClick={}}
               >
                 My Packages 
               </button>
@@ -70,8 +74,8 @@ const PackagesScreen = () => {
               </button>
             </div>
           <div className="w-full flex flex-wrap justify-start items-center">
-            {Array.isArray(allPackages) &&
-              allPackages?.map((packageItem: any) => (
+            {Array.isArray(userviewPackages) &&
+              userviewPackages?.map((packageItem: any) => (
                 <div
                   key={packageItem._id}
                   className={`${styles.packageItem} ${selectedPackage?.type} ${
@@ -106,4 +110,4 @@ const PackagesScreen = () => {
   );
 };
 
-export default PackagesScreen;
+export default myPackageScreen;

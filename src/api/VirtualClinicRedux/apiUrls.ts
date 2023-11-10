@@ -130,3 +130,6 @@ export const deleteDoctor = () => {
 export const deletePatient = () => {
   return `adminAPI/deletePatient`;
 };
+export const viewPackages = () => {
+  return `patient/viewPackages`;
+};

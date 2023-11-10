@@ -13,10 +13,10 @@ import { create } from "domain";
 import { createPackageAction } from "redux/VirtualClinicRedux/CreatePackage/createPackageAction";
 import { deletePackageAction } from "redux/VirtualClinicRedux/DeletePackage/deletePackageAction";
 import JellyLoader from "components/JellyLoader/JellyLoader";
-import axios from 'axios';
+import axios from "axios";
 import { viewPackagesAction } from "redux/VirtualClinicRedux/viewPackages/viewPackagesAction";
 
-const myPackageScreen = () => {
+const MyPackageScreen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   const dispatch: any = useDispatch();
   const [selectedPackage, setSelectedPackage] = useState<any>(null);
@@ -27,15 +27,9 @@ const myPackageScreen = () => {
   const hasMountedUpdate = useRef(false);
   const hasMountedDelete = useRef(false);
 
-
-
-
- 
   const { viewPackagesLoading, userviewPackages } = useSelector(
     (state: RootState) => state.viewPackagesReducer
   );
-
-
 
   useEffect(() => {
     dispatch(viewPackagesAction()); // sending the request, and update the states
@@ -43,7 +37,6 @@ const myPackageScreen = () => {
     setShowSinglePackage(false);
     console.log(userviewPackages);
     console.log(selectedPackage);
-   
   }, []);
   return (
     <div
@@ -57,22 +50,22 @@ const myPackageScreen = () => {
         <div>
           <h1 className="pageHeading">Health Packages</h1>
           <div className="flex items-center">
-              <button
-                className={`${styles.editLink} `}
-                //onClick={}}
-              >
-                My Packages 
-              </button>
-              <button
-                className={`${styles.editLink}`}
-                onClick={() => {
-                  // Handle click for "My Family Packages" button
-                  console.log("Clicked on My Family Packages");
-                }}
-              >
-                My Family Packages
-              </button>
-            </div>
+            <button
+              className={`${styles.editLink} `}
+              //onClick={}}
+            >
+              My Packages
+            </button>
+            <button
+              className={`${styles.editLink}`}
+              onClick={() => {
+                // Handle click for "My Family Packages" button
+                console.log("Clicked on My Family Packages");
+              }}
+            >
+              My Family Packages
+            </button>
+          </div>
           <div className="w-full flex flex-wrap justify-start items-center">
             {Array.isArray(userviewPackages) &&
               userviewPackages?.map((packageItem: any) => (
@@ -110,4 +103,4 @@ const myPackageScreen = () => {
   );
 };
 
-export default myPackageScreen;
+export default MyPackageScreen;

@@ -30,8 +30,8 @@ import DoctorInfoScreen from "screens/VirtualClinicScreens/User Screens/Patient 
 import LoginScreen2 from "screens/VirtualClinicScreens/LoginScreen/LoginScreen2";
 import NotFoundScreen from "screens/VirtualClinicScreens/NotFoundScreen/NotFoundScreen";
 import CommonPackagesScreen from "screens/VirtualClinicScreens/CommonScreens/CommonPackagesScreen/CommonPackagesScreen";
-import PackagesScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PackagesScreen/PackagesScreen";
-import myPackageScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PackagesScreen/myPackageScreen";
+import MyPackageScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PackagesScreen/MyPackageScreen";
+
 export const routes = [
   {
     path: "*",
@@ -119,7 +119,7 @@ export const routes = [
   },
   {
     path: Routes.MY_PACKAGE_PATH,
-    element: <myPackageScreen />,
+    element: <MyPackageScreen />,
     parent: <ProtectedRoutes />,
   },
   {

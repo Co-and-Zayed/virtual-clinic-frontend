@@ -13,14 +13,7 @@ import { getDoctorInfoAction } from "redux/VirtualClinicRedux/GetDoctorInfo/getD
 import JellyLoader from "components/JellyLoader/JellyLoader";
 import DoctorCard from "components/DoctorCard/DoctorCard";
 import { motion } from "framer-motion";
-import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
 import dayjs, { Dayjs } from "dayjs";
-import { PickersDay, PickersDayProps } from "@mui/x-date-pickers";
-import Badge from "@mui/material/Badge";
-import { BackIcon, RightArrowIcon } from "assets/IconComponents";
-import InputField from "components/InputField/InputField";
-import RoundedButton from "components/RoundedButton/RoundedButton";
 import { Stripe, loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";

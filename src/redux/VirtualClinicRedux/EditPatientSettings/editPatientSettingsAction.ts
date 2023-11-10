@@ -7,12 +7,12 @@ import {
   EDIT_PATIENT_SETTINGS_DATA_FAILURE,
 } from "redux/VirtualClinicRedux/types"; // Import your action types here
 
-export const editSettingsAction =
+export const editPatientSettingsAction =
   (requestBody?: any) => async (dispatch: Dispatch) => {
     try {
       dispatch({ type: EDIT_PATIENT_SETTINGS_DATA_LOADING, payload: true });
 
-      const response = await api.patch(
+      const response = await api.post(
         editPatientSettings(), // Your Endpoint
         requestBody // (for requests with a body)
       );

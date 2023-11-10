@@ -27,6 +27,10 @@ export const allSpecialities = () => {
 export const getDoctorInfo = () => {
   return `patient/getDoctordetails`;
 };
+export const editPatientSettings = () => {
+  return `patient/changepassword`;
+};
+
 
 //// NEVEEN URLs
 export const listAllPatients = () => {

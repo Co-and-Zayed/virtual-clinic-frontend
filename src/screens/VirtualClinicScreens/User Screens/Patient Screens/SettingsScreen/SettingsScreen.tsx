@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from "screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/SettingsScreen.module.css";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";

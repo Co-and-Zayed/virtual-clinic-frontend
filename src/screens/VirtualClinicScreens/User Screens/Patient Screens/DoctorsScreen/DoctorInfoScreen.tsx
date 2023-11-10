@@ -118,13 +118,13 @@ const DoctorInfoScreen = () => {
   const fetchHighlightedDays = (date: Dayjs) => {
     const controller = new AbortController();
 
-        setHighlightedDays([
-          // today and tomorrow
-          // ...daysToHighlight,
-          // dayjs("23/10/2023", "DD/MM/YYYY").date(),
-          // dayjs().add(1, "day").date(),
-        ]);
-        setIsLoading(false);
+    setHighlightedDays([
+      // today and tomorrow
+      // ...daysToHighlight,
+      // dayjs("23/10/2023", "DD/MM/YYYY").date(),
+      // dayjs().add(1, "day").date(),
+    ]);
+    setIsLoading(false);
 
     requestAbortController.current = controller;
   };
@@ -463,33 +463,58 @@ const DoctorInfoScreen = () => {
                   className={`h-[17rem] flex flex-col items-center justify-start gap-y-[0.35rem] px-4 mt-4`}
                   style={{ overflowY: "auto", overflowX: "hidden" }}
                 >
-                  {timeSlots.map((timeSlot: any, index: any) => (
-                    <div
-                    // /////////////////////////////////////////////////////////////////// //
-                    // TODO: DISABLE BUTTON IF DOCTOR ALREADY HAS AN APPOINTMENT AT THIS TIME
-                    // /////////////////////////////////////////////////////////////////// //
-                      key={index}
-                      className={`w-[10rem] py-[0.55rem] flex flex-row items-center justify-center rounded-xl border border-solid`}
-                      style={{
-                        borderColor: "var(--dark-green)",
-                        backgroundColor:
-                          selectedTimeSlot?.time === timeSlot.time
-                            ? "var(--dark-green)"
-                            : "transparent",
-                      }}
-                      onClick={() => setSelectedTimeSlot(timeSlot)}
-                    >
-                      <p
-                        className={`text-sm font-normal ${
-                          selectedTimeSlot?.time === timeSlot.time
-                            ? "text-white"
-                            : "text-dark-green"
-                        }`}
+                  {timeSlots.map((timeSlot: any, index: any) => {
+                    // Check if doctor has an appointment at this time
+
+                    var hasAppointment = false;
+                    if (docinfo.appointments) {
+                      docinfo.appointments.forEach((appointment: any) => {
+                        var appointmentDate = dayjs(appointment.date);
+                        var appointmentTime = appointmentDate.format("h:mm A");
+                        
+                        if (
+                          selectedDate?.format("DD/MM/YYYY") ===
+                          appointmentDate.format("DD/MM/YYYY") &&
+                          appointmentTime === timeSlot.time
+                          ) {
+                            hasAppointment = true;
+                            console.log("Appointment Time: " + appointmentTime);
+                            console.log("Time Slot Time: " + timeSlot.time);
+                        }
+                      });
+                    }
+
+                    return (
+                      <Button
+                        disabled={hasAppointment}
+                        key={index}
+                        className={`w-[10rem] h-[2.5rem] py-[1rem] flex flex-row items-center justify-center rounded-xl border border-solid`}
+                        style={{
+                          borderColor: hasAppointment ? ""  : "var(--dark-green)",
+                          backgroundColor:
+                            selectedTimeSlot?.time === timeSlot.time
+                              ? "var(--dark-green)"
+                              : "transparent",
+                        }}
+                        onClick={() => setSelectedTimeSlot(timeSlot)}
                       >
-                        {timeSlot.time}
-                      </p>
-                    </div>
-                  ))}
+                        <p
+                          className={`text-sm font-normal ${
+                            selectedTimeSlot?.time === timeSlot.time
+                              ? "text-white"
+                              : "text-dark-green"
+                          }`}
+                          style={{
+                            // strike through if not available
+                            textDecoration: hasAppointment ? "line-through" : "",
+                            fontFamily: "Cabin",
+                          }}
+                        >
+                          {timeSlot.time}
+                        </p>
+                      </Button>
+                    );
+                  })}
                 </div>
               </div>
 

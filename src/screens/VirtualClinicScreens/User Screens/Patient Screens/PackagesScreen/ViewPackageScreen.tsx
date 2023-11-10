@@ -16,7 +16,7 @@ import JellyLoader from "components/JellyLoader/JellyLoader";
 import axios from "axios";
 import { viewPackagesAction } from "redux/VirtualClinicRedux/viewPackages/viewPackagesAction";
 
-const MyPackageScreen = () => {
+const ViewPackageScreen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   const dispatch: any = useDispatch();
   const [selectedPackage, setSelectedPackage] = useState<any>(null);
@@ -31,8 +31,9 @@ const MyPackageScreen = () => {
     (state: RootState) => state.viewPackagesReducer
   );
 
+  const { userData } = useSelector((state: RootState) => state.userReducer);
   useEffect(() => {
-    dispatch(viewPackagesAction()); // sending the request, and update the states
+    dispatch(viewPackagesAction({ patientID: userData?._id })); // sending the request, and update the states
     setSelectedPackage(null);
     setShowSinglePackage(false);
     console.log(userviewPackages);
@@ -103,4 +104,4 @@ const MyPackageScreen = () => {
   );
 };
 
-export default MyPackageScreen;
+export default ViewPackageScreen;

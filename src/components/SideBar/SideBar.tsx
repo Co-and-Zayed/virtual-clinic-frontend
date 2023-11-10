@@ -122,7 +122,7 @@ const SideBar: FC<SideBarProps> = () => {
         <div className={`w-full flex flex-col items-start justify-center`}>
           <div className={`${styles.walletText} mb-1`}>MY WALLET</div>
           <div className="flex items-end">
-            <p className={`${styles.walletValue}`}>{userData?.wallet.toLocaleString()}</p>
+            <p className={`${styles.walletValue}`}>{userData?.wallet?.toLocaleString()}</p>
             <p className={`${styles.walletCurrency}`}>EGP</p>
           </div>
         </div>

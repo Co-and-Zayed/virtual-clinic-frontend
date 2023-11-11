@@ -136,7 +136,7 @@ const MyFamilyPackageScreen = () => {
       ) : (
         <div>
           <div className="w-full flex flex-wrap justify-start items-center">
-            {Array.isArray(userViewSubscribedPackageForFamilyMember) &&
+            {Array.isArray(userViewSubscribedPackageForFamilyMember) && searchFamilyMembers &&
               userViewSubscribedPackageForFamilyMember?.map((packageItem: any) => (
                 <div
                   key={packageItem._id}

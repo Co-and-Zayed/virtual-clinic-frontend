@@ -62,7 +62,8 @@ const PackagesScreen = () => {
               <button
                 className={`${styles.editLink}`}
                 onClick={() => {
-                  // Handle click for "My Family Packages" button
+                  navigate(Routes.MY_FAMILY_PACKAGES_PATH, {
+                  });
                   console.log("Clicked on My Family Packages");
                 }}
               >

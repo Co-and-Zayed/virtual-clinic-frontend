@@ -108,7 +108,7 @@ const PayWithCard: FC<PayWithCard> = ({
           <div className="w-[33rem] flex flex-col items-end justify-center gap-y-2">
             {/* ORIGINAL */}
             <p className={`${styles.priceLight}`}>
-              {`${priceOriginal.toLocaleString()} EGP`}
+              {`${priceOriginal?.toLocaleString()} EGP`}
             </p>
             {
               // DISCOUNT
@@ -118,12 +118,12 @@ const PayWithCard: FC<PayWithCard> = ({
                     {`(${(
                       (100.0 * (priceOriginal - priceDiscounted)) /
                       priceOriginal
-                    ).toLocaleString()}% off)`}
+                    )?.toLocaleString()}% off)`}
                   </p>
                   <p className={`${styles.priceLight}`}>
                     {`- ${(
                       priceOriginal - priceDiscounted
-                    ).toLocaleString()} EGP`}
+                    )?.toLocaleString()} EGP`}
                   </p>
                 </div>
               )
@@ -132,7 +132,7 @@ const PayWithCard: FC<PayWithCard> = ({
               <div className={`text-2xl ${styles.uppercase}`}>TOTAL</div>
               <div className="flex items-end justify-end gap-x-3">
                 <p className="text-6xl darkGreenText font-semibold">
-                  {priceDiscounted.toLocaleString()}
+                  {priceDiscounted?.toLocaleString()}
                 </p>
                 <p className="text-3xl opacity-30  font-semibold">EGP</p>
               </div>

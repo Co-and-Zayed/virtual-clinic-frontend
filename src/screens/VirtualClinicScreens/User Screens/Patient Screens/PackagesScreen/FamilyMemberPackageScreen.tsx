@@ -18,7 +18,7 @@ import { viewPackagesAction } from "redux/VirtualClinicRedux/viewPackages/viewPa
 import { unsubscribeFromPackageAction } from "redux/VirtualClinicRedux/UnsubscribeFromPackage/unsubscribeFromPackageAction";
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
 
-const ViewPackageScreen = () => {
+const FamilyMemberPackageScreen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   const dispatch: any = useDispatch();
   const [selectedPackage, setSelectedPackage] = useState<any>(null);
@@ -118,4 +118,4 @@ const unsubscribe = async () => {
   );
 };
 
-export default ViewPackageScreen;
+export default FamilyMemberPackageScreen;

@@ -1,7 +1,7 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Admin Screens/PackagesScreen/PackagesScreen.module.css";
 import { useNavigate } from "react-router";
 import { FormikHelpers, useFormik } from "formik";
-import { Input, notification, Spin, Table } from "antd";
+import { Input, notification, Select, Spin, Table } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,15 +15,29 @@ import { deletePackageAction } from "redux/VirtualClinicRedux/DeletePackage/dele
 import JellyLoader from "components/JellyLoader/JellyLoader";
 import axios from "axios";
 import { viewPackagesAction } from "redux/VirtualClinicRedux/viewPackages/viewPackagesAction";
-import { unsubscribeFromPackageAction } from "redux/VirtualClinicRedux/UnsubscribeFromPackage/unsubscribeFromPackageAction";
+import {getFamilyMembersAction } from "redux/VirtualClinicRedux/GetFamilyMembers/getFamilyMembersAction"
+import { viewSubscribedPackageForFamilyMemberReducer } from "redux/VirtualClinicRedux/ViewSubscribedPackageforFamilyMember/viewSubscribedPackageforFamilyMemberReducer";
+import inputStyles from "components/InputField/InputField.module.css";
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
+import SearchButton from "components/SearchButton/SearchButton";
+import { viewSubscribedPackageforFamilyMemberAction } from "redux/VirtualClinicRedux/ViewSubscribedPackageforFamilyMember/viewSubscribedPackageforFamilyMemberAction";
+import { viewSubscribedPackageforFamilyMember } from "api/VirtualClinicRedux/apiUrls";
 
-const ViewPackageScreen = () => {
+const MyFamilyPackageScreen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   const dispatch: any = useDispatch();
   const [selectedPackage, setSelectedPackage] = useState<any>(null);
   const [showSinglePackage, setShowSinglePackage] = useState<boolean>(false);
   const [actionType, setActionType] = useState<string>();
+  const [searchFamilyMembers, setSearchFamilyMembers] = useState(null);
+  const {userFamilyMembers, familyMembersLoading } = useSelector(
+    (state: RootState) => state.getFamilyMembersReducer
+  );
+
+  const {userViewSubscribedPackageForFamilyMember, viewSubscribedPackageForFamilyMemberLoading } = useSelector(
+    (state: RootState) => state.viewSubscribedPackageForFamilyMemberReducer
+  );
+  
   const navigate = useNavigate();
   const hasMountedCreate = useRef(false);
   const hasMountedUpdate = useRef(false);
@@ -33,19 +47,10 @@ const ViewPackageScreen = () => {
     (state: RootState) => state.viewPackagesReducer
   );
 
-  const { unsubsribeFromPackageLoading, userUnsubsribeFromPackage} = useSelector(
-    (state: RootState) => state.unsubscribeFromPackageReducer
-  );
-
-const { userData } = useSelector((state: RootState) => state.userReducer);  
-
-const unsubscribe = async () => {
-  dispatch(unsubscribeFromPackageAction({ patientID: userData?._id }));     
-  window.location.reload(); // Refresh the page after successful unsubscribe
-}
-
+  const { userData } = useSelector((state: RootState) => state.userReducer);
   useEffect(() => {
     dispatch(viewPackagesAction({ patientID: userData?._id })); // sending the request, and update the states
+    dispatch(getFamilyMembersAction({patientID: userData?._id}))
     setSelectedPackage(null);
     setShowSinglePackage(false);
     console.log(userviewPackages);
@@ -65,7 +70,11 @@ const unsubscribe = async () => {
           <div className="flex items-center">
             <button
               className={`${styles.editLink} `}
-              //onClick={}}
+              onClick={() => {
+                navigate(Routes.MY_PACKAGE_PATH, {
+                });
+                console.log("Clicked on My Family Packages");
+              }}
             >
               My Packages
             </button>
@@ -79,10 +88,56 @@ const unsubscribe = async () => {
             >
               My Family Packages
             </button>
-          </div>
+            {/* DROPDOWN FOR FamilyMembers */}
+          <div className={`flex text-base gap-x-2 items-center`}>
+                {/* <i className="w-[20px] fa-solid fa-stethoscope"></i> */}
+                <Select
+                  placeholder="Select a Family Member"
+                  showSearch
+                  allowClear
+                  onClear={() => {
+                    setSearchFamilyMembers(null);
+                  }}
+                  value={searchFamilyMembers}
+                  onSelect={(value) => {
+                    setSearchFamilyMembers(value);
+                  }}
+                  optionFilterProp="children"
+                  options={userFamilyMembers?.map((FamilyMembers: any) => ({
+                    value: FamilyMembers._id,
+                    label: FamilyMembers.name,
+                  }))}
+                  filterOption={(input, option: any) =>
+                    option?.children
+                      ?.toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                  className={`${inputStyles.lightInputField}`}
+                  style={{
+                    paddingInline: "0",
+                    width: "12rem",
+                  }}
+                  dropdownStyle={{
+                    fontFamily: "Century Gothic",
+                    fontWeight: "normal",
+                  }}
+                />
+              </div>
+              <SearchButton
+                  onClick={() => {
+                    dispatch(viewSubscribedPackageforFamilyMemberAction({ ID: searchFamilyMembers}));
+                  }}
+                />
+                <br/>
+                {viewSubscribedPackageForFamilyMemberLoading ? (
+        <div className={`${styles.spinnerContainer}`}>
+          <JellyLoader />
+        </div>
+      ) : (
+        <div>
           <div className="w-full flex flex-wrap justify-start items-center">
-            {Array.isArray(userviewPackages) &&
-              userviewPackages?.map((packageItem: any) => (
+            {Array.isArray(userViewSubscribedPackageForFamilyMember) &&
+              userViewSubscribedPackageForFamilyMember?.map((packageItem: any) => (
                 <div
                   key={packageItem._id}
                   className={`${styles.packageItem} ${selectedPackage?.type} ${
@@ -97,7 +152,7 @@ const unsubscribe = async () => {
                       <h1 className="mr-2">{packageItem.type}</h1>
                       <p>| {packageItem.tier}</p>
                     </div>
-                    <button className={`${styles.editLink}`} onClick={unsubscribe}>UNSUBSCRIBE</button>
+                    {/* <button className={`${styles.editLink}`} onClick={unsubscribe}>UNSUBSCRIBE</button> */}
                   </div>
                   <p>EGP {packageItem.price_per_year}</p>
                   <p>
@@ -114,8 +169,11 @@ const unsubscribe = async () => {
           </div>
         </div>
       )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default ViewPackageScreen;
+export default MyFamilyPackageScreen;

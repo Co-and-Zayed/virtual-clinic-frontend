@@ -133,3 +133,9 @@ export const deletePatient = () => {
 export const viewPackages = () => {
   return `patient/viewPackages`;
 };
+export const viewSubscribedPackageforFamilyMember = () => {
+  return `patient/viewSubscribedPackageforFamilyMember`;
+};
+export const unsubscribeFromPackage = () => {
+  return `patient/unsubscribeFromPackage`;
+};

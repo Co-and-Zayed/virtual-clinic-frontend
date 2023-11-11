@@ -35,6 +35,8 @@ import { registerReducer } from "redux/Register/registerReducer";
 import { logoutReducer } from "redux/Logout/logoutReducer";
 import { getDoctorCardCoordsReducer } from "redux/VirtualClinicRedux/GetDoctorInfo/getDoctorCardCoordsReducer";
 import { viewPackagesReducer } from "./VirtualClinicRedux/viewPackages/viewPackagesReducer";
+import { unsubscribeFromPackageReducer } from "./VirtualClinicRedux/UnsubscribeFromPackage/unsubscribeFromPackageReducer";
+import { viewSubscribedPackageForFamilyMemberReducer } from "./VirtualClinicRedux/ViewSubscribedPackageforFamilyMember/viewSubscribedPackageforFamilyMemberReducer";
 
 
 export const appReducer = combineReducers({
@@ -69,7 +71,9 @@ export const appReducer = combineReducers({
   listPatientByNameReducer,
   logoutReducer,
   getDoctorCardCoordsReducer,
-  viewPackagesReducer
+  viewPackagesReducer,
+  unsubscribeFromPackageReducer,
+  viewSubscribedPackageForFamilyMemberReducer
 });
 
 export const rootReducers = (state: any, action: any) => {

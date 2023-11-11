@@ -23,3 +23,6 @@ export const viewSubscribedPackageforFamilyMemberAction = (requestBody?: any) =>
     dispatch({ type: VIEW_SUBSCRIBED_PACKAGE_FOR_FAMILY_MEMBER_DATA_LOADING, payload: false });
   }
 };
+export const clearSubscribedPackagesAction = () => ({
+  type: "CLEAR_SUBSCRIBED_PACKAGES",
+});

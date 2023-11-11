@@ -97,7 +97,18 @@ const unsubscribe = async () => {
                       <h1 className="mr-2">{packageItem.type}</h1>
                       <p>| {packageItem.tier}</p>
                     </div>
-                    <button className={`${styles.editLink}`} onClick={unsubscribe}>UNSUBSCRIBE</button>
+                    {packageItem.status ? (
+                  // Render UNSUBSCRIBE button if status exists
+                  <button
+                    className={`${styles.editLink}`}
+                    onClick={unsubscribe}
+                  >
+                    UNSUBSCRIBE
+                  </button>
+                ) : (
+                  // Render SUBSCRIBE button if status doesn't exist
+                  <button className={`${styles.editLink}`}>SUBSCRIBE</button>
+                )}
                   </div>
                   <p>EGP {packageItem.price_per_year}</p>
                   <p>
@@ -108,7 +119,10 @@ const unsubscribe = async () => {
                     Medicine Discount: {packageItem.medicine_discount * 100}%
                   </p>
                   <p>Family Discount: {packageItem.family_discount * 100}%</p>
-                  <p>Status: {packageItem.status}</p>
+                  {packageItem.status && (
+                // Render Status if it exists
+                <p>Status: {packageItem.status}</p>
+              )}
                 </div>
               ))}
           </div>

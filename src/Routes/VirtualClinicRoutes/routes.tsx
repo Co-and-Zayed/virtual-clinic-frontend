@@ -33,6 +33,7 @@ import CommonPackagesScreen from "screens/VirtualClinicScreens/CommonScreens/Com
 import ViewPackageScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PackagesScreen/ViewPackageScreen";
 import MyFamilyPackagesScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PackagesScreen/MyFamilyPackagesScreen";
 import FamilyMemberPackageScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PackagesScreen/FamilyMemberPackageScreen";
+import PaymentMethod from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/PaymentScreens/PaymentMethod";
 
 export const routes = [
   {

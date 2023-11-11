@@ -20,8 +20,10 @@ import { viewSubscribedPackageForFamilyMemberReducer } from "redux/VirtualClinic
 import inputStyles from "components/InputField/InputField.module.css";
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
 import SearchButton from "components/SearchButton/SearchButton";
-import { viewSubscribedPackageforFamilyMemberAction } from "redux/VirtualClinicRedux/ViewSubscribedPackageforFamilyMember/viewSubscribedPackageforFamilyMemberAction";
+import { clearSubscribedPackagesAction, viewSubscribedPackageforFamilyMemberAction } from "redux/VirtualClinicRedux/ViewSubscribedPackageforFamilyMember/viewSubscribedPackageforFamilyMemberAction";
 import { viewSubscribedPackageforFamilyMember } from "api/VirtualClinicRedux/apiUrls";
+import { unsubscribe } from "diagnostics_channel";
+import { unsubscribeFromPackageForFamilyAction } from "redux/VirtualClinicRedux/UnsubscribeFromPackageforFamily/unsubscribeFromPackageforFamilyAction";
 
 const MyFamilyPackageScreen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -48,6 +50,7 @@ const MyFamilyPackageScreen = () => {
   );
 
   const { userData } = useSelector((state: RootState) => state.userReducer);
+
   useEffect(() => {
     dispatch(viewPackagesAction({ patientID: userData?._id })); // sending the request, and update the states
     dispatch(getFamilyMembersAction({patientID: userData?._id}))
@@ -125,6 +128,7 @@ const MyFamilyPackageScreen = () => {
               </div>
               <SearchButton
                   onClick={() => {
+                    dispatch(clearSubscribedPackagesAction());
                     dispatch(viewSubscribedPackageforFamilyMemberAction({ ID: searchFamilyMembers}));
                   }}
                 />
@@ -136,7 +140,7 @@ const MyFamilyPackageScreen = () => {
       ) : (
         <div>
           <div className="w-full flex flex-wrap justify-start items-center">
-            {Array.isArray(userViewSubscribedPackageForFamilyMember) && searchFamilyMembers &&
+            {Array.isArray(userViewSubscribedPackageForFamilyMember) && searchFamilyMembers && 
               userViewSubscribedPackageForFamilyMember?.map((packageItem: any) => (
                 <div
                   key={packageItem._id}
@@ -152,7 +156,10 @@ const MyFamilyPackageScreen = () => {
                       <h1 className="mr-2">{packageItem.type}</h1>
                       <p>| {packageItem.tier}</p>
                     </div>
-                    {/* <button className={`${styles.editLink}`} onClick={unsubscribe}>UNSUBSCRIBE</button> */}
+                    <button className={`${styles.editLink}`} onClick={() => {
+                    dispatch(unsubscribeFromPackageForFamilyAction({ ID: searchFamilyMembers}));     
+                    window.location.reload(); // Refresh the page after successful unsubscribe
+                  }}>UNSUBSCRIBE</button>
                   </div>
                   <p>EGP {packageItem.price_per_year}</p>
                   <p>

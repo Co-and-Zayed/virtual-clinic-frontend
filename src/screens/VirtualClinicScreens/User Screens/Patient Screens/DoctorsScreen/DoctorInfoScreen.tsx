@@ -295,7 +295,7 @@ const DoctorInfoScreen = () => {
               " | Appointment Time: " +
               appointmentDate?.format("h:mm A") +
               " | Price: " +
-              docinfo?.session_price +
+              docinfo?.session_price.toFixed(2) +
               " EGP"
             }
             callBackOnSuccess={createAppointmentCallback}

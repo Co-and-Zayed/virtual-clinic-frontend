@@ -75,13 +75,22 @@ const AppointmentsScreen = () => {
   });
 
   useEffect(() => {
-    dispatch(
+    fetchAppointments();
+   
+  }, []);
+
+  async function fetchAppointments() {
+    await dispatch(
       getAppointmentsAction({
         id: userData?._id,
         type: userType,
       })
     );
-  }, []);
+    console.log(userAppointments);
+    updateDaysToHighlight();
+  }
+
+
 
   // useEffect(() => {
   // console.log("userAppointments");
@@ -278,6 +287,11 @@ const AppointmentsScreen = () => {
   useEffect(() => {
     console.log("userAppointments useEffect");
     console.log(userAppointments);
+    updateDaysToHighlight();
+    
+  }, [userAppointments]);
+
+  function updateDaysToHighlight() {
     if (userAppointments) {
       var uniqueDays: dayjs.Dayjs[] = [];
       userAppointments.forEach((app: any) => {
@@ -288,8 +302,7 @@ const AppointmentsScreen = () => {
       });
       setDaysToHighlight(uniqueDays);
     }
-  }, [userAppointments]);
-
+  }
   function getFilteredAppointments() {
     var filteredAppointments;
     if (selectedDate) {

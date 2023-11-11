@@ -11,7 +11,7 @@ const SvgBackIcon = (props: SVGProps<SVGSVGElement>) => (
   >
     <path
       fill="currentColor"
-      stroke="currentColor"
+      stroke="#163B45"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={3}

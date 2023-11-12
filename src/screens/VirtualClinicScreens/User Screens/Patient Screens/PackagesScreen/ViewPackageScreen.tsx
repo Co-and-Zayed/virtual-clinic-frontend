@@ -97,7 +97,7 @@ const unsubscribe = async () => {
                       <h1 className="mr-2">{packageItem.type}</h1>
                       <p>| {packageItem.tier}</p>
                     </div>
-                    {packageItem.status ? (
+                    {packageItem.status === "SUBSCRIBED" ? (
                   // Render UNSUBSCRIBE button if status exists
                   <button
                     className={`${styles.editLink}`}
@@ -107,7 +107,10 @@ const unsubscribe = async () => {
                   </button>
                 ) : (
                   // Render SUBSCRIBE button if status doesn't exist
-                  <button className={`${styles.editLink}`}>SUBSCRIBE</button>
+                  <button className={`${styles.editLink}`} onClick={() => {
+                    // navigate(Routes.MY_FAMILY_PACKAGES_PATH, {
+                    // });
+                  }} >SUBSCRIBE</button>
                 )}
                   </div>
                   <p>EGP {packageItem.price_per_year}</p>
@@ -123,6 +126,18 @@ const unsubscribe = async () => {
                 // Render Status if it exists
                 <p>Status: {packageItem.status}</p>
               )}
+              {packageItem.status === "CANCELLED" && (
+                // Render END DATE if status is "CANCELLED"
+                <p>End Date:  {new Date(packageItem.healthPackageRenewalDate).toLocaleDateString()}</p>
+              )}
+              {packageItem.status === "UNSUBSCRIBED" && (
+                // Render VALID UNTIL if status is "UNSUBSCRIBED"
+                <p>Valid Until: {new Date(packageItem.healthPackageRenewalDate).toLocaleDateString()}</p>
+              )}
+              {packageItem.status === "SUBSCRIBED" && (
+                // Render RENEWAL DATE if status is "SUBSCRIBED"
+                <p>Renewal Date:  {new Date(packageItem.healthPackageRenewalDate).toLocaleDateString()}</p>
+              )}
                 </div>
               ))}
           </div>
@@ -131,5 +146,6 @@ const unsubscribe = async () => {
     </div>
   );
 };
+
 
 export default ViewPackageScreen;

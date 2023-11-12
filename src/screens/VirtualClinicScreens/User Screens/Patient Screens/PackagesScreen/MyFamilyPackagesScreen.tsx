@@ -170,7 +170,22 @@ const MyFamilyPackageScreen = () => {
                     Medicine Discount: {packageItem.medicine_discount * 100}%
                   </p>
                   <p>Family Discount: {packageItem.family_discount * 100}%</p>
-                  <p>Status: {packageItem.status}</p>
+                  {packageItem.status && (
+                // Render Status if it exists
+                <p>Status: {packageItem.status}</p>
+              )}
+                  {packageItem.status === "CANCELLED" && (
+                // Render END DATE if status is "CANCELLED"
+                <p>End Date:  {new Date(packageItem.healthPackageRenewalDate).toLocaleDateString()}</p>
+              )}
+              {packageItem.status === "UNSUBSCRIBED" && (
+                // Render VALID UNTIL if status is "UNSUBSCRIBED"
+                <p>Valid Until: {new Date(packageItem.healthPackageRenewalDate).toLocaleDateString()}</p>
+              )}
+              {packageItem.status === "SUBSCRIBED" && (
+                // Render RENEWAL DATE if status is "SUBSCRIBED"
+                <p>Renewal Date:  {new Date(packageItem.healthPackageRenewalDate).toLocaleDateString()}</p>
+              )}
                 </div>
               ))}
           </div>

@@ -98,7 +98,7 @@ const unsubscribe = async () => {
                       <h1 className="mr-2">{packageItem.type}</h1>
                       <p>| {packageItem.tier}</p>
                     </div>
-                    {packageItem.status ? (
+                    {packageItem.status === "SUBSCRIBED" ? (
                   // Render UNSUBSCRIBE button if status exists
                   <button
                     className={`${styles.editLink}`}
@@ -126,6 +126,18 @@ const unsubscribe = async () => {
                   {packageItem.status && (
                 // Render Status if it exists
                 <p>Status: {packageItem.status}</p>
+              )}
+              {packageItem.status === "CANCELLED" && (
+                // Render END DATE if status is "CANCELLED"
+                <p>End Date:  {new Date(packageItem.healthPackageRenewalDate).toLocaleDateString()}</p>
+              )}
+              {packageItem.status === "UNSUBSCRIBED" && (
+                // Render VALID UNTIL if status is "UNSUBSCRIBED"
+                <p>Valid Until: {new Date(packageItem.healthPackageRenewalDate).toLocaleDateString()}</p>
+              )}
+              {packageItem.status === "SUBSCRIBED" && (
+                // Render RENEWAL DATE if status is "SUBSCRIBED"
+                <p>Renewal Date:  {new Date(packageItem.healthPackageRenewalDate).toLocaleDateString()}</p>
               )}
                 </div>
               ))}

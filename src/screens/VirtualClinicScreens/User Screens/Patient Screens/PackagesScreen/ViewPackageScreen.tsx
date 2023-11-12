@@ -68,12 +68,7 @@ const ViewPackageScreen = () => {
         <div>
           <h1 className="pageHeading">Health Packages</h1>
           <div className="flex items-center">
-            <button
-              className={`${styles.editLink} `}
-              //onClick={}}
-            >
-              My Packages
-            </button>
+            <button className={`${styles.editLink} `}>My Packages</button>
             <button
               className={`${styles.editLink}`}
               onClick={() => {

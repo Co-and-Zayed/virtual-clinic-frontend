@@ -35,6 +35,7 @@ import { registerReducer } from "redux/Register/registerReducer";
 import { logoutReducer } from "redux/Logout/logoutReducer";
 import { getDoctorCardCoordsReducer } from "redux/VirtualClinicRedux/GetDoctorInfo/getDoctorCardCoordsReducer";
 
+
 export const appReducer = combineReducers({
   listAllUsersReducer,
   patientGetDoctorsReducer,

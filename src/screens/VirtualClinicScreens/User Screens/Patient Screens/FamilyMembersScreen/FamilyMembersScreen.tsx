@@ -18,6 +18,7 @@ import type {
 import { RootState } from "redux/rootReducer";
 import { addFamilyMemberAction } from "redux/VirtualClinicRedux/AddFamilyMember/addFamilyMemberAction";
 import { getFamilyMembersAction } from "redux/VirtualClinicRedux/GetFamilyMembers/getFamilyMembersAction";
+import { val } from "cheerio/lib/api/attributes";
 
 interface DataType {
   name: string;
@@ -25,6 +26,8 @@ interface DataType {
   age: Number;
   gender: string;
   relationship: string;
+  username: string;
+  email: string;
   key: string;
 }
 
@@ -44,7 +47,34 @@ const { Option } = Select;
 const FamilyMembersScreen = () => {
   const formRef = React.useRef<FormInstance>(null);
 
-  const { userData } = useSelector((state: RootState) => state.userReducer);
+  const { userData, accessToken } = useSelector(
+    (state: RootState) => state.userReducer
+  );
+
+  const addPatientMember = async (values: any) => {
+    console.log(values.patientRelationship);
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}patient/addFamilyMember`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          isPatient: true,
+          memberUsername: values.patientUsername,
+          relationship: values.patientRelationship,
+        }),
+      }
+    );
+    dispatch(
+      getFamilyMembersAction({
+        patientEmail: userData?.email,
+      })
+    );
+    const data = await res.json();
+  };
 
   const onFinish = async (values: any) => {
     await dispatch(
@@ -81,14 +111,27 @@ const FamilyMembersScreen = () => {
   );
 
   const data: DataType[] = //}|
-    userFamilyMembers?.map((user: any) => ({
-      name: user.name, // |
-      nationalID: user.nationalID, // |
-      age: user.age, // |Trying to populate the table with the data
-      gender: user.gender, // |
-      relationship: user.relationship, // |
-      key: user._id, // |
-    })); //}|
+    userFamilyMembers
+      ?.filter((user: any) => user.type === "GUEST")
+      .map((user: any) => ({
+        name: user.familyMember.name, // |
+        nationalID: user.familyMember.nationalID, // |
+        age: user.familyMember.age, // |Trying to populate the table with the data
+        gender: user.familyMember.gender, // |
+        relationship: user.familyMember.relation, // |
+        key: user.familyMember._id, // |
+      })); //}|
+
+  const patientData: DataType[] = //}|
+    userFamilyMembers
+      ?.filter((user: any) => user.type === "EXISTING")
+      .map((user: any) => ({
+        name: user.familyMember.name, // |
+        username: user.familyMember.username, // |
+        email: user.familyMember.email,
+        relationship: user.relation, // |
+        key: user.familyMember._id, // |
+      }));
 
   useEffect(() => {
     dispatch(
@@ -270,13 +313,14 @@ const FamilyMembersScreen = () => {
       title: "National ID",
       dataIndex: "nationalID",
       key: "nationalID",
-      width: "50%",
+      width: "25%",
       ...getColumnSearchProps("nationalID"),
     },
     {
       title: "Age",
       dataIndex: "age",
       key: "age",
+      width: "10%",
       ...getColumnSearchProps("age"),
       sorter: (a, b) => parseInt(a.age.toString()) - parseInt(b.age.toString()),
       sortDirections: ["descend", "ascend"],
@@ -286,8 +330,8 @@ const FamilyMembersScreen = () => {
       dataIndex: "gender",
       key: "gender",
       filters: [
-        { text: "M", value: "M" },
-        { text: "F", value: "F" },
+        { text: "Male", value: "MALE" },
+        { text: "Female", value: "FEMALE" },
       ],
       onFilter: (value: React.Key | boolean, record) =>
         record.gender.indexOf(value as string) === 0,
@@ -297,6 +341,49 @@ const FamilyMembersScreen = () => {
       title: "Relationship",
       dataIndex: "relationship",
       key: "relationship",
+      width: "15%",
+      filters: [
+        { text: "HUSBAND", value: "HUSBAND" },
+        { text: "WIFE", value: "WIFE" },
+        { text: "CHILD", value: "CHILD" },
+      ],
+      onFilter: (value: React.Key | boolean, record) =>
+        record.relationship.indexOf(value as string) === 0,
+      ellipsis: true,
+    },
+  ];
+
+  const patientColumns: ColumnsType<DataType> = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      width: "30%",
+      ...getColumnSearchProps("name"),
+      sorter: (a, b) => a.name.localeCompare(b.name),
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Username",
+      dataIndex: "username",
+      key: "username",
+      ...getColumnSearchProps("username"),
+      sorter: (a, b) => a.name.localeCompare(b.name),
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+      ...getColumnSearchProps("email"),
+      sorter: (a, b) => a.name.localeCompare(b.name),
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Relationship",
+      dataIndex: "relationship",
+      key: "relationship",
+      width: "15%",
       filters: [
         { text: "HUSBAND", value: "HUSBAND" },
         { text: "WIFE", value: "WIFE" },
@@ -311,68 +398,103 @@ const FamilyMembersScreen = () => {
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
       <h1 className="pageHeading">Family Members</h1>
-      <Form
-        {...layout}
-        ref={formRef}
-        name="control-ref"
-        onFinish={onFinish}
-        style={{ maxWidth: 800 }}
-      >
-        <Form.Item name="name" label="Name" rules={[{ required: true }]}>
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="nationalID"
-          label="National ID"
-          rules={[{ required: true }]}
+      <div className="flex flex-row items-center justify-center">
+        <Form
+          {...layout}
+          ref={formRef}
+          name="control-ref"
+          onFinish={onFinish}
+          style={{ maxWidth: 800 }}
         >
-          <Input />
-        </Form.Item>
-        <Form.Item name="age" label="Age" rules={[{ required: true }]}>
-          <Input />
-        </Form.Item>
-        <Form.Item name="gender" label="Gender" rules={[{ required: true }]}>
-          <Select placeholder="Select a Gender" allowClear>
-            <Option value="M">Male</Option>
-            <Option value="F">Female</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item
-          noStyle
-          shouldUpdate={(prevValues, currentValues) =>
-            prevValues.gender !== currentValues.gender
-          }
-        ></Form.Item>
-        <Form.Item
-          name="relationship"
-          label="RelationShip"
-          rules={[{ required: true }]}
-        >
-          <Select placeholder="Select your relationship" allowClear>
-            <Option value="HUSBAND">Husband</Option>
-            <Option value="WIFE">Wife</Option>
-            <Option value="CHILD">Child</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item
-          noStyle
-          shouldUpdate={(prevValues, currentValues) =>
-            prevValues.gender !== currentValues.gender
-          }
-        ></Form.Item>
-        <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-          <Button htmlType="button" onClick={onReset}>
-            Reset
-          </Button>
-        </Form.Item>
-      </Form>
+          <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="nationalID"
+            label="National ID"
+            rules={[{ required: true }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item name="age" label="Age" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="gender" label="Gender" rules={[{ required: true }]}>
+            <Select placeholder="Select a Gender" allowClear>
+              <Option value="MALE">Male</Option>
+              <Option value="FEMALE">Female</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item
+            noStyle
+            shouldUpdate={(prevValues, currentValues) =>
+              prevValues.gender !== currentValues.gender
+            }
+          ></Form.Item>
+          <Form.Item
+            name="relationship"
+            label="RelationShip"
+            rules={[{ required: true }]}
+          >
+            <Select placeholder="Select your relationship" allowClear>
+              <Option value="HUSBAND">Husband</Option>
+              <Option value="WIFE">Wife</Option>
+              <Option value="CHILD">Child</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item
+            noStyle
+            shouldUpdate={(prevValues, currentValues) =>
+              prevValues.gender !== currentValues.gender
+            }
+          ></Form.Item>
+          <Form.Item {...tailLayout}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+            <Button htmlType="button" onClick={onReset}>
+              Reset
+            </Button>
+          </Form.Item>
+        </Form>
+        <Form onFinish={addPatientMember}>
+          <Form.Item
+            name="patientUsername"
+            label="Patient's Username"
+            rules={[{ required: true }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="patientRelationship"
+            label="RelationShip"
+            rules={[{ required: true }]}
+          >
+            <Select placeholder="Select your relationship" allowClear>
+              <Option value="HUSBAND">Husband</Option>
+              <Option value="WIFE">Wife</Option>
+              <Option value="CHILD">Child</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item {...tailLayout}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+            <Button htmlType="button" onClick={onReset}>
+              Reset
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
       <hr />
       <Table
         dataSource={data}
         columns={columns}
+        onChange={clearFilters}
+      ></Table>
+      <Table
+        dataSource={patientData}
+        columns={patientColumns}
         onChange={clearFilters}
       ></Table>
     </div>

@@ -11,7 +11,7 @@ export const getFamilyMembersAction = (requestBody?: any) => async (dispatch: Di
   try {
     dispatch({ type: GET_FAMILYMEMBERS_DATA_LOADING, payload: true });
 
-    const response = await api.post(
+    const response = await api.get(
       getFamilyMembers(), // Your Endpoint
       requestBody, // (for requests with a body)
     );

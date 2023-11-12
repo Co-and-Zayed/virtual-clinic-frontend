@@ -30,7 +30,7 @@ export const navLinksPatient = [
   },
   {
     name: "Health Packages",
-    route: Routes.PACKAGES_PATH,
+    route: Routes.MY_PACKAGE_PATH,
     icon: <HealthIcon />,
   },
   {

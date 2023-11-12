@@ -17,6 +17,7 @@ import axios from "axios";
 import { viewPackagesAction } from "redux/VirtualClinicRedux/viewPackages/viewPackagesAction";
 import { unsubscribeFromPackageAction } from "redux/VirtualClinicRedux/UnsubscribeFromPackage/unsubscribeFromPackageAction";
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
+import PaymentMethod from "../DoctorsScreen/PaymentScreens/PaymentMethod";
 
 const ViewPackageScreen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -24,6 +25,9 @@ const ViewPackageScreen = () => {
   const [selectedPackage, setSelectedPackage] = useState<any>(null);
   const [showSinglePackage, setShowSinglePackage] = useState<boolean>(false);
   const [actionType, setActionType] = useState<string>();
+  const [page, setPage] = useState<string>("packages");
+  const [chosenPackage, setChosenPackage] = useState<any>();
+
   const navigate = useNavigate();
   const hasMountedCreate = useRef(false);
   const hasMountedUpdate = useRef(false);
@@ -52,6 +56,7 @@ const unsubscribe = async () => {
     console.log(selectedPackage);
   }, []);
   return (
+
     <div
       className={`w-full flex flex-col flex-wrap items-start justify-center`}
     >
@@ -80,6 +85,7 @@ const unsubscribe = async () => {
               My Family Packages
             </button>
           </div>
+          { (page==="packages")?
           <div className="w-full flex flex-wrap justify-start items-center">
             {Array.isArray(userviewPackages) &&
               userviewPackages?.map((packageItem: any) => (
@@ -108,8 +114,8 @@ const unsubscribe = async () => {
                 ) : (
                   // Render SUBSCRIBE button if status doesn't exist
                   <button className={`${styles.editLink}`} onClick={() => {
-                    // navigate(Routes.MY_FAMILY_PACKAGES_PATH, {
-                    // });
+                    setChosenPackage (packageItem)
+                    setPage("payment")
                   }} >SUBSCRIBE</button>
                 )}
                   </div>
@@ -138,9 +144,21 @@ const unsubscribe = async () => {
                 // Render RENEWAL DATE if status is "SUBSCRIBED"
                 <p>Renewal Date:  {new Date(packageItem.healthPackageRenewalDate).toLocaleDateString()}</p>
               )}
+              {packageItem.discountedPrice && (
+                // Render Status if it exists
+                <p>Discounted Price: {packageItem.discountedPrice}</p>
+              )}
                 </div>
               ))}
           </div>
+                 :(<PaymentMethod    
+                   
+                 priceOriginal={chosenPackage?.price_per_year}
+                 priceDiscounted={chosenPackage?.discountedPrice}
+
+                  />
+                 )
+                }
         </div>
       )}
     </div>

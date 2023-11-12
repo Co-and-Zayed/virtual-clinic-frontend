@@ -342,6 +342,10 @@ const MyFamilyPackageScreen = () => {
                 // Render RENEWAL DATE if status is "SUBSCRIBED"
                 <p>Renewal Date:  {new Date(packageItem.healthPackageRenewalDate).toLocaleDateString()}</p>
               )}
+              {packageItem.discountedPrice && (
+                // Render Status if it exists
+                <p>Discounted Price: {packageItem.discountedPrice}</p>
+              )}
                 </div>
                     )
                   )}

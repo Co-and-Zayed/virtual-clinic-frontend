@@ -340,7 +340,7 @@ const DoctorInfoScreen = () => {
                     // Check if doctor has an appointment at this time
 
                     var hasAppointment = false;
-                    if (docinfo.appointments) {
+                    if (docinfo?.appointments) {
                       docinfo.appointments.forEach((appointment: any) => {
                         var appointmentDate = dayjs(appointment.date);
                         var appointmentTime = appointmentDate.format("h:mm A");

@@ -70,8 +70,8 @@ const DoctorsScreen = () => {
     (state: RootState) => state.adminListAllDoctorsReducer
   );
 
-  const handleDeleteClick = async (email: any) => {
-    await dispatch(deleteDoctorAction({ email: email }));
+  const handleDeleteClick = async (username: any) => {
+    await dispatch(deleteDoctorAction({ username: username }));
     await dispatch(adminListAllDoctorsAction());
     notification.success({
       message: "Doctor deleted Successfully",
@@ -350,7 +350,7 @@ const DoctorsScreen = () => {
             </a>
           </Space>
           <Space>
-            <a onClick={() => handleDeleteClick(record.email)}>Delete</a>
+            <a onClick={() => handleDeleteClick(record.username)}>Delete</a>
           </Space>
         </Space>
       ),
@@ -410,7 +410,7 @@ const DoctorsScreen = () => {
                   {/* <p className={`${styles.editLink}`}>Edit</p> */}
                   <DeleteOutlined
                     style={{ color: "red" }}
-                    onClick={() => handleDeleteClick(currDoctor?.email)}
+                    onClick={() => handleDeleteClick(currDoctor?.username)}
                   />
                 </div>
                 <div className="flex items-center justify-between">

@@ -34,34 +34,7 @@ import ConfirmationScreen from "./PaymentScreens/ConfirmationScreen";
 import RoundedButton from "components/RoundedButton/RoundedButton";
 import PayWithWallet from "./PaymentScreens/PayWithWallet";
 import { createAppointmentAction } from "redux/VirtualClinicRedux/CreateAppointment/createAppoinmentAction";
-
-function getRandomNumber(min: number, max: number) {
-  return Math.round(Math.random() * (max - min) + min);
-}
-
-/**
- * Mimic fetch with abort controller https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort
- * ⚠️ No IE11 support
- */
-function fakeFetch(date: Dayjs, { signal }: { signal: AbortSignal }) {
-  return new Promise<{ daysToHighlight: number[] }>((resolve, reject) => {
-    const timeout = setTimeout(() => {
-      const daysInMonth = date.daysInMonth();
-      const daysToHighlight = [1, 2, 3].map(() =>
-        getRandomNumber(1, daysInMonth)
-      );
-
-      resolve({ daysToHighlight });
-    }, 500);
-
-    signal.onabort = () => {
-      clearTimeout(timeout);
-      reject(new DOMException("aborted", "AbortError"));
-    };
-  });
-}
-
-const initialValue = dayjs();
+import CoolCalendar from "components/CoolCalendar/CoolCalendar";
 
 const DoctorInfoScreen = () => {
   //const { name } = useParams<{ name: string }>();   //name of dr
@@ -83,9 +56,6 @@ const DoctorInfoScreen = () => {
   const [page, setPage] = useState("booking");
 
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
-  const requestAbortController = useRef<AbortController | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [highlightedDays, setHighlightedDays] = useState([1, 2, 15]);
 
   const [timeSlots, setTimeSlots] = useState<any>(generateTimeSlots());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<any>(null);
@@ -95,12 +65,6 @@ const DoctorInfoScreen = () => {
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
 
   const { username } = useParams<{ username: string }>();
-
-  useEffect(() => {
-    fetchHighlightedDays(initialValue);
-    // abort request on unmount
-    return () => requestAbortController.current?.abort();
-  }, []);
 
   useEffect(() => {
     document.title = "El7a2ni" + (docinfo && " | " + docinfo.name);
@@ -114,80 +78,6 @@ const DoctorInfoScreen = () => {
       console.log(docinfo);
     }
   }, [docinfo]);
-
-  const fetchHighlightedDays = (date: Dayjs) => {
-    const controller = new AbortController();
-    fakeFetch(date, {
-      signal: controller.signal,
-    })
-      .then(({ daysToHighlight }) => {
-        setHighlightedDays([
-          // today and tomorrow
-          ...daysToHighlight,
-          dayjs("23/10/2023", "DD/MM/YYYY").date(),
-          dayjs().add(1, "day").date(),
-        ]);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        // ignore the error if it's caused by `controller.abort`
-        if (error.name !== "AbortError") {
-          throw error;
-        }
-      });
-
-    requestAbortController.current = controller;
-  };
-
-  const handleMonthChange = (date: Dayjs) => {
-    if (requestAbortController.current) {
-      // make sure that you are aborting useless requests
-      // because it is possible to switch between months pretty quickly
-      requestAbortController.current.abort();
-    }
-
-    setIsLoading(true);
-    setHighlightedDays([]);
-    fetchHighlightedDays(date);
-  };
-
-  function ServerDay(
-    props: PickersDayProps<Dayjs> & { highlightedDays?: number[] }
-  ) {
-    const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
-
-    const isSelected =
-      !props.outsideCurrentMonth &&
-      highlightedDays.indexOf(props.day.date()) >= 0;
-
-    return (
-      <Badge
-        key={props.day.toString()}
-        overlap="circular"
-        badgeContent={
-          isSelected ? (
-            <div
-              className={`w-[0.4rem] h-[0.4rem] rounded-full`}
-              style={{ backgroundColor: "rgba(255, 56, 56, 1)" }}
-            />
-          ) : undefined
-        }
-      >
-        <PickersDay
-          {...other}
-          outsideCurrentMonth={outsideCurrentMonth}
-          day={day}
-          style={{
-            fontFamily: "Cabin",
-            fontWeight: 400,
-            // color: "var(--dark-green)",
-            color: "rgba(22, 59, 69, 1)",
-            opacity: !isSelected ? 0.5 : 1,
-          }}
-        />
-      </Badge>
-    );
-  }
 
   function generateTimeSlots(): any {
     // all time from 9 am to 5 pm with 30 min interval
@@ -237,23 +127,10 @@ const DoctorInfoScreen = () => {
       date.setUTCDate(appointmentDate?.date());
       date.setUTCSeconds(0);
       date.setUTCMilliseconds(0);
-
-      console.log("Converted Date: " + appointmentDate?.toDate());
-      console.log(appointmentDate?.toDate().toString());
-      console.log("NEWWW Date: " + date);
     }
   }, [appointmentDate]);
 
   async function createAppointmentCallback() {
-    console.log("Create Appointment Callback");
-    console.log(
-      "Appointment Date: " + appointmentDate?.format("DD/MM/YYYY hh:mm A")
-    );
-    console.log("Patient:");
-    console.log(userData);
-    console.log("Doctor:");
-    console.log(docinfo);
-
     var date = appointmentDate?.toDate();
     // var date = new Date();
     // date.setUTCDate(appointmentDate?.date() ?? 1);
@@ -447,24 +324,10 @@ const DoctorInfoScreen = () => {
                   transform: "scale(1.2)",
                 }}
               >
-                <DateCalendar
-                  defaultValue={initialValue}
-                  value={selectedDate}
-                  onChange={(newValue) => {
-                    setSelectedDate(newValue);
-                  }}
-                  loading={isLoading}
-                  onMonthChange={handleMonthChange}
-                  renderLoading={() => <DayCalendarSkeleton />}
-                  slots={{
-                    day: ServerDay,
-                  }}
-                  slotProps={{
-                    day: {
-                      highlightedDays,
-                    } as any,
-                  }}
-                  views={["year", "month", "day"]}
+                <CoolCalendar
+                  selectedDate={selectedDate}
+                  setSelectedDate={setSelectedDate}
+                  daysToHighlight={[]}
                 />
 
                 {/* Column containing all timeslots in a rounded rectangles */}
@@ -473,30 +336,62 @@ const DoctorInfoScreen = () => {
                   className={`h-[17rem] flex flex-col items-center justify-start gap-y-[0.35rem] px-4 mt-4`}
                   style={{ overflowY: "auto", overflowX: "hidden" }}
                 >
-                  {timeSlots.map((timeSlot: any, index: any) => (
-                    <div
-                      key={index}
-                      className={`w-[10rem] py-[0.55rem] flex flex-row items-center justify-center rounded-xl border border-solid`}
-                      style={{
-                        borderColor: "var(--dark-green)",
-                        backgroundColor:
-                          selectedTimeSlot?.time === timeSlot.time
-                            ? "var(--dark-green)"
-                            : "transparent",
-                      }}
-                      onClick={() => setSelectedTimeSlot(timeSlot)}
-                    >
-                      <p
-                        className={`text-sm font-normal ${
-                          selectedTimeSlot?.time === timeSlot.time
-                            ? "text-white"
-                            : "text-dark-green"
-                        }`}
+                  {timeSlots.map((timeSlot: any, index: any) => {
+                    // Check if doctor has an appointment at this time
+
+                    var hasAppointment = false;
+                    if (docinfo.appointments) {
+                      docinfo.appointments.forEach((appointment: any) => {
+                        var appointmentDate = dayjs(appointment.date);
+                        var appointmentTime = appointmentDate.format("h:mm A");
+
+                        if (
+                          selectedDate?.format("DD/MM/YYYY") ===
+                            appointmentDate.format("DD/MM/YYYY") &&
+                          appointmentTime === timeSlot.time
+                        ) {
+                          hasAppointment = true;
+                          console.log("Appointment Time: " + appointmentTime);
+                          console.log("Time Slot Time: " + timeSlot.time);
+                        }
+                      });
+                    }
+
+                    return (
+                      <Button
+                        disabled={hasAppointment}
+                        key={index}
+                        className={`w-[10rem] h-[2.5rem] py-[1rem] flex flex-row items-center justify-center rounded-xl border border-solid`}
+                        style={{
+                          borderColor: hasAppointment
+                            ? ""
+                            : "var(--dark-green)",
+                          backgroundColor:
+                            selectedTimeSlot?.time === timeSlot.time
+                              ? "var(--dark-green)"
+                              : "transparent",
+                        }}
+                        onClick={() => setSelectedTimeSlot(timeSlot)}
                       >
-                        {timeSlot.time}
-                      </p>
-                    </div>
-                  ))}
+                        <p
+                          className={`text-sm font-normal ${
+                            selectedTimeSlot?.time === timeSlot.time
+                              ? "text-white"
+                              : "text-dark-green"
+                          }`}
+                          style={{
+                            // strike through if not available
+                            textDecoration: hasAppointment
+                              ? "line-through"
+                              : "",
+                            fontFamily: "Cabin",
+                          }}
+                        >
+                          {timeSlot.time}
+                        </p>
+                      </Button>
+                    );
+                  })}
                 </div>
               </div>
 

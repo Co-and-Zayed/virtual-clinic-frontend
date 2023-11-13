@@ -1,4 +1,4 @@
-import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/DashboardScreen/DashboardScreen.module.css";
+import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/ContractScreen/ContractScreen.module.css";
 import { useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
@@ -24,17 +24,19 @@ import type {
   FilterConfirmProps,
 } from "antd/es/table/interface";
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
-import { useFunctions } from "hooks/useFunctions";
 //import { listAllUsersAction } from "redux/VirtualClinicRedux/ListAllUsers/listAllUsersAction";
 
-const DashboardScreen = () => {
+const ContractScreen = () => {
   const dispatch: any = useDispatch();
   const { allContracts } = useSelector(
     (state: RootState) => state.listAllContractsReducer
   );
 
-  const { userData } = useSelector((state: RootState) => state.userReducer);
-  const { handleDownload } = useFunctions();
+  const { userData, accessToken } = useSelector(
+    (state: RootState) => state.userReducer
+  );
+
+  const searchInput = useRef<InputRef>(null);
 
   useEffect(() => {
     dispatch(listAllContractsAction({ doctorUsername: userData?.username })); // sending the request, and update the states
@@ -283,17 +285,61 @@ const DashboardScreen = () => {
     },
 
     {
-      title: "Date of Birth",
-      dataIndex: "date_of_birth",
-      key: "date_of_birth",
-      render: (date_of_birth: Date) => {
-        const date = new Date(date_of_birth);
-        return (
-          <span>
-            {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}
-          </span>
-        );
-      },
+      title: "Start Date",
+      dataIndex: "date",
+      key: "date",
+      ...getColumnSearchProps("date"),
+      sorter: (a, b) => a.date.localeCompare(b.date),
+      sortDirections: ["descend", "ascend"],
+    },
+
+    {
+      title: "End Date",
+      dataIndex: "endDate",
+      key: "endDate",
+      ...getColumnSearchProps("endDate"),
+      sorter: (a, b) => a.endDate.localeCompare(b.endDate),
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Hourly Rate /hr",
+      dataIndex: "hourlyRate",
+      key: "hourlyRate",
+      ...getColumnSearchProps("hourlyRate"),
+      sorter: (a, b) =>
+        parseInt(a.hourlyRate.toString()) - parseInt(b.hourlyRate.toString()),
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Clinic Rate /hr",
+      dataIndex: "clinicRate",
+      key: "clinicRate",
+      ...getColumnSearchProps("clinicRate"),
+      sorter: (a, b) =>
+        parseInt(a.clinicRate.toString()) - parseInt(b.clinicRate.toString()),
+      sortDirections: ["descend", "ascend"],
+    },
+
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      defaultFilteredValue: ["PENDING"],
+      filters: [
+        { text: "Accepted", value: "ACCEPTED" },
+        { text: "Pending", value: "PENDING" },
+        { text: "Rejected", value: "REJECTED" },
+        { text: "Expired", value: "EXPIRED" },
+      ],
+      onFilter: (value: React.Key | boolean, record) =>
+        record.status.indexOf(value as string) === 0,
+      ellipsis: true,
+      render: (text, record) => (
+        <Badge
+          status={getStatusColor(record.status)}
+          text={getStatusText(record.status)}
+        />
+      ),
     },
     {
       title: "Action",
@@ -325,12 +371,6 @@ const DashboardScreen = () => {
     <div className={`w-full flex flex-col items-start justify-center`}>
       <h1>My Contracts</h1>
 
-      {
-        <a onClick={() => handleDownload({ files: userData?.doctorDocuments })}>
-          Download My Documents
-        </a>
-      }
-
       <button
         className={styles.button}
         onClick={() => {
@@ -345,4 +385,4 @@ const DashboardScreen = () => {
   );
 };
 
-export default DashboardScreen;
+export default ContractScreen;

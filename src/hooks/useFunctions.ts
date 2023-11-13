@@ -4,6 +4,8 @@ import { RootState } from "redux/rootReducer";
 import JSZip from "jszip";
 
 export const useFunctions = () => {
+  // {files: any} for multiple files -> downloads them as a zip file
+  // {file: any} for a single file -> downloads it as a single file
   const handleDownload = async (download: { files: any } | { file: any }) => {
     if ("files" in download) {
       const zip = new JSZip();

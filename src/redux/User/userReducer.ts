@@ -8,6 +8,7 @@ import {
   UPDATE_ACCESS_TOKEN,
   ADD_TIMEOUT,
   CLEAR_TIMEOUTS,
+  UPDATE_USER_DATA,
 } from "./loginTypes";
 import store from "redux/store";
 
@@ -36,6 +37,11 @@ export const userReducer = (state = initialState, action: any) => {
         accessToken: action.payload?.tokens?.accessToken,
         refreshToken: action.payload?.tokens?.refreshToken,
       };
+      case UPDATE_USER_DATA:
+        return {
+          ...state,
+          userData: action.payload,
+        };
     case LOGOUT_USER:
       return { ...state, userType: null };
     case SHOULD_REFRESH:

@@ -1,23 +1,13 @@
 .mainViewContainer {
   width: 100%;
   height: 100%;
+}
+
+.children {
+  flex: 1;
+  margin-left: var(--sidebar-width);
   padding-inline: 2.5rem;
-}
-.sideBar {
-  padding-top: 3rem;
-}
-
-.sideBar li {
-  user-select: none;
-  transition: all 0.2s ease-in-out;
-}
-
-.sideBar li:hover {
-  cursor: pointer;
-}
-
-.activeLink {
-  color: blue;
+  padding-top: 2.5rem;
 }
 
 hr {

@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom/client";
 import "index.css";
+import "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/Calendar.css";
 import App from "App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";

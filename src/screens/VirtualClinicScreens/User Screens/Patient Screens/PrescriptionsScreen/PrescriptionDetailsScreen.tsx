@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";
 import { listSinglePrescriptionAction } from "../../../../../redux/VirtualClinicRedux/ListSinglePrescription/listSinglePrescriptionAction";
 import { useEffect } from "react";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const PrescriptionDetailsScreen = () => {
   const { id } = useParams<{ id: string }>();
@@ -19,7 +20,7 @@ const PrescriptionDetailsScreen = () => {
     <div className={`w-full flex flex-col items-start justify-center`}>
       <h1>Prescriptions Details Screen</h1>
       {prescriptionLoading ? (
-        <h1>Loading...</h1>
+        <JellyLoader />
       ) : (
         <div className={`w-full flex flex-col items-start justify-center`}>
           <h3 className={`font-bold`}>Patient Name:</h3>

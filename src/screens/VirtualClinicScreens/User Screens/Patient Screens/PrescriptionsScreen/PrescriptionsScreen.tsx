@@ -1,7 +1,7 @@
 import { SearchOutlined } from "@ant-design/icons";
 import React, { useRef, useState, useEffect } from "react";
 import type { InputRef } from "antd";
-import { Button, Input, Space, Table, DatePicker,} from "antd";
+import { Button, Input, Space, Table, DatePicker } from "antd";
 import type { ColumnType, ColumnsType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
 import Highlighter from "react-highlight-words";
@@ -11,6 +11,7 @@ import { RootState } from "redux/rootReducer";
 import { listAllPrescriptionsAction } from "redux/VirtualClinicRedux/ListAllPrescriptions/listAllPrescriptionsAction";
 import moment from "moment";
 import { text } from "stream/consumers";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const PrescriptionsScreen: React.FC = () => {
   const dispatch: any = useDispatch();
@@ -253,7 +254,7 @@ const PrescriptionsScreen: React.FC = () => {
         setTimeout(() => searchDateInput.current?.select(), 100);
       }
     },
-    render: (text) => 
+    render: (text) =>
       searchedDateColumn === dataIndex ? (
         <Highlighter
           highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
@@ -323,10 +324,10 @@ const PrescriptionsScreen: React.FC = () => {
 
   return (
     <div>
-      <h1>Prescriptions Screen</h1>
+      <h1 className="pageHeading">Prescriptions</h1>
       <div>
         {prescriptionsLoading ? (
-          <h1>Loading...</h1>
+          <JellyLoader />
         ) : (
           <Table columns={columns} dataSource={data} />
         )}

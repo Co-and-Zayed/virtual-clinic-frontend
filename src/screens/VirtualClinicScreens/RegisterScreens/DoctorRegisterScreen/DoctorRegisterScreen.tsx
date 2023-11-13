@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";
 import { useNavigate } from "react-router";
 import { regsiterAction } from "redux/Register/registerAction";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const DoctorRegisterScreen = () => {
   const navigate = useNavigate();
@@ -230,7 +231,7 @@ const DoctorRegisterScreen = () => {
           </div>
         </div>
         {registerLoading ? (
-          <Spin />
+          <JellyLoader />
         ) : (
           <button
             type="submit"

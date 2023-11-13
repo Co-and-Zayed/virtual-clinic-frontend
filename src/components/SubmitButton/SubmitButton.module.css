@@ -1,0 +1,15 @@
+.loginBtn {
+  padding-block: 0.5rem;
+  background-color: var(--light-green);
+  border-radius: 0.3rem;
+
+  transition: all 0.3s ease-in-out;
+
+  /* Glow around */
+  /* filter: drop-shadow(0px 6px 20px rgba(138, 193, 134, 0.25)); */
+}
+
+.loginBtn:hover {
+  background-color: var(--light-green);
+  filter: drop-shadow(0px 6px 20px rgba(138, 193, 134, 0.25));
+}

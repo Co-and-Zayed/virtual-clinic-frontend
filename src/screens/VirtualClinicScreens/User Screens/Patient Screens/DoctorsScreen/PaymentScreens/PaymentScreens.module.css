@@ -1,0 +1,112 @@
+.h1 {
+    color: var(--el7a2ni---bg, #FFF);
+    text-align: center;
+    font-family: Century Gothic;
+    font-size: 1.7rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/*                */
+/* REGISTER CARDS */
+/*                */
+.registerCard {
+    z-index: 10;
+    overflow: hidden;
+    width: 16rem;
+    height: 19rem;
+    border: 1.5px solid rgba(97, 108, 120, 0.50);
+    background: linear-gradient(0deg, var(--dark-green) 0%, var(--dark-green) 100%), #163B45;
+    backdrop-filter: blur(10px);
+    border-radius: 1.4rem;
+
+    /* center items */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    transition: all 0.5s ease-in-out;
+}
+
+.registerCard:hover {
+    cursor: pointer;
+    /* bottom border */
+    background: linear-gradient(156deg, rgba(138, 193, 134, 0.20) 15.86%, rgba(0, 0, 0, 0.00) 87.52%), #163B45;
+    border-bottom: 1.5px solid var(--light-green);
+
+    transition: all 0.5s ease-in-out;
+}
+
+
+.registerCardCircle {
+    position: absolute;
+    bottom: -4rem;
+    width: 100%;
+    height: 30%;
+    border-radius: 50%;
+    filter: blur(30px);
+
+    transition: all 0.4s ease-in-out;
+}
+
+/* change registerCardCircle when hovering on registerCard */
+.registerCard:hover .registerCardCircle {
+    background: rgba(138, 193, 134, 0.35);
+}
+
+/* change h1 inside registerCard when hovering over registerCard */
+.registerCard h1 {
+    color: white
+}
+
+.registerCard:hover h1 {
+    color: var(--light-green);
+}
+
+.registerCardImage {
+    color: white;
+    transition: all 0.2s ease-in-out;
+}
+
+.registerCard:hover .registerCardImage {
+    color: var(--light-green);
+}
+
+.priceLight {
+    position: relative;
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: var(--dark-green);
+    opacity: 0.3;
+}
+
+.price {
+    position: relative;
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: var(--dark-green);
+}
+
+.uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.12rem;
+}
+
+.appDate{
+    color: var(--dark-green);
+    font-size: 0.9rem;
+    letter-spacing: 0.12rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--dark-green);
+}
+
+.appTime {
+    color: var(--dark-green);
+    font-size: 0.9rem;
+    letter-spacing: 0.12rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--dark-green);
+    border-left: none;
+}

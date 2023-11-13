@@ -12,6 +12,7 @@ import { updatePackageAction } from "redux/VirtualClinicRedux/UpdatePackage/upda
 import { create } from "domain";
 import { createPackageAction } from "redux/VirtualClinicRedux/CreatePackage/createPackageAction";
 import { deletePackageAction } from "redux/VirtualClinicRedux/DeletePackage/deletePackageAction";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const PackagesScreen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -37,6 +38,7 @@ const PackagesScreen = () => {
   const { deletingPackageLoading, deletedPackage } = useSelector(
     (state: RootState) => state.deletePackageReducer
   );
+  const { userType } = useSelector((state: RootState) => state.userReducer);
 
   const handlePackageClick = (packageItem: any) => {
     formik.setValues({
@@ -206,7 +208,8 @@ const PackagesScreen = () => {
     setSelectedPackage(null);
     setShowSinglePackage(false);
     console.log(allPackages);
-    console.log("YBNY ER7AMNY")
+    console.log(userType);
+    console.log("YBNY ER7AMNY");
     console.log(selectedPackage);
   }, []);
 
@@ -217,7 +220,7 @@ const PackagesScreen = () => {
       >
         {packagesLoading ? (
           <div className={`${styles.spinnerContainer}`}>
-            <Spin indicator={antIcon} />
+            <JellyLoader />
           </div>
         ) : (
           <div className="w-full flex flex-wrap justify-start items-center">
@@ -225,7 +228,9 @@ const PackagesScreen = () => {
               allPackages?.map((packageItem: any) => (
                 <div
                   key={packageItem._id}
-                  className={`${styles.packageItem} ${selectedPackage?.type} ${packageItem.type} ${
+                  className={`${styles.packageItem} ${selectedPackage?.type} ${
+                    packageItem.type
+                  } ${
                     selectedPackage?.type === packageItem.type &&
                     styles.currentPackage
                   } mt-5 mr-5`}
@@ -254,7 +259,6 @@ const PackagesScreen = () => {
             </div>
           </div>
         )}
-
         {showSinglePackage && (
           <div className="w-[40rem]  flex flex-col justify-center items-start mt-12">
             {generateFieldRow([

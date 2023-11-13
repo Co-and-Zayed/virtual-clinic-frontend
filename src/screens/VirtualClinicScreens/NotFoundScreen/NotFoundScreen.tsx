@@ -5,9 +5,15 @@ import {
   navLinksDoctor,
   navLinksPatient,
 } from "utils/VirtualClinicUtils/navigationLinks";
+import { ErrorIllustration } from "assets/IconComponents";
 
 const NotFoundScreen = () => {
-  return <>Error 404 - This page does not exist</>;
+  return (
+    <div className={`${styles.notFoundPage} w-full flex flex-col items-center justify-center`}>
+      <p>Oops! Page not found</p>
+      <ErrorIllustration fontSize={"50rem"} />
+    </div>
+  );
 };
 
 export default NotFoundScreen;

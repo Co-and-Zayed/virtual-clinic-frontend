@@ -4,6 +4,7 @@ import { RootState } from "redux/rootReducer";
 import { listDoctorSettingsAction } from "redux/VirtualClinicRedux/ListDoctorSettings/listDoctorSettingsAction";
 import { editSettingsAction } from "redux/VirtualClinicRedux/EditSettings/editSettingsAction";
 import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/SettingsScreen/SettingsScreen.module.css";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const SettingsScreen = () => {
   const dispatch: any = useDispatch();
@@ -45,60 +46,60 @@ const SettingsScreen = () => {
     <div className="w-full flex flex-col items-start justify-center">
       <h1>Doctor Settings Screen</h1>
       {doctorSettingsLoading ? (
-        <h1>Loading...</h1>
+        <JellyLoader />
       ) : doctorSettings !== null && typeof doctorSettings === "object" ? (
         Object.keys(doctorSettings)?.map((key: string) => {
-            const keysToSkip = ["_id", "password", "__v"];
+          const keysToSkip = ["_id", "password", "__v"];
 
-            if (keysToSkip.includes(key)) {
-              return null;
-            }
+          if (keysToSkip.includes(key)) {
+            return null;
+          }
 
-            const placeholders: { [key: string]: string } = {
-              affiliation: "Enter updated value",
-              hourlyRate: "Enter updated value",
-              email: "Enter updated value",
-            };
-            return (
-              <div key={key} className="m-5">
-                <h1>{key}</h1>
-                <p>{doctorSettings[key]}</p>
-                {["affiliation", "hourlyRate", "email"].includes(key) && (
-                  <>
-                    <input
-                      type="text"
-                      placeholder={placeholders[key]}
-                      onChange={(e) => {
-                        if (key === "affiliation") {
-                          setAffiliation(e.target.value);
-                        } else if (key === "hourlyRate") {
-                          setHourlyRate(e.target.value);
-                        } else if (key === "email") {
-                          setEmail(e.target.value);
-                        }
-                      }}
-                    />
-
-                    <button
-                      className={`${styles.customButton}`}
-                      onClick={() =>
-                        handleUpdate(
-                          key,
-                          key === "affiliation"
-                            ? affiliation
-                            : key === "hourlyRate"
-                            ? hourlyRate
-                            : email
-                        )
+          const placeholders: { [key: string]: string } = {
+            affiliation: "Enter updated value",
+            hourlyRate: "Enter updated value",
+            email: "Enter updated value",
+          };
+          return (
+            <div key={key} className="m-5">
+              <h1>{key}</h1>
+              <p>{doctorSettings[key]}</p>
+              {["affiliation", "hourlyRate", "email"].includes(key) && (
+                <>
+                  <input
+                    type="text"
+                    placeholder={placeholders[key]}
+                    onChange={(e) => {
+                      if (key === "affiliation") {
+                        setAffiliation(e.target.value);
+                      } else if (key === "hourlyRate") {
+                        setHourlyRate(e.target.value);
+                      } else if (key === "email") {
+                        setEmail(e.target.value);
                       }
-                    >
-                      Edit
-                    </button>
-                  </>
-                )}
-              </div>
-            );
-          })
+                    }}
+                  />
+
+                  <button
+                    className={`${styles.customButton}`}
+                    onClick={() =>
+                      handleUpdate(
+                        key,
+                        key === "affiliation"
+                          ? affiliation
+                          : key === "hourlyRate"
+                          ? hourlyRate
+                          : email
+                      )
+                    }
+                  >
+                    Edit
+                  </button>
+                </>
+              )}
+            </div>
+          );
+        })
       ) : (
         <p>No doctor settings data available.</p>
       )}

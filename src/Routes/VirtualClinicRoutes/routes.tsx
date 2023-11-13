@@ -27,7 +27,9 @@ import AdminAdminsScreen from "screens/VirtualClinicScreens/User Screens/Admin S
 import RegisterScreen from "screens/VirtualClinicScreens/RegisterScreens/RegisterScreen";
 
 import DoctorInfoScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/DoctorInfoScreen";
+import LoginScreen2 from "screens/VirtualClinicScreens/LoginScreen/LoginScreen2";
 import NotFoundScreen from "screens/VirtualClinicScreens/NotFoundScreen/NotFoundScreen";
+import CommonPackagesScreen from "screens/VirtualClinicScreens/CommonScreens/CommonPackagesScreen/CommonPackagesScreen";
 
 export const routes = [
   {
@@ -41,7 +43,8 @@ export const routes = [
   },
   {
     path: Routes.LOGIN_PATH,
-    element: <LoginScreen />,
+    // element: <LoginScreen />,
+    element: <LoginScreen2 />,
   },
   {
     path: Routes.DASHBOARD_PATH,
@@ -74,6 +77,16 @@ export const routes = [
     parent: <ProtectedRoutes />,
   },
   {
+    path: Routes.SETTINGS_PATH + Routes.PROFILE_PATH,
+    element: <CommonSettingsScreen />,
+    parent: <ProtectedRoutes />,
+  },
+  {
+    path: Routes.SETTINGS_PATH + Routes.PASSWORD_PATH,
+    element: <CommonSettingsScreen />,
+    parent: <ProtectedRoutes />,
+  },
+  {
     path: Routes.APPOINTMENTS_PATH,
     element: <CommonAppointmentsScreen />,
     parent: <ProtectedRoutes />,
@@ -100,7 +113,7 @@ export const routes = [
   },
   {
     path: Routes.PACKAGES_PATH,
-    element: <AdminPackagesScreen />,
+    element: <CommonPackagesScreen />,
     parent: <ProtectedRoutes />,
   },
   {
@@ -114,7 +127,7 @@ export const routes = [
     parent: <ProtectedRoutes />,
   },
   {
-    path: "/doctor-info",
+    path: Routes.DOCTOR_INFO,
     element: <DoctorInfoScreen />,
     parent: <ProtectedRoutes />,
   },

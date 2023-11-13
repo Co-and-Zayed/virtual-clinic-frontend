@@ -12,7 +12,7 @@ const SvgLogoText = (props: SVGProps<SVGSVGElement>) => (
       style={{
         fontSize: "79.167px",
         fill: "#8ac186",
-        fontFamily: "Cabin",
+        fontFamily: "&quot",
         fontWeight: 600,
         fontStyle: "italic",
         textTransform: "uppercase",

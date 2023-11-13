@@ -14,7 +14,6 @@ export const loginAction = (data: any) => async (dispatch: Dispatch) => {
   try {
     dispatch({ type: LOGIN_LOADING, payload: true });
     const response = await loginService(data);
-
     dispatch({ type: LOGIN_USER, payload: response.data });
     dispatch({ type: SHOULD_REFRESH, payload: "START" });
   } catch (err) {

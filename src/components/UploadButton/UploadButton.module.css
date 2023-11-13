@@ -1,0 +1,67 @@
+.labelContainer {
+  width: fit-content;
+  column-gap: 0.8rem;
+}
+
+.customLabel {
+  /* background-color: white; */
+  color: var(--light-green);
+  border: 1px solid var(--light-green);
+  width: fit-content;
+  padding-inline: 0.75rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  transition: all 0.15s ease-in-out;
+}
+
+.customLabel:hover {
+  background-color: var(--light-green);
+  color: var(--dark-green);
+  box-shadow: 0 0 10px #8ac18680; /* Glow effect on hover */
+
+  cursor: pointer;
+}
+
+.infoCircle {
+  color: var(--light-green);
+  font-size: 0.9rem;
+  opacity: 0.6;
+  transition: all 0.15s ease-in-out;
+}
+
+.infoCircle:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.uploadedFiles {
+  color: var(--dark-green);
+  column-gap: 0.75rem;
+  font-size: 0.8rem;
+  transition: all 0.15s ease-in-out;
+}
+
+.uploadedFiles p {
+  display: flex;
+  column-gap: 0.5rem;
+}
+
+.uploadedFiles .deleteIcon {
+  color: red;
+}
+
+.uploadedFiles:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.popover {
+  max-height: 8rem;
+  padding-right: 0.5rem;
+  overflow: auto;
+}

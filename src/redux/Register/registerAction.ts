@@ -14,13 +14,13 @@ import { LOGIN_SUCCESS } from "redux/User/loginTypes";
 export const regsiterAction = (data: any) => async (dispatch: Dispatch) => {
   try {
     dispatch({ type: REGISTER_LOADING, payload: true });
+    console.log("REGISTER ACTION");
     const response = await registerService(data);
     console.log(response);
     dispatch({ type: LOGIN_USER, payload: response.data });
     dispatch({ type: SHOULD_REFRESH, payload: "START" });
-
-  } catch (err) {
-    console.log("ERRORR REGISTER");
+  } catch (err: any) {
+    console.log("ERRORR REGISTER", err.message);
     dispatch({ type: REGISTER_FAILURE, payload: false });
   } finally {
     dispatch({ type: REGISTER_LOADING, payload: false });

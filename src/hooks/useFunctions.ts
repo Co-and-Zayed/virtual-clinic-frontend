@@ -6,6 +6,7 @@ import JSZip from "jszip";
 export const useFunctions = () => {
   // {files: any} for multiple files -> downloads them as a zip file
   // {file: any} for a single file -> downloads it as a single file
+  // both expect the url of the each file in the bucket
   const handleDownload = async (download: { files: any } | { file: any }) => {
     if ("files" in download) {
       const zip = new JSZip();

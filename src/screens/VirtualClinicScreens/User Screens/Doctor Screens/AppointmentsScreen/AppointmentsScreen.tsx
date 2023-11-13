@@ -48,6 +48,17 @@ const AppointmentsScreen = () => {
     (state: RootState) => state.getAppointmentsReducer
   );
 
+//   const data: DataType[] = userAppointments?.map((appointment: any) => {
+//     const date = new Date(appointment.date);
+//     return {
+//       patientEmail: appointment.patient.email,
+//       doctorEmail: appointment.doctor.email,
+//       date: appointment.date.split("T")[0].replace(/-/g, "/"),
+//       time: date.getHours() + ":" + date.getMinutes(),
+//       status: appointment.status,
+//       key: appointment._id,
+//     };
+//   });
   const { userData, userType } = useSelector(
     (state: RootState) => state.userReducer
   );

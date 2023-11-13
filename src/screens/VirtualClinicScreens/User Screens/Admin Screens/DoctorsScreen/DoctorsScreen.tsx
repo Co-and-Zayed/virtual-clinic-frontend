@@ -36,6 +36,7 @@ import { deleteDoctorAction } from "redux/VirtualClinicRedux/DeleteDoctor/delete
 import JellyLoader from "components/JellyLoader/JellyLoader";
 import { viewDoctors } from "~/api/VirtualClinicRedux/apiUrls";
 import { get } from "http";
+import { useFunctions } from "hooks/useFunctions";
 
 interface DataType {
   name: string;
@@ -46,6 +47,7 @@ interface DataType {
   educationalBackground: string;
   hourlyRate: Number;
   status: string;
+  doctorDocuments: any;
   key: string;
 }
 
@@ -63,6 +65,7 @@ const DoctorsScreen = () => {
   const [filteredInfo, setFilteredInfo] = useState<
     Record<string, FilterValue | null>
   >({});
+  const {handleDownload} = useFunctions()
 
   const { adminDoctorsLoading, adminDoctors } = useSelector(
     (state: RootState) => state.adminListAllDoctorsReducer
@@ -242,6 +245,8 @@ const DoctorsScreen = () => {
         return "warning";
       case "REJECTED":
         return "error";
+      case "WAITING":
+        return "processing"
       default:
         return "warning";
     }
@@ -255,6 +260,8 @@ const DoctorsScreen = () => {
         return "Pending";
       case "REJECTED":
         return "Rejected";
+      case "WAITING":
+        return "Waiting";
       default:
         return "Pending";
     }
@@ -335,6 +342,7 @@ const DoctorsScreen = () => {
         { text: "Accepted", value: "ACCEPTED" },
         { text: "Pending", value: "PENDING" },
         { text: "Rejected", value: "REJECTED" },
+        { text: "Waiting", value: "WAITING" },
       ],
       onFilter: (value: React.Key | boolean, record) =>
         record.status.indexOf(value as string) === 0,
@@ -381,6 +389,7 @@ const DoctorsScreen = () => {
     educationalBackground: user.educationalBackground,
     hourlyRate: user.hourlyRate,
     status: user.status,
+    doctorDocuments: user.doctorDocuments,
     key: user._id,
   }));
 
@@ -462,7 +471,9 @@ const DoctorsScreen = () => {
           expandable={{
             expandedRowRender: (record) => (
               <p style={{ margin: 0 }}>
-                <a>{record.email}</a>
+                <a onClick={()=> {handleDownload( 
+                  {files: record.doctorDocuments}
+                )} }>Download Documents</a>
               </p>
             ),
             rowExpandable: (record) => record.name !== "Not Expandable",

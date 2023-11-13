@@ -10,7 +10,6 @@ export const useFunctions = () => {
     files: any;
     endpoint: any;
     data?: any;
-    sendToken?: boolean;
   }) => {
     const formData = new FormData();
 
@@ -26,14 +25,13 @@ export const useFunctions = () => {
       }
     }
 
+    const token = store.getState()?.userReducer?.accessToken;
     return await axios.post(
       `${process.env.REACT_APP_BACKEND_URL}${form.endpoint}`,
       formData,
       {
         headers: {
-          Authorization: form.sendToken
-            ? `Bearer ${store.getState()?.userReducer?.accessToken}`
-            : "",
+          Authorization: token && token != "" ? `Bearer ${token}` : "",
         },
       }
     );

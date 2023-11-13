@@ -141,6 +141,8 @@ export const rejectDoctor = () => {
 
 export const viewAllContracts = () => {
   return `doctor/viewAllContracts`;
+};
+
 export const viewPackages = () => {
   return `patient/viewPackages`;
 };

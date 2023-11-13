@@ -128,11 +128,35 @@ const AdminsScreen = () => {
       </div>
     );
   };
+  const [showChangePasswordFields, setShowChangePasswordFields] = useState<boolean>(false);
+
+  const handleShowChangePasswordClick = () => {
+    setShowChangePasswordFields(true);
+  };
 
   useEffect(() => {
     dispatch(listAllAdminsAction(userData?._id));
     console.log("All Admins", allAdmins);
   }, []);
+
+  const handleChangePassword = async () => {
+    
+    console.log('Username:', formik.values.username);
+    console.log('Old Password:', formik.values.oldPassword);
+    console.log('New Password:', formik.values.newPassword);
+
+    formik.setValues({
+      username: '',
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+    });
+    setShowChangePasswordFields(false);
+    notification.success({
+      message: "Password changed Successfully",
+      placement: "topRight",
+    });
+  };
 
   return (
     <form onSubmit={formik.handleSubmit} className="pb-24">
@@ -168,31 +192,75 @@ const AdminsScreen = () => {
           </div>
         )}
 
-        {showAddFields && (
+{showAddFields && (
           <div className="w-[40rem]  flex flex-col justify-center items-start mt-12">
             {generateFieldRow([
               {
-                title: "Username",
-                name: "username",
+                title: 'Username',
+                name: 'username',
                 value: formik.values.username,
-                status: formik.errors.username ? "error" : "",
+                status: formik.errors.username ? 'error' : '',
                 error: formik.errors.username,
               },
               {
-                title: "Password",
-                name: "password",
+                title: 'Password',
+                name: 'password',
                 value: formik.values.password,
-                status: formik.errors.password ? "error" : "",
+                status: formik.errors.password ? 'error' : '',
                 error: formik.errors.password,
               },
             ])}
             <div className="w-full flex justify-end gap-x-2">
               <button
                 className="bg-[blue]"
-                style={{ alignSelf: "center" }}
+                style={{ alignSelf: 'center' }}
                 type="submit"
               >
                 Submit
+              </button>
+            </div>
+          </div>
+        )}
+
+        {showChangePasswordFields && (
+          <div className="w-[40rem] flex flex-col justify-center items-start mt-12">
+            {generateFieldRow([
+              {
+                title: 'Username',
+                name: 'username',
+                value: formik.values.username,
+                status: formik.errors.username ? 'error' : '',
+                error: formik.errors.username,
+              },
+              {
+                title: 'Old Password',
+                name: 'oldPassword',
+                value: formik.values.oldPassword,
+                status: formik.errors.oldPassword ? 'error' : '',
+                error: formik.errors.oldPassword,
+              },
+              {
+                title: 'New Password',
+                name: 'newPassword',
+                value: formik.values.newPassword,
+                status: formik.errors.newPassword ? 'error' : '',
+                error: formik.errors.newPassword,
+              },
+              {
+                title: 'Confirm Password',
+                name: 'confirmPassword',
+                value: formik.values.confirmPassword,
+                status: formik.errors.confirmPassword ? 'error' : '',
+                error: formik.errors.confirmPassword,
+              },
+            ])}
+            <div className="w-full flex justify-end gap-x-2">
+              <button
+                className="bg-[blue]"
+                onClick={handleChangePassword}
+                type="button"
+              >
+                Change Password
               </button>
             </div>
           </div>

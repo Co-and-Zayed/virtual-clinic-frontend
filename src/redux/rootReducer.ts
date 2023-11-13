@@ -34,6 +34,9 @@ import { userReducer } from "redux/User/userReducer";
 import { registerReducer } from "redux/Register/registerReducer";
 import { logoutReducer } from "redux/Logout/logoutReducer";
 import { getDoctorCardCoordsReducer } from "redux/VirtualClinicRedux/GetDoctorInfo/getDoctorCardCoordsReducer";
+import { forgetPasswordReducer } from "redux/ForgetPassword/forgetPasswordReducer";
+import { verifyOtpReducer } from "redux/ForgetPassword/VerifyOtp/verifyOtpReducer";
+import { resetPasswordReducer } from "redux/ForgetPassword/ResetPassword/resetPasswordReducer";
 
 export const appReducer = combineReducers({
   listAllUsersReducer,
@@ -66,7 +69,10 @@ export const appReducer = combineReducers({
   editSettingsReducer,
   listPatientByNameReducer,
   logoutReducer,
-  getDoctorCardCoordsReducer
+  getDoctorCardCoordsReducer,
+  forgetPasswordReducer,
+  verifyOtpReducer,
+  resetPasswordReducer
 });
 
 export const rootReducers = (state: any, action: any) => {

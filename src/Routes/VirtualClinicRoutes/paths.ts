@@ -23,3 +23,4 @@ export const VIEW_PATIENTS_PATH = "/view-patients";
 
 export const PROFILE_PATH = "/profile";
 export const PASSWORD_PATH = "/password";
+export const RESET_PASSWORD = "/reset-password";

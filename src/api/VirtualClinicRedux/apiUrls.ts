@@ -142,3 +142,19 @@ export const rejectDoctor = () => {
 export const viewAllContracts = () => {
   return `doctor/viewAllContracts`;
 };
+
+export const viewPackages = () => {
+  return `patient/viewPackages`;
+};
+export const viewPackagePrice = () => {
+  return `patient/viewPackagePrice`;
+};
+export const viewSubscribedPackageforFamilyMember = () => {
+  return `patient/viewSubscribedPackageforFamilyMember`;
+};
+export const unsubscribeFromPackage = () => {
+  return `patient/unsubscribeFromPackage`;
+};
+export const unsubscribeFromPackageForFamily = () => {
+  return `patient/unsubscribeFromPackageForFamily`;
+};

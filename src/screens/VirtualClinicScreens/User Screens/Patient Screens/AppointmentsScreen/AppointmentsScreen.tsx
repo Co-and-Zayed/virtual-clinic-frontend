@@ -1,4 +1,5 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Patient Screens/AppointmentsScreen/AppointmentsScreen.module.css";
+import inputStyles from "components/InputField/InputField.module.css";
 import { useNavigate } from "react-router";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +14,8 @@ import {
   InputRef,
   TableProps,
   Popconfirm,
+  DatePicker,
+  TimePicker,
 } from "antd";
 import type {
   ColumnType,
@@ -25,8 +28,12 @@ import { createAppointmentAction } from "redux/VirtualClinicRedux/CreateAppointm
 import { getAppointmentsAction } from "redux/VirtualClinicRedux/GetAppointments/getAppoinmentsAction";
 import { updateAppointmentAction } from "redux/VirtualClinicRedux/UpdateAppointment/updateAppointmentAction";
 import { deleteAppointmentAction } from "redux/VirtualClinicRedux/DeleteAppointment/deleteAppointmentAction";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import moment from "moment";
+import CoolCalendar from "components/CoolCalendar/CoolCalendar";
+import SearchButton from "components/SearchButton/SearchButton";
+import AppointmentCard from "components/AppointmentCard/AppointmentCard";
+import { motion } from "framer-motion";
 
 interface DataType {
   patientName: any;
@@ -40,10 +47,6 @@ interface DataType {
 type DataIndex = keyof DataType;
 
 const AppointmentsScreen = () => {
-  // const { addingFamMemLoading, confirm } = useSelector(
-  //   (state: RootState) => state.createAppointmentReducer
-  // );
-
   const { appointmentLoading, userAppointments } = useSelector(
     (state: RootState) => state.getAppointmentsReducer
   );
@@ -54,13 +57,17 @@ const AppointmentsScreen = () => {
 
   const dispatch: any = useDispatch();
 
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
+  const [upcomingAppointments, setUpcomingAppointments] = useState(false);
+  const [pastAppointments, setPastAppointments] = useState(false);
+
   const data: DataType[] = userAppointments?.map((appointment: any) => {
     const date = moment(appointment.date);
     return {
       patientName: appointment.patient.name,
       doctorName: appointment.doctor.name,
       date: date.toDate(),
-      dateStr: date.format("dddd, MMMM D, yyyy"),
+      dateStr: date.format("dddd, D MMMM, yyyy"),
       time: date.format("h:mm a"),
       status: appointment.status,
       key: appointment._id,
@@ -68,18 +75,26 @@ const AppointmentsScreen = () => {
   });
 
   useEffect(() => {
-    dispatch(
+    fetchAppointments();
+   
+  }, []);
+
+  async function fetchAppointments() {
+    await dispatch(
       getAppointmentsAction({
         id: userData?._id,
         type: userType,
       })
     );
     console.log(userAppointments);
-  }, []);
+    updateDaysToHighlight();
+  }
+
+
 
   // useEffect(() => {
-    // console.log("userAppointments");
-    // console.log(userAppointments);
+  // console.log("userAppointments");
+  // console.log(userAppointments);
   // }, [userAppointments]);
 
   const [searchText, setSearchText] = useState("");
@@ -88,6 +103,9 @@ const AppointmentsScreen = () => {
   const [filteredInfo, setFilteredInfo] = useState<
     Record<string, FilterValue | null>
   >({});
+
+  const [dateFilter, setDateFilter] = useState<any>(null);
+  const [timeFilter, setTimeFilter] = useState<any>(null);
 
   const handleSearch = (
     selectedKeys: string[],
@@ -221,7 +239,7 @@ const AppointmentsScreen = () => {
       width: "30%",
       ...getColumnSearchProps("date"),
       // a.date is of type Date
-      sorter: (a, b) =>  a.date.toString().localeCompare(b.date.toString()),
+      sorter: (a, b) => a.date.toString().localeCompare(b.date.toString()),
       sortDirections: ["descend", "ascend"],
     },
     {
@@ -264,10 +282,239 @@ const AppointmentsScreen = () => {
     },
   ];
 
+  const [daysToHighlight, setDaysToHighlight] = useState<Dayjs[] | null>(null);
+
+  useEffect(() => {
+    console.log("userAppointments useEffect");
+    console.log(userAppointments);
+    updateDaysToHighlight();
+    
+  }, [userAppointments]);
+
+  function updateDaysToHighlight() {
+    if (userAppointments) {
+      var uniqueDays: dayjs.Dayjs[] = [];
+      userAppointments.forEach((app: any) => {
+        const date = dayjs(app.date);
+        if (!uniqueDays.includes(date)) {
+          uniqueDays.push(date);
+        }
+      });
+      setDaysToHighlight(uniqueDays);
+    }
+  }
+  function getFilteredAppointments() {
+    var filteredAppointments;
+    if (selectedDate) {
+      filteredAppointments = userAppointments?.filter((app: any) => {
+        const date = dayjs(app.date);
+        return date.isSame(selectedDate, "day");
+      });
+    } else if (upcomingAppointments || pastAppointments) {
+      filteredAppointments = userAppointments;
+    } else {
+      return <p className="text-2xl">Select a date</p>;
+    }
+
+    if (dateFilter) {
+      filteredAppointments = filteredAppointments?.filter((app: any) => {
+        const date = dayjs(app.date);
+        return date.isSame(dateFilter, "day");
+      });
+    }
+
+    if (timeFilter) {
+      filteredAppointments = filteredAppointments?.filter((app: any) => {
+        const date = dayjs(app.date);
+        return date.isSame(timeFilter, "minute");
+      });
+    }
+
+    if (upcomingAppointments) {
+      filteredAppointments = filteredAppointments?.filter((app: any) => {
+        const date = dayjs(app.date);
+        return date.isAfter(dayjs());
+      });
+    }
+
+    if (pastAppointments) {
+      filteredAppointments = filteredAppointments?.filter((app: any) => {
+        const date = dayjs(app.date);
+        return date.isBefore(dayjs());
+      });
+    }
+
+    // Write the date of the different days in the list of filtered appointments before each different day
+    var components: any[] = [];
+    var prevDate = "";
+    var idx = 0;
+    filteredAppointments?.forEach((app: any) => {
+      const date = dayjs(app.date);
+      if (date.format("dddd, D MMMM, YYYY") !== prevDate) {
+        components.push(
+          // border bottom
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.5,
+              ease: [0.38, 0.01, 0.39, 1.1],
+              delay: idx * 0.08,
+            }}
+            className="w-full flex items-center justify-start pb-2 mb-3 border-b-2 border-gray-300"
+          >
+            <p className="text-2xl font-semibold">
+              {date.format("dddd, D MMMM, YYYY")}
+            </p>
+          </motion.div>
+        );
+        prevDate = date.format("dddd, D MMMM, YYYY");
+        idx++;
+      }
+      components.push(
+        <motion.div
+          className="w-full"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.5,
+            ease: [0.38, 0.01, 0.39, 1.1],
+            delay: idx * 0.1,
+          }}
+        >
+          <AppointmentCard appointment={app} />
+        </motion.div>
+      );
+      idx++;
+    });
+
+    return components;
+  }
+
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
-      <h1 className="pageHeading">Appointments</h1>
-      <Table dataSource={data} columns={columns} />
+      <h1 className="pageHeading" style={{ marginBottom: 0 }}>
+        Appointments
+      </h1>
+      {/* <Table dataSource={data} columns={columns} /> */}
+
+      <div className="w-full flex items-start justify-center gap-x-16">
+        {/* Calendar */}
+        <div
+          style={{
+            transform: "scale(1.2)",
+            marginTop: "7rem",
+          }}
+        >
+          <CoolCalendar
+            selectedDate={selectedDate}
+            setSelectedDate={(date: Dayjs | null) => {
+              setSelectedDate(date);
+              setPastAppointments(false);
+              setUpcomingAppointments(false);
+            }}
+            daysToHighlight={daysToHighlight ?? []}
+            loading={appointmentLoading}
+          />
+        </div>
+
+        {/* Appointments */}
+        <div className="flex flex-col items-center justify-start gap-y-4">
+          <div className="w-full flex items-center justify-start gap-x-2">
+            <Button
+              className={`
+                ${pastAppointments ? styles.filterBtnActive : styles.filterBtn}
+              `}
+              onClick={() => {
+                setPastAppointments((past) => {
+                  if (!past) {
+                    setUpcomingAppointments(false);
+                    setSelectedDate(null);
+                  }
+                  return !past;
+                });
+              }}
+            >
+              Past
+            </Button>
+            <Button
+              className={`
+                ${
+                  upcomingAppointments
+                    ? styles.filterBtnActive
+                    : styles.filterBtn
+                }`}
+              onClick={() => {
+                setUpcomingAppointments((upcoming) => {
+                  if (!upcoming) {
+                    setPastAppointments(false);
+                    setSelectedDate(null);
+                  }
+                  return !upcoming;
+                });
+              }}
+            >
+              Upcoming
+            </Button>
+          </div>
+          {/* FILTERS */}
+          <div className={`flex gap-x-2`}>
+            <DatePicker
+              format={"DD/MM/YYYY"}
+              value={dateFilter}
+              onChange={(value) => {
+                setDateFilter(value);
+              }}
+              allowClear
+              placeholder="Select date for appointment"
+              className={`${inputStyles.lightInputField}`}
+              style={{
+                width: "15rem",
+              }}
+            />
+
+            <TimePicker
+              className={`${inputStyles.lightInputField}`}
+              format={"hh:mm a"}
+              onSelect={(value) => {
+                setTimeFilter(value);
+              }}
+              onChange={(value) => {
+                setTimeFilter(value);
+              }}
+              value={timeFilter}
+              allowClear
+              style={{
+                width: "12rem",
+              }}
+            />
+
+            {/* APPLY FILTERS */}
+            <SearchButton
+              // noSearchIcon
+              // text="Apply"
+              onClick={() => {
+                // filterDoctors();
+              }}
+            />
+          </div>
+
+          {/* APPOINTMENTS */}
+          {/* display appointment card for each appointment on selected date (sorted ascendingly by time) */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="w-full h-full flex flex-col items-center justify-start gap-y-4 mt-2"
+            style={{
+              height: "calc(100vh - 15rem)",
+              overflowY: "auto",
+            }}
+          >
+            {getFilteredAppointments()}
+          </motion.div>
+        </div>
+      </div>
     </div>
   );
 };

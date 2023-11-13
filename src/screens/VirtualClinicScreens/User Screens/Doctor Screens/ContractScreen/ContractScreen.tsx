@@ -1,4 +1,3 @@
-// import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/ContractScreen/ContractScreen.module.css";
 import { useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";

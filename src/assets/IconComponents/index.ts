@@ -4,6 +4,7 @@ export { default as CreditCardIcon } from "./CreditCardIcon";
 export { default as DashboardIcon } from "./DashboardIcon";
 export { default as DoctorsIcon } from "./DoctorsIcon";
 export { default as DollarIcon } from "./DollarIcon";
+export { default as Dots } from "./Dots";
 export { default as EducationIcon } from "./EducationIcon";
 export { default as ErrorIllustration } from "./ErrorIllustration";
 export { default as FamilyIcon } from "./FamilyIcon";

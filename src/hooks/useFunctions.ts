@@ -3,12 +3,14 @@ import { CSSProperties } from "react";
 import { RootState } from "redux/rootReducer";
 import JSZip from "jszip";
 import axios from "axios";
+import store from "redux/store";
 
 export const useFunctions = () => {
   const handleUpload = async (form: {
     files: any;
     endpoint: any;
     data?: any;
+    sendToken?: boolean;
   }) => {
     const formData = new FormData();
 
@@ -26,7 +28,14 @@ export const useFunctions = () => {
 
     return await axios.post(
       `${process.env.REACT_APP_BACKEND_URL}${form.endpoint}`,
-      formData
+      formData,
+      {
+        headers: {
+          Authorization: form.sendToken
+            ? `Bearer ${store.getState()?.userReducer?.accessToken}`
+            : "",
+        },
+      }
     );
   };
 

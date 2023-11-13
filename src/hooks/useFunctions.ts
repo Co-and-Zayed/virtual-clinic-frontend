@@ -2,8 +2,34 @@ import { useSelector } from "react-redux";
 import { CSSProperties } from "react";
 import { RootState } from "redux/rootReducer";
 import JSZip from "jszip";
+import axios from "axios";
 
 export const useFunctions = () => {
+  const handleUpload = async (form: {
+    files: any;
+    endpoint: any;
+    data?: any;
+  }) => {
+    const formData = new FormData();
+
+    if (form.data) {
+      Object.keys(form.data).forEach((key) => {
+        formData.append(key, form.data[key]);
+      });
+    }
+
+    if (form.files) {
+      for (let i = 0; i < Array.from(form.files).length; i++) {
+        formData.append(`files`, form.files[i]);
+      }
+    }
+
+    return await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}${form.endpoint}`,
+      formData
+    );
+  };
+
   // {files: any} for multiple files -> downloads them as a zip file
   // {file: any} for a single file -> downloads it as a single file
   // both expect the url of the each file in the bucket
@@ -31,7 +57,12 @@ export const useFunctions = () => {
         const link = document.createElement("a");
 
         // Set the download attribute with a unique name
-        link.download = `El7a2ni--my_health_records@${new Date().getDate()}.zip`;
+        const currentDate = new Date();
+        const formattedDate = `${currentDate.getDate()}-${
+          currentDate.getMonth() + 1
+        }-${currentDate.getFullYear()}@${currentDate.getHours()}h${currentDate.getMinutes()}m`;
+
+        link.download = `El7a2ni--health_records--${formattedDate}.zip`;
 
         // Create a URL for the blob and set it as the href
         link.href = URL.createObjectURL(blob);
@@ -68,5 +99,6 @@ export const useFunctions = () => {
   };
   return {
     handleDownload,
+    handleUpload,
   };
 };

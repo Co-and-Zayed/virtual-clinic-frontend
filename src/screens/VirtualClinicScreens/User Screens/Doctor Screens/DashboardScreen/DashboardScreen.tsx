@@ -100,7 +100,13 @@ const DashboardScreen = () => {
     emergencyContactNumber: string;
   }
 
-  return <ContractScreen />;
+  return userData?.status === "WAITING" || userData?.status === "ACCEPTED" ? (
+    <ContractScreen />
+  ) : userData?.status === "PENDING" ? (
+    <p>Your documents are being reviewed</p>
+  ) : (
+    <p>Error 404</p>
+  );
 };
 
 export default DashboardScreen;

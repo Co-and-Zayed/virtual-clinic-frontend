@@ -24,6 +24,7 @@ instance.interceptors.request.use(
 
     if (token) {
       config.headers!.Authorization = `Bearer ${token}`;
+      config.headers!.mode = `no-cors`;
       config.data = {
         ...config.data,
         refreshToken: store.getState()?.userReducer?.refreshToken,

@@ -25,6 +25,7 @@ const PatientRegister: FC<PatientRegisterProps> = ({ backFn }) => {
 
   const [dateOfBirth, setDateOfBirth] = useState<any>(null);
 
+
   // const [fields, setFields] = useState({
   //   name: "",
   //   email: "",
@@ -158,6 +159,10 @@ const PatientRegister: FC<PatientRegisterProps> = ({ backFn }) => {
       }
 
       if (!errorExists) {
+        const dateParts = values.date_of_birth.split("/");
+        const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+        const dateObject = new Date(formattedDate);
+
         await dispatch(
           regsiterAction({
             name: values.name,
@@ -165,12 +170,13 @@ const PatientRegister: FC<PatientRegisterProps> = ({ backFn }) => {
             type: "PATIENT",
             username: values.username,
             password: values.password,
-            date_of_birth: new Date(values.date_of_birth.toString()),
+            date_of_birth: dateObject,
             gender: values.gender,
             mobileNumber: values.mobileNumber,
             healthRecords: values.healthRecords,
             emergencyContactName: values.emergencyContactName,
             emergencyContactNumber: values.emergenyContactNumber,
+            // files: patientFiles,
           })
         );
         navigate("/dashboard");
@@ -194,6 +200,9 @@ const PatientRegister: FC<PatientRegisterProps> = ({ backFn }) => {
   // name, email, username, dob, password, confirm password
   // Section 2:
   // Hourly rate, affiliation, Educational bg
+
+  
+
   return (
     <div
       className="flex flex-col items-center gap-y-3"

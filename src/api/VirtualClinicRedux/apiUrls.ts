@@ -62,7 +62,7 @@ export const createAppointment = () => {
   return `patient/createAppointment`;
 };
 export const getAppointments = (type: any) => {
-  return `${type.toLowerCase()}/getAppointments/${type}`;
+  return `${type.toLowerCase()}/getAppointments`;
 };
 export const deleteAppointment = (id: any) => {
   return `patient/deleteAppointment/${id}`;
@@ -130,6 +130,17 @@ export const deleteDoctor = () => {
 export const deletePatient = () => {
   return `adminAPI/deletePatient`;
 };
+
+export const acceptDoctor = () => {
+  return `adminAPI/acceptDoctor`;
+};
+
+export const rejectDoctor = () => {
+  return `adminAPI/rejectDoctor`;
+};
+
+export const viewAllContracts = () => {
+  return `doctor/viewAllContracts`;
 export const viewPackages = () => {
   return `patient/viewPackages`;
 };

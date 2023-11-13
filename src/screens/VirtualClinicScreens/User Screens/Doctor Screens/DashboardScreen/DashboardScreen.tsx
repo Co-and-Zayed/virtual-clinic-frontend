@@ -9,6 +9,7 @@ import { listAllPatientsAction } from "redux/VirtualClinicRedux/ListAllPatients/
 import { SearchOutlined } from "@ant-design/icons";
 import { Table, Input, Button } from "antd";
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
+import { useFunctions } from "hooks/useFunctions";
 //import { listAllUsersAction } from "redux/VirtualClinicRedux/ListAllUsers/listAllUsersAction";
 
 const DashboardScreen = () => {
@@ -18,6 +19,7 @@ const DashboardScreen = () => {
   );
 
   const { userData } = useSelector((state: RootState) => state.userReducer);
+  const { handleDownload } = useFunctions();
 
   useEffect(() => {
     dispatch(listAllPatientsAction({ doctorUsername: userData?.username })); // sending the request, and update the states
@@ -170,7 +172,7 @@ const DashboardScreen = () => {
             {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}
           </span>
         );
-      }
+      },
     },
     { title: "Gender", dataIndex: "gender", key: "gender" },
     {
@@ -183,6 +185,12 @@ const DashboardScreen = () => {
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
       <h1>My Patients</h1>
+
+      {
+        <a onClick={() => handleDownload({ files: userData?.doctorDocuments })}>
+          Download My Documents
+        </a>
+      }
 
       <button
         className={styles.button}

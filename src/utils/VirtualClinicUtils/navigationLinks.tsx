@@ -126,3 +126,11 @@ export const navLinksAdmin = [
     route: Routes.VIEW_PATIENTS_PATH,
   },
 ];
+
+export const pendingNavLinksDoctor = [
+  {
+    name: "Dashboard",
+    route: Routes.DASHBOARD_PATH,
+    icon: <DashboardIcon />,
+  },
+];

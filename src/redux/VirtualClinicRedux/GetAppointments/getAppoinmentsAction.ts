@@ -12,9 +12,9 @@ export const getAppointmentsAction =
     try {
       dispatch({ type: GET_APPOINTMENTS_DATA_LOADING, payload: true });
 
-      const response = await api.post(
+      const response = await api.get(
         getAppointments(requestBody.type), // Your Endpoint
-        requestBody // (for requests with a body)
+         // (for requests with a body)
       );
 
       dispatch({ type: GET_APPOINTMENTS_DATA_SUCCESS, payload: response.data });

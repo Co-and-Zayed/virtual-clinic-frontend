@@ -1,4 +1,4 @@
-import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/ContractScreen/ContractScreen.module.css";
+// import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/ContractScreen/ContractScreen.module.css";
 import { useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
@@ -371,14 +371,14 @@ const ContractScreen = () => {
     <div className={`w-full flex flex-col items-start justify-center`}>
       <h1>My Contracts</h1>
 
-      <button
+      {/* <button
         className={styles.button}
         onClick={() => {
           navigate(Routes.VIEW_CONTRACT_PATH, {});
         }}
       >
         Filter by upcoming appointments
-      </button>
+      </button> */}
 
       <Table columns={columns} dataSource={data} />
     </div>

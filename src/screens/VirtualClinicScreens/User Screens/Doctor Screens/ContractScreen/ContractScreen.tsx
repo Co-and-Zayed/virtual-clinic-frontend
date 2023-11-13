@@ -1,4 +1,4 @@
-import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/DashboardScreen/DashboardScreen.module.css";
+import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/ContractScreen/ContractScreen.module.css";
 import { useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
@@ -26,7 +26,7 @@ import type {
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
 //import { listAllUsersAction } from "redux/VirtualClinicRedux/ListAllUsers/listAllUsersAction";
 
-const DashboardScreen = () => {
+const ContractScreen = () => {
   const dispatch: any = useDispatch();
   const { allContracts } = useSelector(
     (state: RootState) => state.listAllContractsReducer
@@ -385,4 +385,4 @@ const DashboardScreen = () => {
   );
 };
 
-export default DashboardScreen;
+export default ContractScreen;

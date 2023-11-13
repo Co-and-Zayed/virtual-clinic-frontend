@@ -138,3 +138,7 @@ export const acceptDoctor = () => {
 export const rejectDoctor = () => {
   return `adminAPI/rejectDoctor`;
 };
+
+export const viewAllContracts = () => {
+  return `doctor/viewAllContracts`;
+};

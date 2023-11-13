@@ -27,10 +27,8 @@ import {
 } from "antd";
 import {
   LoadingOutlined,
-  PlusOutlined,
   DeleteOutlined,
   SearchOutlined,
-  DownOutlined,
 } from "@ant-design/icons";
 import { adminListAllDoctorsAction } from "redux/VirtualClinicRedux/AdminListAllDoctors/adminListAllDoctorsAction";
 import { deleteDoctorAction } from "redux/VirtualClinicRedux/DeleteDoctor/deleteDoctorAction";
@@ -86,6 +84,21 @@ const DoctorsScreen = () => {
   );
 
   const handleDoctorRequest = async (username: any, values: any) => {
+    if (values === "accept") {
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}adminAPI/sendContract`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({
+            username: username,
+          }),
+        }
+      );
+    }
     const res = await fetch(
       `${process.env.REACT_APP_BACKEND_URL}adminAPI/${values}Doctor`,
       {
@@ -336,7 +349,7 @@ const DoctorsScreen = () => {
     {
       title: "Action",
       dataIndex: "",
-      key: "delete",
+      key: "x",
       render: (record) => (
         <Space>
           <Space>
@@ -444,7 +457,18 @@ const DoctorsScreen = () => {
       )}
       <br />
       <div>
-        <Table columns={columns} dataSource={data} />
+        <Table
+          columns={columns}
+          expandable={{
+            expandedRowRender: (record) => (
+              <p style={{ margin: 0 }}>
+                <a>{record.email}</a>
+              </p>
+            ),
+            rowExpandable: (record) => record.name !== "Not Expandable",
+          }}
+          dataSource={data}
+        />
       </div>
     </div>
   );

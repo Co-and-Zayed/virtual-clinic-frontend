@@ -73,7 +73,11 @@ const SideBar: FC<SideBarProps> = () => {
   useEffect(() => {
     console.log("CURRENT USER TYPE: ", userType);
     if (userType === "DOCTOR") {
-      setCurrentNavLinks(navLinksDoctor);
+      if (userData?.status === "ACCEPTED") {
+        setCurrentNavLinks(navLinksDoctor);
+      } else {
+        setCurrentNavLinks(navLinksDoctor.slice(0, 1));
+      }
     } else if (userType === "PATIENT") {
       setCurrentNavLinks(navLinksPatient);
       setCurrentSettingsLinks(settingsPatient);
@@ -93,6 +97,11 @@ const SideBar: FC<SideBarProps> = () => {
     await dispatch(logoutAction());
     navigate("/login");
   };
+
+  useEffect(() => {
+    console.log("Balabiz Seif");
+    console.log(userData);
+  }, [userData]);
 
   useEffect(() => {
     setCurrentLink(-1);

@@ -10,6 +10,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Table, Input, Button } from "antd";
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
 import { useFunctions } from "hooks/useFunctions";
+import ContractScreen from "../ContractScreen/ContractScreen";
 //import { listAllUsersAction } from "redux/VirtualClinicRedux/ListAllUsers/listAllUsersAction";
 
 const DashboardScreen = () => {
@@ -99,127 +100,7 @@ const DashboardScreen = () => {
     emergencyContactNumber: string;
   }
 
-  const columns: ColumnsType<DataType> = [
-    Table.SELECTION_COLUMN,
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-      }) => (
-        <div style={{ padding: 8 }}>
-          <input
-            placeholder={`Search name`}
-            value={
-              selectedKeys[0] !== undefined ? selectedKeys[0].toString() : ""
-            }
-            onChange={(e) =>
-              setSelectedKeys(e.target.value ? [e.target.value] : [])
-            }
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSearch(selectedKeys, confirm, "name");
-              }
-            }}
-            style={{ width: 188, marginBottom: 8, display: "block" }}
-          />
-          <Button
-            onClick={() => handleSearch(selectedKeys, confirm, "name")}
-            size="small"
-            style={{ width: 90, marginRight: 8 }}
-          >
-            Search
-          </Button>
-          <Button
-            onClick={handleResetSearch}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Clear
-          </Button>
-        </div>
-      ),
-      filterIcon: (filtered) => (
-        <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
-      ),
-      onFilter: (value, record) => {
-        const stringValue = String(value).toLowerCase();
-        const name = String(record.name).toLowerCase();
-        return name.includes(stringValue);
-      },
-      filtered: !!searchText,
-      render: (text) =>
-        searchedColumn === "name" ? (
-          <span style={{ backgroundColor: "#ffc069" }}>{text}</span>
-        ) : (
-          text
-        ),
-    },
-    Table.EXPAND_COLUMN,
-    { title: "Email", dataIndex: "email", key: "Email" },
-    {
-      title: "Date of Birth",
-      dataIndex: "date_of_birth",
-      key: "date_of_birth",
-      render: (date_of_birth: Date) => {
-        const date = new Date(date_of_birth);
-        return (
-          <span>
-            {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}
-          </span>
-        );
-      },
-    },
-    { title: "Gender", dataIndex: "gender", key: "gender" },
-    {
-      title: "Health Records",
-      dataIndex: "healthRecords",
-      key: "healthRecords",
-    },
-  ];
-
-  return (
-    <div className={`w-full flex flex-col items-start justify-center`}>
-      <h1>My Patients</h1>
-
-      {
-        <a onClick={() => handleDownload({ files: userData?.doctorDocuments })}>
-          Download My Documents
-        </a>
-      }
-
-      <button
-        className={styles.button}
-        onClick={() => {
-          navigate(Routes.DOCTORS_UPCOMING_PATIENTS_PATH, {});
-        }}
-      >
-        Filter by upcoming appointments
-      </button>
-
-      <Table
-        columns={columns}
-        rowSelection={{
-          type: "radio",
-          selectedRowKeys: [selectedRowKey],
-          onSelect: (record: DataType) => handleRowSelect(record),
-        }}
-        expandable={{
-          expandedRowRender: (record) => generateExpandable(record),
-          onExpand: (expanded, record) => handleExpand(expanded, record),
-        }}
-        dataSource={allPatients?.map((patient: any, index: any) => ({
-          ...patient,
-          key: patient.key || index.toString(), // Use index as a fallback key
-        }))}
-        expandedRowKeys={expandedRowKeys}
-      />
-    </div>
-  );
+  return <ContractScreen />;
 };
 
 export default DashboardScreen;

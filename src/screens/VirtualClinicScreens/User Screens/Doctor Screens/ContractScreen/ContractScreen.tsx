@@ -1,4 +1,4 @@
-import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/ContractScreen/ContractScreen.module.css";
+// import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/ContractScreen/ContractScreen.module.css";
 import { useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
@@ -24,6 +24,7 @@ import type {
   FilterConfirmProps,
 } from "antd/es/table/interface";
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
+import { UPDATE_USER_DATA } from "redux/User/loginTypes";
 //import { listAllUsersAction } from "redux/VirtualClinicRedux/ListAllUsers/listAllUsersAction";
 
 const ContractScreen = () => {
@@ -70,7 +71,7 @@ const ContractScreen = () => {
   const [expandedRowKeys, setExpandedRowKeys] = useState<string[]>([]);
 
   const handleContractRequest = async (ID: any, values: any) => {
-    const res = await fetch(
+    const res: any = await fetch(
       `${process.env.REACT_APP_BACKEND_URL}doctor/${values}Contract`,
       {
         method: "PUT",
@@ -83,8 +84,11 @@ const ContractScreen = () => {
         }),
       }
     );
-    dispatch(listAllContractsAction());
+    await dispatch(listAllContractsAction());
     const data = await res.json();
+    console.log(data, "Response")
+    await dispatch({ type: UPDATE_USER_DATA, payload: data.doctor });
+    window.location.reload();
     notification.success({
       message: "Contract Status Updated Successfully",
       placement: "topRight",
@@ -324,7 +328,6 @@ const ContractScreen = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      defaultFilteredValue: ["PENDING"],
       filters: [
         { text: "Accepted", value: "ACCEPTED" },
         { text: "Pending", value: "PENDING" },
@@ -347,16 +350,22 @@ const ContractScreen = () => {
       key: "delete",
       render: (record) => (
         <Space>
-          <Space>
-            <a onClick={() => handleContractRequest(record.key, "accept")}>
-              Accept
-            </a>
-          </Space>
-          <Space>
-            <a onClick={() => handleContractRequest(record.key, "reject")}>
-              Reject
-            </a>
-          </Space>
+          {record.status === "PENDING" ? (
+            <>
+              <Space>
+                <a onClick={() => handleContractRequest(record.key, "accept")}>
+                  Accept
+                </a>
+              </Space>
+              <Space>
+                <a onClick={() => handleContractRequest(record.key, "reject")}>
+                  Reject
+                </a>
+              </Space>
+            </>
+          ) : (
+            <p>-</p>
+          )}
         </Space>
       ),
     },
@@ -370,16 +379,6 @@ const ContractScreen = () => {
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
       <h1>My Contracts</h1>
-
-      <button
-        className={styles.button}
-        onClick={() => {
-          navigate(Routes.VIEW_CONTRACT_PATH, {});
-        }}
-      >
-        Filter by upcoming appointments
-      </button>
-
       <Table columns={columns} dataSource={data} />
     </div>
   );

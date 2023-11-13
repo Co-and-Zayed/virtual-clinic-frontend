@@ -23,3 +23,10 @@ export const VIEW_PATIENTS_PATH = "/view-patients";
 
 export const PROFILE_PATH = "/profile";
 export const PASSWORD_PATH = "/password";
+
+export const  MY_PACKAGE_PATH = "/viewPackages";
+export const  MY_FAMILY_PACKAGES_PATH = "/viewFamilyPackages";
+export const  FAMILY_MEMBER_PACKAGE_PATH = "/familyMemberPackage";
+
+
+

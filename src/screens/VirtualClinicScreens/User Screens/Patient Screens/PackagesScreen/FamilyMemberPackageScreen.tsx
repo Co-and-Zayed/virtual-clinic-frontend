@@ -17,9 +17,8 @@ import axios from "axios";
 import { viewPackagesAction } from "redux/VirtualClinicRedux/viewPackages/viewPackagesAction";
 import { unsubscribeFromPackageAction } from "redux/VirtualClinicRedux/UnsubscribeFromPackage/unsubscribeFromPackageAction";
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
-import PaymentMethod from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/PaymentScreens/PaymentMethod";
 
-const PackagesScreen = () => {
+const FamilyMemberPackageScreen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   const dispatch: any = useDispatch();
   const [selectedPackage, setSelectedPackage] = useState<any>(null);
@@ -98,21 +97,7 @@ const unsubscribe = async () => {
                       <h1 className="mr-2">{packageItem.type}</h1>
                       <p>| {packageItem.tier}</p>
                     </div>
-                    {packageItem.status === "SUBSCRIBED" ? (
-                  // Render UNSUBSCRIBE button if status exists
-                  <button
-                    className={`${styles.editLink}`}
-                    onClick={unsubscribe}
-                  >
-                    UNSUBSCRIBE
-                  </button>
-                ) : (
-                  // Render SUBSCRIBE button if status doesn't exist
-                  <button className={`${styles.editLink}`} onClick={() => {
-                    // navigate(Routes.MY_FAMILY_PACKAGES_PATH, {
-                    // });
-                  }} >SUBSCRIBE</button>
-                )}
+                    <button className={`${styles.editLink}`} onClick={unsubscribe}>UNSUBSCRIBE</button>
                   </div>
                   <p>EGP {packageItem.price_per_year}</p>
                   <p>
@@ -123,26 +108,7 @@ const unsubscribe = async () => {
                     Medicine Discount: {packageItem.medicine_discount * 100}%
                   </p>
                   <p>Family Discount: {packageItem.family_discount * 100}%</p>
-                  {packageItem.status && (
-                // Render Status if it exists
-                <p>Status: {packageItem.status}</p>
-              )}
-              {packageItem.status === "CANCELLED" && (
-                // Render END DATE if status is "CANCELLED"
-                <p>End Date:  {new Date(packageItem.healthPackageRenewalDate).toLocaleDateString()}</p>
-              )}
-              {packageItem.status === "UNSUBSCRIBED" && (
-                // Render VALID UNTIL if status is "UNSUBSCRIBED"
-                <p>Valid Until: {new Date(packageItem.healthPackageRenewalDate).toLocaleDateString()}</p>
-              )}
-              {packageItem.status === "SUBSCRIBED" && (
-                // Render RENEWAL DATE if status is "SUBSCRIBED"
-                <p>Renewal Date:  {new Date(packageItem.healthPackageRenewalDate).toLocaleDateString()}</p>
-              )}
-               {packageItem.discountedPrice && (
-                // Render Status if it exists
-                <p>Discounted Price: {packageItem.discountedPrice}</p>
-              )}
+                  <p>Status: {packageItem.status}</p>
                 </div>
               ))}
           </div>
@@ -152,4 +118,4 @@ const unsubscribe = async () => {
   );
 };
 
-export default PackagesScreen;
+export default FamilyMemberPackageScreen;

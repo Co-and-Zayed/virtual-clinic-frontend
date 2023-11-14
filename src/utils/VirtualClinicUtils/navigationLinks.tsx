@@ -8,9 +8,11 @@ import {
   LockIcon,
   PrescriptionsIcon,
   ProfileIcon,
+  MedicalIcon,
 } from "assets/IconComponents";
 import PatientProfileScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/ProfileScreen/ProfileScreen";
 import PatientPasswordScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/PasswordScreen/PasswordScreen";
+import MedicalScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/MedicalScreen/MedicalScreen";
 
 export const navLinksPatient = [
   {
@@ -30,7 +32,7 @@ export const navLinksPatient = [
   },
   {
     name: "Health Packages",
-    route: Routes.PACKAGES_PATH,
+    route: Routes.MY_PACKAGE_PATH,
     icon: <HealthIcon />,
   },
   {
@@ -57,6 +59,12 @@ export const settingsPatient = [
     route: Routes.SETTINGS_PATH + Routes.PASSWORD_PATH,
     sub_page: <PatientPasswordScreen />,
     icon: <LockIcon />,
+  },
+  {
+    name: "Health",
+    route: Routes.SETTINGS_PATH + Routes.MEDICAL_HISTORY_PATH,
+    sub_page: <MedicalScreen />,
+    icon: <MedicalIcon />,
   },
 ];
 
@@ -124,5 +132,13 @@ export const navLinksAdmin = [
   {
     name: "Patients",
     route: Routes.VIEW_PATIENTS_PATH,
+  },
+];
+
+export const pendingNavLinksDoctor = [
+  {
+    name: "Dashboard",
+    route: Routes.DASHBOARD_PATH,
+    icon: <DashboardIcon />,
   },
 ];

@@ -1,6 +1,6 @@
 import styles from "screens/VirtualClinicScreens/LoginScreen/LoginScreen2.module.css";
 import inputStyles from "components/InputField/InputField.module.css";
-import { DatePicker, Input, Select, Spin } from "antd";
+import { DatePicker, Input, Select, Spin, Upload } from "antd";
 import { useFormik } from "formik";
 import DoctorRegisterModel from "models/DoctorRegisterModel";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,7 @@ import SubmitButton from "components/SubmitButton/SubmitButton";
 import { FC, useState } from "react";
 import InputField from "components/InputField/InputField";
 import JellyLoader from "components/JellyLoader/JellyLoader";
+import UploadButton from "components/UploadButton/UploadButton";
 
 interface DoctorRegisterProps {
   backFn: () => void;
@@ -23,6 +24,8 @@ const DoctorRegister: FC<DoctorRegisterProps> = ({ backFn }) => {
   const [section, setSection] = useState(1);
 
   const [dateOfBirth, setDateOfBirth] = useState<any>(null);
+
+  const [fileList, setFileList] = useState<any[]>([]); // Initialize as an empty array
 
   // const [fields, setFields] = useState({
   //   name: "",
@@ -143,6 +146,9 @@ const DoctorRegister: FC<DoctorRegisterProps> = ({ backFn }) => {
       console.log("ERROR EXISTS AFTER ALL: ", errorExists);
 
       if (!errorExists) {
+        const dateParts = values.date_of_birth.split("/");
+        const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+        const dateObject = new Date(formattedDate);
         await dispatch(
           regsiterAction({
             name: values.name,
@@ -152,10 +158,12 @@ const DoctorRegister: FC<DoctorRegisterProps> = ({ backFn }) => {
             password: values.password,
             gender: values.gender,
             specialty: values.specialty,
-            date_of_birth: new Date(values.date_of_birth.toString()),
+            date_of_birth: dateObject,
             affiliation: values.affiliation,
             educationalBackground: values.educationalBackground,
             hourlyRate: values.hourlyRate,
+            files: fileList,
+            createdAt: new Date(),
           })
         );
         navigate("/dashboard");
@@ -329,6 +337,9 @@ const DoctorRegister: FC<DoctorRegisterProps> = ({ backFn }) => {
               onChange={formik.handleChange}
               value={formik.values.educationalBackground}
             />
+            <div className="w-full h-full flex items-center justify-start">
+              <UploadButton fileList={fileList} setFileList={setFileList} />
+            </div>
           </div>
         )}
 

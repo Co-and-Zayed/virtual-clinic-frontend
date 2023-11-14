@@ -13,14 +13,7 @@ import { getDoctorInfoAction } from "redux/VirtualClinicRedux/GetDoctorInfo/getD
 import JellyLoader from "components/JellyLoader/JellyLoader";
 import DoctorCard from "components/DoctorCard/DoctorCard";
 import { motion } from "framer-motion";
-import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
 import dayjs, { Dayjs } from "dayjs";
-import { PickersDay, PickersDayProps } from "@mui/x-date-pickers";
-import Badge from "@mui/material/Badge";
-import { BackIcon, RightArrowIcon } from "assets/IconComponents";
-import InputField from "components/InputField/InputField";
-import RoundedButton from "components/RoundedButton/RoundedButton";
 import { Stripe, loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
@@ -108,7 +101,7 @@ const PayWithCard: FC<PayWithCard> = ({
           <div className="w-[33rem] flex flex-col items-end justify-center gap-y-2">
             {/* ORIGINAL */}
             <p className={`${styles.priceLight}`}>
-              {`${priceOriginal.toLocaleString()} EGP`}
+              {`${priceOriginal?.toLocaleString()} EGP`}
             </p>
             {
               // DISCOUNT
@@ -118,12 +111,12 @@ const PayWithCard: FC<PayWithCard> = ({
                     {`(${(
                       (100.0 * (priceOriginal - priceDiscounted)) /
                       priceOriginal
-                    ).toLocaleString()}% off)`}
+                    )?.toLocaleString()}% off)`}
                   </p>
                   <p className={`${styles.priceLight}`}>
                     {`- ${(
                       priceOriginal - priceDiscounted
-                    ).toLocaleString()} EGP`}
+                    )?.toLocaleString()} EGP`}
                   </p>
                 </div>
               )
@@ -132,7 +125,7 @@ const PayWithCard: FC<PayWithCard> = ({
               <div className={`text-2xl ${styles.uppercase}`}>TOTAL</div>
               <div className="flex items-end justify-end gap-x-3">
                 <p className="text-6xl darkGreenText font-semibold">
-                  {priceDiscounted.toLocaleString()}
+                  {priceDiscounted?.toLocaleString()}
                 </p>
                 <p className="text-3xl opacity-30  font-semibold">EGP</p>
               </div>

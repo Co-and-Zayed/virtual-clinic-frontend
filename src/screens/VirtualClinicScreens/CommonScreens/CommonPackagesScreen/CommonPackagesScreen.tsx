@@ -5,7 +5,6 @@ import { RootState } from "~/redux/rootReducer";
 import { useSelector } from "react-redux";
 import AdminPackagesScreen from "../../User Screens/Admin Screens/AdminsScreen/AdminsScreen";
 import PatientPackagesScreen from "../../User Screens/Patient Screens/PackagesScreen/PackagesScreen";
-
 const CommonPackagesScreen = () => {
   const { loginLoading, userType } = useSelector(
     (state: RootState) => state.userReducer

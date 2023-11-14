@@ -9,7 +9,10 @@ export const useFunctions = () => {
   const handleUpload = async (form: {
     files: any;
     endpoint: any;
-    data?: any;
+    data: {
+      createdAt: Date;
+      [key: string]: any;
+    };
   }) => {
     const formData = new FormData();
 

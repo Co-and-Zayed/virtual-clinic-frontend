@@ -73,7 +73,11 @@ const SideBar: FC<SideBarProps> = () => {
   useEffect(() => {
     console.log("CURRENT USER TYPE: ", userType);
     if (userType === "DOCTOR") {
-      setCurrentNavLinks(navLinksDoctor);
+      if (userData?.status === "ACCEPTED") {
+        setCurrentNavLinks(navLinksDoctor);
+      } else {
+        setCurrentNavLinks(navLinksDoctor.slice(0, 1));
+      }
     } else if (userType === "PATIENT") {
       setCurrentNavLinks(navLinksPatient);
       setCurrentSettingsLinks(settingsPatient);
@@ -93,6 +97,11 @@ const SideBar: FC<SideBarProps> = () => {
     await dispatch(logoutAction());
     navigate("/login");
   };
+
+  useEffect(() => {
+    console.log("Balabiz Seif");
+    console.log(userData);
+  }, [userData]);
 
   useEffect(() => {
     setCurrentLink(-1);
@@ -122,7 +131,9 @@ const SideBar: FC<SideBarProps> = () => {
         <div className={`w-full flex flex-col items-start justify-center`}>
           <div className={`${styles.walletText} mb-1`}>MY WALLET</div>
           <div className="flex items-end">
-            <p className={`${styles.walletValue}`}>{userData?.wallet.toLocaleString()}</p>
+            <p className={`${styles.walletValue}`}>
+              {userData?.wallet?.toLocaleString()}
+            </p>
             <p className={`${styles.walletCurrency}`}>EGP</p>
           </div>
         </div>
@@ -143,7 +154,9 @@ const SideBar: FC<SideBarProps> = () => {
             {generateLink({
               name: "Settings",
               icon: <SettingsIcon />,
-              route: currentSettingsLinks ? currentSettingsLinks[0]?.route : "/settings",
+              route: currentSettingsLinks
+                ? currentSettingsLinks[0]?.route
+                : "/settings",
               index: currentNavLinks?.length + 1,
             })}
 

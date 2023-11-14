@@ -1,4 +1,4 @@
-import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/SettingsScreen/SettingsScreen.module.css";
+import styles from "screens/VirtualClinicScreens/User Screens/Patient Screens/AppointmentsScreen/AppointmentsScreen.module.css";
 import { useNavigate } from "react-router";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,11 +25,15 @@ import { createAppointmentAction } from "redux/VirtualClinicRedux/CreateAppointm
 import { getAppointmentsAction } from "redux/VirtualClinicRedux/GetAppointments/getAppoinmentsAction";
 import { updateAppointmentAction } from "redux/VirtualClinicRedux/UpdateAppointment/updateAppointmentAction";
 import { deleteAppointmentAction } from "redux/VirtualClinicRedux/DeleteAppointment/deleteAppointmentAction";
+import dayjs from "dayjs";
+import moment from "moment";
 
 interface DataType {
-  patientEmail: string;
-  doctorEmail: string;
-  date: string;
+  patientName: any;
+  patientPhone: any;
+  doctorName: any;
+  date: Date;
+  dateStr: string;
   time: string;
   status: string;
   key: string;
@@ -45,30 +49,51 @@ const AppointmentsScreen = () => {
     (state: RootState) => state.getAppointmentsReducer
   );
 
-  const dispatch: any = useDispatch();
-
-  const data: DataType[] = userAppointments?.map((appointment: any) => ({
-    patientEmail: appointment.patientEmail,
-    doctorEmail: appointment.doctorEmail,
-    date: appointment.date.split("T")[0].replace(/-/g, "/"),
-    time: appointment.time,
-    status: appointment.status,
-    key: appointment._id,
-  }));
-
+//   const data: DataType[] = userAppointments?.map((appointment: any) => {
+//     const date = new Date(appointment.date);
+//     return {
+//       patientEmail: appointment.patient.email,
+//       doctorEmail: appointment.doctor.email,
+//       date: appointment.date.split("T")[0].replace(/-/g, "/"),
+//       time: date.getHours() + ":" + date.getMinutes(),
+//       status: appointment.status,
+//       key: appointment._id,
+//     };
+//   });
   const { userData, userType } = useSelector(
     (state: RootState) => state.userReducer
   );
 
+  const dispatch: any = useDispatch();
+
+  const data: DataType[] = userAppointments?.map((appointment: any) => {
+    const date = moment(appointment.date);
+    return {
+      patientName: appointment.patient.name,
+      patientPhone: appointment.patient.mobileNumber,
+      doctorName: appointment.doctor.name,
+      date: date.toDate(),
+      dateStr: date.format("dddd, MMMM D, yyyy"),
+      time: date.format("h:mm a"),
+      status: appointment.status,
+      key: appointment._id,
+    };
+  });
+
   useEffect(() => {
     dispatch(
       getAppointmentsAction({
-        email: userData?.email,
+        id: userData?._id,
         type: userType,
       })
     );
     console.log(userAppointments);
   }, []);
+
+  // useEffect(() => {
+    // console.log("userAppointments");
+    // console.log(userAppointments);
+  // }, [userAppointments]);
 
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
@@ -85,6 +110,7 @@ const AppointmentsScreen = () => {
     confirm();
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
+    console.log(selectedKeys[0]);
   };
 
   const handleReset = (clearFilters: () => void) => {
@@ -92,13 +118,12 @@ const AppointmentsScreen = () => {
     setSearchText("");
   };
 
-  const handleChange: TableProps<DataType>["onChange"] = (
-    pagination,
-    filters,
-    sorter
-  ) => {
-    console.log("Various parameters", pagination, filters, sorter);
-    setFilteredInfo(filters as Record<string, FilterValue | null>);
+  const clearFilters = () => {
+    setFilteredInfo({});
+  };
+
+  const clearAll = () => {
+    setFilteredInfo({});
   };
 
   const getColumnSearchProps = (
@@ -194,21 +219,29 @@ const AppointmentsScreen = () => {
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "Patient Email",
-      dataIndex: "patientEmail",
-      key: "patientEmail",
-      width: "30%",
-      ...getColumnSearchProps("patientEmail"),
-      sorter: (a, b) => a.patientEmail.localeCompare(b.patientEmail),
+      title: "Patient Name",
+      dataIndex: "patientName",
+      key: "patientName",
+      width: "20%",
+      ...getColumnSearchProps("patientName"),
+      sorter: (a, b) => a.patientName?.localeCompare(b.patientName),
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
+      title: "Patient Phone",
+      dataIndex: "patientPhone",
+      key: "patientPhone",
       width: "20%",
+      ...getColumnSearchProps("patientPhone"),
+    },
+    {
+      title: "Date",
+      dataIndex: "dateStr",
+      key: "date",
+      width: "25%",
       ...getColumnSearchProps("date"),
-      sorter: (a, b) => a.date.localeCompare(b.date),
+      // a.date is of type Date
+      sorter: (a, b) =>  a.date.toString().localeCompare(b.date.toString()),
       sortDirections: ["descend", "ascend"],
     },
     {
@@ -216,7 +249,7 @@ const AppointmentsScreen = () => {
       dataIndex: "time",
       key: "time",
       ...getColumnSearchProps("time"),
-      sorter: (a, b) => a.time.localeCompare(b.time),
+      sorter: (a, b) => a.time?.localeCompare(b.time),
       sortDirections: ["descend", "ascend"],
     },
     {
@@ -238,7 +271,13 @@ const AppointmentsScreen = () => {
       fixed: "right",
       width: 100,
       render: () => (
-        <Popconfirm title="Sure to delete?">
+        <Popconfirm
+          title="Sure to delete?"
+          onConfirm={(e) => {
+            console.log("delete");
+            console.log(e);
+          }}
+        >
           <a>Delete</a>
         </Popconfirm>
       ),
@@ -247,8 +286,8 @@ const AppointmentsScreen = () => {
 
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
-      <h1>Doctor Appointments Screen</h1>
-      <Table dataSource={data} columns={columns} onChange={handleChange} />
+      <h1 className="pageHeading">Appointments</h1>
+      <Table dataSource={data} columns={columns} />
     </div>
   );
 };

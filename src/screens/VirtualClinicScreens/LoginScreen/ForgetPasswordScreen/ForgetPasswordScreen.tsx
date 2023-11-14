@@ -38,7 +38,12 @@ const ForgetPasswordScreen = () => {
     }
 
     const handleResetClick = async () => {
-        await dispatch(resetPasswordAction(userType?.toLowerCase(), {password: password}));
+        if (userType === "ADMIN") {
+            await dispatch(resetPasswordAction("adminAPI", {password: password}));
+        }
+        else {
+            await dispatch(resetPasswordAction(userType?.toLowerCase(), {password: password}));
+        }
         navigate("/");
     }
 

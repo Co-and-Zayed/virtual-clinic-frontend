@@ -90,6 +90,11 @@ export const routes = [
     parent: <ProtectedRoutes />,
   },
   {
+    path: Routes.SETTINGS_PATH + Routes.MEDICAL_HISTORY_PATH,
+    element: <CommonSettingsScreen />,
+    parent: <ProtectedRoutes />,
+  },
+  {
     path: Routes.APPOINTMENTS_PATH,
     element: <CommonAppointmentsScreen />,
     parent: <ProtectedRoutes />,
@@ -125,12 +130,12 @@ export const routes = [
     parent: <ProtectedRoutes />,
   },
   {
-    path: Routes.MY_FAMILY_PACKAGES_PATH ,
+    path: Routes.MY_FAMILY_PACKAGES_PATH,
     element: <MyFamilyPackagesScreen />,
     parent: <ProtectedRoutes />,
   },
   {
-    path: Routes.FAMILY_MEMBER_PACKAGE_PATH ,
+    path: Routes.FAMILY_MEMBER_PACKAGE_PATH,
     element: <FamilyMemberPackageScreen />,
     parent: <ProtectedRoutes />,
   },

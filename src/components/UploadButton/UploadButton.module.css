@@ -5,8 +5,6 @@
 
 .customLabel {
   /* background-color: white; */
-  color: var(--light-green);
-  border: 1px solid var(--light-green);
   width: fit-content;
   padding-inline: 0.75rem;
   height: 2rem;
@@ -20,15 +18,32 @@
 }
 
 .customLabel:hover {
-  background-color: var(--light-green);
-  color: var(--dark-green);
-  box-shadow: 0 0 10px #8ac18680; /* Glow effect on hover */
-
   cursor: pointer;
 }
 
-.infoCircle {
+.customLabelLight {
   color: var(--light-green);
+  border: 1px solid var(--light-green);
+}
+
+.customLabelDark {
+  color: var(--dark-green);
+  border: 1px solid var(--dark-green);
+}
+
+.customLabelLight:hover {
+  background-color: var(--light-green);
+  color: var(--dark-green);
+  box-shadow: 0 0 10px #8ac18680; /* Glow effect on hover */
+}
+
+.customLabelDark:hover {
+  background-color: var(--dark-green);
+  color: var(--light-green);
+  box-shadow: 0 0 10px #163b4580; /* Glow effect on hover */
+}
+
+.infoCircle {
   font-size: 0.9rem;
   opacity: 0.6;
   transition: all 0.15s ease-in-out;
@@ -37,6 +52,14 @@
 .infoCircle:hover {
   opacity: 1;
   cursor: pointer;
+}
+
+.infoCircleLight {
+  color: var(--light-green);
+}
+
+.infoCircleDark {
+  color: var(--dark-green);
 }
 
 .uploadedFiles {

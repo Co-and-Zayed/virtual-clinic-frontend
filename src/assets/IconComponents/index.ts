@@ -13,6 +13,7 @@ export { default as HospitalIcon } from "./HospitalIcon";
 export { default as LockIcon } from "./LockIcon";
 export { default as LogoText } from "./LogoText";
 export { default as LogoutIcon } from "./LogoutIcon";
+export { default as MedicalIcon } from "./MedicalIcon";
 export { default as PackagesIcon } from "./PackagesIcon";
 export { default as PrescriptionsIcon } from "./PrescriptionsIcon";
 export { default as ProfileIcon } from "./ProfileIcon";

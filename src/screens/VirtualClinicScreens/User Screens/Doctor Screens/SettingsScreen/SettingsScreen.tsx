@@ -5,6 +5,7 @@ import { listDoctorSettingsAction } from "redux/VirtualClinicRedux/ListDoctorSet
 import { editSettingsAction } from "redux/VirtualClinicRedux/EditSettings/editSettingsAction";
 import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/SettingsScreen/SettingsScreen.module.css";
 import JellyLoader from "components/JellyLoader/JellyLoader";
+import PasswordScreen from "./PasswordScreen";
 
 const SettingsScreen = () => {
   const dispatch: any = useDispatch();
@@ -103,6 +104,7 @@ const SettingsScreen = () => {
       ) : (
         <p>No doctor settings data available.</p>
       )}
+      <PasswordScreen />
     </div>
   );
 };

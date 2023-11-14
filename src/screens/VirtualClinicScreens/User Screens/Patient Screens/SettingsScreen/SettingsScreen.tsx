@@ -4,10 +4,16 @@ import { useEffect, useState } from "react";
 import { settingsPatient } from "utils/VirtualClinicUtils/navigationLinks";
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
 import ProfileScreen from "./ProfileScreen/ProfileScreen";
+import { useSelector } from "react-redux";
+import { RootState } from "redux/rootReducer";
 
 const SettingsScreen = () => {
   const [currentLink, setCurrentLink] = useState(0);
   const [currentPage, setCurrentPage] = useState<any>(null);
+
+  const { userData, accessToken, userType } = useSelector(
+    (state: RootState) => state.userReducer
+  );
 
   const navigate = useNavigate();
 
@@ -32,6 +38,7 @@ const SettingsScreen = () => {
       <div className="w-full h-full flex">
         <div className={`${styles.navigationContainer}`}>
           {settingsPatient.map((link, index) => {
+            if (userType === "ADMIN" && link.name === "Health") return;
             return (
               <div
                 className={`${styles.linkContainer} ${

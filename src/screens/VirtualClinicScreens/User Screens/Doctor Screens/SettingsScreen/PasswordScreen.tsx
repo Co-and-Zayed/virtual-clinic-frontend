@@ -11,7 +11,7 @@ import { notification } from "antd";
 import SubmitButton from "components/SubmitButton/SubmitButton";
 
 const PasswordScreen = () => {
-  const { userData, accessToken, userType } = useSelector(
+  const { userData, accessToken } = useSelector(
     (state: RootState) => state.userReducer
   );
 
@@ -47,9 +47,7 @@ const PasswordScreen = () => {
       if (!errorExists) {
         setLoading(true);
         const res = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}${
-            userType === "PATIENT" ? "patient" : "adminAPI"
-          }/changePassword`,
+          `${process.env.REACT_APP_BACKEND_URL}doctor/changePassword`,
           {
             method: "POST",
             headers: {

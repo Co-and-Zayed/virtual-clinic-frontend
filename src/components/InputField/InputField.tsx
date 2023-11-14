@@ -16,6 +16,7 @@ interface InputFieldProps {
   onChange?: any;
   className?: string;
   customInput?: any;
+  titleColor?: string;
 }
 
 const InputField: FC<InputFieldProps> = ({
@@ -32,10 +33,16 @@ const InputField: FC<InputFieldProps> = ({
   onChange,
   className,
   customInput,
+  titleColor,
 }) => {
   return (
-    <div className="w-full flex flex-col items-start gap-y-2">
-      <p className="text-white text-base">{title}</p>
+    <div
+      className="w-full flex flex-col items-start gap-y-2"
+      style={{
+        color: titleColor || "white",
+      }}
+    >
+      <p className="text-base">{title}</p>
       <div className="w-full">
         {customInput ? (
           customInput

@@ -176,12 +176,12 @@ const LoginScreen2 = () => {
                 style={{ fontSize: "0.75rem", opacity: 0.7 }}
               >
                 <p className="text-[white]">Forgot your password? Click </p>
-                <p
-                  className="hover:cursor-pointer greenText"
-                  // onClick={() => navigate("/register")}
+                <a 
+                className="hover:cursor-pointer greenText"  
+                href="/reset-password"
                 >
                   <u>here</u>
-                </p>
+                </a>
               </div>
             </div>
 

@@ -14,12 +14,16 @@ interface UploadButtonProps {
   fileList: any[];
   setFileList: any;
   label?: string;
+  variant?: "LIGHT_GREEN" | "DARK_GREEN";
+  listType?: "INFO_CIRCLE" | "VERTICAL";
 }
 
 const UploadButton: FC<UploadButtonProps> = ({
   label,
   fileList,
   setFileList,
+  variant = "LIGHT_GREEN",
+  listType = "INFO_CIRCLE",
 }) => {
   useEffect(() => {
     console.log("UPLOADED FILES", fileList);
@@ -30,6 +34,23 @@ const UploadButton: FC<UploadButtonProps> = ({
 
   const handleDelete = (file: any) => {
     setFileList((prev: any) => prev.filter((item: any) => item !== file));
+  };
+
+  const renderFiles = () => {
+    return fileList?.map((file: any) => (
+      <div
+        className={`${styles.uploadedFiles} w-full flex items-center justify-between`}
+      >
+        <p>
+          <PaperClipOutlined />
+          <span>{file?.name ?? file.split("$__$")[1]}</span>
+        </p>
+        <DeleteOutlined
+          onClick={() => handleDelete(file)}
+          className={`${styles.deleteIcon}`}
+        />
+      </div>
+    ));
   };
 
   return (
@@ -50,7 +71,14 @@ const UploadButton: FC<UploadButtonProps> = ({
       <div
         className={`flex justify-between items-center ${styles.labelContainer}`}
       >
-        <label htmlFor="fileInput" className={styles.customLabel}>
+        <label
+          htmlFor="fileInput"
+          className={`${styles.customLabel} ${
+            variant === "LIGHT_GREEN"
+              ? styles.customLabelLight
+              : styles.customLabelDark
+          }`}
+        >
           <UploadOutlined />
           {label ?? "Choose Files"}
         </label>
@@ -58,29 +86,23 @@ const UploadButton: FC<UploadButtonProps> = ({
           <Popover
             color="white"
             trigger={["click"]}
-            title={
-              <div className={`${styles.popover}`}>
-                {fileList?.map((file: any) => (
-                  <div
-                    className={`${styles.uploadedFiles} w-full flex items-center justify-between`}
-                  >
-                    <p>
-                      <PaperClipOutlined />
-                      <span>{file.name}</span>
-                    </p>
-                    <DeleteOutlined
-                      onClick={() => handleDelete(file)}
-                      className={`${styles.deleteIcon}`}
-                    />
-                  </div>
-                ))}
-              </div>
-            }
+            title={<div className={`${styles.popover}`}>{renderFiles()}</div>}
           >
-            <InfoCircleOutlined className={styles.infoCircle} />
+            {listType === "INFO_CIRCLE" && (
+              <InfoCircleOutlined
+                className={`${styles.infoCircle} ${
+                  variant === "LIGHT_GREEN"
+                    ? styles.infoCircleLight
+                    : styles.infoCircleDark
+                }`}
+              />
+            )}
           </Popover>
         )}
       </div>
+      {listType === "VERTICAL" && (
+        <div className="mt-3 w-[fit-content]">{renderFiles()}</div>
+      )}
     </div>
   );
 };

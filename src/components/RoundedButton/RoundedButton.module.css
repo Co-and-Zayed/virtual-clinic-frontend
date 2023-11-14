@@ -14,15 +14,15 @@
 }
 
 /* on hover, background daark green, text white */
-.checkoutBtn:hover {
+.hover:hover {
   background-color: var(--dark-green);
   color: white !important;
   transition: all 0.3s ease-in-out;
 
   /* p */
   p {
-      color: white;
-      transition: all 0.3s ease-in-out;
+    color: white;
+    transition: all 0.3s ease-in-out;
   }
 }
 
@@ -45,7 +45,7 @@
 }
 
 /* on hover, background daark green, text white */
-.checkoutBtnInv:hover {
+.hoverInv:hover {
   /* color: white !important; */
   opacity: 0.75;
   color: white !important;

@@ -62,9 +62,10 @@ const FamilyMembersScreen = () => {
           Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
-          isPatient: true,
-          memberUsername: values.patientUsername,
+          memberEmail: values.patientEmail,
+          memberMobileNumber: values.patientMobileNumber,
           relationship: values.patientRelationship,
+          isPatient: true,
         }),
       }
     );
@@ -457,11 +458,18 @@ const FamilyMembersScreen = () => {
             </Button>
           </Form.Item>
         </Form>
-        <Form onFinish={addPatientMember}>
+        <Form className="ml-8" onFinish={addPatientMember}>
           <Form.Item
-            name="patientUsername"
-            label="Patient's Username"
-            rules={[{ required: true }]}
+            name="patientEmail"
+            label="Patient's Email"
+            // rules={[{ required: true }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="patientMobileNumber"
+            label="Patient's Mobile Number"
+            // rules={[{ required: true }]}
           >
             <Input />
           </Form.Item>

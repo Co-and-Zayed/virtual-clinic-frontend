@@ -24,7 +24,11 @@ export const VIEW_PATIENTS_PATH = "/view-patients";
 export const PROFILE_PATH = "/profile";
 export const PASSWORD_PATH = "/password";
 
+export const RESET_PASSWORD = "/reset-password";
+
+export const MEDICAL_HISTORY_PATH = "/medical-history";
+
 export const VIEW_CONTRACT_PATH = "/view-contract";
-export const  MY_PACKAGE_PATH = "/viewPackages";
-export const  MY_FAMILY_PACKAGES_PATH = "/viewFamilyPackages";
-export const  FAMILY_MEMBER_PACKAGE_PATH = "/familyMemberPackage";
+export const MY_PACKAGE_PATH = "/viewPackages";
+export const MY_FAMILY_PACKAGES_PATH = "/viewFamilyPackages";
+export const FAMILY_MEMBER_PACKAGE_PATH = "/familyMemberPackage";

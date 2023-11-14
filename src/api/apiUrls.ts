@@ -13,3 +13,15 @@ export const refreshAccessTokenUrl = () => {
 export const logoutUrl = () => {
     return 'authAPI/logout';
 }
+
+export const forgetPasswordUrl = () => {
+    return 'userAPI/forgetPassword';
+}
+
+export const verifyOtpUrl = () => {
+    return 'userAPI/verifyOtp';
+}
+
+export const resetPasswordUrl = (type: any) => {
+    return `${type}/resetPassword`;
+}

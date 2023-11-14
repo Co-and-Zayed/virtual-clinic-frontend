@@ -38,8 +38,12 @@ const RoundedButton: FC<RoundedButtonProps> = ({
         colorInverted ? styles.checkoutBtnInv : styles.checkoutBtn
       } ${
         !loading ? (colorInverted ? styles.hoverInv : styles.hover) : ""
-      } ${className}`}
-      onClick={onClick}
+      } ${className} ${loading ? "cursor-default" : ""}`}
+      onClick={() => {
+        if (!loading && onClick) {
+          onClick();
+        }
+      }}
       style={{ ...style, minWidth: width }}
     >
       {loading ? (

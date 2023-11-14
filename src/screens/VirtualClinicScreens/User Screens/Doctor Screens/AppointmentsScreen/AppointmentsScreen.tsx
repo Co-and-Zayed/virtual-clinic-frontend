@@ -13,6 +13,9 @@ import {
   InputRef,
   TableProps,
   Popconfirm,
+  Dropdown,
+  MenuProps,
+  notification,
 } from "antd";
 import type {
   ColumnType,
@@ -25,6 +28,7 @@ import { createAppointmentAction } from "redux/VirtualClinicRedux/CreateAppointm
 import { getAppointmentsAction } from "redux/VirtualClinicRedux/GetAppointments/getAppoinmentsAction";
 import { updateAppointmentAction } from "redux/VirtualClinicRedux/UpdateAppointment/updateAppointmentAction";
 import { deleteAppointmentAction } from "redux/VirtualClinicRedux/DeleteAppointment/deleteAppointmentAction";
+import { DownOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import moment from "moment";
 
@@ -49,17 +53,17 @@ const AppointmentsScreen = () => {
     (state: RootState) => state.getAppointmentsReducer
   );
 
-//   const data: DataType[] = userAppointments?.map((appointment: any) => {
-//     const date = new Date(appointment.date);
-//     return {
-//       patientEmail: appointment.patient.email,
-//       doctorEmail: appointment.doctor.email,
-//       date: appointment.date.split("T")[0].replace(/-/g, "/"),
-//       time: date.getHours() + ":" + date.getMinutes(),
-//       status: appointment.status,
-//       key: appointment._id,
-//     };
-//   });
+  //   const data: DataType[] = userAppointments?.map((appointment: any) => {
+  //     const date = new Date(appointment.date);
+  //     return {
+  //       patientEmail: appointment.patient.email,
+  //       doctorEmail: appointment.doctor.email,
+  //       date: appointment.date.split("T")[0].replace(/-/g, "/"),
+  //       time: date.getHours() + ":" + date.getMinutes(),
+  //       status: appointment.status,
+  //       key: appointment._id,
+  //     };
+  //   });
   const { userData, userType } = useSelector(
     (state: RootState) => state.userReducer
   );
@@ -68,11 +72,14 @@ const AppointmentsScreen = () => {
 
   const data: DataType[] = userAppointments?.map((appointment: any) => {
     const date = moment(appointment.date);
-    const isGuest =  appointment.patient.type === "GUEST";
+    const isGuest = appointment.patient.type === "GUEST";
     return {
       patientName: appointment.patient?.name,
-      patientPhone: isGuest? (appointment.patient.relationTo + "'s " + appointment.patient.relation.toLowerCase()) :
-       appointment.patient?.mobileNumber,
+      patientPhone: isGuest
+        ? appointment.patient.relationTo +
+          "'s " +
+          appointment.patient.relation.toLowerCase()
+        : appointment.patient?.mobileNumber,
       doctorName: appointment.doctor.name,
       date: date.toDate(),
       dateStr: date.format("dddd, MMMM D, yyyy"),
@@ -93,8 +100,8 @@ const AppointmentsScreen = () => {
   }, []);
 
   // useEffect(() => {
-    // console.log("userAppointments");
-    // console.log(userAppointments);
+  // console.log("userAppointments");
+  // console.log(userAppointments);
   // }, [userAppointments]);
 
   const [searchText, setSearchText] = useState("");
@@ -243,7 +250,7 @@ const AppointmentsScreen = () => {
       width: "25%",
       ...getColumnSearchProps("date"),
       // a.date is of type Date
-      sorter: (a, b) =>  a.date.toString().localeCompare(b.date.toString()),
+      sorter: (a, b) => a.date.toString().localeCompare(b.date.toString()),
       sortDirections: ["descend", "ascend"],
     },
     {
@@ -271,19 +278,27 @@ const AppointmentsScreen = () => {
       title: "Action",
       key: "operation",
       fixed: "right",
-      width: 100,
-      render: () => (
-        <Popconfirm
-          title="Sure to delete?"
-          onConfirm={(e) => {
-            console.log("delete");
-            console.log(e);
-          }}
-        >
-          <a>Delete</a>
-        </Popconfirm>
+      width: 150,
+      render: (record) => (
+        <Dropdown menu={{ items, onClick }}>
+          <a>
+            More <DownOutlined />
+          </a>
+        </Dropdown>
       ),
     },
+  ];
+
+  const onClick: MenuProps['onClick'] = ({ key }) => {
+    notification.info({
+      message: `Click on item ${key}`,
+    });
+  };
+
+  const items = [
+    { key: "CANCELLED", label: "Cancel" },
+    { key: "COMPLETED", label: "Complete" },
+    { key: "RESCHEDULED", label: "Reschedule" },
   ];
 
   return (

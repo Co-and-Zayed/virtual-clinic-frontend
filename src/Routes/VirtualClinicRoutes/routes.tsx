@@ -29,6 +29,7 @@ import DoctorInfoScreen from "screens/VirtualClinicScreens/User Screens/Patient 
 import LoginScreen2 from "screens/VirtualClinicScreens/LoginScreen/LoginScreen2";
 import NotFoundScreen from "screens/VirtualClinicScreens/NotFoundScreen/NotFoundScreen";
 import CommonPackagesScreen from "screens/VirtualClinicScreens/CommonScreens/CommonPackagesScreen/CommonPackagesScreen";
+import ForgetPasswordScreen from "screens/VirtualClinicScreens/LoginScreen/ForgetPasswordScreen/ForgetPasswordScreen";
 import ViewPackageScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PackagesScreen/ViewPackageScreen";
 import MyFamilyPackagesScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PackagesScreen/MyFamilyPackagesScreen";
 import FamilyMemberPackageScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PackagesScreen/FamilyMemberPackageScreen";
@@ -158,4 +159,8 @@ export const routes = [
     path: Routes.REGISTER_PATH,
     element: <RegisterScreen />,
   },
+  {
+    path: Routes.RESET_PASSWORD,
+    element: <ForgetPasswordScreen />
+  }
 ];

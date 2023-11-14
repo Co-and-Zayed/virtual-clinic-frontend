@@ -10,6 +10,7 @@ import { useRequests } from "hooks/useRequests";
 import { UPDATE_USER_DATA } from "redux/User/loginTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";
+import JellyLoader from "components/JellyLoader/JellyLoader";
 import {
   UploadOutlined,
   PaperClipOutlined,
@@ -21,15 +22,20 @@ const MedicalScreen = () => {
   const [newMedicalHistory, setNewMedicalHistory] = useState<any[]>([]);
   const [medicalHistory, setMedicalHistory] = useState<any[]>([]);
   const [historyLoading, setHistoryLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(true);
+  const [healthRecords, setHealthRecords] = useState<any>(null);
 
   const { handleUpload } = useFunctions();
   const { updateUserData } = useRequests();
   const dispatch: any = useDispatch();
 
-  const { userData } = useSelector((state: RootState) => state.userReducer);
+  const { userData, accessToken } = useSelector(
+    (state: RootState) => state.userReducer
+  );
 
   useEffect(() => {
     updateUserData();
+    getHealthRecords();
   }, []);
 
   useEffect(() => {
@@ -37,6 +43,32 @@ const MedicalScreen = () => {
       setMedicalHistory(userData?.medicalHistory);
     }
   }, [userData]);
+
+  const getHealthRecords = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}Patient/getHealthRecords`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+      console.log(data.healthRecords);
+      console.log("Fetched", data);
+      
+      if (response.ok) {
+        setLoading(false);
+        setHealthRecords(data.healthRecords);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const renderFiles = (fileList: any) => {
     return fileList?.map((file: any) => (
@@ -98,7 +130,21 @@ const MedicalScreen = () => {
       <div className={`${styles.settingsSection}`}>
         <h2 className={`${styles.subHeading}`}>Health Records</h2>
         <div className={`${styles.divider}`}></div>
-        <div>balabizo</div>
+
+        {loading ? (
+          <JellyLoader />
+        ) : <div>
+              {
+                healthRecords.map((record: any, index: any) => (
+                  <div>
+                    <h1>Health Record {index + 1}</h1>
+                    <p>
+                      {record}
+                    </p>
+                  </div>
+                ))
+              }
+          </div>}
       </div>
     </div>
   );

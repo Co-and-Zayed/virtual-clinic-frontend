@@ -68,9 +68,11 @@ const AppointmentsScreen = () => {
 
   const data: DataType[] = userAppointments?.map((appointment: any) => {
     const date = moment(appointment.date);
+    const isGuest =  appointment.patient.type === "GUEST";
     return {
-      patientName: appointment.patient.name,
-      patientPhone: appointment.patient.mobileNumber,
+      patientName: appointment.patient?.name,
+      patientPhone: isGuest? (appointment.patient.relationTo + "'s " + appointment.patient.relation.toLowerCase()) :
+       appointment.patient?.mobileNumber,
       doctorName: appointment.doctor.name,
       date: date.toDate(),
       dateStr: date.format("dddd, MMMM D, yyyy"),

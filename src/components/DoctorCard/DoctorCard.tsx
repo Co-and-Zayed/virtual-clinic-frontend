@@ -16,11 +16,18 @@ import { SET_DOCTOR_CARD_COORDS } from "redux/VirtualClinicRedux/types";
 interface DoctorCardProps {
   doctor: any;
   noBooking?: boolean;
+  discountedPrice?: number | null;
 }
 
-const DoctorCard: FC<DoctorCardProps> = ({ doctor, noBooking }) => {
+const DoctorCard: FC<DoctorCardProps> = ({
+  doctor,
+  noBooking,
+  discountedPrice,
+}) => {
   const dispatch: any = useDispatch();
   const navigate = useNavigate();
+
+  const sessionPrice = discountedPrice ? discountedPrice : doctor?.session_price;
 
   const getDoctorName = async (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -102,7 +109,7 @@ const DoctorCard: FC<DoctorCardProps> = ({ doctor, noBooking }) => {
             className={`${styles.priceLight} ${styles.lineThrough}`}
             style={{
               visibility:
-                doctor?.hourlyRate * 1.1 > doctor?.session_price
+                doctor?.hourlyRate * 1.1 > sessionPrice
                   ? "visible"
                   : "hidden",
             }}
@@ -115,7 +122,7 @@ const DoctorCard: FC<DoctorCardProps> = ({ doctor, noBooking }) => {
           </p>
           {/* ACTUAL */}
           <p className={`${styles.price}`}>
-            {doctor?.session_price?.toLocaleString()} EGP
+            {sessionPrice?.toLocaleString()} EGP
           </p>
           <p className={`${styles.priceLight}`}>per session</p>
         </div>

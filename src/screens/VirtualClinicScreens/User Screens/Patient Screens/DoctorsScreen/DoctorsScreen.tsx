@@ -287,7 +287,7 @@ const DoctorsScreen = () => {
             </div>
           ) : (
             allDoctors?.map((doctor: any, idx: number) => {
-              if (doctor?.status === "PENDING") return;
+              if (doctor?.status !== "ACCEPTED") return;
 
               return (
                 <motion.div

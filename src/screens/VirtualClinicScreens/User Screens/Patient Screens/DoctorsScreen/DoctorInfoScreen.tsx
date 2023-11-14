@@ -18,6 +18,7 @@ import { SearchOutlined } from "@ant-design/icons";
 // import { allSpecialitiesAction } from "redux/VirtualClinicRedux/Dropdowns/AllSpecialities/allSpecialitiesAction";
 // import { patientSearchDoctorsAction } from "redux/VirtualClinicRedux/PatientSearchDoctors/patientSearchDoctorsAction";
 import { getDoctorInfoAction } from "redux/VirtualClinicRedux/GetDoctorInfo/getDoctorInfoAction";
+import { getFamilyMembersAction } from "redux/VirtualClinicRedux/GetFamilyMembers/getFamilyMembersAction";
 import JellyLoader from "components/JellyLoader/JellyLoader";
 import DoctorCard from "components/DoctorCard/DoctorCard";
 import { motion } from "framer-motion";
@@ -46,6 +47,10 @@ const DoctorInfoScreen = () => {
     (state: RootState) => state.getDoctorInfoReducer
   );
 
+  const { userFamilyMembers, familyMembersLoading } = useSelector(
+    (state: RootState) => state.getFamilyMembersReducer
+  );
+
   const { x, y } = useSelector(
     (state: RootState) => state.getDoctorCardCoordsReducer
   );
@@ -64,12 +69,17 @@ const DoctorInfoScreen = () => {
 
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
 
+  const [selectedFamilyMember, setSelectedFamilyMember] = useState<any>(null);
+  const [selectedFamilyMemberObj, setSelectedFamilyMemberObj] =
+    useState<any>(null);
+
   const { username } = useParams<{ username: string }>();
 
   useEffect(() => {
     document.title = "El7a2ni" + (docinfo && " | " + docinfo.name);
 
     dispatch(getDoctorInfoAction({ username: username }));
+    dispatch(getFamilyMembersAction({ userId: userData._id }, true));
   }, []);
 
   useEffect(() => {
@@ -132,23 +142,26 @@ const DoctorInfoScreen = () => {
 
   async function createAppointmentCallback() {
     var date = appointmentDate?.toDate();
-    // var date = new Date();
-    // date.setUTCDate(appointmentDate?.date() ?? 1);
-    // date.setUTCHours(appointmentDate?.hour() ?? 0);
-    // date.setUTCMinutes(appointmentDate?.minute() ?? 0);
-    // date.setUTCSeconds(0);
-    // date.setUTCMilliseconds(0);
-    console.log("NEW Date: " + date);
 
     // create appointment
     // // Params: patientId, doctorId, date, status (enum: ["UPCOMING", "CANCELLED", "COMPLETED"])
+    console.log(
+      "Appointment for: " + isCheckboxChecked &&
+        selectedFamilyMemberObj?.familyMember?.type === "GUEST"
+        ? "GUEST"
+        : "PATIENT"
+    );
     await dispatch(
       createAppointmentAction({
-        patientId: userData._id,
+        patientId: isCheckboxChecked ? selectedFamilyMember : userData._id,
         doctorId: docinfo._id,
-        // date: appointmentDate?.format("DD/MM/YYYY hh:mm A"),
         date: date,
         status: "UPCOMING",
+        patientType:
+          isCheckboxChecked &&
+          selectedFamilyMemberObj?.familyMember?.type === "GUEST"
+            ? "GUEST"
+            : "PATIENT",
       })
     );
   }
@@ -159,21 +172,25 @@ const DoctorInfoScreen = () => {
         return (
           <PaymentMethod
             priceOriginal={docinfo?.hourlyRate * 1.1}
-            priceDiscounted={docinfo?.session_price}
+            priceDiscounted={
+              getDiscountedPriceForFamilyMember() ?? docinfo?.session_price
+            }
             appointmentDate={appointmentDate}
             backBtnOnClick={() => setPage("booking")}
             transactionDescription={
               "Patient: " +
-              userData.name +
-              " | Doctor: " +
-              docinfo.name +
-              " | Appointment Date: " +
-              appointmentDate?.format("DD/MM/YYYY") +
-              " | Appointment Time: " +
-              appointmentDate?.format("h:mm A") +
-              " | Price: " +
-              docinfo?.session_price.toFixed(2) +
-              " EGP"
+                (isCheckboxChecked
+                  ? selectedFamilyMemberObj?.familyMember?.name
+                  : userData.name) +
+                " | Doctor: " +
+                docinfo.name +
+                " | Appointment Date: " +
+                appointmentDate?.format("DD/MM/YYYY") +
+                " | Appointment Time: " +
+                appointmentDate?.format("h:mm A") +
+                " | Price: " +
+                getDiscountedPriceForFamilyMember()?.toFixed(2) ??
+              docinfo?.session_price.toFixed(2) + " EGP"
             }
             callBackOnSuccess={createAppointmentCallback}
           />
@@ -229,9 +246,29 @@ const DoctorInfoScreen = () => {
       return;
     }
 
+    // Check if checkbox is checked but no family member is selected
+    if (isCheckboxChecked && !selectedFamilyMember) {
+      // show error
+      notification.error({
+        message: "Error",
+        description: "Please select a family member",
+      });
+      return;
+    }
+
     setAppointmentDate(date);
 
     setPage("paymentMethod");
+  }
+
+  function getDiscountedPriceForFamilyMember() {
+    return isCheckboxChecked &&
+      selectedFamilyMemberObj &&
+      selectedFamilyMemberObj?.familyMember?.doctor_session_discount
+      ? docinfo?.hourlyRate *
+          1.1 *
+          (1 - selectedFamilyMemberObj?.familyMember?.doctor_session_discount)
+      : null;
   }
 
   return (
@@ -288,7 +325,11 @@ const DoctorInfoScreen = () => {
             exit={{ opacity: 0, x, y }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
           >
-            <DoctorCard doctor={docinfo} noBooking />
+            <DoctorCard
+              doctor={docinfo}
+              noBooking
+              discountedPrice={getDiscountedPriceForFamilyMember()}
+            />
           </motion.div>
 
           {doctorLoading ? (
@@ -406,13 +447,28 @@ const DoctorInfoScreen = () => {
 
                 {/* FAMILY MEMBER DROPDOWN */}
                 <Select
-                  // status={formik.errors.gender ? "error" : ""}
-                  // onChange={formik.handleChange}
-                  // value={formik.values.gender}
-                  // options={GENDER_VALUES}
-                  // onSelect={(value: any) => {
-                  //   formik.setFieldValue("gender", value);
-                  // }}
+                  value={selectedFamilyMember}
+                  options={userFamilyMembers?.map((member: any) => {
+                    return {
+                      label:
+                        member.familyMember?.name +
+                        "  (" +
+                        (member.type === "EXISTING"
+                          ? member.relation
+                          : member.familyMember.relation) +
+                        ")",
+                      value: member.familyMember._id,
+                    };
+                  })}
+                  allowClear
+                  onChange={(value) => {
+                    setSelectedFamilyMember(value);
+                    setSelectedFamilyMemberObj(
+                      userFamilyMembers?.find(
+                        (member: any) => member.familyMember._id === value
+                      )
+                    );
+                  }}
                   className={`${inputStyles.inputField} ${styles.dropdown}`}
                   style={{
                     paddingInline: "0",
@@ -420,17 +476,10 @@ const DoctorInfoScreen = () => {
                   }}
                   disabled={!isCheckboxChecked}
                   placeholder="Choose member"
-                  dropdownStyle={
-                    // color of backgroung
-                    {
-                      fontFamily: "Century Gothic",
-                      fontWeight: "normal",
-                      // backgroundColor: "var(--dark-green)",
-                      // accentColor: "var(--dark-green)",
-                      // color of selected item
-                      // color: "var(--white)",
-                    }
-                  }
+                  dropdownStyle={{
+                    fontFamily: "Century Gothic",
+                    fontWeight: "normal",
+                  }}
                 />
               </div>
 

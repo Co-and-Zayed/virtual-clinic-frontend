@@ -39,7 +39,7 @@ const PasswordScreen = () => {
 
   const { cpassword, password, password2 } = formData;
   const [validPassword, setValidPassword] = useState(false);
-
+  //const [viewedUserName, setViewedUserName] = useState(null);
   const hasUpperCase = (pass: any) => {
     return /[A-Z]/.test(pass);
   };
@@ -56,6 +56,7 @@ const PasswordScreen = () => {
     }));
     console.log(e.target.name);
     if (e.target.name === "password") {
+      //password:new password entered.
       if (
         e.target.value.length < 6 ||
         !hasUpperCase(e.target.value) ||
@@ -70,15 +71,24 @@ const PasswordScreen = () => {
   const onSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
   };
-  const handleclick = async () => {
-    await dispatch(
-      editPatientSettingsAction({
-        cpassword: cpassword,
-        password: password,
-        password2: password2,
-      })
-    );
-  };
+  // const handleclick = async (
+  //   oldpassword: any,
+  //   newpassword: any,
+  //   confirmedpassword: any
+  // ) => {
+  //   console.log("heree");
+  //   await dispatch(
+  //     editPatientSettingsAction({
+  //       oldpassword: cpassword,
+  //       newpassword: password,
+  //       confirmedpassword: password2,
+  //     })
+  //   );
+
+  //   <div>
+  //     <p> You have successfully changed your password!</p>
+  //   </div>;
+  // };
 
   return (
     <>
@@ -133,15 +143,23 @@ const PasswordScreen = () => {
 
           <div className="form-group">
             <button
-              type="submit"
+              // type="submit"
               className="px-6 py-2"
               style={{
                 backgroundColor: "green",
                 borderRadius: "0.2rem",
               }}
-              onClick={handleclick}
+              onClick={() => {
+                dispatch(
+                  editPatientSettingsAction({
+                    oldpassword: cpassword,
+                    newpassword: password,
+                    confirmedpassword: password2,
+                  })
+                );
+              }}
             >
-              Submit{" "}
+              Change
             </button>
           </div>
         </form>

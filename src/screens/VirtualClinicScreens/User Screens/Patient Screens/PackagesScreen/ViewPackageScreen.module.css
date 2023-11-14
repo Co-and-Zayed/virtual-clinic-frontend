@@ -1,0 +1,76 @@
+.packageItem {
+    background-color: rgb(255, 255, 255);
+    padding-block: 1rem;
+    padding-inline: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    width: 22rem;
+    transition: all 0.2s;
+  }
+  
+  .packageItem:hover {
+    cursor: pointer;
+    transform: scale(0.98);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  }
+  
+  .packageItem h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: all 0.2s;
+  }
+  
+  .currentPackage h1 {
+    color: green;
+  }
+  
+  .editLink {
+    color: blue;
+    transition: all 0.2s;
+  }
+  
+  .editLink:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  
+  button {
+    color: white;
+    font-weight: 600;
+    padding-block: 0.5rem;
+    padding-inline: 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+  }
+  
+  .spinnerContainer {
+    /* background-color: pink; */
+    width: 40rem;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .plusIcon {
+    background-color: blue;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    margin-block: 1rem;
+    color: white;
+  }
+  
+  .plusIcon:hover {
+    cursor: pointer;
+  }
+  
+  .deleteButton {
+    color: red;
+    border: 2px solid red;
+  }
+  

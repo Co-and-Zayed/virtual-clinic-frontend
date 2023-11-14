@@ -5,8 +5,8 @@ import { RightArrowIcon } from "assets/IconComponents";
 import JellyLoader from "../JellyLoader/JellyLoader";
 
 interface RoundedButtonProps {
-  text?: string;
-  icon: any;
+  text: string;
+  icon?: any;
   width?: any;
   onClick?: () => void;
   style?: any;
@@ -36,22 +36,22 @@ const RoundedButton: FC<RoundedButtonProps> = ({
       disabled={disabled}
       className={`${
         colorInverted ? styles.checkoutBtnInv : styles.checkoutBtn
+      } ${
+        !loading ? (colorInverted ? styles.hoverInv : styles.hover) : ""
       } ${className}`}
       onClick={onClick}
       style={{ ...style, minWidth: width }}
     >
       {loading ? (
         <div className="w-full flex items-center justify-center">
-          <JellyLoader 
-          color={colorInverted ? "#fff" : "var(--dark-green)"}
-          />
+          <JellyLoader color={colorInverted ? "#fff" : "var(--dark-green)"} />
         </div>
       ) : (
         <p className="text-center" style={{ flex: 1 }}>
           {text?.toUpperCase()}
         </p>
       )}
-      {!loading && icon}
+      {!loading && icon && icon}
     </Button>
   );
 };

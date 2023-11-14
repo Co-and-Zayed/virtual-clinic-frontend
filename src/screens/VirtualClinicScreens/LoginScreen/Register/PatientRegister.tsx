@@ -25,7 +25,6 @@ const PatientRegister: FC<PatientRegisterProps> = ({ backFn }) => {
 
   const [dateOfBirth, setDateOfBirth] = useState<any>(null);
 
-  const [patientFiles, setPatientFiles] = useState<any>(null);
 
   // const [fields, setFields] = useState({
   //   name: "",
@@ -160,13 +159,10 @@ const PatientRegister: FC<PatientRegisterProps> = ({ backFn }) => {
       }
 
       if (!errorExists) {
-        console.log("REGSITERING");
         const dateParts = values.date_of_birth.split("/");
         const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
         const dateObject = new Date(formattedDate);
 
-        console.log("DATE OF BIRTH", values.date_of_birth);
-        console.log("DATE OF BIRTH", dateObject);
         await dispatch(
           regsiterAction({
             name: values.name,
@@ -180,7 +176,7 @@ const PatientRegister: FC<PatientRegisterProps> = ({ backFn }) => {
             healthRecords: values.healthRecords,
             emergencyContactName: values.emergencyContactName,
             emergencyContactNumber: values.emergenyContactNumber,
-            files: patientFiles,
+            // files: patientFiles,
           })
         );
         navigate("/dashboard");
@@ -205,9 +201,7 @@ const PatientRegister: FC<PatientRegisterProps> = ({ backFn }) => {
   // Section 2:
   // Hourly rate, affiliation, Educational bg
 
-  useEffect(() => {
-    console.log("PATIENT FILES", patientFiles);
-  }, [patientFiles]);
+  
 
   return (
     <div
@@ -383,15 +377,6 @@ const PatientRegister: FC<PatientRegisterProps> = ({ backFn }) => {
             />
           </div>
         )}
-
-        {/* create input to uploaf multiple files */}
-        <input
-          type="file"
-          multiple
-          onChange={(e) => {
-            setPatientFiles(e.target.files);
-          }}
-        />
 
         {section === 1 ? (
           <SubmitButton

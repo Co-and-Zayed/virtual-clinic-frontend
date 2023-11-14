@@ -34,9 +34,19 @@ import { userReducer } from "redux/User/userReducer";
 import { registerReducer } from "redux/Register/registerReducer";
 import { logoutReducer } from "redux/Logout/logoutReducer";
 import { getDoctorCardCoordsReducer } from "redux/VirtualClinicRedux/GetDoctorInfo/getDoctorCardCoordsReducer";
+
 import { forgetPasswordReducer } from "redux/ForgetPassword/forgetPasswordReducer";
 import { verifyOtpReducer } from "redux/ForgetPassword/VerifyOtp/verifyOtpReducer";
 import { resetPasswordReducer } from "redux/ForgetPassword/ResetPassword/resetPasswordReducer";
+
+import { listAllContractsReducer } from "redux/VirtualClinicRedux/ListAllContracts/listAllContractsReducer";
+
+import { viewPackagesReducer } from "./VirtualClinicRedux/viewPackages/viewPackagesReducer";
+import { unsubscribeFromPackageReducer } from "./VirtualClinicRedux/UnsubscribeFromPackage/unsubscribeFromPackageReducer";
+import { viewSubscribedPackageForFamilyMemberReducer } from "./VirtualClinicRedux/ViewSubscribedPackageforFamilyMember/viewSubscribedPackageforFamilyMemberReducer";
+import { unsubscribeFromPackageForFamilyReducer } from "./VirtualClinicRedux/UnsubscribeFromPackageforFamily/unsubscribeFromPackageforFamilyReducer";
+import {viewPackagePriceReducer} from "./VirtualClinicRedux/GetPackagePrice/getPackagePriceReducer"
+
 
 export const appReducer = combineReducers({
   listAllUsersReducer,
@@ -72,7 +82,13 @@ export const appReducer = combineReducers({
   getDoctorCardCoordsReducer,
   forgetPasswordReducer,
   verifyOtpReducer,
-  resetPasswordReducer
+  resetPasswordReducer,
+  listAllContractsReducer,
+  viewPackagesReducer,
+  unsubscribeFromPackageReducer,
+  viewSubscribedPackageForFamilyMemberReducer,
+  unsubscribeFromPackageForFamilyReducer,
+  viewPackagePriceReducer,
 });
 
 export const rootReducers = (state: any, action: any) => {

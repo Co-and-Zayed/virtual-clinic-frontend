@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { RootState } from "~/redux/rootReducer";
 import { useSelector } from "react-redux";
-import AdminPackagesScreen from "../../User Screens/Admin Screens/AdminsScreen/AdminsScreen";
+import AdminPackagesScreen from "../../User Screens/Admin Screens/PackagesScreen/PackagesScreen";
 import PatientPackagesScreen from "../../User Screens/Patient Screens/PackagesScreen/PackagesScreen";
 const CommonPackagesScreen = () => {
   const { loginLoading, userType } = useSelector(

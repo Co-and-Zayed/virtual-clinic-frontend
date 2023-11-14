@@ -105,7 +105,7 @@ const DashboardScreen = () => {
   ) : userData?.status === "PENDING" ? (
     <p>Your documents are being reviewed</p>
   ) : (
-    <p>Error 404</p>
+    <p>Unfortunately, your application has been rejected.</p>
   );
 };
 

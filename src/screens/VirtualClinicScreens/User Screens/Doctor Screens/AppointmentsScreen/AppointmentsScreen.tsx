@@ -16,6 +16,9 @@ import {
   Dropdown,
   MenuProps,
   notification,
+  Modal,
+  TimePicker,
+  Badge,
 } from "antd";
 import type {
   ColumnType,
@@ -29,7 +32,7 @@ import { getAppointmentsAction } from "redux/VirtualClinicRedux/GetAppointments/
 import { updateAppointmentAction } from "redux/VirtualClinicRedux/UpdateAppointment/updateAppointmentAction";
 import { deleteAppointmentAction } from "redux/VirtualClinicRedux/DeleteAppointment/deleteAppointmentAction";
 import { DownOutlined } from "@ant-design/icons";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import moment from "moment";
 
 interface DataType {
@@ -53,17 +56,6 @@ const AppointmentsScreen = () => {
     (state: RootState) => state.getAppointmentsReducer
   );
 
-  //   const data: DataType[] = userAppointments?.map((appointment: any) => {
-  //     const date = new Date(appointment.date);
-  //     return {
-  //       patientEmail: appointment.patient.email,
-  //       doctorEmail: appointment.doctor.email,
-  //       date: appointment.date.split("T")[0].replace(/-/g, "/"),
-  //       time: date.getHours() + ":" + date.getMinutes(),
-  //       status: appointment.status,
-  //       key: appointment._id,
-  //     };
-  //   });
   const { userData, userType } = useSelector(
     (state: RootState) => state.userReducer
   );
@@ -88,6 +80,9 @@ const AppointmentsScreen = () => {
       key: appointment._id,
     };
   });
+
+  const [rescheduleModalVisible, setRescheduleModalVisible] = useState(false);
+  const [selectedAppointment, setSelectedAppointment] = useState<string>();
 
   useEffect(() => {
     dispatch(
@@ -133,6 +128,21 @@ const AppointmentsScreen = () => {
 
   const clearAll = () => {
     setFilteredInfo({});
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "COMPLETED":
+        return "success";
+      case "UPCOMING":
+        return "processing";
+      case "CANCELLED":
+        return "error";
+      case "RESCHEDULED":
+        return "warning";
+      default:
+        return "warning";
+    }
   };
 
   const getColumnSearchProps = (
@@ -231,7 +241,7 @@ const AppointmentsScreen = () => {
       title: "Patient Name",
       dataIndex: "patientName",
       key: "patientName",
-      width: "20%",
+      width: "17%",
       ...getColumnSearchProps("patientName"),
       sorter: (a, b) => a.patientName?.localeCompare(b.patientName),
       sortDirections: ["descend", "ascend"],
@@ -240,7 +250,7 @@ const AppointmentsScreen = () => {
       title: "Patient Phone",
       dataIndex: "patientPhone",
       key: "patientPhone",
-      width: "20%",
+      width: "17%",
       ...getColumnSearchProps("patientPhone"),
     },
     {
@@ -266,45 +276,199 @@ const AppointmentsScreen = () => {
       dataIndex: "status",
       key: "status",
       filters: [
-        { text: "UPCOMING", value: "UPCOMING" },
-        { text: "CANCELED", value: "CANCELLED" },
-        { text: "COMPLETED", value: "COMPLETED" },
+        { text: "Upcoming", value: "UPCOMING" },
+        { text: "Cancelled", value: "CANCELLED" },
+        { text: "Completed", value: "COMPLETED" },
+        { text: "Rescheduled", value: "RESCHEDULED" },
       ],
       onFilter: (value: React.Key | boolean, record) =>
         record.status.indexOf(value as string) === 0,
       ellipsis: true,
+      render: (text, record) => (
+        <Badge
+          status={getStatusColor(record.status)}
+          text={
+            record.status.charAt(0).toUpperCase() +
+            record.status.slice(1).toLowerCase()
+          }
+        />
+      ),
     },
     {
       title: "Action",
       key: "operation",
       fixed: "right",
       width: 150,
-      render: (record) => (
-        <Dropdown menu={{ items, onClick }}>
-          <a>
-            More <DownOutlined />
-          </a>
-        </Dropdown>
-      ),
+      render: (record) => {
+        var items = [
+          { key: "UPCOMING", label: "Mark as Upcoming" },
+          { key: "CANCELLED", label: "Cancel" },
+          { key: "COMPLETED", label: "Complete" },
+          { key: "RESCHEDULED", label: "Reschedule" },
+        ];
+        items = items.filter((item) => item.key !== record.status);
+
+        console.log(record.status);
+        console.log(items);
+        return (
+          <Dropdown
+            menu={{ items, onClick: (item) => onClick(item, record.key) }}
+          >
+            <a>
+              More <DownOutlined />
+            </a>
+          </Dropdown>
+        );
+      },
+      // render: (record) => (
+      //   <Dropdown menu={{ items, onClick }}>
+      //     <a>
+      //       More <DownOutlined />
+      //     </a>
+      //   </Dropdown>
+      // ),
     },
   ];
 
-  const onClick: MenuProps['onClick'] = ({ key }) => {
-    notification.info({
-      message: `Click on item ${key}`,
+  const onClick = async (item: any, id: string) => {
+    // If it is reschedule, make an antd modal with a date and time picker
+    if (item.key === "RESCHEDULED") {
+      setSelectedAppointment(id);
+      setRescheduleModalVisible(true);
+      return;
+    }
+
+    await dispatch(
+      updateAppointmentAction({
+        id: id,
+        status: item.key,
+      })
+    );
+    notification.open({
+      message: "Appointment Status Changed",
+      description: `Appointment status changed to ${item.key}`,
+      onClick: () => {
+        console.log("Notification Clicked!");
+      },
+      // placement: "bottomRight",
     });
+
+    dispatch(
+      getAppointmentsAction({
+        id: userData?._id,
+        type: userType,
+      })
+    );
   };
 
-  const items = [
-    { key: "CANCELLED", label: "Cancel" },
-    { key: "COMPLETED", label: "Complete" },
-    { key: "RESCHEDULED", label: "Reschedule" },
-  ];
+  const [chosenDate, setChosenDate] = useState<Dayjs | null>(null);
+  const [chosenTime, setChosenTime] = useState<Dayjs | null>(null);
+  const [loadingReschedule, setLoadingReschedule] = useState(false);
 
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
       <h1 className="pageHeading">Appointments</h1>
       <Table dataSource={data} columns={columns} />
+      <Modal
+        title="Title"
+        open={rescheduleModalVisible}
+        onOk={async () => {
+          setLoadingReschedule(true);
+
+          // check if the date and time are valid and in the future
+          if (!chosenDate || !chosenTime || chosenDate?.isBefore(dayjs())) {
+            notification.warning({
+              message: "Invalid Date and Time",
+              description: `Please choose a valid date and time`,
+              onClick: () => {
+                console.log("Notification Clicked!");
+              },
+              // placement: "bottomRight",
+            });
+            setLoadingReschedule(false);
+            return;
+          }
+
+          // create another appointment with the same patient and doctor but with the new date and time
+
+          var finalDate = chosenDate?.toDate();
+          finalDate.setHours(chosenTime?.hour() || 0);
+          finalDate?.setMinutes(chosenTime?.minute() || 0);
+          finalDate?.setSeconds(0);
+          finalDate?.setMilliseconds(0);
+
+          await dispatch(
+            createAppointmentAction({
+              doctorId: userData?._id,
+              patientId: userAppointments?.find(
+                (appointment: any) => appointment._id === selectedAppointment
+              )?.patientId,
+              date: finalDate,
+              status: "UPCOMING",
+            })
+          );
+
+          // update the old appointment to be rescheduled
+          await dispatch(
+            updateAppointmentAction({
+              id: selectedAppointment,
+              status: "RESCHEDULED",
+            })
+          );
+
+          dispatch(
+            getAppointmentsAction({
+              id: userData?._id,
+              type: userType,
+            })
+          );
+
+          notification.success({
+            message: "Appointment Rescheduled",
+            description: `Appointment rescheduled successfully to ${moment(
+              finalDate
+            ).format("dddd, MMMM D, yyyy")} at ${moment(finalDate).format(
+              "h:mm a"
+            )}`,
+            onClick: () => {
+              console.log("Notification Clicked!");
+            },
+            // placement: "bottomRight",
+          });
+
+          setLoadingReschedule(false);
+          setRescheduleModalVisible(false);
+        }}
+        confirmLoading={loadingReschedule}
+        onCancel={() => setRescheduleModalVisible(false)}
+      >
+        {/* DATE AND TIME PICKER */}
+        <p>Reschedule Appointment</p>
+        <p>Choose a date and time for your appointment</p>
+        <div className="flex flex-col items-center justify-center">
+          <Input
+            type="date"
+            allowClear
+            onChange={(e) => {
+              console.log(e.target.value);
+              setChosenDate(dayjs(e.target.value));
+            }}
+          />
+          {/* only every 30 minutes */}
+          <TimePicker
+            minuteStep={30}
+            showSecond={false}
+            format={"h:mm a"}
+            showNow={false}
+            allowClear
+            onChange={(time, timeString) => {
+              console.log(time);
+              console.log(timeString);
+              setChosenTime(time);
+            }}
+          />
+        </div>
+      </Modal>
     </div>
   );
 };

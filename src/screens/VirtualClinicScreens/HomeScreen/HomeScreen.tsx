@@ -14,7 +14,7 @@ const HomeScreen = () => {
     if (isLoggedIn) {
       navigate("/dashboard");
     } else {
-      navigate("/login");
+      // navigate("/login");
     }
   }, []);
 

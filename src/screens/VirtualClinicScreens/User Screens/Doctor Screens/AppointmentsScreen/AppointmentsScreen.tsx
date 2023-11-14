@@ -82,6 +82,7 @@ const AppointmentsScreen = () => {
   });
 
   const [rescheduleModalVisible, setRescheduleModalVisible] = useState(false);
+  const [followUpModalVisible, setFollowUpModalVisible] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState<string>();
 
   useEffect(() => {
@@ -250,7 +251,7 @@ const AppointmentsScreen = () => {
       title: "Patient Phone",
       dataIndex: "patientPhone",
       key: "patientPhone",
-      width: "17%",
+      width: "20%",
       ...getColumnSearchProps("patientPhone"),
     },
     {
@@ -308,8 +309,11 @@ const AppointmentsScreen = () => {
         ];
         items = items.filter((item) => item.key !== record.status);
 
-        console.log(record.status);
-        console.log(items);
+        // if completed add a "Schedule a follow up" button
+        if (record.status === "COMPLETED") {
+          items.push({ key: "FOLLOW_UP", label: "Schedule a Follow Up" });
+        }
+
         return (
           <Dropdown
             menu={{ items, onClick: (item) => onClick(item, record.key) }}
@@ -320,13 +324,6 @@ const AppointmentsScreen = () => {
           </Dropdown>
         );
       },
-      // render: (record) => (
-      //   <Dropdown menu={{ items, onClick }}>
-      //     <a>
-      //       More <DownOutlined />
-      //     </a>
-      //   </Dropdown>
-      // ),
     },
   ];
 
@@ -335,6 +332,13 @@ const AppointmentsScreen = () => {
     if (item.key === "RESCHEDULED") {
       setSelectedAppointment(id);
       setRescheduleModalVisible(true);
+      return;
+    }
+
+    // If it is follow up, make an antd modal with a date and time picker
+    if (item.key === "FOLLOW_UP") {
+      setSelectedAppointment(id);
+      setFollowUpModalVisible(true);
       return;
     }
 
@@ -363,14 +367,18 @@ const AppointmentsScreen = () => {
 
   const [chosenDate, setChosenDate] = useState<Dayjs | null>(null);
   const [chosenTime, setChosenTime] = useState<Dayjs | null>(null);
+
   const [loadingReschedule, setLoadingReschedule] = useState(false);
+  const [loadingFollowUp, setLoadingFollowUp] = useState(false);
 
   return (
     <div className={`w-full flex flex-col items-start justify-center`}>
       <h1 className="pageHeading">Appointments</h1>
       <Table dataSource={data} columns={columns} />
+
+      {/* RESCHEDULE */}
       <Modal
-        title="Title"
+        title="Reschedule Appointment"
         open={rescheduleModalVisible}
         onOk={async () => {
           setLoadingReschedule(true);
@@ -397,14 +405,17 @@ const AppointmentsScreen = () => {
           finalDate?.setSeconds(0);
           finalDate?.setMilliseconds(0);
 
+          const appointment = userAppointments?.find(
+            (appointment: any) => appointment._id === selectedAppointment
+          );
+
           await dispatch(
             createAppointmentAction({
               doctorId: userData?._id,
-              patientId: userAppointments?.find(
-                (appointment: any) => appointment._id === selectedAppointment
-              )?.patientId,
+              patientId: appointment?.patientId,
               date: finalDate,
               status: "UPCOMING",
+              patientType: appointment?.patientType,
             })
           );
 
@@ -443,7 +454,112 @@ const AppointmentsScreen = () => {
         onCancel={() => setRescheduleModalVisible(false)}
       >
         {/* DATE AND TIME PICKER */}
-        <p>Reschedule Appointment</p>
+        <p>Choose a date and time for your appointment</p>
+        <div className="flex flex-col items-center justify-center">
+          <Input
+            type="date"
+            allowClear
+            onChange={(e) => {
+              console.log(e.target.value);
+              setChosenDate(dayjs(e.target.value));
+            }}
+          />
+          {/* only every 30 minutes */}
+          <TimePicker
+            minuteStep={30}
+            showSecond={false}
+            format={"h:mm a"}
+            showNow={false}
+            allowClear
+            onChange={(time, timeString) => {
+              console.log(time);
+              console.log(timeString);
+              setChosenTime(time);
+            }}
+          />
+        </div>
+      </Modal>
+
+      {/* SCHEDULE A FOLLOW UP */}
+      <Modal
+        title="Follow Up Appointment"
+        open={followUpModalVisible}
+        onOk={async () => {
+          setLoadingFollowUp(true);
+
+          // check if the date and time are valid and in the future
+          if (!chosenDate || !chosenTime || chosenDate?.isBefore(dayjs())) {
+            notification.warning({
+              message: "Invalid Date and Time",
+              description: `Please choose a valid date and time`,
+              onClick: () => {
+                console.log("Notification Clicked!");
+              },
+              // placement: "bottomRight",
+            });
+            setLoadingFollowUp(false);
+            return;
+          }
+
+          // create another appointment with the same patient and doctor but with the new date and time
+
+          var finalDate = chosenDate?.toDate();
+          finalDate.setHours(chosenTime?.hour() || 0);
+          finalDate?.setMinutes(chosenTime?.minute() || 0);
+          finalDate?.setSeconds(0);
+          finalDate?.setMilliseconds(0);
+
+          const appointment = userAppointments?.find(
+            (appointment: any) => appointment._id === selectedAppointment
+          );
+
+          await dispatch(
+            createAppointmentAction({
+              doctorId: userData?._id,
+              patientId: appointment?.patientId,
+              date: finalDate,
+              status: "UPCOMING",
+              patientType: appointment?.patientType,
+            })
+          );
+
+          // // update the old appointment to be rescheduled
+          // await dispatch(
+          //   updateAppointmentAction({
+          //     id: selectedAppointment,
+          //     status: "RESCHEDULED",
+          //   })
+          // );
+
+          dispatch(
+            getAppointmentsAction({
+              id: userData?._id,
+              type: userType,
+            })
+          );
+
+          notification.success({
+            message: "Follow Up Appointment Scheduled",
+            description: `for ${
+              userAppointments?.find(
+                (appointment: any) => appointment._id === selectedAppointment
+              )?.patient?.name
+            }  on ${moment(finalDate).format("dddd, MMMM D, yyyy")} at ${moment(
+              finalDate
+            ).format("h:mm a")}`,
+            onClick: () => {
+              console.log("Notification Clicked!");
+            },
+            // placement: "bottomRight",
+          });
+
+          setLoadingFollowUp(false);
+          setFollowUpModalVisible(false);
+        }}
+        confirmLoading={loadingReschedule}
+        onCancel={() => setRescheduleModalVisible(false)}
+      >
+        {/* DATE AND TIME PICKER */}
         <p>Choose a date and time for your appointment</p>
         <div className="flex flex-col items-center justify-center">
           <Input

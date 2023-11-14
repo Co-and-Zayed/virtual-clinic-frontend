@@ -46,6 +46,7 @@ import { unsubscribeFromPackageReducer } from "./VirtualClinicRedux/UnsubscribeF
 import { viewSubscribedPackageForFamilyMemberReducer } from "./VirtualClinicRedux/ViewSubscribedPackageforFamilyMember/viewSubscribedPackageforFamilyMemberReducer";
 import { unsubscribeFromPackageForFamilyReducer } from "./VirtualClinicRedux/UnsubscribeFromPackageforFamily/unsubscribeFromPackageforFamilyReducer";
 import {viewPackagePriceReducer} from "./VirtualClinicRedux/GetPackagePrice/getPackagePriceReducer"
+import { listAllPatientHealthRecordsReducer } from "./VirtualClinicRedux/ListAllPatientHealthRecords/ListAllPatientHealthRecordsReducer";
 
 
 export const appReducer = combineReducers({
@@ -89,6 +90,7 @@ export const appReducer = combineReducers({
   viewSubscribedPackageForFamilyMemberReducer,
   unsubscribeFromPackageForFamilyReducer,
   viewPackagePriceReducer,
+  listAllPatientHealthRecordsReducer
 });
 
 export const rootReducers = (state: any, action: any) => {

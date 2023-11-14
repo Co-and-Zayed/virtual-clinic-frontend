@@ -86,6 +86,10 @@ export const listSinglePrescription = (id: any) => {
   return `prescriptionAPI/getPrescription/${id}`;
 };
 
+export const listAllPatientHealthRecords = () => {
+  return `patient/getHealthRecords`;
+}
+
 // SEIF URLs
 export const listAllPackages = () => {
   return `getPackages`;

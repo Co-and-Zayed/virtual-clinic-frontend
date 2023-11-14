@@ -7,7 +7,8 @@ import React from "react";
 import type { ColumnsType } from "antd/es/table";
 import { listAllPatientsAction } from "redux/VirtualClinicRedux/ListAllPatients/listAllPatientsAction";
 import { SearchOutlined } from "@ant-design/icons";
-import { Table, Input, Button } from "antd";
+import { Table, Input, Button, notification } from "antd";
+
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
 import { useFunctions } from "hooks/useFunctions";
 //import { listAllUsersAction } from "redux/VirtualClinicRedux/ListAllUsers/listAllUsersAction";
@@ -18,8 +19,12 @@ const PatientsScreen = () => {
     (state: RootState) => state.listAllPatientsReducer
   );
 
-  const { userData } = useSelector((state: RootState) => state.userReducer);
+  const { userData, accessToken } = useSelector(
+    (state: RootState) => state.userReducer
+  );
   const { handleDownload } = useFunctions();
+  const [healthRecord, setHealthRecord] = useState("");
+  const { TextArea } = Input;
 
   useEffect(() => {
     dispatch(listAllPatientsAction({ doctorUsername: userData?.username })); // sending the request, and update the states
@@ -179,6 +184,68 @@ const PatientsScreen = () => {
       title: "Health Records",
       dataIndex: "healthRecords",
       key: "healthRecords",
+    },
+    {
+      title: "Add Health Record",
+      dataIndex: "healthRecord",
+      key: "healthRecord",
+      render: (text, record: any) => {
+        const handleAddHealthRecord = async () => {
+          if (healthRecord === "") {
+            notification.error({
+              message: "Fill The Health Record Field",
+            });
+
+            return;
+          }
+
+          try {
+            const response = await fetch(
+              `${process.env.REACT_APP_BACKEND_URL}doctor/addHealthRecordForPatient`,
+              {
+                method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${accessToken}`,
+                  },
+                  body: JSON.stringify({
+                    patientId: record._id,
+                    healthRecord
+                  }),
+              }
+            );
+
+            const data = await response.json();
+            console.log("Fetched", data);
+
+            if (response.ok) {
+              notification.success({
+                message: "Health Record Added Successfully",
+              });
+            }
+          } catch (error) {
+            notification.error({
+              message: "Failed To Add Health Record",
+            });
+            console.log(error);
+          }
+        };
+
+        return (
+          <div>
+            <TextArea
+              placeholder="Enter health record"
+              autoSize={false}
+              onChange={(e) => {
+                setHealthRecord(e.target.value);
+              }}
+            />
+            <Button onClick={handleAddHealthRecord} style={{ marginTop: 8 }}>
+              Add Record
+            </Button>
+          </div>
+        );
+      },
     },
   ];
 

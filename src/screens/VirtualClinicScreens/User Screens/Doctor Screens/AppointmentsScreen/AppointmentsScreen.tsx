@@ -71,21 +71,21 @@ const AppointmentsScreen = () => {
   const dispatch: any = useDispatch();
 
   const data: DataType[] = userAppointments?.map((appointment: any) => {
-    const date = moment(appointment.date);
-    const isGuest = appointment.patient.type === "GUEST";
+    const date = moment(appointment?.date);
+    const isGuest = appointment.patient?.type === "GUEST";
     return {
-      patientName: appointment.patient?.name,
+      patientName: appointment?.patient?.name,
       patientPhone: isGuest
-        ? appointment.patient.relationTo +
+        ? appointment?.patient?.relationTo +
           "'s " +
-          appointment.patient.relation.toLowerCase()
+          appointment.patient?.relation.toLowerCase()
         : appointment.patient?.mobileNumber,
-      doctorName: appointment.doctor.name,
+      doctorName: appointment?.doctor?.name,
       date: date.toDate(),
       dateStr: date.format("dddd, MMMM D, yyyy"),
       time: date.format("h:mm a"),
-      status: appointment.status,
-      key: appointment._id,
+      status: appointment?.status,
+      key: appointment?._id,
     };
   });
 

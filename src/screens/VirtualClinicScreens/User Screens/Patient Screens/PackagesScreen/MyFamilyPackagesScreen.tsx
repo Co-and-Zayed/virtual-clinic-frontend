@@ -117,8 +117,8 @@ const MyFamilyPackageScreen = () => {
                 }}
                 optionFilterProp="children"
                 options={userFamilyMembers?.map((FamilyMembers: any) => ({
-                  value: FamilyMembers._id,
-                  label: FamilyMembers.name,
+                  value: FamilyMembers.familyMember._id,
+                  label: FamilyMembers.familyMember.name,
                 }))}
                 filterOption={(input, option: any) =>
                   option?.children

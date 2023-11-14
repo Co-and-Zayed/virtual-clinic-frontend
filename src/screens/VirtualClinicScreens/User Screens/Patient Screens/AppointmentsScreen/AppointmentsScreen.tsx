@@ -16,6 +16,7 @@ import {
   Popconfirm,
   DatePicker,
   TimePicker,
+  Select,
 } from "antd";
 import type {
   ColumnType,
@@ -60,6 +61,7 @@ const AppointmentsScreen = () => {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
   const [upcomingAppointments, setUpcomingAppointments] = useState(false);
   const [pastAppointments, setPastAppointments] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
 
   const data: DataType[] = userAppointments?.map((appointment: any) => {
     const date = moment(appointment.date);
@@ -76,7 +78,6 @@ const AppointmentsScreen = () => {
 
   useEffect(() => {
     fetchAppointments();
-   
   }, []);
 
   async function fetchAppointments() {
@@ -89,13 +90,6 @@ const AppointmentsScreen = () => {
     console.log(userAppointments);
     updateDaysToHighlight();
   }
-
-
-
-  // useEffect(() => {
-  // console.log("userAppointments");
-  // console.log(userAppointments);
-  // }, [userAppointments]);
 
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
@@ -288,7 +282,6 @@ const AppointmentsScreen = () => {
     console.log("userAppointments useEffect");
     console.log(userAppointments);
     updateDaysToHighlight();
-    
   }, [userAppointments]);
 
   function updateDaysToHighlight() {
@@ -341,6 +334,12 @@ const AppointmentsScreen = () => {
       filteredAppointments = filteredAppointments?.filter((app: any) => {
         const date = dayjs(app.date);
         return date.isBefore(dayjs());
+      });
+    }
+
+    if (selectedStatus) {
+      filteredAppointments = filteredAppointments?.filter((app: any) => {
+        return app.status === selectedStatus;
       });
     }
 
@@ -421,41 +420,66 @@ const AppointmentsScreen = () => {
         {/* Appointments */}
         <div className="flex flex-col items-center justify-start gap-y-4">
           <div className="w-full flex items-center justify-start gap-x-2">
-            <Button
-              className={`
-                ${pastAppointments ? styles.filterBtnActive : styles.filterBtn}
-              `}
-              onClick={() => {
-                setPastAppointments((past) => {
-                  if (!past) {
-                    setUpcomingAppointments(false);
-                    setSelectedDate(null);
+            {/* PAST & UPCOMING */}
+            <div className="w-full flex items-center justify-start gap-x-2">
+              <Button
+                className={`
+                  ${
+                    pastAppointments ? styles.filterBtnActive : styles.filterBtn
                   }
-                  return !past;
-                });
+                `}
+                onClick={() => {
+                  setPastAppointments((past) => {
+                    if (!past) {
+                      setUpcomingAppointments(false);
+                      setSelectedDate(null);
+                    }
+                    return !past;
+                  });
+                }}
+              >
+                Past
+              </Button>
+              <Button
+                className={`
+                  ${
+                    upcomingAppointments
+                      ? styles.filterBtnActive
+                      : styles.filterBtn
+                  }`}
+                onClick={() => {
+                  setUpcomingAppointments((upcoming) => {
+                    if (!upcoming) {
+                      setPastAppointments(false);
+                      setSelectedDate(null);
+                    }
+                    return !upcoming;
+                  });
+                }}
+              >
+                Upcoming
+              </Button>
+            </div>
+
+            {/* FILTER BY STATUS (upcoming, completed, cancelled, rescheduled) */}
+            {/* dropdown containing these values with allow clear */}
+            <Select
+              className={`${inputStyles.lightInputField}`}
+              style={{ width: "12rem" }}
+              placeholder="Filter by Status"
+              options={
+                [
+                  { value: "UPCOMING", label: "Upcoming" },
+                  { value: "COMPLETED", label: "Completed" },
+                  { value: "CANCELLED", label: "Cancelled" },
+                  { value: "RESCHEDULED", label: "Rescheduled" },
+                ] as any
+              }
+              allowClear
+              onChange={(value) => {
+                setSelectedStatus(value);
               }}
-            >
-              Past
-            </Button>
-            <Button
-              className={`
-                ${
-                  upcomingAppointments
-                    ? styles.filterBtnActive
-                    : styles.filterBtn
-                }`}
-              onClick={() => {
-                setUpcomingAppointments((upcoming) => {
-                  if (!upcoming) {
-                    setPastAppointments(false);
-                    setSelectedDate(null);
-                  }
-                  return !upcoming;
-                });
-              }}
-            >
-              Upcoming
-            </Button>
+            />
           </div>
           {/* FILTERS */}
           <div className={`flex gap-x-2`}>

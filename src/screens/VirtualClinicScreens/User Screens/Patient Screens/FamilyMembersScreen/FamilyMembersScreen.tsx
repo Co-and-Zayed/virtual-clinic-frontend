@@ -114,23 +114,23 @@ const FamilyMembersScreen = () => {
     userFamilyMembers
       ?.filter((user: any) => user.type === "GUEST")
       .map((user: any) => ({
-        name: user.familyMember.name, // |
-        nationalID: user.familyMember.nationalID, // |
-        age: user.familyMember.age, // |Trying to populate the table with the data
-        gender: user.familyMember.gender, // |
-        relationship: user.familyMember.relation, // |
-        key: user.familyMember._id, // |
+        name: user.familyMember?.name, // |
+        nationalID: user.familyMember?.nationalID, // |
+        age: user.familyMember?.age, // |Trying to populate the table with the data
+        gender: user.familyMember?.gender, // |
+        relationship: user.familyMember?.relation, // |
+        key: user.familyMember?._id, // |
       })); //}|
 
   const patientData: DataType[] = //}|
     userFamilyMembers
       ?.filter((user: any) => user.type === "EXISTING")
       .map((user: any) => ({
-        name: user.familyMember.name, // |
-        username: user.familyMember.username, // |
-        email: user.familyMember.email,
+        name: user.familyMember?.name, // |
+        username: user.familyMember?.username, // |
+        email: user.familyMember?.email,
         relationship: user.relation, // |
-        key: user.familyMember._id, // |
+        key: user.familyMember?._id, // |
       }));
 
   useEffect(() => {

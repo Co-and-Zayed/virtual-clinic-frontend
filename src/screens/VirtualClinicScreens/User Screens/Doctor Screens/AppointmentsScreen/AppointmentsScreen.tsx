@@ -30,6 +30,7 @@ import moment from "moment";
 
 interface DataType {
   patientName: any;
+  patientPhone: any;
   doctorName: any;
   date: Date;
   dateStr: string;
@@ -69,6 +70,7 @@ const AppointmentsScreen = () => {
     const date = moment(appointment.date);
     return {
       patientName: appointment.patient.name,
+      patientPhone: appointment.patient.mobileNumber,
       doctorName: appointment.doctor.name,
       date: date.toDate(),
       dateStr: date.format("dddd, MMMM D, yyyy"),
@@ -220,16 +222,23 @@ const AppointmentsScreen = () => {
       title: "Patient Name",
       dataIndex: "patientName",
       key: "patientName",
-      width: "30%",
+      width: "20%",
       ...getColumnSearchProps("patientName"),
       sorter: (a, b) => a.patientName?.localeCompare(b.patientName),
       sortDirections: ["descend", "ascend"],
     },
     {
+      title: "Patient Phone",
+      dataIndex: "patientPhone",
+      key: "patientPhone",
+      width: "20%",
+      ...getColumnSearchProps("patientPhone"),
+    },
+    {
       title: "Date",
       dataIndex: "dateStr",
       key: "date",
-      width: "30%",
+      width: "25%",
       ...getColumnSearchProps("date"),
       // a.date is of type Date
       sorter: (a, b) =>  a.date.toString().localeCompare(b.date.toString()),

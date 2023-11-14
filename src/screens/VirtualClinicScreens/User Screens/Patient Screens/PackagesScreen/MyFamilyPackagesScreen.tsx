@@ -13,7 +13,7 @@ import { create } from "domain";
 import { createPackageAction } from "redux/VirtualClinicRedux/CreatePackage/createPackageAction";
 import { deletePackageAction } from "redux/VirtualClinicRedux/DeletePackage/deletePackageAction";
 import JellyLoader from "components/JellyLoader/JellyLoader";
-import axios from "axios";
+// import axios from "axios";
 import { viewPackagesAction } from "redux/VirtualClinicRedux/viewPackages/viewPackagesAction";
 import { getFamilyMembersAction } from "redux/VirtualClinicRedux/GetFamilyMembers/getFamilyMembersAction";
 import { viewSubscribedPackageForFamilyMemberReducer } from "redux/VirtualClinicRedux/ViewSubscribedPackageforFamilyMember/viewSubscribedPackageforFamilyMemberReducer";
@@ -25,9 +25,9 @@ import {
   viewSubscribedPackageforFamilyMemberAction,
 } from "redux/VirtualClinicRedux/ViewSubscribedPackageforFamilyMember/viewSubscribedPackageforFamilyMemberAction";
 import { viewSubscribedPackageforFamilyMember } from "api/VirtualClinicRedux/apiUrls";
-import { unsubscribe } from "diagnostics_channel";
 import { unsubscribeFromPackageForFamilyAction } from "redux/VirtualClinicRedux/UnsubscribeFromPackageforFamily/unsubscribeFromPackageforFamilyAction";
 import PaymentMethod from "../DoctorsScreen/PaymentScreens/PaymentMethod";
+import HealthPackageCard from "components/HealthPackageCard/HealthPackageCard";
 
 const MyFamilyPackageScreen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -154,97 +154,112 @@ const MyFamilyPackageScreen = () => {
                 searchFamilyMembers &&
                 userViewSubscribedPackageForFamilyMember?.map(
                   (packageItem: any) => (
-                    <div
-                      key={packageItem._id}
-                      className={`${styles.packageItem} ${
-                        selectedPackage?.type
-                      } ${packageItem.type} ${
-                        selectedPackage?.type === packageItem.type &&
-                        styles.currentPackage
-                      } mt-5 mr-5`}
-                    >
-                      <div className="w-full flex justify-between items-center mb-2">
-                        <div className="flex items-center">
-                          <h1 className="mr-2">{packageItem.type}</h1>
-                          <p>| {packageItem.tier}</p>
-                        </div>
+                    // <div
+                    //   key={packageItem._id}
+                    //   className={`${styles.packageItem} ${
+                    //     selectedPackage?.type
+                    //   } ${packageItem.type} ${
+                    //     selectedPackage?.type === packageItem.type &&
+                    //     styles.currentPackage
+                    //   } mt-5 mr-5`}
+                    // >
+                    //   <div className="w-full flex justify-between items-center mb-2">
+                    //     <div className="flex items-center">
+                    //       <h1 className="mr-2">{packageItem.type}</h1>
+                    //       <p>| {packageItem.tier}</p>
+                    //     </div>
 
-                        {packageItem.status === "SUBSCRIBED" ? (
-                          // Render UNSUBSCRIBE button if status exists
-                          <button
-                            className={`${styles.editLink}`}
-                            onClick={() => {
-                              dispatch(
-                                unsubscribeFromPackageForFamilyAction({
-                                  ID: searchFamilyMembers,
-                                })
-                              );
-                              window.location.reload(); // Refresh the page after successful unsubscribe
-                            }}
-                          >
-                            UNSUBSCRIBE
-                          </button>
-                        ) : (
-                          // Render SUBSCRIBE button if status doesn't exist
-                          <button
-                            className={`${styles.editLink}`}
-                            onClick={() => {
-                              setChosenPackage(packageItem);
-                              setPage("payment");
-                            }}
-                          >
-                            SUBSCRIBE
-                          </button>
-                        )}
-                      </div>
-                      <p>EGP {packageItem.price_per_year}</p>
-                      <p>
-                        Session Discount:{" "}
-                        {packageItem.doctor_session_discount * 100}%
-                      </p>
-                      <p>
-                        Medicine Discount: {packageItem.medicine_discount * 100}
-                        %
-                      </p>
-                      <p>
-                        Family Discount: {packageItem.family_discount * 100}%
-                      </p>
-                      {packageItem.status && (
-                        // Render Status if it exists
-                        <p>Status: {packageItem.status}</p>
-                      )}
-                      {packageItem.status === "CANCELLED" && (
-                        // Render END DATE if status is "CANCELLED"
-                        <p>
-                          End Date:{" "}
-                          {new Date(
-                            packageItem.healthPackageRenewalDate
-                          ).toLocaleDateString()}
-                        </p>
-                      )}
-                      {packageItem.status === "UNSUBSCRIBED" && (
-                        // Render VALID UNTIL if status is "UNSUBSCRIBED"
-                        <p>
-                          Valid Until:{" "}
-                          {new Date(
-                            packageItem.healthPackageRenewalDate
-                          ).toLocaleDateString()}
-                        </p>
-                      )}
-                      {packageItem.status === "SUBSCRIBED" && (
-                        // Render RENEWAL DATE if status is "SUBSCRIBED"
-                        <p>
-                          Renewal Date:{" "}
-                          {new Date(
-                            packageItem.healthPackageRenewalDate
-                          ).toLocaleDateString()}
-                        </p>
-                      )}
-                      {packageItem.discountedPrice && (
-                        // Render Status if it exists
-                        <p>Discounted Price: {packageItem.discountedPrice}</p>
-                      )}
-                    </div>
+                    //     {packageItem.status === "SUBSCRIBED" ? (
+                    //       // Render UNSUBSCRIBE button if status exists
+                    //       <button
+                    //         className={`${styles.editLink}`}
+                    //         onClick={() => {
+                    //           dispatch(
+                    //             unsubscribeFromPackageForFamilyAction({
+                    //               ID: searchFamilyMembers,
+                    //             })
+                    //           );
+                    //           window.location.reload(); // Refresh the page after successful unsubscribe
+                    //         }}
+                    //       >
+                    //         UNSUBSCRIBE
+                    //       </button>
+                    //     ) : (
+                    //       // Render SUBSCRIBE button if status doesn't exist
+                    //       <button
+                    //         className={`${styles.editLink}`}
+                    //         onClick={() => {
+                    //           setChosenPackage(packageItem);
+                    //           setPage("payment");
+                    //         }}
+                    //       >
+                    //         SUBSCRIBE
+                    //       </button>
+                    //     )}
+                    //   </div>
+                    //   <p>EGP {packageItem.price_per_year}</p>
+                    //   <p>
+                    //     Session Discount:{" "}
+                    //     {packageItem.doctor_session_discount * 100}%
+                    //   </p>
+                    //   <p>
+                    //     Medicine Discount: {packageItem.medicine_discount * 100}
+                    //     %
+                    //   </p>
+                    //   <p>
+                    //     Family Discount: {packageItem.family_discount * 100}%
+                    //   </p>
+                    //   {packageItem.status && (
+                    //     // Render Status if it exists
+                    //     <p>Status: {packageItem.status}</p>
+                    //   )}
+                    //   {packageItem.status === "CANCELLED" && (
+                    //     // Render END DATE if status is "CANCELLED"
+                    //     <p>
+                    //       End Date:{" "}
+                    //       {new Date(
+                    //         packageItem.healthPackageRenewalDate
+                    //       ).toLocaleDateString()}
+                    //     </p>
+                    //   )}
+                    //   {packageItem.status === "UNSUBSCRIBED" && (
+                    //     // Render VALID UNTIL if status is "UNSUBSCRIBED"
+                    //     <p>
+                    //       Valid Until:{" "}
+                    //       {new Date(
+                    //         packageItem.healthPackageRenewalDate
+                    //       ).toLocaleDateString()}
+                    //     </p>
+                    //   )}
+                    //   {packageItem.status === "SUBSCRIBED" && (
+                    //     // Render RENEWAL DATE if status is "SUBSCRIBED"
+                    //     <p>
+                    //       Renewal Date:{" "}
+                    //       {new Date(
+                    //         packageItem.healthPackageRenewalDate
+                    //       ).toLocaleDateString()}
+                    //     </p>
+                    //   )}
+                    //   {packageItem.discountedPrice && (
+                    //     // Render Status if it exists
+                    //     <p>Discounted Price: {packageItem.discountedPrice}</p>
+                    //   )}
+                    // </div>
+                    <HealthPackageCard
+                      packageItem={packageItem}
+                      subscribeCallback={() => {
+                        setChosenPackage(packageItem);
+                        setPage("payment");
+                      }}
+                      unsubscribeCallback={() => {
+                        dispatch(
+                          unsubscribeFromPackageForFamilyAction({
+                            ID: searchFamilyMembers,
+                          })
+                        );
+                        window.location.reload();
+                      }}
+                    />
                   )
                 )}
             </div>

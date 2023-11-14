@@ -15,7 +15,7 @@ import { deletePackageAction } from "redux/VirtualClinicRedux/DeletePackage/dele
 import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const PackagesScreen = () => {
-  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+  // const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   const dispatch: any = useDispatch();
   const [selectedPackage, setSelectedPackage] = useState<any>(null);
   const [showSinglePackage, setShowSinglePackage] = useState<boolean>(false);

@@ -1,0 +1,201 @@
+.packageItem {
+  background-color: var(--dark-green);
+  color: white;
+  width: 18rem !important;
+  height: 27rem;
+  padding: 1.5rem;
+  border-radius: 1.875rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s;
+}
+
+.packageItemInv {
+  background-color: var(--light-green) !important;
+  color: var(--dark-green) !important;
+}
+
+@property --gb {
+  /* grey/blue */
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 70%;
+}
+
+@property --br {
+  /* blue/red */
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 85%;
+}
+
+.packageItemHover {
+  --gb: 0%;
+  --br: 0%;
+
+  transition: --gb 0.4s, --br 0.4s;
+  border-radius: 1.875rem;
+
+  background: linear-gradient(197deg, rgba(138, 193, 134, 0.30) var(--gb), rgba(138, 193, 134, 0.00) var(--br)), #163B45;
+
+  backdrop-filter: blur(15px);
+}
+
+.packageItemHover:hover {
+  --gb: -10.03%;
+  --br: 63.88%;
+}
+
+.packageItemHoverInv {
+  --gb: 0%;
+  --br: 0%;
+
+  transition: --gb 0.4s, --br 0.4s;
+  border-radius: 1.875rem;
+
+  background: linear-gradient(220deg, rgba(0, 0, 0, 0.30) var(--gb), rgba(0, 0, 0, 0.00) var(--br)), #8AC186;
+
+  backdrop-filter: blur(15px);
+}
+
+.packageItemHoverInv:hover {
+  --gb: -10.03%;
+  --br: 55.4%;
+}
+
+.packageItemInv:hover {
+  cursor: pointer;
+}
+
+.packageName {
+  width: fit-content;
+  padding-inline: 0.7rem;
+  padding-block: 0.2rem;
+  background-color: var(--light-green);
+
+  border-radius: 9999px;
+}
+
+.uppercase {
+  font-size: 0.8rem;
+  /* text-align: center; */
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+}
+
+.price {
+  line-height: 1;
+}
+
+.arrowCircle {
+  height: 1.2rem;
+  width: 1.2rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem;
+
+}
+
+.packageItem h1 {
+  font-size: 2.2rem;
+}
+
+.spinnerContainer {
+  /* background-color: pink; */
+  width: 40rem;
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.plusIcon {
+  background-color: blue;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-block: 1rem;
+  color: white;
+}
+
+.plusIcon:hover {
+  cursor: pointer;
+}
+
+.deleteButton {
+  color: red;
+  border: 2px solid red;
+}
+
+
+.checkoutBtn {
+  /*  w-[14rem] h-[2.5rem] flex flex-row items-center justify-between rounded-full border border-solid darkGreenText text-sm */
+  height: 2.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--light-green);
+  color: var(--light-green);
+  font-size: 0.75rem;
+  letter-spacing: 0.12rem;
+}
+
+/* on hover, background daark green, text white */
+.packageItem:hover .checkoutBtn {
+  background-color: white;
+  color: var(--dark-green) !important;
+  transition: all 0.3s ease-in-out;
+
+  /* p */
+  p {
+    color: white;
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+.packageItem:hover .packageName {
+  background-color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+.checkoutBtnInv {
+  /*  w-[14rem] h-[2.5rem] flex flex-row items-center justify-between rounded-full border border-solid darkGreenText text-sm */
+  height: 2.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--dark-green);
+  color: var(--dark-green);
+  font-size: 0.75rem;
+  letter-spacing: 0.12rem;
+
+}
+
+/* on hover, background daark green, text white */
+.packageItemInv:hover .checkoutBtnInv {
+  /* color: white !important; */
+  color: white !important;
+  background-color: var(--dark-green);
+  transition: all 0.3s ease-in-out;
+
+  /* p */
+  /* p {
+      color: white;
+      transition: all 0.3s ease-in-out;
+  } */
+}

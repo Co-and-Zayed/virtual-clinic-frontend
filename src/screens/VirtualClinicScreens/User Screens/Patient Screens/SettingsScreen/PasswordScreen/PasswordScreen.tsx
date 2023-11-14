@@ -83,6 +83,8 @@ const PasswordScreen = () => {
 
         // reset form
         formik.resetForm();
+
+        setLoading(false);
       }
     },
   });
@@ -130,7 +132,7 @@ const PasswordScreen = () => {
             />
 
             <SubmitButton
-              text="Change Password"
+              text={loading ? "Loading..." : "Change Password"}
               onClick={formik.handleSubmit}
               style={{
                 backgroundColor: "var(--dark-green)",

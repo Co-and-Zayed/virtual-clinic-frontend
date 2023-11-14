@@ -168,6 +168,7 @@ const UpcomingPatientsScreen = () => {
   const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);
 
   const handleExpand = (expanded: boolean, record: DataType) => {
+    console.log(record.key);
     if (expanded) {
       setExpandedRowKeys([record.key]);
     } else {
@@ -204,7 +205,11 @@ const UpcomingPatientsScreen = () => {
           expandedRowRender: (record) => generateExpandable(record),
           onExpand: (expanded, record) => handleExpand(expanded, record),
         }}
-        dataSource={allPatients}
+        dataSource={allPatients.map((patient: any) => {
+          //  unique key
+          patient.key = patient.id;
+          return patient;
+        })}
         expandedRowKeys={expandedRowKeys}
       />
     </div>

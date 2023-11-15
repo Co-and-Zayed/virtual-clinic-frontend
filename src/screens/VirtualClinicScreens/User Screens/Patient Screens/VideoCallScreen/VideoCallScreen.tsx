@@ -1,4 +1,4 @@
-import styles from "screens/VirtualClinicScreens/User Screens/Patient Screens/DashboardScreen/DashboardScreen.module.css";
+import styles from "screens/VirtualClinicScreens/User Screens/Patient Screens/VideoCallScreen/VideoCallScreen.module.css";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,7 @@ import {
   RTC_CONNECTION,
 } from "redux/VirtualClinicRedux/types";
 import * as Firestore from "firebase/firestore";
+import { set } from "mongoose";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -35,28 +36,37 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const firestore = Firestore.getFirestore(app);
 
-const DashboardScreen = () => {
+const VideoCallScreen = () => {
   const { userData } = useSelector((state: RootState) => state.userReducer);
   const { pc, localStream, remoteStream, currentAction } = useSelector(
     (state: RootState) => state.videoCallReducer
   );
 
+  const [isAnswering, setIsAnswering] = useState<boolean>(false);
   const [callInput, setCallInput] = useState<any>(null);
   const [callInputValue, setCallInputValue] = useState<any>(null);
+
+  const [roomCode, setRoomCode] = useState<any>(null);
   const [webcamVideo, setWebcamVideo] = useState<any>(null);
   const [remoteVideo, setRemoteVideo] = useState<any>(null);
   const dispatch: any = useDispatch();
 
   enum CallAction {
+    INIT = "INIT",
     START_WEB_CAM = "START_WEB_CAM",
-    CALL = "CALL",
     ANSWER = "ANSWER",
-    HANGUP = "HANGUP",
   }
 
   useEffect(() => {
     // init();
+    // change color of body to var(--dark-green)
+    document.body.style.backgroundColor = "var(--dark-green)";
     resetRedux();
+
+    return () => {
+      document.body.style.backgroundColor = "";
+      setIsAnswering(false);
+    };
   }, []);
 
   const init = async () => {
@@ -91,6 +101,10 @@ const DashboardScreen = () => {
       setRemoteVideo(
         document.getElementById("remoteVideo") as HTMLVideoElement
       );
+      await dispatch({
+        type: CURRENT_CALL_ACTION,
+        payload: CallAction.INIT,
+      });
     }
   };
 
@@ -133,18 +147,17 @@ const DashboardScreen = () => {
 
   useEffect(() => {
     switch (currentAction) {
+      case CallAction.INIT:
+        console.log("INIT START WEBCAM");
+        handleStartWebcam();
+        break;
       case CallAction.START_WEB_CAM:
         console.log("START WEBCAM");
         startWebcam();
         break;
-      case CallAction.CALL:
-        console.log("CALL");
-        break;
       case CallAction.ANSWER:
         console.log("ANSWER");
-        break;
-      case CallAction.HANGUP:
-        console.log("HANGUP");
+        handleAnswerClick(roomCode);
         break;
       default:
         console.log("DEFAULT");
@@ -167,8 +180,26 @@ const DashboardScreen = () => {
       });
     };
 
+    console.log("REMOTE STREAM");
+    console.log(remoteStream);
+    console.log("LOCAL STREAM");
+    console.log(localStream);
+    console.log("WEBCAM VIDEO");
+    console.log(webcamVideo);
+    console.log("REMOTE VIDEO");
+    console.log(remoteVideo);
+
     webcamVideo.srcObject = localStream;
     remoteVideo.srcObject = remoteStream;
+
+    if (isAnswering) {
+      await dispatch({
+        type: CURRENT_CALL_ACTION,
+        payload: CallAction.ANSWER,
+      });
+    } else {
+      await handleCallClick();
+    }
   };
 
   const handleStartWebcam = async () => {
@@ -201,6 +232,10 @@ const DashboardScreen = () => {
 
     // Get candidates for caller, save to db
     setCallInputValue(callDoc.id);
+    if (!isAnswering) {
+      console.log("NOT ANSWERING");
+      setRoomCode(callDoc.id);
+    }
     pc.onicecandidate = (event: any) => {
       event.candidate &&
         Firestore.addDoc(offerCandidates, event.candidate.toJSON());
@@ -242,10 +277,14 @@ const DashboardScreen = () => {
     console.log(callInputValue);
   }, [callInputValue]);
 
-  const handleAnswerClick = async () => {
-    console.log("ANSWER CALL CLICK");
+  useEffect(() => {
+    console.log("ROOM CODE VALUE CHANGED");
+    console.log(roomCode);
+  }, [roomCode]);
 
-    const callId = callInputValue;
+  const handleAnswerClick = async (callId: any) => {
+    console.log("ANSWER CLICK");
+    console.log(callId);
     const callDoc = Firestore.doc(firestore, "calls", callId);
 
     const answerCandidates = Firestore.collection(callDoc, "answerCandidates");
@@ -303,44 +342,83 @@ const DashboardScreen = () => {
     // Optional: Redirect or perform other actions after hanging up
   };
 
-  return (
-    <div
-      className={`ml-12 mt-12 w-full flex flex-col items-start justify-center`}
-    >
-      <h1 className="pageHeading">Create or Join a Meeting</h1>
-      <div className="videos">
-        <span>
-          <h3>Local</h3>
-          <video id="webcamVideo" autoPlay playsInline></video>
-        </span>
-        <span>
-          <h3>Remote</h3>
-          <video id="remoteVideo" autoPlay playsInline></video>
-        </span>
-      </div>
-      <div onClick={init}>START APP</div>
-      <div id="webcamButton" onClick={handleStartWebcam}>
-        Start webcam
-      </div>
-      <h2>Create a new Call</h2>
-      <div id="webcamButton" onClick={handleCallClick}>
-        Call
-      </div>
-      <h2>Join a Call</h2>
+  const handleJoinClick = async () => {
+    setIsAnswering(true);
+    await init();
+  };
 
-      <input
-        id="callInput"
-        value={callInputValue}
-        onChange={(e: any) => setCallInputValue(e.target.value)}
-      />
-      <div id="answerButton" onClick={handleAnswerClick}>
-        Answer
+  return (
+    <div className="w-full h-full relative">
+      <div
+        style={{ visibility: currentAction == null ? "visible" : "hidden" }}
+        className="w-full h-full absolute flex flex-col items-center justify-center"
+      >
+        <div
+          className="mb-5 cursor-pointer"
+          onClick={init}
+          style={{ color: "white" }}
+        >
+          CREATE A MEETING
+        </div>
+        <div className="mb-5" style={{ color: "white" }}>
+          or
+        </div>
+        <input
+          id="callInput"
+          className="mb-2"
+          value={roomCode}
+          onChange={(e: any) => {
+            // setCallInputValue(e.target.value);
+            setRoomCode(e.target.value);
+          }}
+        />
+        <div
+          onClick={handleJoinClick}
+          className="cursor-pointer"
+          style={{ color: "white" }}
+        >
+          JOIN
+        </div>
       </div>
-      <div id="hangup" onClick={handleHangupClick}>
-        Hangup
+      <div
+        style={{ visibility: currentAction != null ? "visible" : "hidden" }}
+        className={`p-10 pt-8 w-full flex flex-col items-center justify-center`}
+      >
+        {/* <h1 className="pageHeading">Create or Join a Meeting</h1> */}
+        <div className="w-3/4 flex gap-x-12 justify-center items-center">
+          <div className={`flex flex-col items-center gap-y-6`}>
+            <span>
+              <video
+                className={`${styles.videoContainer}`}
+                id="webcamVideo"
+                autoPlay
+                playsInline
+              ></video>
+            </span>
+            <span>
+              <video
+                className={`${styles.videoContainer}`}
+                id="remoteVideo"
+                autoPlay
+                playsInline
+              ></video>
+            </span>
+          </div>
+          <div className="h-full flex flex-col items-center justify-center">
+            <div
+              id="hangup"
+              style={{ color: "white" }}
+              className="cursor-pointer"
+              onClick={handleHangupClick}
+            >
+              Hangup
+            </div>
+            <div style={{ color: "white" }}>{roomCode}</div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default DashboardScreen;
+export default VideoCallScreen;

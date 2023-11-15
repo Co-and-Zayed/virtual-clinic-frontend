@@ -1,0 +1,7 @@
+.videoContainer {
+  width: 50rem;
+  height: 25rem;
+  background-color: rgb(15, 15, 15);
+  border-radius: 1.5rem;
+  transform: scaleX(-1);
+}

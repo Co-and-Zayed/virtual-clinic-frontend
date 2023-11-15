@@ -9,6 +9,7 @@ import {
   PrescriptionsIcon,
   ProfileIcon,
   MedicalIcon,
+  VideoIcon,
 } from "assets/IconComponents";
 import PatientProfileScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/ProfileScreen/ProfileScreen";
 import PatientPasswordScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/PasswordScreen/PasswordScreen";
@@ -44,6 +45,11 @@ export const navLinksPatient = [
     name: "Prescriptions",
     route: Routes.PRESCRIPTIONS_PATH,
     icon: <PrescriptionsIcon />,
+  },
+  {
+    name: "Video Call",
+    route: Routes.VIDEO_CALL_PATH,
+    icon: <VideoIcon />,
   },
 ];
 

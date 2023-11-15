@@ -24,6 +24,7 @@
     "cheerio": "^1.0.0-rc.12",
     "dayjs": "^1.11.10",
     "dotenv": "^16.3.1",
+    "firebase": "^10.6.0",
     "formik": "^2.4.5",
     "framer-motion": "^10.16.4",
     "jszip": "^3.10.1",

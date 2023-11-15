@@ -45,11 +45,12 @@ import { viewPackagesReducer } from "./VirtualClinicRedux/viewPackages/viewPacka
 import { unsubscribeFromPackageReducer } from "./VirtualClinicRedux/UnsubscribeFromPackage/unsubscribeFromPackageReducer";
 import { viewSubscribedPackageForFamilyMemberReducer } from "./VirtualClinicRedux/ViewSubscribedPackageforFamilyMember/viewSubscribedPackageforFamilyMemberReducer";
 import { unsubscribeFromPackageForFamilyReducer } from "./VirtualClinicRedux/UnsubscribeFromPackageforFamily/unsubscribeFromPackageforFamilyReducer";
-import {viewPackagePriceReducer} from "./VirtualClinicRedux/GetPackagePrice/getPackagePriceReducer"
+import { viewPackagePriceReducer } from "./VirtualClinicRedux/GetPackagePrice/getPackagePriceReducer";
 import { listAllPatientHealthRecordsReducer } from "./VirtualClinicRedux/ListAllPatientHealthRecords/ListAllPatientHealthRecordsReducer";
-
+import { videoCallReducer } from "./VirtualClinicRedux/VideoCall/videoCallReducer";
 
 export const appReducer = combineReducers({
+  videoCallReducer,
   listAllUsersReducer,
   patientGetDoctorsReducer,
   patientSearchDoctorsReducer,
@@ -90,7 +91,7 @@ export const appReducer = combineReducers({
   viewSubscribedPackageForFamilyMemberReducer,
   unsubscribeFromPackageForFamilyReducer,
   viewPackagePriceReducer,
-  listAllPatientHealthRecordsReducer
+  listAllPatientHealthRecordsReducer,
 });
 
 export const rootReducers = (state: any, action: any) => {

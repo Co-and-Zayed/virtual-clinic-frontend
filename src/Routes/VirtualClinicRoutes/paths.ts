@@ -32,3 +32,5 @@ export const VIEW_CONTRACT_PATH = "/view-contract";
 export const MY_PACKAGE_PATH = "/viewPackages";
 export const MY_FAMILY_PACKAGES_PATH = "/viewFamilyPackages";
 export const FAMILY_MEMBER_PACKAGE_PATH = "/familyMemberPackage";
+
+export const VIDEO_CALL_PATH = "/video-call";

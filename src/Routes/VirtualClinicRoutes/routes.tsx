@@ -34,6 +34,7 @@ import ViewPackageScreen from "screens/VirtualClinicScreens/User Screens/Patient
 import MyFamilyPackagesScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PackagesScreen/MyFamilyPackagesScreen";
 import FamilyMemberPackageScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/PackagesScreen/FamilyMemberPackageScreen";
 import PaymentMethod from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/PaymentScreens/PaymentMethod";
+import VideoCallScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/VideoCallScreen/VideoCallScreen";
 
 export const routes = [
   {
@@ -59,6 +60,11 @@ export const routes = [
     path: Routes.PATIENTS_PATH,
     element: <DoctorPatientsScreen />,
     parent: <ProtectedRoutes />,
+  },
+  {
+    path: Routes.VIDEO_CALL_PATH,
+    element: <VideoCallScreen />,
+    // parent: <ProtectedRoutes />,
   },
   {
     path: Routes.DOCTORS_UPCOMING_PATIENTS_PATH,
@@ -161,6 +167,6 @@ export const routes = [
   },
   {
     path: Routes.RESET_PASSWORD,
-    element: <ForgetPasswordScreen />
-  }
+    element: <ForgetPasswordScreen />,
+  },
 ];

@@ -19,5 +19,6 @@ export { default as PrescriptionsIcon } from "./PrescriptionsIcon";
 export { default as ProfileIcon } from "./ProfileIcon";
 export { default as RightArrowIcon } from "./RightArrowIcon";
 export { default as SettingsIcon } from "./SettingsIcon";
+export { default as VideoIcon } from "./VideoIcon";
 export { default as WalletIcon } from "./WalletIcon";
 export { default as XIcon } from "./XIcon";

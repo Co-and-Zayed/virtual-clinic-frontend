@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import PatientDashboardScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/DashboardScreen/DashboardScreen";
 import DoctorDashboardScreen from "screens/VirtualClinicScreens/User Screens/Doctor Screens/DashboardScreen/DashboardScreen";
-import { RootState } from "~/redux/rootReducer";
+import { RootState } from "redux/rootReducer";
 import { useSelector } from "react-redux";
 import AdminsScreen from "../../User Screens/Admin Screens/AdminsScreen/AdminsScreen";
 
@@ -18,7 +18,9 @@ const CommonDashboardScreen = () => {
     <PatientDashboardScreen />
   ) : userType === "ADMIN" ? (
     <AdminsScreen />
-  ) : <>User type not valid</>
+  ) : (
+    <>User type not valid</>
+  );
 };
 
 export default CommonDashboardScreen;

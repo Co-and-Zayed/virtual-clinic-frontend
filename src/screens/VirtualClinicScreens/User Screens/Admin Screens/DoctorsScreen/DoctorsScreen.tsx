@@ -34,7 +34,7 @@ import { adminListAllDoctorsAction } from "redux/VirtualClinicRedux/AdminListAll
 import { deleteDoctorAction } from "redux/VirtualClinicRedux/DeleteDoctor/deleteDoctorAction";
 
 import JellyLoader from "components/JellyLoader/JellyLoader";
-import { viewDoctors } from "~/api/VirtualClinicRedux/apiUrls";
+import { viewDoctors } from "api/VirtualClinicRedux/apiUrls";
 import { get } from "http";
 import { useFunctions } from "hooks/useFunctions";
 
@@ -65,7 +65,7 @@ const DoctorsScreen = () => {
   const [filteredInfo, setFilteredInfo] = useState<
     Record<string, FilterValue | null>
   >({});
-  const {handleDownload} = useFunctions()
+  const { handleDownload } = useFunctions();
 
   const { adminDoctorsLoading, adminDoctors } = useSelector(
     (state: RootState) => state.adminListAllDoctorsReducer
@@ -246,7 +246,7 @@ const DoctorsScreen = () => {
       case "REJECTED":
         return "error";
       case "WAITING":
-        return "processing"
+        return "processing";
       default:
         return "warning";
     }
@@ -471,9 +471,13 @@ const DoctorsScreen = () => {
           expandable={{
             expandedRowRender: (record) => (
               <p style={{ margin: 0 }}>
-                <a onClick={()=> {handleDownload( 
-                  {files: record.doctorDocuments}
-                )} }>Download Documents</a>
+                <a
+                  onClick={() => {
+                    handleDownload({ files: record.doctorDocuments });
+                  }}
+                >
+                  Download Documents
+                </a>
               </p>
             ),
             rowExpandable: (record) => record.name !== "Not Expandable",

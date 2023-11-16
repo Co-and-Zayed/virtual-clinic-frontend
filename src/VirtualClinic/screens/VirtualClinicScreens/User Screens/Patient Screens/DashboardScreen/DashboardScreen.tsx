@@ -1,11 +1,11 @@
 import styles from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Patient Screens/DashboardScreen/DashboardScreen.module.css";
-import { useNav } from "VirtualClinic/hooks/useNav";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "VirtualClinic/redux/rootReducer";
 import JSZip from "jszip";
 import { access } from "fs";
-import { useFunctions } from "VirtualClinic/hooks/useFunctions";
+import { useFunctions } from "hooks/useFunctions";
 
 const DashboardScreen = () => {
   const { userData } = useSelector((state: RootState) => state.userReducer);

@@ -1,0 +1,168 @@
+.mainContainer {
+  /* background-color: rgb(255, 255, 255); */
+  width: 16rem;
+  height: 18rem;
+  overflow: hidden;
+  border-radius: 0.625rem;
+  border: 1px solid var(--dark-green);
+  /* color: white; */
+  transition: all 0.2s;
+  transition: all 0.3s var(--custom-bezier);
+  padding: 0.75rem;
+  position: relative;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.25); */
+}
+
+.mainContainer:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.mainContainer:hover .imageContainer::after {
+  opacity: 85%;
+}
+
+.imageContainer {
+  position: relative;
+  background-color: gray;
+  width: 100%;
+  height: 9rem;
+  border-radius: 0.625rem;
+  overflow: hidden;
+  transition: all 0.3s var(--custom-bezier);
+}
+
+.imageContainer::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--dark-green);
+  border-radius: 0.625rem;
+  opacity: 0;
+  transition: all 0.3s var(--custom-bezier);
+}
+
+.viewDetails {
+  position: absolute;
+  font-size: 0.75rem;
+  letter-spacing: 0.2rem;
+  font-weight: 100;
+
+  z-index: 2;
+  color: white;
+
+  transform: translateY(50%);
+  opacity: 0;
+
+  transition: all 0.3s var(--custom-bezier);
+}
+
+.mainContainer:hover .viewDetails {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+.medicinalUse {
+  opacity: 0.5;
+  font-size: 0.8rem;
+  margin-bottom: -0.3rem;
+}
+
+/* DASHES */
+.medicinalUse span {
+  margin-inline: 0.2rem;
+}
+
+.priceContainer {
+  position: absolute;
+  background-color: var(--dark-green);
+  padding: 0.75rem;
+  width: 100%;
+  height: 2.85rem;
+  bottom: 0;
+  left: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 0.5;
+
+  color: var(--light-green);
+}
+
+.priceContainer span {
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.dataContainer {
+  padding-top: 0.5rem;
+}
+
+.dataContainer h1 {
+  margin-bottom: 0 !important;
+  font-size: 1.4rem;
+  color: var(--faded-green);
+}
+
+.searchButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: blue;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.6rem;
+  color: white;
+  transition: all 0.2s;
+}
+
+.searchButton:hover {
+  cursor: pointer;
+  background-color: rgb(0, 0, 255, 0.8);
+}
+
+.addButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: blue;
+  padding-inline: 1rem;
+  height: 2.5rem;
+  border-radius: 0.6rem;
+  color: white;
+  transition: all 0.2s;
+}
+
+.addButton:hover {
+  cursor: pointer;
+  background-color: rgb(0, 0, 255, 0.8);
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  border-radius: 100rem;
+  background-color: var(--faded-green);
+  margin-top: 2rem;
+}
+
+.cartItemContainer {
+  max-height: 23rem;
+  overflow: auto;
+}
+
+/* Proceed to checkout Button */
+.checkoutButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--dark-green);
+  padding-inline: 1rem;
+  height: 2.5rem;
+  border-radius: 0.6rem;
+  color: white;
+  transition: all 0.2s;
+  margin-top: 1rem;
+}

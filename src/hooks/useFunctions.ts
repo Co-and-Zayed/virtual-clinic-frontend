@@ -107,8 +107,17 @@ export const useFunctions = () => {
       document.body.removeChild(link);
     }
   };
+
+  function toDecimalPlaces(value: any, decimalPlaces: number) {
+    return value?.toLocaleString(undefined, {
+      minimumFractionDigits: decimalPlaces,
+      maximumFractionDigits: decimalPlaces,
+    });
+  }
+
   return {
     handleDownload,
     handleUpload,
+    toDecimalPlaces,
   };
 };

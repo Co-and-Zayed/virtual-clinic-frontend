@@ -1,0 +1,40 @@
+.counterContainer {
+  color: var(--dark-green);
+
+  border: 1px solid #cfcfcf;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  user-select: none;
+}
+
+.counterContainer .subButton {
+  border-right: 1px solid #cfcfcf;
+}
+
+.counterContainer .addButton {
+  border-left: 1px solid #cfcfcf;
+}
+
+.counterContainer .subButton:hover,
+.counterContainer .addButtonEnable:hover {
+  cursor: pointer;
+  background-color: #f3f3f3;
+}
+
+.counterContainer .addButtonDisable {
+  /* background-color: #f3f3f3; */
+  cursor: not-allowed;
+  background-color: #f9f9f9;
+  opacity: 0.4;
+}
+
+.counterContainer .subButton,
+.counterContainer .addButton {
+  transition: all 0.2s;
+}
+
+.minusIcon {
+  width: 35%;
+  height: 5%;
+  background-color: var(--dark-green);
+}

@@ -1,7 +1,7 @@
 import styles from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Patient Screens/FamilyMembersScreen/FamilyMembersScreen.module.css";
 
 import React from "react";
-import { useNav } from "VirtualClinic/hooks/useNav";
+import { useNav } from "hooks/useNav";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState, useRef } from "react";
 import { SearchOutlined } from "@ant-design/icons";

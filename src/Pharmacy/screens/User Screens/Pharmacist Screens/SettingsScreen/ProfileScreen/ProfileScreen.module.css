@@ -1,0 +1,49 @@
+.linkContainer {
+  margin-bottom: 0.5rem;
+  padding-inline: 0.75rem;
+  padding-block: 0.65rem;
+  width: 14rem;
+  border-radius: 0.625rem;
+  font-size: 1.25rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.subHeading {
+  font-size: 2.1875rem;
+  font-weight: 900;
+}
+
+.linkContainer:hover {
+  cursor: pointer;
+}
+
+.nonActiveLink:hover {
+  background-color: rgba(237, 237, 237, 0.9);
+}
+
+.settingsSection {
+  width: 100%;
+  margin-bottom: 4rem;
+  padding-right: 4rem;
+}
+
+.linkContainer .icon {
+  margin-right: 0.75rem;
+}
+
+.activeLink {
+  background-color: #e6e6e6;
+}
+
+.navigationContainer {
+  padding-top: 2rem;
+  margin-right: 2.5rem;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #cfcfcf;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}

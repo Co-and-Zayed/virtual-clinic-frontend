@@ -1,5 +1,5 @@
 import styles from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Doctor Screens/DashboardScreen/DashboardScreen.module.css";
-import { useNav } from "VirtualClinic/hooks/useNav";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "VirtualClinic/redux/rootReducer";
@@ -9,7 +9,7 @@ import { listAllPatientsAction } from "VirtualClinic/redux/VirtualClinicRedux/Li
 import { SearchOutlined } from "@ant-design/icons";
 import { Table, Input, Button } from "antd";
 import * as Routes from "VirtualClinic/Routes/VirtualClinicRoutes/paths";
-import { useFunctions } from "VirtualClinic/hooks/useFunctions";
+import { useFunctions } from "hooks/useFunctions";
 import ContractScreen from "../ContractScreen/ContractScreen";
 //import { listAllUsersAction } from "redux/VirtualClinicRedux/ListAllUsers/listAllUsersAction";
 

@@ -1,5 +1,5 @@
 import styles from "VirtualClinic/screens/VirtualClinicScreens/HomeScreen/HomeScreen.module.css";
-import { useNav } from "VirtualClinic/hooks/useNav";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import {
   navLinksDoctor,

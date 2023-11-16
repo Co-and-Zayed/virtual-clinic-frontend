@@ -1,0 +1,48 @@
+.mainContainer {
+  background-color: rgb(255, 255, 255);
+  width: 30rem;
+  height: 12rem;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  /* color: white; */
+  transition: all 0.2s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.mainContainer:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.imageContainer {
+  /* background-color: red; */
+  width: 18rem;
+  height: 100%;
+}
+
+.dataContainer {
+  padding-inline: 1rem;
+  padding-block: 1rem;
+}
+
+.dataContainer h1 {
+  margin-bottom: 0 !important;
+}
+
+.searchButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: blue;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.6rem;
+  color: white;
+  transition: all 0.2s;
+}
+
+.searchButton:hover {
+  cursor: pointer;
+  background-color: rgb(0, 0, 255, 0.8);
+}

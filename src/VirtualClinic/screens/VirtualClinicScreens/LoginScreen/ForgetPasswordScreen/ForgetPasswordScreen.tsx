@@ -7,7 +7,7 @@ import { forgetPasswordAction } from "VirtualClinic/redux/ForgetPassword/forgetP
 import JellyLoader from "VirtualClinic/components/JellyLoader/JellyLoader";
 import { verifyOtpAction } from "VirtualClinic/redux/ForgetPassword/VerifyOtp/verifyOtpAction";
 import { resetPasswordAction } from "VirtualClinic/redux/ForgetPassword/ResetPassword/resetPasswordAction";
-import { useNav } from "VirtualClinic/hooks/useNav";
+import { useNav } from "hooks/useNav";
 
 const ForgetPasswordScreen = () => {
   const dispatch: any = useDispatch();

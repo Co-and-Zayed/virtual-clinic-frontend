@@ -1,7 +1,7 @@
 import { DatePicker, Input, Select, Spin } from "antd";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { useNav } from "VirtualClinic/hooks/useNav";
+import { useNav } from "hooks/useNav";
 import { RootState } from "VirtualClinic/redux/rootReducer";
 import PatientRegisterModel from "VirtualClinic/models/PatientRegisterModel";
 import { regsiterAction } from "VirtualClinic/redux/Register/registerAction";

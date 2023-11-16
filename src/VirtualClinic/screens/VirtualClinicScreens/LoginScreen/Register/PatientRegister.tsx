@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import PatientRegisterModel from "VirtualClinic/models/PatientRegisterModel";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "VirtualClinic/redux/rootReducer";
-import { useNav } from "VirtualClinic/hooks/useNav";
+import { useNav } from "hooks/useNav";
 import { regsiterAction } from "VirtualClinic/redux/Register/registerAction";
 import Back from "VirtualClinic/assets/images/back.svg";
 import SubmitButton from "VirtualClinic/components/SubmitButton/SubmitButton";

@@ -11,7 +11,7 @@ import {
   RightArrowIcon,
 } from "VirtualClinic/assets/IconComponents";
 import { SET_DOCTOR_CARD_COORDS } from "VirtualClinic/redux/VirtualClinicRedux/types";
-import { useNav } from "VirtualClinic/hooks/useNav";
+import { useNav } from "hooks/useNav";
 
 interface DoctorCardProps {
   doctor: any;

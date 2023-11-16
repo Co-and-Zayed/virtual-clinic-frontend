@@ -1,0 +1,70 @@
+.subItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid var(--dark-green);
+  padding-inline: 1rem;
+  font-size: 0.95rem;
+}
+
+.subItemHeading {
+  text-transform: uppercase;
+  font-size: 0.55rem;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.1rem;
+}
+
+.addCartButton {
+  color: white;
+  background-color: var(--dark-green);
+}
+
+.addCartButton,
+.addCartButtonSelected {
+  border: 1px solid var(--dark-green);
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.15rem;
+  user-select: none;
+  margin-top: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.addCartButton:hover {
+  cursor: pointer;
+}
+
+.infoIcon {
+  opacity: 0.6;
+  transition: all 0.2s ease-in-out;
+}
+
+.infoIcon:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.otherButton {
+  user-select: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.otherButton:hover {
+  cursor: pointer;
+  background-color: #5e747e26;
+}
+
+.otherIngredients {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.25rem;
+  font-family: "Cabin";
+  max-height: 10rem;
+  overflow: auto;
+  color: var(--dark-green);
+}
+.otherIngredients p {
+  margin-right: 0.75rem;
+}

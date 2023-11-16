@@ -6,7 +6,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import LoginModel from "VirtualClinic/models/LoginModel";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "VirtualClinic/redux/rootReducer";
-import { useNav } from "VirtualClinic/hooks/useNav";
+import { useNav } from "hooks/useNav";
 import { loginAction } from "VirtualClinic/redux/User/userAction";
 import Logo from "VirtualClinic/assets/images/Logo.svg";
 import Doctor from "VirtualClinic/assets/images/Doctor.svg";

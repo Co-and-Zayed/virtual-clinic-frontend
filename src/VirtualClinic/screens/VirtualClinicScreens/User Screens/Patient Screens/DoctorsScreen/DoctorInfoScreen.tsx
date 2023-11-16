@@ -36,7 +36,7 @@ import RoundedButton from "VirtualClinic/components/RoundedButton/RoundedButton"
 import PayWithWallet from "./PaymentScreens/PayWithWallet";
 import { createAppointmentAction } from "VirtualClinic/redux/VirtualClinicRedux/CreateAppointment/createAppoinmentAction";
 import CoolCalendar from "VirtualClinic/components/CoolCalendar/CoolCalendar";
-import { useNav } from "VirtualClinic/hooks/useNav";
+import { useNav } from "hooks/useNav";
 
 const DoctorInfoScreen = () => {
   //const { name } = useParams<{ name: string }>();   //name of dr

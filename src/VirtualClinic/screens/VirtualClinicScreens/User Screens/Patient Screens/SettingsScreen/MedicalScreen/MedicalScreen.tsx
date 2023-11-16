@@ -1,12 +1,12 @@
 import styles from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/MedicalScreen/MedicalScreen.module.css";
-import { useNav } from "VirtualClinic/hooks/useNav";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import { settingsPatient } from "VirtualClinic/utils/navigationLinks";
 import * as Routes from "VirtualClinic/Routes/VirtualClinicRoutes/paths";
 import UploadButton from "VirtualClinic/components/UploadButton/UploadButton";
 import RoundedButton from "VirtualClinic/components/RoundedButton/RoundedButton";
-import { useFunctions } from "VirtualClinic/hooks/useFunctions";
-import { useRequests } from "VirtualClinic/hooks/useRequests";
+import { useFunctions } from "hooks/useFunctions";
+import { useRequests } from "hooks/useRequests";
 import { UPDATE_USER_DATA } from "VirtualClinic/redux/User/loginTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "VirtualClinic/redux/rootReducer";

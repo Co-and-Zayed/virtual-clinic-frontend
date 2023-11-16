@@ -1,6 +1,6 @@
 import styles from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/DoctorsScreen.module.css";
 import inputStyles from "VirtualClinic/components/InputField/InputField.module.css";
-import { useNav } from "VirtualClinic/hooks/useNav";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import { RootState } from "VirtualClinic/redux/rootReducer";
 import { useDispatch, useSelector } from "react-redux";

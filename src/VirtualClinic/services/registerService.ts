@@ -1,7 +1,7 @@
 import api from "VirtualClinic/api";
 import { registerUrl } from "VirtualClinic/api/apiUrls";
 import axios from "axios";
-import { useFunctions as customFunctions } from "VirtualClinic/hooks/useFunctions";
+import { useFunctions as customFunctions } from "hooks/useFunctions";
 
 export const registerService = async (data: any) => {
   const { handleUpload } = customFunctions();

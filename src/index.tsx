@@ -4,7 +4,7 @@ import "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/
 import App from "App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
-import store, { persistor } from "redux/store";
+import store, { persistor } from "VirtualClinic/redux/store";
 import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(

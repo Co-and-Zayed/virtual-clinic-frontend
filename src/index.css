@@ -74,20 +74,21 @@ input:-internal-autofill-selected {
   background-color: rgba(255, 255, 255, 0.03) !important;
 }
 
-.lightInputField {}
+.lightInputField {
+}
 
 /* src/assets/fonts/yourfont.ttf */
 
 @font-face {
   font-family: "Century Gothic";
-  src: url("assets/fonts/CenturyGothic.ttf") format("truetype");
+  src: url("VirtualClinic/assetsfonts/CenturyGothic.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Century Gothic";
-  src: url("assets/fonts/gothicb.ttf") format("truetype");
+  src: url("VirtualClinic/assetsfonts/gothicb.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
@@ -112,14 +113,12 @@ input:-internal-autofill-selected {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--light-green);
   transition: background 0.3s ease-in-out;
-
 }
 
 .ant-btn-primary {
   /* color: #fff; */
   background-color: #163b45;
 }
-
 
 /* CALENDAR
 .css-1u23akw-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {

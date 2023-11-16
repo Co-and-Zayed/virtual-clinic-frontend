@@ -1,4 +1,4 @@
-import styles from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/PaymentScreens/PaymentScreens.module.css";
+import styles from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/PaymentScreens/PaymentScreens.module.css";
 import inputStyles from "VirtualClinic/components/InputField/InputField.module.css";
 import { useNavigate, useParams } from "react-router";
 import { FC, useEffect, useRef, useState } from "react";

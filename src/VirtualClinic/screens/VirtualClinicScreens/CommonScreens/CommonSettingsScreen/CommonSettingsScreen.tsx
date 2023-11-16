@@ -1,4 +1,4 @@
-import styles from "screens/VirtualClinicScreens/CommonScreens/CommonSettingsScreen/CommonSettingsScreen.module.css";
+import styles from "VirtualClinic/screens/VirtualClinicScreens/CommonScreens/CommonSettingsScreen/CommonSettingsScreen.module.css";
 import { useNav } from "VirtualClinic/hooks/useNav";
 import { useEffect, useState } from "react";
 

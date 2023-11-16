@@ -1,4 +1,4 @@
-import styles from "screens/VirtualClinicScreens/LoginScreen/LoginScreen2.module.css";
+import styles from "VirtualClinic/screens/VirtualClinicScreens/LoginScreen/LoginScreen2.module.css";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { ConfigProvider, Input, Spin, theme } from "antd";

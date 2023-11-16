@@ -33,7 +33,6 @@ import ForgetPasswordScreen from "VirtualClinic/screens/VirtualClinicScreens/Log
 import ViewPackageScreen from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Patient Screens/PackagesScreen/ViewPackageScreen";
 import MyFamilyPackagesScreen from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Patient Screens/PackagesScreen/MyFamilyPackagesScreen";
 import FamilyMemberPackageScreen from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Patient Screens/PackagesScreen/FamilyMemberPackageScreen";
-import PaymentMethod from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/PaymentScreens/PaymentMethod";
 import VideoCallScreen from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Patient Screens/VideoCallScreen/VideoCallScreen";
 
 export const routes = [

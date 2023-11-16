@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "VirtualClinic/redux/rootReducer";
 import { listDoctorSettingsAction } from "VirtualClinic/redux/VirtualClinicRedux/ListDoctorSettings/listDoctorSettingsAction";
 import { editSettingsAction } from "VirtualClinic/redux/VirtualClinicRedux/EditSettings/editSettingsAction";
-import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/SettingsScreen/SettingsScreen.module.css";
+import styles from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Doctor Screens/SettingsScreen/SettingsScreen.module.css";
 import JellyLoader from "VirtualClinic/components/JellyLoader/JellyLoader";
 import PasswordScreen from "./PasswordScreen";
 

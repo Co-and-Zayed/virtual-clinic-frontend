@@ -1,4 +1,4 @@
-import styles from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/PaymentScreens/PaymentScreens.module.css";
+import styles from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/PaymentScreens/PaymentScreens.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { ConfigProvider } from "antd";
 import { BackIcon } from "VirtualClinic/assets/IconComponents";

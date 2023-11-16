@@ -1,4 +1,4 @@
-import styles from "screens/VirtualClinicScreens/CommonScreens/CommonPackagesScreen/CommonPackagesScreen.module.css";
+import styles from "VirtualClinic/screens/VirtualClinicScreens/CommonScreens/CommonPackagesScreen/CommonPackagesScreen.module.css";
 import { useNav } from "VirtualClinic/hooks/useNav";
 import { useEffect, useState } from "react";
 import { RootState } from "VirtualClinic/redux/rootReducer";

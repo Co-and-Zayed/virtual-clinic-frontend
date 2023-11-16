@@ -1,4 +1,4 @@
-import styles from "screens/VirtualClinicScreens/LoginScreen/ForgetPasswordScreen/ForgetPasswordScreen.module.css";
+import styles from "VirtualClinic/screens/VirtualClinicScreens/LoginScreen/ForgetPasswordScreen/ForgetPasswordScreen.module.css";
 import { useState } from "react";
 import { Input } from "antd";
 import { useSelector, useDispatch } from "react-redux";

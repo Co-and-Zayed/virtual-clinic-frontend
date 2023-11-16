@@ -1,4 +1,4 @@
-import styles from "screens/VirtualClinicScreens/LoginScreen/LoginScreen2.module.css";
+import styles from "VirtualClinic/screens/VirtualClinicScreens/LoginScreen/LoginScreen2.module.css";
 import inputStyles from "VirtualClinic/components/InputField/InputField.module.css";
 import { DatePicker, Input, Select, Spin, Upload } from "antd";
 import { useFormik } from "formik";

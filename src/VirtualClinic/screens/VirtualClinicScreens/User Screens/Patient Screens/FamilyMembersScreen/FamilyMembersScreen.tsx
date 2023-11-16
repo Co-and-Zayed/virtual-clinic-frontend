@@ -1,4 +1,4 @@
-import styles from "screens/VirtualClinicScreens/User Screens/Patient Screens/FamilyMembersScreen/FamilyMembersScreen.module.css";
+import styles from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Patient Screens/FamilyMembersScreen/FamilyMembersScreen.module.css";
 
 import React from "react";
 import { useNav } from "VirtualClinic/hooks/useNav";

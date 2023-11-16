@@ -81,14 +81,14 @@ input:-internal-autofill-selected {
 
 @font-face {
   font-family: "Century Gothic";
-  src: url("VirtualClinic/assetsfonts/CenturyGothic.ttf") format("truetype");
+  src: url("VirtualClinic/assets/fonts/CenturyGothic.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Century Gothic";
-  src: url("VirtualClinic/assetsfonts/gothicb.ttf") format("truetype");
+  src: url("VirtualClinic/assets/fonts/gothicb.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }

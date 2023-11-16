@@ -18,7 +18,7 @@ import ErrorBoundary from "antd/es/alert/ErrorBoundary";
 import { SettingsIcon, LogoutIcon } from "VirtualClinic/assets/IconComponents";
 import * as Routes from "VirtualClinic/Routes/VirtualClinicRoutes/paths";
 import Logo from "VirtualClinic/assets/images/Logo.svg";
-import LogoText from "VirtualClinic/assetsicons/LogoText.svg";
+import LogoText from "VirtualClinic/assets/icons/LogoText.svg";
 
 interface SideBarProps {}
 

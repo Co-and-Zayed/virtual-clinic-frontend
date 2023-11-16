@@ -3,10 +3,8 @@ import axios from "axios";
 import store from "redux/store";
 import { notification } from "antd";
 import { CLEAR_TIMEOUTS, REFRESH_TIMEOUT } from "redux/User/loginTypes";
-// require("dotenv").config();
 
 // Change The Api Url
-// const apiURL = "http://127.0.0.1:8000/";
 const apiURL = process.env.REACT_APP_BACKEND_CLINIC;
 
 const instance = axios.create({

@@ -16,6 +16,7 @@ import PatientRegister from "./Register/PatientRegister";
 import SubmitButton from "components/SubmitButton/SubmitButton";
 import InputField from "components/InputField/InputField";
 import JellyLoader from "components/JellyLoader/JellyLoader";
+import { LOGIN_LOADING } from "redux/User/loginTypes";
 
 const LoginScreen2 = () => {
   const navigate = useNav();
@@ -25,6 +26,10 @@ const LoginScreen2 = () => {
   const { loginLoading, userType } = useSelector(
     (state: RootState) => state.userReducer
   );
+
+  useEffect(() => {
+    dispatch({ type: LOGIN_LOADING, payload: false });
+  }, []);
 
   const [page, setPage] = useState("login");
 

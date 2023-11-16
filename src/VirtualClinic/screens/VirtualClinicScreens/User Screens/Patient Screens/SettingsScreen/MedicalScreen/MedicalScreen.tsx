@@ -1,7 +1,7 @@
 import styles from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/MedicalScreen/MedicalScreen.module.css";
 import { useNav } from "VirtualClinic/hooks/useNav";
 import { useEffect, useState } from "react";
-import { settingsPatient } from "VirtualClinic/VirtualClinicUtils/navigationLinks";
+import { settingsPatient } from "VirtualClinic/utils/navigationLinks";
 import * as Routes from "VirtualClinic/Routes/VirtualClinicRoutes/paths";
 import UploadButton from "VirtualClinic/components/UploadButton/UploadButton";
 import RoundedButton from "VirtualClinic/components/RoundedButton/RoundedButton";

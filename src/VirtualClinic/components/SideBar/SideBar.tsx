@@ -9,7 +9,9 @@ import {
   navLinksPatient,
   navLinksAdmin,
   settingsPatient,
-} from "VirtualClinic/VirtualClinicUtils/navigationLinks";
+  settingsDoctor,
+  settingsAdmin,
+} from "VirtualClinic/utils/navigationLinks";
 import { RootState } from "VirtualClinic/redux/rootReducer";
 import { logoutAction } from "VirtualClinic/redux/User/userAction";
 import { CLEAR_TIMEOUTS } from "VirtualClinic/redux/User/loginTypes";
@@ -78,11 +80,13 @@ const SideBar: FC<SideBarProps> = () => {
       } else {
         setCurrentNavLinks(navLinksDoctor.slice(0, 1));
       }
+      setCurrentSettingsLinks(settingsDoctor);
     } else if (userType === "PATIENT") {
       setCurrentNavLinks(navLinksPatient);
       setCurrentSettingsLinks(settingsPatient);
     } else if (userType === "ADMIN") {
       setCurrentNavLinks(navLinksAdmin);
+      setCurrentSettingsLinks(settingsAdmin);
     } else {
       navigate("/login");
     }
@@ -106,12 +110,13 @@ const SideBar: FC<SideBarProps> = () => {
   useEffect(() => {
     setCurrentLink(-1);
     for (let i = 0; i < currentNavLinks?.length; i++) {
-      if (currentNavLinks[i]?.route === window.location.pathname) {
+      if ("/clinic" + currentNavLinks[i]?.route === window.location.pathname) {
         setCurrentLink(i);
         return;
       }
+      console.log("CURRENT LINK", currentNavLinks[i]?.route);
+      console.log("WINDOW LINK", window.location.pathname);
     }
-
     if (window.location.pathname.includes(Routes.SETTINGS_PATH)) {
       setCurrentLink(currentNavLinks?.length + 1);
       return;

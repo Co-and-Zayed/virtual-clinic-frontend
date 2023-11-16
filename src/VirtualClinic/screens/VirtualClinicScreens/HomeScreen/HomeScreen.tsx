@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import {
   navLinksDoctor,
   navLinksPatient,
-} from "VirtualClinic/VirtualClinicUtils/navigationLinks";
+} from "VirtualClinic/utils/navigationLinks";
 
 const HomeScreen = () => {
   const isLoggedIn = true;
@@ -13,8 +13,6 @@ const HomeScreen = () => {
   useEffect(() => {
     if (isLoggedIn) {
       navigate("/dashboard");
-    } else {
-      // navigate("/login");
     }
   }, []);
 

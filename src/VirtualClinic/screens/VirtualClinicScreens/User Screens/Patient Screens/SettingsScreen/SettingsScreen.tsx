@@ -1,7 +1,7 @@
 import styles from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/SettingsScreen.module.css";
 import { useNav } from "VirtualClinic/hooks/useNav";
 import { useEffect, useState } from "react";
-import { settingsPatient } from "VirtualClinic/VirtualClinicUtils/navigationLinks";
+import { settingsPatient } from "VirtualClinic/utils/navigationLinks";
 import * as Routes from "VirtualClinic/Routes/VirtualClinicRoutes/paths";
 import ProfileScreen from "./ProfileScreen/ProfileScreen";
 import { useSelector } from "react-redux";

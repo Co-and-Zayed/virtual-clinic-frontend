@@ -187,7 +187,7 @@ const ViewPackageScreen = () => {
               transactionDescription=" subscribe to Package"
               callBackOnSuccess={async () => {
                 var response = await fetch(
-                  `${process.env.REACT_APP_BACKEND_URL}patient/subscribeToPackage`,
+                  `${process.env.REACT_APP_BACKEND_CLINIC}patient/subscribeToPackage`,
                   {
                     method: "POST",
                     body: JSON.stringify({

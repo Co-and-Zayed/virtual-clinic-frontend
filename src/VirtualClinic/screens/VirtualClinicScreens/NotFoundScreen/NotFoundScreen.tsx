@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import {
   navLinksDoctor,
   navLinksPatient,
-} from "VirtualClinic/VirtualClinicUtils/navigationLinks";
+} from "VirtualClinic/utils/navigationLinks";
 import { ErrorIllustration } from "VirtualClinic/assets/IconComponents";
 
 const NotFoundScreen = () => {

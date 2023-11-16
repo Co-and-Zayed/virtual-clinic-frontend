@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import PatientRegisterModel from "models/PatientRegisterModel";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { regsiterAction } from "redux/Register/registerAction";
 import Back from "assets/images/back.svg";
 import SubmitButton from "components/SubmitButton/SubmitButton";
@@ -19,12 +19,11 @@ interface PatientRegisterProps {
 }
 
 const PatientRegister: FC<PatientRegisterProps> = ({ backFn }) => {
-  const navigate = useNavigate();
+  const navigate = useNav();
 
   const [section, setSection] = useState(1);
 
   const [dateOfBirth, setDateOfBirth] = useState<any>(null);
-
 
   // const [fields, setFields] = useState({
   //   name: "",
@@ -200,8 +199,6 @@ const PatientRegister: FC<PatientRegisterProps> = ({ backFn }) => {
   // name, email, username, dob, password, confirm password
   // Section 2:
   // Hourly rate, affiliation, Educational bg
-
-  
 
   return (
     <div

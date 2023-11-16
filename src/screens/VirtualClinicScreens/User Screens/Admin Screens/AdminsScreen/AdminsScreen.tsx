@@ -1,5 +1,5 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Admin Screens/AdminsScreen/AdminsScreen.module.css";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";

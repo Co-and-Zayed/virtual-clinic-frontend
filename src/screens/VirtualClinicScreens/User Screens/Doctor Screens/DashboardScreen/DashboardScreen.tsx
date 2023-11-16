@@ -1,5 +1,5 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/DashboardScreen/DashboardScreen.module.css";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";
@@ -49,7 +49,7 @@ const DashboardScreen = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const [selectedKeys, setSelectedKeys] = useState([]);
-  const navigate = useNavigate();
+  const navigate = useNav();
   const [selectedRowKey, setSelectedRowKey] = useState<string>("");
   const [expandedRowKeys, setExpandedRowKeys] = useState<string[]>([]);
 

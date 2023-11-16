@@ -1,5 +1,5 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/PatientsScreen/PatientsScreen.module.css";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";
@@ -48,7 +48,7 @@ const UpcomingPatientsScreen = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const [selectedKeys, setSelectedKeys] = useState([]);
-  const navigate = useNavigate();
+  const navigate = useNav();
 
   const handleSearch = (selectedKeys: any, confirm: any, dataIndex: any) => {
     setSearchText(

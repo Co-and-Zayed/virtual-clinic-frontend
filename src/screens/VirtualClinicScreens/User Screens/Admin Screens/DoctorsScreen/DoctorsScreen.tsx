@@ -1,5 +1,5 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Admin Screens/DoctorsScreen/DoctorsScreen.module.css";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import React from "react";
@@ -89,7 +89,7 @@ const DoctorsScreen = () => {
   const handleDoctorRequest = async (username: any, values: any) => {
     if (values === "accept") {
       const res = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}adminAPI/sendContract`,
+        `${process.env.REACT_APP_BACKEND_CLINIC}adminAPI/sendContract`,
         {
           method: "POST",
           headers: {
@@ -103,7 +103,7 @@ const DoctorsScreen = () => {
       );
     }
     const res = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}adminAPI/${values}Doctor`,
+      `${process.env.REACT_APP_BACKEND_CLINIC}adminAPI/${values}Doctor`,
       {
         method: "PUT",
         headers: {

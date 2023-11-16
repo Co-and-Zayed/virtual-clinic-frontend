@@ -2,7 +2,6 @@ import { Input } from "antd";
 import styles from "components/DoctorCard/DoctorCard.module.css";
 import { FC } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
 import { getDoctorInfoAction } from "redux/VirtualClinicRedux/GetDoctorInfo/getDoctorInfoAction";
 import DoctorIcon from "assets/images/SvgComponents/DoctorIcon";
 import {
@@ -12,6 +11,7 @@ import {
   RightArrowIcon,
 } from "assets/IconComponents";
 import { SET_DOCTOR_CARD_COORDS } from "redux/VirtualClinicRedux/types";
+import { useNav } from "hooks/useNav";
 
 interface DoctorCardProps {
   doctor: any;
@@ -25,9 +25,11 @@ const DoctorCard: FC<DoctorCardProps> = ({
   discountedPrice,
 }) => {
   const dispatch: any = useDispatch();
-  const navigate = useNavigate();
+  const navigate = useNav();
 
-  const sessionPrice = discountedPrice ? discountedPrice : doctor?.session_price;
+  const sessionPrice = discountedPrice
+    ? discountedPrice
+    : doctor?.session_price;
 
   const getDoctorName = async (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -109,9 +111,7 @@ const DoctorCard: FC<DoctorCardProps> = ({
             className={`${styles.priceLight} ${styles.lineThrough}`}
             style={{
               visibility:
-                doctor?.hourlyRate * 1.1 > sessionPrice
-                  ? "visible"
-                  : "hidden",
+                doctor?.hourlyRate * 1.1 > sessionPrice ? "visible" : "hidden",
             }}
           >
             {(doctor?.hourlyRate * 1.1)

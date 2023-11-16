@@ -9,7 +9,7 @@ import styles from "components/Calendar/Calendar.module.css";
 import dayjs, { Dayjs } from "dayjs";
 import { FC, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 
 const initialValue = dayjs();
 
@@ -41,7 +41,7 @@ const CoolCalendar: FC<CoolCalendarProps> = ({
     const controller = new AbortController();
 
     console.log(daysToHighlight);
-    // make sure to highlight only if the month is the same as the current one 
+    // make sure to highlight only if the month is the same as the current one
     var toHighlight = daysToHighlight.filter(
       (day) => day.month() === date.month()
     );
@@ -104,7 +104,6 @@ const CoolCalendar: FC<CoolCalendarProps> = ({
       </Badge>
     );
   }
-
 
   return (
     <DateCalendar

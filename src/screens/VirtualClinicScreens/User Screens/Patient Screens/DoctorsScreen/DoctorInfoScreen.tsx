@@ -36,6 +36,7 @@ import RoundedButton from "components/RoundedButton/RoundedButton";
 import PayWithWallet from "./PaymentScreens/PayWithWallet";
 import { createAppointmentAction } from "redux/VirtualClinicRedux/CreateAppointment/createAppoinmentAction";
 import CoolCalendar from "components/CoolCalendar/CoolCalendar";
+import { useNav } from "hooks/useNav";
 
 const DoctorInfoScreen = () => {
   //const { name } = useParams<{ name: string }>();   //name of dr
@@ -55,7 +56,7 @@ const DoctorInfoScreen = () => {
     (state: RootState) => state.getDoctorCardCoordsReducer
   );
 
-  const navigate = useNavigate();
+  const navigate = useNav();
 
   // booking, paymentMethod, wallet, card, confirmation
   const [page, setPage] = useState("booking");

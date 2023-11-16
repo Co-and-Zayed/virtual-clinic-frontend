@@ -9,7 +9,19 @@ const App = () => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ConfigProvider
         theme={{
-          token: { colorPrimary: "#163B45", colorBgContainer: "transparent" },
+          token: {
+            colorPrimary: "#163B45",
+            // colorBgContainer: "transparent"
+          },
+          components: {
+            Input: {
+              colorBgContainer: "transparent",
+            },
+            Select: {
+              colorBgContainer: "transparent",
+              // colorBorderBg: "#163B45",
+            },
+          },
         }}
       >
         <AnimatePresence mode="wait">

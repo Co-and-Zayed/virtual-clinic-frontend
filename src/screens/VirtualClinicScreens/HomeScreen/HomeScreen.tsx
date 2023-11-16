@@ -1,5 +1,5 @@
 import styles from "screens/VirtualClinicScreens/HomeScreen/HomeScreen.module.css";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import {
   navLinksDoctor,
@@ -8,7 +8,7 @@ import {
 
 const HomeScreen = () => {
   const isLoggedIn = true;
-  const navigate = useNavigate();
+  const navigate = useNav();
 
   useEffect(() => {
     if (isLoggedIn) {

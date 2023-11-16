@@ -2,7 +2,7 @@ import { Input } from "antd";
 import styles from "components/SideBar/SideBar.module.css";
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import {
   navLinksDoctor,
@@ -24,7 +24,7 @@ interface SideBarProps {}
 
 const SideBar: FC<SideBarProps> = () => {
   const dispatch: any = useDispatch();
-  const navigate = useNavigate();
+  const navigate = useNav();
 
   const [currentLink, setCurrentLink] = useState(0);
   const [currentNavLinks, setCurrentNavLinks] = useState<any>(null);

@@ -1,6 +1,6 @@
 import styles from "components/MainViewContainer/MainViewContainer.module.css";
 import { FC, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useSelector, useDispatch } from "react-redux";
 
 import SideBar from "../SideBar/SideBar";
@@ -10,7 +10,7 @@ interface MainViewContainerProps {
 }
 
 const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
-  const navigate = useNavigate();
+  const navigate = useNav();
   const dispatch: any = useDispatch();
 
   useEffect(() => {

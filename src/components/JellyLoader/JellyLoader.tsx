@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useSelector, useDispatch } from "react-redux";
 import { Jelly } from "@uiball/loaders";
 

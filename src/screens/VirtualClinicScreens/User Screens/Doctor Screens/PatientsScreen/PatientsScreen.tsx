@@ -1,5 +1,5 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Doctor Screens/PatientsScreen/PatientsScreen.module.css";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";
@@ -53,7 +53,7 @@ const PatientsScreen = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const [selectedKeys, setSelectedKeys] = useState([]);
-  const navigate = useNavigate();
+  const navigate = useNav();
   const [selectedRowKey, setSelectedRowKey] = useState<string>("");
   const [expandedRowKeys, setExpandedRowKeys] = useState<string[]>([]);
 
@@ -201,17 +201,17 @@ const PatientsScreen = () => {
 
           try {
             const response = await fetch(
-              `${process.env.REACT_APP_BACKEND_URL}doctor/addHealthRecordForPatient`,
+              `${process.env.REACT_APP_BACKEND_CLINIC}doctor/addHealthRecordForPatient`,
               {
                 method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${accessToken}`,
-                  },
-                  body: JSON.stringify({
-                    patientId: record._id,
-                    healthRecord
-                  }),
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${accessToken}`,
+                },
+                body: JSON.stringify({
+                  patientId: record._id,
+                  healthRecord,
+                }),
               }
             );
 

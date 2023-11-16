@@ -4,15 +4,16 @@ import { routes } from "Routes/VirtualClinicRoutes/routes";
 const AppRoutes = () => {
   return (
     <Routes>
-      {routes?.map(({ path, element, parent }, index) => {
+      {routes?.map(({ path, element, parent, system }, index) => {
+        console.log(system + path);
         if (parent) {
           return (
             <Route key={index} element={parent}>
-              <Route element={element} path={path} />
+              <Route element={element} path={system + path} />
             </Route>
           );
         }
-        return <Route key={index} element={element} path={path} />;
+        return <Route key={index} element={element} path={system + path} />;
       })}
     </Routes>
   );

@@ -1,5 +1,5 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Admin Screens/PackagesScreen/PackagesScreen.module.css";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { FormikHelpers, useFormik } from "formik";
 import { Input, notification, Select, Spin, Table } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
@@ -50,7 +50,7 @@ const MyFamilyPackageScreen = () => {
     (state: RootState) => state.viewSubscribedPackageForFamilyMemberReducer
   );
 
-  const navigate = useNavigate();
+  const navigate = useNav();
   const hasMountedCreate = useRef(false);
   const hasMountedUpdate = useRef(false);
   const hasMountedDelete = useRef(false);
@@ -276,7 +276,7 @@ const MyFamilyPackageScreen = () => {
               transactionDescription=" subscribe to Package"
               callBackOnSuccess={async () => {
                 var response = await fetch(
-                  `${process.env.REACT_APP_BACKEND_URL}patient/subscribeToPackageForFamilyPatient`,
+                  `${process.env.REACT_APP_BACKEND_CLINIC}patient/subscribeToPackageForFamilyPatient`,
                   {
                     method: "POST",
                     body: JSON.stringify({

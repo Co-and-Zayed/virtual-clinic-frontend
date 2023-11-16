@@ -74,8 +74,7 @@ input:-internal-autofill-selected {
   background-color: rgba(255, 255, 255, 0.03) !important;
 }
 
-.lightInputField {
-}
+.lightInputField {}
 
 /* src/assets/fonts/yourfont.ttf */
 
@@ -114,6 +113,11 @@ input:-internal-autofill-selected {
   background: var(--light-green);
   transition: background 0.3s ease-in-out;
 
+}
+
+.ant-btn-primary {
+  /* color: #fff; */
+  background-color: #163b45;
 }
 
 

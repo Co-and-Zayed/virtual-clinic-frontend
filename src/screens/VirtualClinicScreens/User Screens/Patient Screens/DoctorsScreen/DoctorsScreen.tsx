@@ -1,6 +1,6 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Patient Screens/DoctorsScreen/DoctorsScreen.module.css";
 import inputStyles from "components/InputField/InputField.module.css";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import { RootState } from "redux/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,7 +41,7 @@ const DoctorsScreen = () => {
   const { userData } = useSelector((state: RootState) => state.userReducer);
 
   const dispatch: any = useDispatch();
-  const navigate = useNavigate();
+  const navigate = useNav();
 
   const [specialityFilter, setSpecialityFilter] = useState<any>(null);
   const [dateFilter, setDateFilter] = useState<any>(null);

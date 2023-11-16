@@ -30,7 +30,7 @@ export const useFunctions = () => {
 
     const token = store.getState()?.userReducer?.accessToken;
     return await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}${form.endpoint}`,
+      `${process.env.REACT_APP_BACKEND_CLINIC}${form.endpoint}`,
       formData,
       {
         headers: {

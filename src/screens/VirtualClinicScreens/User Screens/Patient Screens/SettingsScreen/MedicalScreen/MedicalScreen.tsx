@@ -1,5 +1,5 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/MedicalScreen/MedicalScreen.module.css";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import { settingsPatient } from "utils/VirtualClinicUtils/navigationLinks";
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
@@ -48,7 +48,7 @@ const MedicalScreen = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}Patient/getHealthRecords`,
+        `${process.env.REACT_APP_BACKEND_CLINIC}Patient/getHealthRecords`,
         {
           method: "GET",
           headers: {
@@ -60,7 +60,7 @@ const MedicalScreen = () => {
       const data = await response.json();
       console.log(data.healthRecords);
       console.log("Fetched", data);
-      
+
       if (response.ok) {
         setLoading(false);
         setHealthRecords(data.healthRecords);
@@ -133,18 +133,16 @@ const MedicalScreen = () => {
 
         {loading ? (
           <JellyLoader />
-        ) : <div>
-              {
-                healthRecords.map((record: any, index: any) => (
-                  <div>
-                    <h1>Health Record {index + 1}</h1>
-                    <p>
-                      {record}
-                    </p>
-                  </div>
-                ))
-              }
-          </div>}
+        ) : (
+          <div>
+            {healthRecords.map((record: any, index: any) => (
+              <div>
+                <h1>Health Record {index + 1}</h1>
+                <p>{record}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

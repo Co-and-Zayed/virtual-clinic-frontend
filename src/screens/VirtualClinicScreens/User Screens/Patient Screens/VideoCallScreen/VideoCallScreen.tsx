@@ -1,5 +1,5 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Patient Screens/VideoCallScreen/VideoCallScreen.module.css";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";

@@ -179,7 +179,7 @@ const PayWithWallet: FC<PayWithWallet> = ({
 
               console.log("PAYING WITH WALLET");
               const res = await fetch(
-                `${process.env.REACT_APP_BACKEND_URL}patient/payWithWallet`,
+                `${process.env.REACT_APP_BACKEND_CLINIC}patient/payWithWallet`,
                 {
                   method: "POST",
                   headers: {

@@ -1,5 +1,5 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Admin Screens/PackagesScreen/PackagesScreen.module.css";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { FormikHelpers, useFormik } from "formik";
 import { Input, notification, Spin, Table } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
@@ -24,7 +24,7 @@ const FamilyMemberPackageScreen = () => {
   const [selectedPackage, setSelectedPackage] = useState<any>(null);
   const [showSinglePackage, setShowSinglePackage] = useState<boolean>(false);
   const [actionType, setActionType] = useState<string>();
-  const navigate = useNavigate();
+  const navigate = useNav();
   const hasMountedCreate = useRef(false);
   const hasMountedUpdate = useRef(false);
   const hasMountedDelete = useRef(false);
@@ -33,16 +33,15 @@ const FamilyMemberPackageScreen = () => {
     (state: RootState) => state.viewPackagesReducer
   );
 
-  const { unsubsribeFromPackageLoading, userUnsubsribeFromPackage} = useSelector(
-    (state: RootState) => state.unsubscribeFromPackageReducer
-  );
+  const { unsubsribeFromPackageLoading, userUnsubsribeFromPackage } =
+    useSelector((state: RootState) => state.unsubscribeFromPackageReducer);
 
-const { userData } = useSelector((state: RootState) => state.userReducer);  
+  const { userData } = useSelector((state: RootState) => state.userReducer);
 
-const unsubscribe = async () => {
-  dispatch(unsubscribeFromPackageAction({ patientID: userData?._id }));     
-  window.location.reload(); // Refresh the page after successful unsubscribe
-}
+  const unsubscribe = async () => {
+    dispatch(unsubscribeFromPackageAction({ patientID: userData?._id }));
+    window.location.reload(); // Refresh the page after successful unsubscribe
+  };
 
   useEffect(() => {
     dispatch(viewPackagesAction({ patientID: userData?._id })); // sending the request, and update the states
@@ -72,8 +71,7 @@ const unsubscribe = async () => {
             <button
               className={`${styles.editLink}`}
               onClick={() => {
-                navigate(Routes.MY_FAMILY_PACKAGES_PATH, {
-                });
+                navigate(Routes.MY_FAMILY_PACKAGES_PATH, {});
                 console.log("Clicked on My Family Packages");
               }}
             >
@@ -97,7 +95,12 @@ const unsubscribe = async () => {
                       <h1 className="mr-2">{packageItem.type}</h1>
                       <p>| {packageItem.tier}</p>
                     </div>
-                    <button className={`${styles.editLink}`} onClick={unsubscribe}>UNSUBSCRIBE</button>
+                    <button
+                      className={`${styles.editLink}`}
+                      onClick={unsubscribe}
+                    >
+                      UNSUBSCRIBE
+                    </button>
                   </div>
                   <p>EGP {packageItem.price_per_year}</p>
                   <p>

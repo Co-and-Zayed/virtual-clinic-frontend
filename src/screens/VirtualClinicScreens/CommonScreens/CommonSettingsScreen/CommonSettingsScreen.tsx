@@ -1,5 +1,5 @@
 import styles from "screens/VirtualClinicScreens/CommonScreens/CommonSettingsScreen/CommonSettingsScreen.module.css";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 
 import PatientSettingsScreen from "screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/SettingsScreen";

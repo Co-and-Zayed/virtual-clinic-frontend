@@ -46,7 +46,7 @@ const PayWithCard: FC<PayWithCard> = ({
     useState<Promise<Stripe | null> | null>(null);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}stripe/config`).then(
+    fetch(`${process.env.REACT_APP_BACKEND_CLINIC}stripe/config`).then(
       async (r) => {
         const { publishableKey } = await r.json();
         console.log(publishableKey);
@@ -57,16 +57,19 @@ const PayWithCard: FC<PayWithCard> = ({
 
   useEffect(() => {
     // console.log("USer Data", userData);
-    fetch(`${process.env.REACT_APP_BACKEND_URL}stripe/create-payment-intent`, {
-      method: "POST",
-      body: JSON.stringify({
-        amount: priceDiscounted * 100,
-        description: description,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then(async (result) => {
+    fetch(
+      `${process.env.REACT_APP_BACKEND_CLINIC}stripe/create-payment-intent`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          amount: priceDiscounted * 100,
+          description: description,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then(async (result) => {
       var { clientSecret } = await result.json();
       setClientSecret(clientSecret);
     });

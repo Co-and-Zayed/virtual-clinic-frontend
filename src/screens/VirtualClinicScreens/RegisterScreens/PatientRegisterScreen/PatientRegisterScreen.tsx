@@ -1,14 +1,14 @@
 import { DatePicker, Input, Select, Spin } from "antd";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { RootState } from "redux/rootReducer";
 import PatientRegisterModel from "models/PatientRegisterModel";
 import { regsiterAction } from "redux/Register/registerAction";
 import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const PatientRegisterScreen = () => {
-  const navigate = useNavigate();
+  const navigate = useNav();
 
   const dispatch: any = useDispatch();
 

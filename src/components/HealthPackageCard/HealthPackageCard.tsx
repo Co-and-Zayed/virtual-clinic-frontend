@@ -2,7 +2,7 @@ import { Button, Input } from "antd";
 import styles from "components/HealthPackageCard/HealthPackageCard.module.css";
 import { FC } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { getDoctorInfoAction } from "redux/VirtualClinicRedux/GetDoctorInfo/getDoctorInfoAction";
 import DoctorIcon from "assets/images/SvgComponents/DoctorIcon";
 import {

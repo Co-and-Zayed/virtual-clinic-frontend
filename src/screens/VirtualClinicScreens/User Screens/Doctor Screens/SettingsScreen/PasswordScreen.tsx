@@ -1,5 +1,5 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Patient Screens/SettingsScreen/PasswordScreen/PasswordScreen.module.css";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import { settingsPatient } from "utils/VirtualClinicUtils/navigationLinks";
 import * as Routes from "Routes/VirtualClinicRoutes/paths";
@@ -47,7 +47,7 @@ const PasswordScreen = () => {
       if (!errorExists) {
         setLoading(true);
         const res = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}doctor/changePassword`,
+          `${process.env.REACT_APP_BACKEND_CLINIC}doctor/changePassword`,
           {
             method: "POST",
             headers: {

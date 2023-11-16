@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { useDispatch, useSelector } from "react-redux";
@@ -65,13 +65,13 @@ const ContractScreen = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const [selectedKeys, setSelectedKeys] = useState([]);
-  const navigate = useNavigate();
+  const navigate = useNav();
   const [selectedRowKey, setSelectedRowKey] = useState<string>("");
   const [expandedRowKeys, setExpandedRowKeys] = useState<string[]>([]);
 
   const handleContractRequest = async (ID: any, values: any) => {
     const res: any = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}doctor/${values}Contract`,
+      `${process.env.REACT_APP_BACKEND_CLINIC}doctor/${values}Contract`,
       {
         method: "PUT",
         headers: {
@@ -85,7 +85,7 @@ const ContractScreen = () => {
     );
     await dispatch(listAllContractsAction());
     const data = await res.json();
-    console.log(data, "Response")
+    console.log(data, "Response");
     await dispatch({ type: UPDATE_USER_DATA, payload: data.doctor });
     window.location.reload();
     notification.success({

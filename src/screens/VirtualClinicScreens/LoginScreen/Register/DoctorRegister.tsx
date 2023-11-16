@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import DoctorRegisterModel from "models/DoctorRegisterModel";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { regsiterAction } from "redux/Register/registerAction";
 import Back from "assets/images/back.svg";
 import SubmitButton from "components/SubmitButton/SubmitButton";
@@ -19,7 +19,7 @@ interface DoctorRegisterProps {
 }
 
 const DoctorRegister: FC<DoctorRegisterProps> = ({ backFn }) => {
-  const navigate = useNavigate();
+  const navigate = useNav();
 
   const [section, setSection] = useState(1);
 

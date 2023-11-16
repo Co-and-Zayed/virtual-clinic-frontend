@@ -2,7 +2,7 @@ import { Input } from "antd";
 import styles from "components/AppointmentCard/AppointmentCard.module.css";
 import { FC } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { getDoctorInfoAction } from "redux/VirtualClinicRedux/GetDoctorInfo/getDoctorInfoAction";
 import DoctorIcon from "assets/images/SvgComponents/DoctorIcon";
 import {
@@ -54,14 +54,15 @@ const AppointmentCard: FC<AppointmentCardProps> = ({ appointment }) => {
         </div>
       </div>
       {/* Three dots at top right */}
-      <div className={`${styles.threeDots}`}
-      style={{
-        position: "absolute",
-        top: "1rem",
-        right: "0.8rem",
-      
-      }}>
-        <Dots fontSize={16}/>
+      <div
+        className={`${styles.threeDots}`}
+        style={{
+          position: "absolute",
+          top: "1rem",
+          right: "0.8rem",
+        }}
+      >
+        <Dots fontSize={16} />
       </div>
     </div>
   );

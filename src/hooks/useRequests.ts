@@ -12,7 +12,7 @@ export const useRequests = () => {
   async function updateUserData() {
     const token = store.getState()?.userReducer?.accessToken;
     const response = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}userAPI/getUser`,
+      `${process.env.REACT_APP_BACKEND_CLINIC}userAPI/getUser`,
       {
         headers: {
           Authorization: token && token != "" ? `Bearer ${token}` : "",

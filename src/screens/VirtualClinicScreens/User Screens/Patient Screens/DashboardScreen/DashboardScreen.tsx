@@ -1,5 +1,5 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Patient Screens/DashboardScreen/DashboardScreen.module.css";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";

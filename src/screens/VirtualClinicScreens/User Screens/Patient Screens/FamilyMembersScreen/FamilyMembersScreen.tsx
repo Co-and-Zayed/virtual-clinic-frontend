@@ -1,7 +1,7 @@
 import styles from "screens/VirtualClinicScreens/User Screens/Patient Screens/FamilyMembersScreen/FamilyMembersScreen.module.css";
 
 import React from "react";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState, useRef } from "react";
 import { SearchOutlined } from "@ant-design/icons";
@@ -54,7 +54,7 @@ const FamilyMembersScreen = () => {
   const addPatientMember = async (values: any) => {
     console.log(values.patientRelationship);
     const res = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}patient/addFamilyMember`,
+      `${process.env.REACT_APP_BACKEND_CLINIC}patient/addFamilyMember`,
       {
         method: "POST",
         headers: {

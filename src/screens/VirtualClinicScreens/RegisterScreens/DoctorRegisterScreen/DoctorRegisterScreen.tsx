@@ -3,12 +3,12 @@ import { useFormik } from "formik";
 import DoctorRegisterModel from "models/DoctorRegisterModel";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/rootReducer";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { regsiterAction } from "redux/Register/registerAction";
 import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const DoctorRegisterScreen = () => {
-  const navigate = useNavigate();
+  const navigate = useNav();
 
   const { registerLoading } = useSelector(
     (state: RootState) => state.registerReducer

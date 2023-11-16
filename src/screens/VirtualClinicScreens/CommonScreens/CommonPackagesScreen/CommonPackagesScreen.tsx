@@ -1,5 +1,5 @@
 import styles from "screens/VirtualClinicScreens/CommonScreens/CommonPackagesScreen/CommonPackagesScreen.module.css";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { useEffect, useState } from "react";
 import { RootState } from "redux/rootReducer";
 import { useSelector } from "react-redux";

@@ -6,7 +6,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import LoginModel from "models/LoginModel";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "redux/rootReducer";
-import { useNavigate } from "react-router";
+import { useNav } from "hooks/useNav";
 import { loginAction } from "redux/User/userAction";
 import Logo from "assets/images/Logo.svg";
 import Doctor from "assets/images/Doctor.svg";
@@ -18,7 +18,7 @@ import InputField from "components/InputField/InputField";
 import JellyLoader from "components/JellyLoader/JellyLoader";
 
 const LoginScreen2 = () => {
-  const navigate = useNavigate();
+  const navigate = useNav();
 
   const dispatch: any = useDispatch();
 
@@ -176,9 +176,9 @@ const LoginScreen2 = () => {
                 style={{ fontSize: "0.75rem", opacity: 0.7 }}
               >
                 <p className="text-[white]">Forgot your password? Click </p>
-                <a 
-                className="hover:cursor-pointer greenText"  
-                href="/reset-password"
+                <a
+                  className="hover:cursor-pointer greenText"
+                  href="/reset-password"
                 >
                   <u>here</u>
                 </a>

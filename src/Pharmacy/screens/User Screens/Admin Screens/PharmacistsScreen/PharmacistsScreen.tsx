@@ -1,5 +1,5 @@
 import styles from "Pharmacy/screens/User Screens/Admin Screens/PharmacistsScreen/PharmacistsScreen.module.css";
-import { useNav } from "hooks/useNav";
+import { useNav } from "Pharmacy/hooks/useNav";
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import React from "react";

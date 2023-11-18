@@ -1,5 +1,5 @@
 import styles from "Pharmacy/screens/User Screens/Patient Screens/DashboardScreen/DashboardScreen.module.css";
-import { useNav } from "hooks/useNav";
+import { useNav } from "Pharmacy/hooks/useNav";
 import { useEffect, useState } from "react";
 
 const DashboardScreen = () => {

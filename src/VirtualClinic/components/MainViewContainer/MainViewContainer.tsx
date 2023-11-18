@@ -1,6 +1,6 @@
 import styles from "VirtualClinic/components/MainViewContainer/MainViewContainer.module.css";
 import { FC, useEffect } from "react";
-import { useNav } from "hooks/useNav";
+import { useNav } from "VirtualClinic/hooks/useNav";
 import { useSelector, useDispatch } from "react-redux";
 
 import SideBar from "../SideBar/SideBar";

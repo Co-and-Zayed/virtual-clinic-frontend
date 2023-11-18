@@ -1,6 +1,6 @@
 import styles from "Pharmacy/components/MainViewContainer/MainViewContainer.module.css";
 import { FC } from "react";
-import { useNav } from "hooks/useNav";
+import { useNav } from "Pharmacy/hooks/useNav";
 import { useEffect, useState } from "react";
 import {
   navLinksPharmacist,

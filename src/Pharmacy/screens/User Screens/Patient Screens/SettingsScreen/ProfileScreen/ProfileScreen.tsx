@@ -1,5 +1,5 @@
 import styles from "Pharmacy/screens/User Screens/Patient Screens/SettingsScreen/ProfileScreen/ProfileScreen.module.css";
-import { useNav } from "hooks/useNav";
+import { useNav } from "Pharmacy/hooks/useNav";
 import { useEffect, useState } from "react";
 import { settingsPatient } from "Pharmacy/utils/navigationLinks";
 import * as Routes from "Pharmacy/Routes/PharmacyRoutes/paths";

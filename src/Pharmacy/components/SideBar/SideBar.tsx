@@ -2,7 +2,7 @@ import { Input } from "antd";
 import styles from "Pharmacy/components/SideBar/SideBar.module.css";
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNav } from "hooks/useNav";
+import { useNav } from "Pharmacy/hooks/useNav";
 import { useEffect, useState } from "react";
 import {
   navLinksPharmacist,

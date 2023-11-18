@@ -2,7 +2,7 @@ import { Input } from "antd";
 import styles from "VirtualClinic/components/AppointmentCard/AppointmentCard.module.css";
 import { FC } from "react";
 import { useDispatch } from "react-redux";
-import { useNav } from "hooks/useNav";
+import { useNav } from "VirtualClinic/hooks/useNav";
 import { getDoctorInfoAction } from "VirtualClinic/redux/VirtualClinicRedux/GetDoctorInfo/getDoctorInfoAction";
 import DoctorIcon from "VirtualClinic/assets/images/SvgComponents/DoctorIcon";
 import {

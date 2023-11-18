@@ -43,7 +43,7 @@ import AnimatedDigits from "Pharmacy/components/AnimatedDigits/AnimatedDigits";
 import RoundedButton from "Pharmacy/components/RoundedButton/RoundedButton";
 import RightArrowIcon from "Pharmacy/assets/IconComponents/RightArrowIcon";
 import { GET_CART } from "Pharmacy/redux/PharmacyRedux/types";
-import { useNav } from "hooks/useNav";
+import { useNav } from "Pharmacy/hooks/useNav";
 
 interface DataType {
   patientEmail: string;

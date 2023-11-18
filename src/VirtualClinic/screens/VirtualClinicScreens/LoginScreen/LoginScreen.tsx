@@ -4,7 +4,7 @@ import { Input, Spin } from "antd";
 import LoginModel from "VirtualClinic/models/LoginModel";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "VirtualClinic/redux/rootReducer";
-import { useNav } from "hooks/useNav";
+import { useNav } from "VirtualClinic/hooks/useNav";
 import { loginAction } from "VirtualClinic/redux/User/userAction";
 import JellyLoader from "VirtualClinic/components/JellyLoader/JellyLoader";
 

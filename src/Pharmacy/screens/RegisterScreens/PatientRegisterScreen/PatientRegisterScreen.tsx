@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import PatientRegisterModel from "Pharmacy/models/PatientRegisterModel";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "Pharmacy/redux/rootReducer";
-import { useNav } from "hooks/useNav";
+import { useNav } from "Pharmacy/hooks/useNav";
 import { regsiterAction } from "Pharmacy/redux/Register/registerAction";
 import Back from "Pharmacy/assets/images/back.svg";
 import SubmitButton from "Pharmacy/components/SubmitButton/SubmitButton";

@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import DoctorRegisterModel from "VirtualClinic/models/DoctorRegisterModel";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "VirtualClinic/redux/rootReducer";
-import { useNav } from "hooks/useNav";
+import { useNav } from "VirtualClinic/hooks/useNav";
 import { regsiterAction } from "VirtualClinic/redux/Register/registerAction";
 import JellyLoader from "VirtualClinic/components/JellyLoader/JellyLoader";
 

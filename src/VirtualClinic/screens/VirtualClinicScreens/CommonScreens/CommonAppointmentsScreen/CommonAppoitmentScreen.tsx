@@ -1,5 +1,5 @@
 import styles from "VirtualClinic/screens/VirtualClinicScreens/CommonScreens/CommonAppointmentsScreen/CommonAppointmentsScreen.module.css";
-import { useNav } from "hooks/useNav";
+import { useNav } from "VirtualClinic/hooks/useNav";
 import { useEffect, useState } from "react";
 
 import PatientAppointmentsScreen from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Patient Screens/AppointmentsScreen/AppointmentsScreen";

@@ -1,7 +1,7 @@
 import { Input } from "antd";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNav } from "hooks/useNav";
+import { useNav } from "Pharmacy/hooks/useNav";
 import JellyLoader from "Pharmacy/components/JellyLoader/JellyLoader";
 import { RootState } from "Pharmacy/redux/rootReducer";
 import { forgetPasswordAction } from "Pharmacy/redux/ForgetPassword/forgetPasswordAction";

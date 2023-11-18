@@ -1,5 +1,5 @@
 import styles from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Admin Screens/PackagesScreen/PackagesScreen.module.css";
-import { useNav } from "hooks/useNav";
+import { useNav } from "VirtualClinic/hooks/useNav";
 import { FormikHelpers, useFormik } from "formik";
 import { Input, notification, Select, Spin, Table } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";

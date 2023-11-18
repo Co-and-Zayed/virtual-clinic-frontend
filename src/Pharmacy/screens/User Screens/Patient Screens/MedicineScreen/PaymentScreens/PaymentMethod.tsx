@@ -23,7 +23,7 @@ import PayWithCard from "./PayWithCard";
 import PayOnDelivery from "./PayOnDelivery";
 import ConfirmationScreen from "./ConfirmationScreen";
 import { CashOnDelivery } from "Pharmacy/assets/IconComponents";
-import { useNav } from "hooks/useNav";
+import { useNav } from "Pharmacy/hooks/useNav";
 
 interface PaymentMethodProps {
   priceOriginal: number;

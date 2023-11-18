@@ -9,7 +9,7 @@ import styles from "VirtualClinic/components/Calendar/Calendar.module.css";
 import dayjs, { Dayjs } from "dayjs";
 import { FC, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNav } from "hooks/useNav";
+import { useNav } from "VirtualClinic/hooks/useNav";
 
 const initialValue = dayjs();
 

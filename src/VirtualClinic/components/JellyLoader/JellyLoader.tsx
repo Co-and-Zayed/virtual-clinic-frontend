@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useNav } from "hooks/useNav";
+import { useNav } from "VirtualClinic/hooks/useNav";
 import { useSelector, useDispatch } from "react-redux";
 import { Jelly } from "@uiball/loaders";
 

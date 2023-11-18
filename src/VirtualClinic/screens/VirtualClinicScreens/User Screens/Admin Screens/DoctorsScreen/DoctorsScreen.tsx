@@ -1,5 +1,5 @@
 import styles from "VirtualClinic/screens/VirtualClinicScreens/User Screens/Admin Screens/DoctorsScreen/DoctorsScreen.module.css";
-import { useNav } from "hooks/useNav";
+import { useNav } from "VirtualClinic/hooks/useNav";
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import React from "react";

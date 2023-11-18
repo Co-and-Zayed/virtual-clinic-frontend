@@ -1,5 +1,5 @@
 import styles from "Pharmacy/screens/User Screens/Pharmacist Screens/DashboardScreen/DashboardScreen.module.css";
-import { useNav } from "hooks/useNav";
+import { useNav } from "Pharmacy/hooks/useNav";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "Pharmacy/redux/rootReducer";

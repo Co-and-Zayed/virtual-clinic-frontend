@@ -1,5 +1,5 @@
 import styles from "Pharmacy/screens/HomeScreen/HomeScreen.module.css";
-import { useNav } from "hooks/useNav";
+import { useNav } from "Pharmacy/hooks/useNav";
 import { useEffect, useState } from "react";
 import {
   navLinksPharmacist,

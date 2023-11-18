@@ -7,7 +7,7 @@ import { Badge } from "antd";
 import Counter from "../Counter/Counter";
 import AnimatedDigitsLarge from "../AnimatedDigitsLarge/AnimatedDigitsLarge";
 import { DeleteOutlined } from "@ant-design/icons";
-import { useNav } from "hooks/useNav";
+import { useNav } from "Pharmacy/hooks/useNav";
 
 interface CartItemProps {
   id: any;

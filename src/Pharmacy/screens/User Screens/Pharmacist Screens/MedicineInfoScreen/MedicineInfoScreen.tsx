@@ -1,5 +1,5 @@
 import styles from "./MedicineInfoScreen.module.css";
-import { useNav } from "hooks/useNav";
+import { useNav } from "Pharmacy/hooks/useNav";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState, useRef, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";

@@ -8,6 +8,8 @@
   --light-green-5: #8ac1868c;
   --dark-green: #163b45;
   --blue: #86bec2;
+  --faded-green: #5e747e;
+  --custom-bezier: cubic-bezier(0.49, 0.46, 0.32, 0.99);
   --bg-main: #f1f1f1;
   --sidebar-width: 18.75rem;
 }
@@ -118,6 +120,51 @@ input:-internal-autofill-selected {
 .ant-btn-primary {
   /* color: #fff; */
   background-color: #163b45;
+}
+
+.ant-popover-title {
+  min-width: fit-content !important;
+}
+
+/* Initial state */
+.fade {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+/* Visible state */
+.visible {
+  opacity: 1;
+}
+
+/* Hidden state */
+.hidden {
+  opacity: 0;
+}
+
+.animated-container > div > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.myfont-xl {
+  font-size: 2.5rem;
+}
+
+.threeLineEllipsis,
+.twoLineEllipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.threeLineEllipsis {
+  -webkit-line-clamp: 3;
+}
+
+.twoLineEllipsis {
+  -webkit-line-clamp: 2;
 }
 
 /* CALENDAR

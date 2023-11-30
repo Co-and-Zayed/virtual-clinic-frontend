@@ -3,7 +3,7 @@ import { useNav } from "Pharmacy/hooks/useNav";
 import { useEffect, useState } from "react";
 import PatientDashboardScreen from "Pharmacy/screens/User Screens/Patient Screens/DashboardScreen/DashboardScreen";
 import PharmacistDashboardScreen from "Pharmacy/screens/User Screens/Pharmacist Screens/DashboardScreen/DashboardScreen";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import { useSelector } from "react-redux";
 import AdminsScreen from "../../User Screens/Admin Screens/AdminsScreen/AdminsScreen";
 

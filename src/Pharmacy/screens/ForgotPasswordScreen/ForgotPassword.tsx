@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNav } from "Pharmacy/hooks/useNav";
 import JellyLoader from "Pharmacy/components/JellyLoader/JellyLoader";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import { forgetPasswordAction } from "Pharmacy/redux/ForgetPassword/forgetPasswordAction";
 import { verifyOtpAction } from "Pharmacy/redux/ForgetPassword/VerifyOtp/verifyOtpAction";
 import { resetPasswordAction } from "Pharmacy/redux/ForgetPassword/ResetPassword/resetPasswordAction";

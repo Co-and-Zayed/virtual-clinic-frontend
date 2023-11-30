@@ -1,6 +1,6 @@
 import styles from "Pharmacy/screens/User Screens/Patient Screens/MedicineScreen/PaymentScreens/PaymentScreens.module.css";
 import { FC, useEffect, useState } from "react";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Checkbox, ConfigProvider, Input, Select, Spin } from "antd";
 import JellyLoader from "Pharmacy/components/JellyLoader/JellyLoader";

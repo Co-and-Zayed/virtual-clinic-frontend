@@ -1,7 +1,7 @@
 import styles from "Pharmacy/screens/User Screens/Patient Screens/OrderScreen/OrderScreen.module.css";
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import { useEffect, useState } from "react";
 import { FETCH_ORDERS, CANCEL_ORDER } from "Pharmacy/redux/PharmacyRedux/types";
 import type { InputRef } from "antd";

@@ -11,7 +11,7 @@ import type {
   FilterConfirmProps,
 } from "antd/es/table/interface";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import {
   Input,
   notification,

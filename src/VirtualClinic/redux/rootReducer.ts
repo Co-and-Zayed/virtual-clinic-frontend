@@ -48,8 +48,14 @@ import { unsubscribeFromPackageForFamilyReducer } from "./VirtualClinicRedux/Uns
 import { viewPackagePriceReducer } from "./VirtualClinicRedux/GetPackagePrice/getPackagePriceReducer";
 import { listAllPatientHealthRecordsReducer } from "./VirtualClinicRedux/ListAllPatientHealthRecords/ListAllPatientHealthRecordsReducer";
 import { videoCallReducer } from "./VirtualClinicRedux/VideoCall/videoCallReducer";
+import { adminListAllPharmacistsReducer } from "Pharmacy/redux/PharmacyRedux/AdminListAllPharmacists/adminListAllPharmacistsReducer";
+import { listAllMedicinesReducer } from "Pharmacy/redux/PharmacyRedux/ListAllMedicines/listAllMedicinesReducer";
+import { allMedicinalUsesReducer } from "Pharmacy/redux/PharmacyRedux/Dropdowns/AllMedicinalUses/allMedicinalUsesReducer";
+import { patientCartReducer } from "Pharmacy/redux/PharmacyRedux/PatientCart/patientCartReducer";
+import { ordersReducer } from "Pharmacy/redux/PharmacyRedux/ListAllOrders/ordersReducer";
 
 export const appReducer = combineReducers({
+  // VIRTUAL CLINIC
   videoCallReducer,
   listAllUsersReducer,
   patientGetDoctorsReducer,
@@ -92,6 +98,25 @@ export const appReducer = combineReducers({
   unsubscribeFromPackageForFamilyReducer,
   viewPackagePriceReducer,
   listAllPatientHealthRecordsReducer,
+
+  // PHARMACY
+  // listAllUsersReducer,
+  // allSpecialitiesReducer,
+  // listAllAdminsReducer,
+  // createAdminReducer,
+  // adminListAllPatientsReducer,
+  adminListAllPharmacistsReducer,
+  // userReducer,
+  // registerReducer,
+  // logoutReducer,
+  listAllMedicinesReducer,
+  allMedicinalUsesReducer,
+  patientCartReducer,
+  ordersReducer,
+  // listAllContractsReducer,
+  // forgetPasswordReducer,
+  // verifyOtpReducer,
+  // resetPasswordReducer,
 });
 
 export const rootReducers = (state: any, action: any) => {

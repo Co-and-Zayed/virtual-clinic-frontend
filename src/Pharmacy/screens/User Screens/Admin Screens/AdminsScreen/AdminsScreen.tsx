@@ -2,7 +2,7 @@ import styles from "Pharmacy/screens/User Screens/Admin Screens/AdminsScreen/Adm
 import { useNav } from "Pharmacy/hooks/useNav";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import { listAllAdminsAction } from "Pharmacy/redux/PharmacyRedux/ListAllAdmins/listAllAdminsAction";
 import { FormikHelpers, useFormik } from "formik";
 import { Input, notification, Spin, Table } from "antd";

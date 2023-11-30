@@ -5,7 +5,7 @@ import { Button, message, Upload } from "antd";
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import { useFunctions } from "hooks/useFunctions";
 import { set } from "mongoose";
 

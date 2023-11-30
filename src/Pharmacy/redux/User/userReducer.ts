@@ -10,7 +10,7 @@ import {
   CLEAR_TIMEOUTS,
   UPDATE_USER_DATA,
 } from "./loginTypes";
-import store from "Pharmacy/redux/store";
+import store from "VirtualClinic/redux/store";
 
 const initialState = {
   loginLoading: false,

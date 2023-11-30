@@ -4,7 +4,7 @@ import { DatePicker, Input, Select, Spin, Upload } from "antd";
 import { useFormik } from "formik";
 import PharmacistRegisterModel from "Pharmacy/models/PharmacistRegisterModel";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import { useNav } from "Pharmacy/hooks/useNav";
 import { regsiterAction } from "Pharmacy/redux/Register/registerAction";
 import Back from "Pharmacy/assets/images/back.svg";

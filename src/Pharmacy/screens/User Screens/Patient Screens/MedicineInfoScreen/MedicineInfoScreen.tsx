@@ -3,7 +3,7 @@ import { useNav } from "Pharmacy/hooks/useNav";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState, useRef, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import {
   EditOutlined,
   InfoCircleOutlined,

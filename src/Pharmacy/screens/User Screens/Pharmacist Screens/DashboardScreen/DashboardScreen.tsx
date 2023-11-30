@@ -2,7 +2,7 @@ import styles from "Pharmacy/screens/User Screens/Pharmacist Screens/DashboardSc
 import { useNav } from "Pharmacy/hooks/useNav";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import React from "react";
 import type { ColumnsType } from "antd/es/table";
 import { SearchOutlined } from "@ant-design/icons";

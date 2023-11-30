@@ -3,13 +3,13 @@ import MainViewContainer from "Pharmacy/components/MainViewContainer/MainViewCon
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { refreshAccessTokenService } from "Pharmacy/services/refreshAccessTokenService";
-import store from "Pharmacy/redux/store";
+import store from "VirtualClinic/redux/store";
 import {
   UPDATE_ACCESS_TOKEN,
   ADD_TIMEOUT,
   CLEAR_TIMEOUTS,
 } from "Pharmacy/redux/User/loginTypes";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 
 const ProtectedRoutes = () => {
   const dispatch: any = useDispatch();

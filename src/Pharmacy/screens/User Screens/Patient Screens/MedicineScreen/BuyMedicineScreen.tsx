@@ -1,7 +1,7 @@
 import inputStyles from "Pharmacy/components/InputField/InputField.module.css";
 import { useNavigate, useParams, useLocation } from "react-router";
 import { FC, useEffect, useRef, useState } from "react";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Button,

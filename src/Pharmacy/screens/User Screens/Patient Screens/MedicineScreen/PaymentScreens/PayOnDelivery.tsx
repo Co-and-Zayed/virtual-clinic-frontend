@@ -1,6 +1,6 @@
 import styles from "Pharmacy/screens/User Screens/Patient Screens/MedicineScreen/PaymentScreens/PaymentScreens.module.css";
 import { FC, useEffect } from "react";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import BackIcon from "Pharmacy/assets/IconComponents/BackIcon";

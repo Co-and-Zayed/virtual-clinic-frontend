@@ -1,6 +1,6 @@
 import api from "Pharmacy/api";
 import { refreshAccessTokenUrl } from "Pharmacy/api/apiUrls";
-import store from "Pharmacy/redux/store";
+import store from "VirtualClinic/redux/store";
 
 export const refreshAccessTokenService = async () => {
   const response = await api.post(

@@ -9,7 +9,7 @@ import {
 } from "Pharmacy/utils/navigationLinks";
 import { useSelector, useDispatch } from "react-redux";
 
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import { logoutAction } from "Pharmacy/redux/User/userAction";
 import { refreshAccessTokenService } from "Pharmacy/services/refreshAccessTokenService";
 import { CLEAR_TIMEOUTS } from "Pharmacy/redux/User/loginTypes";

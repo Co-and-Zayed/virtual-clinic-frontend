@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
-import store from "Pharmacy/redux/store";
+import store from "VirtualClinic/redux/store";
 import { notification } from "antd";
 import {
   CLEAR_TIMEOUTS,

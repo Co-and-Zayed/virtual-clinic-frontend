@@ -12,7 +12,7 @@ import {
   settingsPharmacist,
   settingsAdmin,
 } from "Pharmacy/utils/navigationLinks";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import { logoutAction } from "Pharmacy/redux/User/userAction";
 import { CLEAR_TIMEOUTS } from "Pharmacy/redux/User/loginTypes";
 // import { DashboardIcon } from "Pharmacy/assets/images";

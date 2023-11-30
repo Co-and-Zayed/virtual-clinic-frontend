@@ -5,7 +5,7 @@ import { ConfigProvider, Input, Spin, theme } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import LoginModel from "Pharmacy/models/LoginModel";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import { useNav } from "Pharmacy/hooks/useNav";
 import { loginAction } from "Pharmacy/redux/User/userAction";
 import Logo from "Pharmacy/assets/images/Logo.svg";

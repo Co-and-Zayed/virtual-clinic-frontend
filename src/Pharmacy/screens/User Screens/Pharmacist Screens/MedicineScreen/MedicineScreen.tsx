@@ -2,7 +2,7 @@ import styles from "Pharmacy/screens/User Screens/Pharmacist Screens/SettingsScr
 import { useNav } from "Pharmacy/hooks/useNav";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "Pharmacy/redux/rootReducer";
+import { RootState } from "VirtualClinic/redux/rootReducer";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import {

@@ -32,14 +32,14 @@ const PayWithCard: FC<PayWithCardProps> = ({
     fetch(`${process.env.REACT_APP_BACKEND_PHARMACY}stripe/config`).then(
       async (r) => {
         const { publishableKey } = await r.json();
-        console.log(publishableKey);
+
         setStripePromise(loadStripe(publishableKey));
       }
     );
   }, []);
 
   useEffect(() => {
-    // console.log("USer Data", userData);
+    //
     fetch(
       `${process.env.REACT_APP_BACKEND_PHARMACY}stripe/create-payment-intent`,
       {

@@ -58,16 +58,12 @@ const MedicalScreen = () => {
       );
 
       const data = await response.json();
-      console.log(data.healthRecords);
-      console.log("Fetched", data);
 
       if (response.ok) {
         setLoading(false);
         setHealthRecords(data.healthRecords);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const renderFiles = (fileList: any) => {

@@ -177,7 +177,6 @@ const PayWithWallet: FC<PayWithWallet> = ({
 
               // Deduct from wallet using API
 
-              console.log("PAYING WITH WALLET");
               const res = await fetch(
                 `${process.env.REACT_APP_BACKEND_CLINIC}patient/payWithWallet`,
                 {
@@ -193,8 +192,7 @@ const PayWithWallet: FC<PayWithWallet> = ({
               );
               const data = await res.json();
               // get "user" from data
-              console.log("PAYED WITH WALLET RESPONSE");
-              console.log(data);
+
               if (data.user)
                 dispatch({
                   type: UPDATE_USER_DATA,

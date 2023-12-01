@@ -92,12 +92,11 @@ const AppointmentsScreen = () => {
         type: userType,
       })
     );
-    console.log(userAppointments);
   }, []);
 
   // useEffect(() => {
-  // console.log("userAppointments");
-  // console.log(userAppointments);
+  //
+  //
   // }, [userAppointments]);
 
   const [searchText, setSearchText] = useState("");
@@ -115,7 +114,6 @@ const AppointmentsScreen = () => {
     confirm();
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
-    console.log(selectedKeys[0]);
   };
 
   const handleReset = (clearFilters: () => void) => {
@@ -351,9 +349,7 @@ const AppointmentsScreen = () => {
     notification.open({
       message: "Appointment Status Changed",
       description: `Appointment status changed to ${item.key}`,
-      onClick: () => {
-        console.log("Notification Clicked!");
-      },
+      onClick: () => {},
       // placement: "bottomRight",
     });
 
@@ -388,9 +384,7 @@ const AppointmentsScreen = () => {
             notification.warning({
               message: "Invalid Date and Time",
               description: `Please choose a valid date and time`,
-              onClick: () => {
-                console.log("Notification Clicked!");
-              },
+              onClick: () => {},
               // placement: "bottomRight",
             });
             setLoadingReschedule(false);
@@ -441,9 +435,7 @@ const AppointmentsScreen = () => {
             ).format("dddd, MMMM D, yyyy")} at ${moment(finalDate).format(
               "h:mm a"
             )}`,
-            onClick: () => {
-              console.log("Notification Clicked!");
-            },
+            onClick: () => {},
             // placement: "bottomRight",
           });
 
@@ -460,7 +452,6 @@ const AppointmentsScreen = () => {
             type="date"
             allowClear
             onChange={(e) => {
-              console.log(e.target.value);
               setChosenDate(dayjs(e.target.value));
             }}
           />
@@ -472,8 +463,6 @@ const AppointmentsScreen = () => {
             showNow={false}
             allowClear
             onChange={(time, timeString) => {
-              console.log(time);
-              console.log(timeString);
               setChosenTime(time);
             }}
           />
@@ -492,9 +481,7 @@ const AppointmentsScreen = () => {
             notification.warning({
               message: "Invalid Date and Time",
               description: `Please choose a valid date and time`,
-              onClick: () => {
-                console.log("Notification Clicked!");
-              },
+              onClick: () => {},
               // placement: "bottomRight",
             });
             setLoadingFollowUp(false);
@@ -547,9 +534,7 @@ const AppointmentsScreen = () => {
             }  on ${moment(finalDate).format("dddd, MMMM D, yyyy")} at ${moment(
               finalDate
             ).format("h:mm a")}`,
-            onClick: () => {
-              console.log("Notification Clicked!");
-            },
+            onClick: () => {},
             // placement: "bottomRight",
           });
 
@@ -566,7 +551,6 @@ const AppointmentsScreen = () => {
             type="date"
             allowClear
             onChange={(e) => {
-              console.log(e.target.value);
               setChosenDate(dayjs(e.target.value));
             }}
           />
@@ -578,8 +562,6 @@ const AppointmentsScreen = () => {
             showNow={false}
             allowClear
             onChange={(time, timeString) => {
-              console.log(time);
-              console.log(timeString);
               setChosenTime(time);
             }}
           />

@@ -34,15 +34,12 @@ const OrderScreen = () => {
       );
 
       const data = await response.json();
-      console.log("Fetched", data);
 
       if (response.ok) {
         setLoading(false);
         dispatch({ type: "FETCH_ORDERS", payload: data.orders.reverse() });
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleOnClick = async (id: any) => {
@@ -58,7 +55,6 @@ const OrderScreen = () => {
       );
 
       const data = await response.json();
-      console.log("Cancelled", data);
 
       if (response.ok && data.user) {
         dispatch({
@@ -68,9 +64,7 @@ const OrderScreen = () => {
 
         dispatch({ type: "CANCEL_ORDER", payload: data.order });
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -117,8 +111,6 @@ const OrderScreen = () => {
       cartDetails: order?.cartDetails,
     };
   });
-
-  console.log(data);
 
   const columns: ColumnsType<DataType> = [
     {

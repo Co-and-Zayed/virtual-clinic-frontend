@@ -5,7 +5,6 @@ const AppRoutes = () => {
   return (
     <Routes>
       {routes?.map(({ path, element, parent, system }, index) => {
-        console.log(system + path);
         if (parent) {
           return (
             <Route key={index} element={parent}>

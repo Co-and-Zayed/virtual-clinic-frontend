@@ -394,11 +394,9 @@ const PharmacistsScreen = () => {
   }));
 
   useEffect(() => {
-    console.log("Sending Request");
     dispatch(adminListAllPharmacistsAction());
     setShowPharmacistDetails(false);
     setCurrentPharmacist(null);
-    console.log("All Pharmacists", adminPharmacists);
   }, []);
 
   return (

@@ -19,8 +19,7 @@ export const useRequests = () => {
         },
       }
     );
-    console.log("NEW USER DATA");
-    console.log(response.data.data);
+
     dispatch({
       type: UPDATE_USER_DATA,
       payload: response.data.data,

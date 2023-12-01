@@ -32,52 +32,42 @@ const PatientRegisterScreen = () => {
     onSubmit: async (values: PatientRegisterModel) => {
       var errorExists = false;
       if (values.name.trim() === "") {
-        console.log("name");
         errorExists = true;
         formik.setFieldError("name", "");
       }
       if (values.email.trim() === "") {
-        console.log("email");
         errorExists = true;
         formik.setFieldError("email", "");
       }
       if (values.username.trim() === "") {
-        console.log("username");
         errorExists = true;
         formik.setFieldError("username", "");
       }
       if (values.password.trim() === "") {
-        console.log("password");
         errorExists = true;
         formik.setFieldError("password", "");
       }
       if (values.date_of_birth.trim() === "") {
-        console.log("date");
         errorExists = true;
         formik.setFieldError("date_of_birth", "");
       }
       if (values.gender.trim() === "") {
-        console.log("gender");
         errorExists = true;
         formik.setFieldError("gender", "");
       }
       if (values.mobileNumber.trim() === "") {
-        console.log("mobilenumb");
         errorExists = true;
         formik.setFieldError("mobileNumber", "");
       }
       if (values.healthRecords.trim() === "") {
-        console.log("health");
         errorExists = true;
         formik.setFieldError("healthRecords", "");
       }
       if (values.emergencyContactName.trim() === "") {
-        console.log("contatc nam");
         errorExists = true;
         formik.setFieldError("emergencyContactName", "");
       }
       if (values.emergenyContactNumber.trim() === "") {
-        console.log("contact numbe");
         errorExists = true;
         formik.setFieldError("emergencyContactNumber", "");
       }

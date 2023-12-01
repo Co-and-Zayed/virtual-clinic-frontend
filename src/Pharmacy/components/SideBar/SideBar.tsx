@@ -70,7 +70,6 @@ const SideBar: FC<SideBarProps> = () => {
   };
 
   useEffect(() => {
-    console.log("CURRENT USER TYPE: ", userType);
     if (userType === "PHARMACIST") {
       if (userData?.status === "ACCEPTED") {
         setCurrentNavLinks(navLinksPharmacist);
@@ -99,10 +98,7 @@ const SideBar: FC<SideBarProps> = () => {
     navigate("/login");
   };
 
-  useEffect(() => {
-    console.log("currentSettingsLinks");
-    console.log(currentSettingsLinks);
-  }, []);
+  useEffect(() => {}, []);
 
   useEffect(() => {
     setCurrentLink(-1);

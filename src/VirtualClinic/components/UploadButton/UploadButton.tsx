@@ -26,10 +26,7 @@ const UploadButton: FC<UploadButtonProps> = ({
   listType = "INFO_CIRCLE",
 }) => {
   useEffect(() => {
-    console.log("UPLOADED FILES", fileList);
-    fileList?.map((file: any) => {
-      console.log(file?.name);
-    });
+    fileList?.map((file: any) => {});
   }, [fileList]);
 
   const handleDelete = (file: any) => {

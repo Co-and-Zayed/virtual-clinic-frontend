@@ -12,16 +12,13 @@ export const createAdminAction =
     try {
       dispatch({ type: CREATED_ADMIN_DATA_LOADING, payload: true });
 
-      console.log("GETTING RESPONSE");
       const response = await api.post(
         createAdmin(), // Your Endpoint
         requestBody // (for requests with a body)
       );
-      console.log("RESPONSSEEE", response.data);
 
       dispatch({ type: CREATED_ADMIN_DATA_SUCCESS, payload: response.data });
     } catch (err) {
-      console.log("ERROR", err);
       dispatch({ type: CREATED_ADMIN_DATA_FAILURE, payload: err });
     } finally {
       dispatch({ type: CREATED_ADMIN_DATA_LOADING, payload: false });

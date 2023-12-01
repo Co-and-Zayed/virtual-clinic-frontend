@@ -49,7 +49,6 @@ const LoginScreen = () => {
     } else if (userType === "ADMIN") {
       navigate("/admins");
     }
-    console.log("USER TYPE WHEN NAVIGATING: ", userType);
   };
 
   useEffect(() => {

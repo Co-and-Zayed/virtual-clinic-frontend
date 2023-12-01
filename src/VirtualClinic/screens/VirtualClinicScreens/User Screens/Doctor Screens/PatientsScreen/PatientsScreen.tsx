@@ -216,7 +216,6 @@ const PatientsScreen = () => {
             );
 
             const data = await response.json();
-            console.log("Fetched", data);
 
             if (response.ok) {
               notification.success({
@@ -227,7 +226,6 @@ const PatientsScreen = () => {
             notification.error({
               message: "Failed To Add Health Record",
             });
-            console.log(error);
           }
         };
 

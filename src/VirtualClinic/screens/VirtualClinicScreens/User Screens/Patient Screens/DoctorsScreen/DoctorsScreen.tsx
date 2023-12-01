@@ -52,7 +52,6 @@ const DoctorsScreen = () => {
   const [searchName, setSearchName] = useState("");
 
   useEffect(() => {
-    console.log("USER DATA", userData);
     dispatch(allSpecialitiesAction());
     dispatch(patientGetDoctorsAction());
   }, []);
@@ -66,8 +65,8 @@ const DoctorsScreen = () => {
   //     }
   //   });
   //   setSpecialitiesFilter(uniqueSpecialities);
-  //   console.log("UNIQUE SPECIALITIES", uniqueSpecialities);
-  //   console.log("SPECIALITIES FILTER", specialitiesFilter);
+  //
+  //
   // }, [allDoctors]);
 
   const getDoctorName = async (doctorUsername: any) => {
@@ -81,10 +80,6 @@ const DoctorsScreen = () => {
     if (!specialityFilter && !dateFilter && !timeFilter) {
       return;
     }
-
-    console.log("SPECIALITY FILTER", specialityFilter);
-    console.log("DATE FILTER", dateFilter);
-    console.log("TIME FILTER", timeFilter);
 
     // Date and time filters must be selected together
     if ((dateFilter && !timeFilter) || (!dateFilter && timeFilter)) {

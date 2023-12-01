@@ -36,10 +36,7 @@ const SideBar: FC<SideBarProps> = () => {
     (state: RootState) => state.userReducer
   );
 
-  useEffect(() => {
-    console.log("SIDEBAR USER DATA:");
-    console.log(userData);
-  }, [userData]);
+  useEffect(() => {}, [userData]);
 
   const generateLink = (link: {
     name: any;
@@ -73,7 +70,6 @@ const SideBar: FC<SideBarProps> = () => {
   };
 
   useEffect(() => {
-    console.log("CURRENT USER TYPE: ", userType);
     if (userType === "DOCTOR") {
       if (userData?.status === "ACCEPTED") {
         setCurrentNavLinks(navLinksDoctor);
@@ -102,10 +98,7 @@ const SideBar: FC<SideBarProps> = () => {
     navigate("/login");
   };
 
-  useEffect(() => {
-    console.log("Balabiz Seif");
-    console.log(userData);
-  }, [userData]);
+  useEffect(() => {}, [userData]);
 
   useEffect(() => {
     setCurrentLink(-1);
@@ -114,8 +107,6 @@ const SideBar: FC<SideBarProps> = () => {
         setCurrentLink(i);
         return;
       }
-      console.log("CURRENT LINK", currentNavLinks[i]?.route);
-      console.log("WINDOW LINK", window.location.pathname);
     }
     if (window.location.pathname.includes(Routes.SETTINGS_PATH)) {
       setCurrentLink(currentNavLinks?.length + 1);

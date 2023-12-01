@@ -61,7 +61,6 @@ const LoginScreen = () => {
       navigate("/admins");
     }
     document.body.style.backgroundColor = "";
-    console.log("USER TYPE WHEN NAVIGATING: ", userType);
   };
 
   useEffect(() => {

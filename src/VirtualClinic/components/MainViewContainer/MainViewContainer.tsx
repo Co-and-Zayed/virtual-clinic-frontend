@@ -10,6 +10,7 @@ interface MainViewContainerProps {
 }
 
 const MainViewContainer: FC<MainViewContainerProps> = ({ children }) => {
+  const { userData } = useSelector((state: any) => state.userReducer);
   const navigate = useNav();
   const dispatch: any = useDispatch();
 

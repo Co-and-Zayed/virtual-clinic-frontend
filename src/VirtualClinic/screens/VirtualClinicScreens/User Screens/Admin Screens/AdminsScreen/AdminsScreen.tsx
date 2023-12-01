@@ -71,7 +71,6 @@ const AdminsScreen = () => {
   });
 
   const checkCreatedAdmin = () => {
-    console.log("CREATED ADMINzzzzz:", createdAdmin);
     if (createdAdmin?.status && createdAdmin?.status === 409) {
       notification.error({
         message: "User already exists!",
@@ -131,7 +130,6 @@ const AdminsScreen = () => {
 
   useEffect(() => {
     dispatch(listAllAdminsAction(userData?._id));
-    console.log("All Admins", allAdmins);
   }, []);
 
   return (

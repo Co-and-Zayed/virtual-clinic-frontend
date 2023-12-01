@@ -95,9 +95,7 @@ const MedicineInfoScreen: FC<MedicineInfoScreenProps> = ({
   const [loadingEdit, setLoadingEdit] = useState(false);
   const [showMedicine, setShowMedicine] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log("ADDED WALLA LA?", hasAdded);
-  }, []);
+  useEffect(() => {}, []);
 
   // fetch medicine from api using
   useEffect(() => {
@@ -404,7 +402,6 @@ const MedicineInfoScreen: FC<MedicineInfoScreenProps> = ({
                       medicine: searchParams.get("id"),
                     });
                   }
-                  console.log(quantity);
                 }}
               >
                 {!hasAdded ? "Add to cart" : "Added"}

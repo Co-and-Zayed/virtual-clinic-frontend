@@ -100,7 +100,7 @@ const MedicineScreen = () => {
 
     if (existingItemIndex !== -1) {
       // If it exists, update its quantity.
-      console.log("FOUND IN CART");
+
       const updatedCart = [...myCart];
       updatedCart[existingItemIndex].quantity = newItem.quantity;
       if (!newItem.fromCounter) {
@@ -111,16 +111,14 @@ const MedicineScreen = () => {
         setMyCart([...updatedCart]);
       }
     } else {
-      console.log("NOT FOUND IN CART");
       // If it doesn't exist, add it to the cart.
       setMyCart([...myCart, newItem]);
-      console.log("UPDATED CART", [...myCart, newItem]);
     }
   };
 
   const updateCart = async (newCart: any) => {
     // setHasAdded(false);
-    console.log("SENDING UPDATE CART REQUEST", newCart);
+
     try {
       const res = await fetch(
         `${process.env.REACT_APP_BACKEND_PHARMACY}patient/updateCart`,
@@ -136,7 +134,6 @@ const MedicineScreen = () => {
       setHasAdded(true);
       const json = await res.json();
     } catch (err) {}
-    console.log("MY NEW CART: ", newCart);
   };
 
   const getCart = async () => {
@@ -159,7 +156,7 @@ const MedicineScreen = () => {
       setMyCart(cart);
     } catch (err) {}
     setHasMounted(true);
-    // console.log("MY NEW CART: ", myCart);
+    //
   };
 
   useEffect(() => {
@@ -243,18 +240,16 @@ const MedicineScreen = () => {
       const existingItemIndex = myCart?.findIndex(
         (item: any) => item.medicine._id === medicineId
       );
-      console.log("medicineID", medicineId);
-      console.log("myCart", myCart);
+
       if (existingItemIndex !== -1) {
         // If it exists, update its quantity.
-        console.log("FOUND IN CART");
-        console.log("MY CART: ", myCart);
+
         // set quantity with this medicine's quantity in cart
         setInitialQuantity(myCart[existingItemIndex].quantity);
         setHasAdded(true);
       } else {
         // If it doesn't exist, add it to the cart.
-        console.log("NOT FOUND IN CART");
+
         setInitialQuantity(-1);
         setHasAdded(false);
       }

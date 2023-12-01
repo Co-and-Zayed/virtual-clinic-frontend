@@ -54,8 +54,6 @@ const ViewPackageScreen = () => {
     dispatch(viewPackagesAction({ patientID: userData?._id })); // sending the request, and update the states
     setSelectedPackage(null);
     setShowSinglePackage(false);
-    console.log(userviewPackages);
-    console.log(selectedPackage);
   }, []);
   return (
     <div
@@ -74,7 +72,6 @@ const ViewPackageScreen = () => {
               className={`${styles.editLink}`}
               onClick={() => {
                 navigate(Routes.MY_FAMILY_PACKAGES_PATH, {});
-                console.log("Clicked on My Family Packages");
               }}
             >
               My Family Packages
@@ -200,7 +197,6 @@ const ViewPackageScreen = () => {
                     },
                   }
                 );
-                console.log(response);
               }}
             />
           )}

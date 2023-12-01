@@ -394,11 +394,9 @@ const DoctorsScreen = () => {
   }));
 
   useEffect(() => {
-    console.log("Sending Request");
     dispatch(adminListAllDoctorsAction());
     setShowDoctorDetails(false);
     setCurrentDoctor(null);
-    console.log("All Doctors", adminDoctors);
   }, []);
 
   return (

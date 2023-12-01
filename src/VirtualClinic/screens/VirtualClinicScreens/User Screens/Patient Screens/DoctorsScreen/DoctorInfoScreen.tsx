@@ -85,8 +85,8 @@ const DoctorInfoScreen = () => {
 
   useEffect(() => {
     if (docinfo) {
-      console.log("Doctor: ");
-      console.log(docinfo);
+      
+      
     }
   }, [docinfo]);
 
@@ -146,7 +146,7 @@ const DoctorInfoScreen = () => {
 
     // create appointment
     // // Params: patientId, doctorId, date, status (enum: ["UPCOMING", "CANCELLED", "COMPLETED"])
-    console.log(
+    
       "Appointment for: " + isCheckboxChecked &&
         selectedFamilyMemberObj?.familyMember?.type === "GUEST"
         ? "GUEST"
@@ -221,24 +221,24 @@ const DoctorInfoScreen = () => {
     }
 
     // Create date object from selected date and time
-    console.log("Selected Date: " + selectedDate.format("DD/MM/YYYY"));
-    console.log("Selected Time Slot: " + selectedTimeSlot.time);
+    
+    
     // selectedTimeSlot is in the format: 9:00 AM
     // selectedDate is a dayjs
     var date = dayjs(
       selectedDate.format("DD/MM/YYYY") + " " + selectedTimeSlot.time,
       "DD/MM/YYYY hh:mm A"
     );
-    console.log("Date: " + date);
+    
 
     // Set seconds to 0
     date = date.set("second", 0).set("millisecond", 0);
 
     // If date is in the past, show error
-    console.log("Date: " + date.format("DD/MM/YYYY hh:mm A"));
-    console.log("Today: " + dayjs());
+    
+    
     if (date.isBefore(dayjs())) {
-      console.log("Date is in the past");
+      
       // show error
       notification.error({
         message: "Error",
@@ -393,8 +393,8 @@ const DoctorInfoScreen = () => {
                           appointmentTime === timeSlot.time
                         ) {
                           hasAppointment = true;
-                          console.log("Appointment Time: " + appointmentTime);
-                          console.log("Time Slot Time: " + timeSlot.time);
+                          
+                          
                         }
                       });
                     }

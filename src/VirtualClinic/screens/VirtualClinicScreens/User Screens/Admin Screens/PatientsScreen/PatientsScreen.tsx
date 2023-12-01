@@ -34,7 +34,6 @@ const PatientsScreen = () => {
 
   useEffect(() => {
     dispatch(adminListAllPatientsAction());
-    console.log("All Patients", adminPatients);
   }, []);
 
   return (

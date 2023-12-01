@@ -16,21 +16,7 @@ import {
 } from "VirtualClinic/redux/VirtualClinicRedux/types";
 import * as Firestore from "firebase/firestore";
 import { set } from "mongoose";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCySV6dNI8FeV1k6Y0tnfakvQxvYvfGcUI",
-  authDomain: "el7a2ni---acl-project.firebaseapp.com",
-  projectId: "el7a2ni---acl-project",
-  storageBucket: "el7a2ni---acl-project.appspot.com",
-  messagingSenderId: "198563552127",
-  appId: "1:198563552127:web:d71e393daf15ab6855d84a",
-  measurementId: "G-HF4NY9D0EB",
-};
+import firebaseConfig from "firebaseConfig";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -108,19 +94,7 @@ const VideoCallScreen = () => {
     }
   };
 
-  const printRedux = (label?: any) => {
-    console.log(label ?? "");
-    console.log("PC");
-    console.log(pc);
-    console.log("localStream");
-    console.log(localStream);
-    console.log("remoteStream");
-    console.log(remoteStream);
-
-    console.log("Firestore:", Firestore ?? "");
-    console.log("Collection:", "calls");
-    console.log("Document ID:", callInput?.value ?? "");
-  };
+  const printRedux = (label?: any) => {};
 
   useEffect(() => {
     printRedux("SOME VALUE CHANGED");
@@ -148,19 +122,15 @@ const VideoCallScreen = () => {
   useEffect(() => {
     switch (currentAction) {
       case CallAction.INIT:
-        console.log("INIT START WEBCAM");
         handleStartWebcam();
         break;
       case CallAction.START_WEB_CAM:
-        console.log("START WEBCAM");
         startWebcam();
         break;
       case CallAction.ANSWER:
-        console.log("ANSWER");
         handleAnswerClick(roomCode);
         break;
       default:
-        console.log("DEFAULT");
         break;
     }
   }, [currentAction]);
@@ -180,15 +150,6 @@ const VideoCallScreen = () => {
       });
     };
 
-    console.log("REMOTE STREAM");
-    console.log(remoteStream);
-    console.log("LOCAL STREAM");
-    console.log(localStream);
-    console.log("WEBCAM VIDEO");
-    console.log(webcamVideo);
-    console.log("REMOTE VIDEO");
-    console.log(remoteVideo);
-
     webcamVideo.srcObject = localStream;
     remoteVideo.srcObject = remoteStream;
 
@@ -203,7 +164,6 @@ const VideoCallScreen = () => {
   };
 
   const handleStartWebcam = async () => {
-    console.log("START WEBCAM CLICK");
     // 1. Setup media sources
     await dispatch({
       type: LOCAL_STREAM,
@@ -223,8 +183,6 @@ const VideoCallScreen = () => {
   };
 
   const handleCallClick = async () => {
-    console.log("START CALL CLICK");
-
     // Reference Firestore Collection
     const callDoc = Firestore.doc(Firestore.collection(firestore, "calls"));
     const offerCandidates = Firestore.collection(callDoc, "offerCandidates");
@@ -233,7 +191,6 @@ const VideoCallScreen = () => {
     // Get candidates for caller, save to db
     setCallInputValue(callDoc.id);
     if (!isAnswering) {
-      console.log("NOT ANSWERING");
       setRoomCode(callDoc.id);
     }
     pc.onicecandidate = (event: any) => {
@@ -272,19 +229,11 @@ const VideoCallScreen = () => {
     });
   };
 
-  useEffect(() => {
-    console.log("CALL INPUT VALUE CHANGED");
-    console.log(callInputValue);
-  }, [callInputValue]);
+  useEffect(() => {}, [callInputValue]);
 
-  useEffect(() => {
-    console.log("ROOM CODE VALUE CHANGED");
-    console.log(roomCode);
-  }, [roomCode]);
+  useEffect(() => {}, [roomCode]);
 
   const handleAnswerClick = async (callId: any) => {
-    console.log("ANSWER CLICK");
-    console.log(callId);
     const callDoc = Firestore.doc(firestore, "calls", callId);
 
     const answerCandidates = Firestore.collection(callDoc, "answerCandidates");
@@ -312,7 +261,6 @@ const VideoCallScreen = () => {
 
     Firestore.onSnapshot(offerCandidates, (snapshot: any) => {
       snapshot.docChanges().forEach((change: any) => {
-        console.log(change);
         if (change.type === "added") {
           let data = change.doc.data();
           pc.addIceCandidate(new RTCIceCandidate(data));
@@ -322,7 +270,6 @@ const VideoCallScreen = () => {
   };
 
   const handleHangupClick = () => {
-    console.log("HANGUP CALL CLICK");
     // Close the connection
     pc.close();
 

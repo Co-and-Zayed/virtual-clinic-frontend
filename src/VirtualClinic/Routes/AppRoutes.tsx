@@ -6,7 +6,6 @@ const AppRoutes = () => {
   return (
     <Routes>
       {clinicRoutes?.map(({ path, element, parent, system }, index) => {
-        console.log(system + path);
         if (parent) {
           return (
             <Route key={index} element={parent}>
@@ -17,7 +16,6 @@ const AppRoutes = () => {
         return <Route key={index} element={element} path={system + path} />;
       })}
       {pharmacyRoutes?.map(({ path, element, parent, system }, index) => {
-        console.log(system + path);
         if (parent) {
           return (
             <Route key={index} element={parent}>

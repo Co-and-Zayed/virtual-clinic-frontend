@@ -39,10 +39,7 @@ const AddNewMedicineModal: FC<AddNewMedicineModalProps> = ({
 
   const [loadingAdd, setLoadingAdd] = useState(false);
 
-  useEffect(() => {
-    console.log("otherActiveIngredients");
-    console.log(otherActiveIngredients);
-  }, [otherActiveIngredients]);
+  useEffect(() => {}, [otherActiveIngredients]);
 
   function resetFields() {
     setName("");
@@ -58,15 +55,6 @@ const AddNewMedicineModal: FC<AddNewMedicineModalProps> = ({
 
   async function handleAddNewMedicine() {
     // Check if all fields are filled
-    console.log(name);
-    console.log(file);
-    console.log(picture);
-    console.log(description);
-    console.log(price);
-    console.log(mainActiveIngredient);
-    console.log(otherActiveIngredients);
-    console.log(medicinalUse);
-    console.log(availableQuantity);
 
     if (
       name === "" ||
@@ -199,7 +187,6 @@ const AddNewMedicineModal: FC<AddNewMedicineModalProps> = ({
             type="file"
             value={picture}
             onChange={(e) => {
-              console.log(e.target.files);
               setFile(e.target.files);
               setPicture(e.target.value);
             }}
@@ -250,7 +237,6 @@ const AddNewMedicineModal: FC<AddNewMedicineModalProps> = ({
             onChange={
               // setOtherActiveIngredients
               (value) => {
-                console.log("NEW OTHER INGREDIETN", value);
                 setOtherActiveIngredients(value);
               }
             }

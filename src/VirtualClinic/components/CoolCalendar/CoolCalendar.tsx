@@ -37,17 +37,13 @@ const CoolCalendar: FC<CoolCalendarProps> = ({
   }, [loading]);
 
   const fetchHighlightedDays = (date: Dayjs) => {
-    console.log("Current month: " + date.format("MMMM"));
     const controller = new AbortController();
 
-    console.log(daysToHighlight);
     // make sure to highlight only if the month is the same as the current one
     var toHighlight = daysToHighlight.filter(
       (day) => day.month() === date.month()
     );
     var toHighlightDates = toHighlight.map((day) => day.date());
-    console.log("highlight");
-    console.log(toHighlight);
 
     setHighlightedDays(toHighlightDates);
     // setIsLoading(false);

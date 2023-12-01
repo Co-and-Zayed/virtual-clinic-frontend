@@ -87,7 +87,7 @@ const AppointmentsScreen = () => {
         type: userType,
       })
     );
-    console.log(userAppointments);
+
     updateDaysToHighlight();
   }
 
@@ -109,7 +109,6 @@ const AppointmentsScreen = () => {
     confirm();
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
-    console.log(selectedKeys[0]);
   };
 
   const handleReset = (clearFilters: () => void) => {
@@ -263,13 +262,7 @@ const AppointmentsScreen = () => {
       fixed: "right",
       width: 100,
       render: () => (
-        <Popconfirm
-          title="Sure to delete?"
-          onConfirm={(e) => {
-            console.log("delete");
-            console.log(e);
-          }}
-        >
+        <Popconfirm title="Sure to delete?" onConfirm={(e) => {}}>
           <a>Delete</a>
         </Popconfirm>
       ),
@@ -279,8 +272,6 @@ const AppointmentsScreen = () => {
   const [daysToHighlight, setDaysToHighlight] = useState<Dayjs[] | null>(null);
 
   useEffect(() => {
-    console.log("userAppointments useEffect");
-    console.log(userAppointments);
     updateDaysToHighlight();
   }, [userAppointments]);
 

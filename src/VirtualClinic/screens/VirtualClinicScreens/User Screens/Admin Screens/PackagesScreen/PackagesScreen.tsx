@@ -82,15 +82,11 @@ const PackagesScreen = () => {
       //   })
       // );
 
-      console.log("SUBMITTING", values);
-
       if (actionType === "add") {
         await dispatch(createPackageAction(values));
       } else if (actionType === "edit") {
-        console.log("SELECTED PACKAGE", selectedPackage._id);
         await dispatch(updatePackageAction(selectedPackage._id, values));
       } else if (actionType === "delete") {
-        console.log("DELETING: ", selectedPackage._id);
         await dispatch(deletePackageAction(selectedPackage._id));
       }
     },
@@ -98,7 +94,6 @@ const PackagesScreen = () => {
 
   /*************************** CHECKING CREATE PACKAGE ********************/
   const checkCreatedPackage = () => {
-    console.log("CREATED PACKAGE: ", createdPackage);
     var isError = false;
     if (createdPackage?.status && createdPackage?.status === 400) {
       isError = true;
@@ -108,7 +103,6 @@ const PackagesScreen = () => {
       });
     }
     if (!isError) {
-      console.log("MALAK???");
       dispatch(listAllPackagesAction());
       setSelectedPackage(null);
       setShowSinglePackage(false);
@@ -207,10 +201,6 @@ const PackagesScreen = () => {
     dispatch(listAllPackagesAction()); // sending the request, and update the states
     setSelectedPackage(null);
     setShowSinglePackage(false);
-    console.log(allPackages);
-    console.log(userType);
-    console.log("YBNY ER7AMNY");
-    console.log(selectedPackage);
   }, []);
 
   return (

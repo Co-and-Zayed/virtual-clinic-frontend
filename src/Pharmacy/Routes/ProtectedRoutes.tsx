@@ -21,7 +21,6 @@ const ProtectedRoutes = () => {
 
   var refreshInterval = 594; // IN SECONDS (9 minutes 54 seconds)
   async function refreshTokenMethod() {
-    console.log("sending refresh request...");
     const currentValue = store.getState()?.userReducer?.shouldRefresh;
     try {
       if (currentValue === "START") {
@@ -41,9 +40,7 @@ const ProtectedRoutes = () => {
     });
   };
 
-  useEffect(() => {
-    console.log("SENT REFRESH TOKEN REQUEST:", counter, allTimeouts);
-  }, [counter]);
+  useEffect(() => {}, [counter]);
 
   useEffect(() => {
     const currentValue = store.getState()?.userReducer?.shouldRefresh;

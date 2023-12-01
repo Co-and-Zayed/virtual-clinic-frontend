@@ -33,7 +33,6 @@ const CartItem: FC<CartItemProps> = ({
   const navigate = useNav();
 
   const handleCartClick = (event: any) => {
-    console.log(event.target.id);
     if (event.target.id === "cartItem" || event.target.id === "name") {
       navigate("/medicine?id=" + id);
     }

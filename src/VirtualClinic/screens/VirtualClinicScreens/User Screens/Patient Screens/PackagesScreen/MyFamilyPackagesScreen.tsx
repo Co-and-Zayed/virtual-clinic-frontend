@@ -68,8 +68,6 @@ const MyFamilyPackageScreen = () => {
     dispatch(getFamilyMembersAction({ patientID: userData?._id }));
     setSelectedPackage(null);
     setShowSinglePackage(false);
-    console.log(userviewPackages);
-    console.log(selectedPackage);
   }, []);
 
   return (
@@ -88,7 +86,6 @@ const MyFamilyPackageScreen = () => {
               className={`${styles.editLink} `}
               onClick={() => {
                 navigate(Routes.MY_PACKAGE_PATH, {});
-                console.log("Clicked on My Family Packages");
               }}
             >
               My Packages
@@ -97,7 +94,6 @@ const MyFamilyPackageScreen = () => {
               className={`${styles.editLink}`}
               onClick={() => {
                 navigate(Routes.MY_FAMILY_PACKAGES_PATH, {});
-                console.log("Clicked on My Family Packages");
               }}
             >
               My Family Packages
@@ -289,7 +285,6 @@ const MyFamilyPackageScreen = () => {
                     },
                   }
                 );
-                console.log(response);
               }}
             />
           )}

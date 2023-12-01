@@ -126,15 +126,13 @@ const PayWithWallet: FC<PayWithWalletProps> = ({
             icon={<RightArrowIcon fontSize={18} style={{ rotate: "-45deg" }} />}
             width={"8rem"}
             onClick={async () => {
-              console.log("PAYING WITH WALLET");
-              console.log("CART ITEMS", cartItems);
               const cart = cartItems.map((item) => {
                 return {
                   medicine: item.medicine,
                   quantity: item.quantity,
                 };
               });
-              console.log("CART", cart);
+
               const res = await fetch(
                 `${process.env.REACT_APP_BACKEND_PHARMACY}buyMedicines`,
                 {
@@ -153,7 +151,6 @@ const PayWithWallet: FC<PayWithWalletProps> = ({
 
               const data = await res.json();
 
-              console.log(data);
               if (data.user) {
                 dispatch({
                   type: UPDATE_USER_DATA,

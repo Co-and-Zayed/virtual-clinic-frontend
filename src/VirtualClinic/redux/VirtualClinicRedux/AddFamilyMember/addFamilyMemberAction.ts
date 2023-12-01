@@ -11,7 +11,7 @@ export const addFamilyMemberAction =
   (requestBody?: any) => async (dispatch: Dispatch) => {
     try {
       dispatch({ type: ADD_FAMILYMEMBER_DATA_LOADING, payload: true });
-      console.log("requestBody: ", requestBody);
+
       const response = await api.post(
         addFamilyMember(), // Your Endpoint
         requestBody // (for requests with a body)

@@ -12,16 +12,13 @@ export const deleteAdminAction =
     try {
       dispatch({ type: DELETED_ADMIN_DATA_LOADING, payload: true });
 
-      console.log("DELETING RESPONSE", requestBody);
       const response = await api.post(
         deleteAdmin(), // Your Endpoint
         requestBody // (for requests with a body)
       );
-      console.log("DELETINGGGG RESPONSSEEE 2", response.data);
 
       dispatch({ type: DELETED_ADMIN_DATA_SUCCESS, payload: response.data });
     } catch (err) {
-      console.log("ERROR", err);
       dispatch({ type: DELETED_ADMIN_DATA_FAILURE, payload: err });
     } finally {
       dispatch({ type: DELETED_ADMIN_DATA_LOADING, payload: false });

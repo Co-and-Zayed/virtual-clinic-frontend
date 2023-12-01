@@ -51,15 +51,14 @@ export default function CheckoutForm({
       });
     } else if (paymentIntent && paymentIntent.status === "succeeded") {
       // SUCCESS !
-      console.log("PAYING WITH CARD");
-      console.log("CART ITEMS", cartItems);
+
       const cart = cartItems.map((item) => {
         return {
           medicine: item.medicine,
           quantity: item.quantity,
         };
       });
-      console.log("CART", cart);
+
       const res = await fetch(
         `${process.env.REACT_APP_BACKEND_PHARMACY}buyMedicines`,
         {

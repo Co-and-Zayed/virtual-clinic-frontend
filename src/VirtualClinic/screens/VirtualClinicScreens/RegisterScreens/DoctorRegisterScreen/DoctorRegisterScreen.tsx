@@ -32,37 +32,30 @@ const DoctorRegisterScreen = () => {
     onSubmit: async (values: DoctorRegisterModel) => {
       var errorExists = false;
       if (values.name.trim() === "") {
-        console.log("name");
         formik.setFieldError("name", "");
         errorExists = true;
       }
       if (values.email.trim() === "") {
-        console.log("email");
         formik.setFieldError("email", "");
         errorExists = true;
       }
       if (values.username.trim() === "") {
-        console.log("username");
         formik.setFieldError("username", "");
         errorExists = true;
       }
       if (values.password.trim() === "") {
-        console.log("password");
         formik.setFieldError("password", "");
         errorExists = true;
       }
       if (values.gender.trim() === "") {
-        console.log("gender");
         formik.setFieldError("gender", "");
         errorExists = true;
       }
       if (values.specialty.trim() === "") {
-        console.log("specialty");
         formik.setFieldError("specialty", "");
         errorExists = true;
       }
       if (values.date_of_birth.trim() === "") {
-        console.log("date");
         formik.setFieldError("date_of_birth", "");
         errorExists = true;
       }

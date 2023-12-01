@@ -29,11 +29,7 @@ const PayOnDelivery: FC<PayOnDeliveryProps> = ({
     (state: RootState) => state.userReducer
   );
 
-  console.log(userData);
-
-  useEffect(() => {
-    console.log("PRICE ORIGINAL", priceOriginal);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <ConfigProvider
@@ -111,15 +107,13 @@ const PayOnDelivery: FC<PayOnDeliveryProps> = ({
             icon={<RightArrowIcon fontSize={18} style={{ rotate: "-45deg" }} />}
             width={"8rem"}
             onClick={async () => {
-              console.log("PAYING ON DELIVERY");
-              console.log("CART ITEMS", cartItems);
               const cart = cartItems.map((item) => {
                 return {
                   medicine: item.medicine,
                   quantity: item.quantity,
                 };
               });
-              console.log("CART", cart);
+
               const res = await fetch(
                 `${process.env.REACT_APP_BACKEND_PHARMACY}buyMedicines`,
                 {
@@ -138,7 +132,6 @@ const PayOnDelivery: FC<PayOnDeliveryProps> = ({
 
               const data = await res.json();
               if (data.user) {
-                console.log("USER IN PAY ON DELIVERY", data.user);
                 dispatch({ type: GET_CART, payload: false });
                 setPage("confirmation");
               }

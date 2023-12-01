@@ -12,7 +12,6 @@ const PatientInfoScreen = () => {
 
   const location = useLocation();
   const _id = location.state._id;
-  console.log("!! here" + _id);
 
   const { patientInfoLoading, patientInfo } = useSelector(
     (state: RootState) => state.listPatientInfoReducer
@@ -20,7 +19,6 @@ const PatientInfoScreen = () => {
 
   useEffect(() => {
     dispatch(listPatientInfoAction()); // sending the request, and update the states
-    console.log(patientInfo + "there");
   }, []);
 
   return (

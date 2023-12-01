@@ -63,7 +63,6 @@ export const userReducer = (state = initialState, action: any) => {
         allTimeouts: [...state.allTimeouts, action.payload],
       };
     case CLEAR_TIMEOUTS:
-      console.log("clearing timeouts", state.allTimeouts);
       if (state.allTimeouts) {
         for (let i = 0; i < state.allTimeouts.length; i++) {
           clearTimeout(state.allTimeouts[i]);

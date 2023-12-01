@@ -85,7 +85,7 @@ const ContractScreen = () => {
     );
     await dispatch(listAllContractsAction());
     const data = await res.json();
-    console.log(data, "Response");
+
     await dispatch({ type: UPDATE_USER_DATA, payload: data.doctor });
     window.location.reload();
     notification.success({
@@ -371,7 +371,6 @@ const ContractScreen = () => {
   ];
 
   useEffect(() => {
-    console.log("Sending Request");
     dispatch(listAllContractsAction());
   }, []);
 

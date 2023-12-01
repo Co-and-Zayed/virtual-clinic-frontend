@@ -81,7 +81,6 @@ const DoctorRegister: FC<DoctorRegisterProps> = ({ backFn }) => {
         errorExists = true;
       }
       if (values.date_of_birth.trim() === "") {
-        console.log("date");
         formik.setFieldError(
           "date_of_birth",
           "Please enter your date of birth"
@@ -106,9 +105,8 @@ const DoctorRegister: FC<DoctorRegisterProps> = ({ backFn }) => {
         formik.setFieldError("confirmPassword", "Passwords do not match");
         errorExists = true;
       }
-      console.log("ERROR EXISTS: ", errorExists);
-      // console.log("CHECKS BOOL: ", checks);
-      console.log("SECTION: ", section);
+
+      //
 
       // SECTION 1
       if (section === 1 && !errorExists) {
@@ -117,12 +115,12 @@ const DoctorRegister: FC<DoctorRegisterProps> = ({ backFn }) => {
       }
 
       if (values.gender.trim() === "") {
-        // console.log("gender");
+        //
         formik.setFieldError("gender", "Please enter your gender");
         errorExists = true;
       }
       if (values.specialty.trim() === "") {
-        // console.log("specialty");
+        //
         formik.setFieldError("specialty", "Please enter your specialty");
         errorExists = true;
       }
@@ -142,8 +140,6 @@ const DoctorRegister: FC<DoctorRegisterProps> = ({ backFn }) => {
         formik.setFieldError("hourlyRate", "Please enter your hourly rate");
         errorExists = true;
       }
-
-      console.log("ERROR EXISTS AFTER ALL: ", errorExists);
 
       if (!errorExists) {
         const dateParts = values.date_of_birth.split("/");

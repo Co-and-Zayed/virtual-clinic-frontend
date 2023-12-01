@@ -22,7 +22,7 @@ const UpcomingPatientsScreen = () => {
 
   useEffect(() => {
     dispatch(listUpcomingPatientsAction({ username: userData?.username })); // sending the request, and update the states
-    //console.log(allPatients);
+    //
   }, []);
 
   const generateExpandable = (record: any) => {
@@ -168,7 +168,6 @@ const UpcomingPatientsScreen = () => {
   const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);
 
   const handleExpand = (expanded: boolean, record: DataType) => {
-    console.log(record.key);
     if (expanded) {
       setExpandedRowKeys([record.key]);
     } else {

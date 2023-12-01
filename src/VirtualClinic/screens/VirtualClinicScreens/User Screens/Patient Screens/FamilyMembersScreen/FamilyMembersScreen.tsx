@@ -52,7 +52,6 @@ const FamilyMembersScreen = () => {
   );
 
   const addPatientMember = async (values: any) => {
-    console.log(values.patientRelationship);
     const res = await fetch(
       `${process.env.REACT_APP_BACKEND_CLINIC}patient/addFamilyMember`,
       {
@@ -94,7 +93,6 @@ const FamilyMembersScreen = () => {
         patientEmail: userData?.email,
       })
     );
-    console.log("values: ", values);
   };
 
   const onReset = () => {
@@ -140,7 +138,6 @@ const FamilyMembersScreen = () => {
         patientEmail: userData?.email,
       })
     );
-    console.log(userFamilyMembers);
   }, []);
 
   //Testing data

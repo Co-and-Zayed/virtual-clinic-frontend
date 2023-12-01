@@ -17,9 +17,7 @@ import PaymentMethod from "./PaymentScreens/PaymentMethod";
 const BuyMedicineScreen = () => {
   const { state } = useLocation();
   const [page, setPage] = useState("paymentMethod");
-  useEffect(() => {
-    console.log(state);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <ConfigProvider

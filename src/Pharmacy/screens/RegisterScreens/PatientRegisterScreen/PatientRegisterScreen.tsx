@@ -74,7 +74,6 @@ const PatientRegisterScreen: FC<PatientRegisterProps> = ({ backFn }) => {
         errorExists = true;
       }
       if (values.date_of_birth.trim() === "") {
-        console.log("date");
         formik.setFieldError(
           "date_of_birth",
           "Please enter your date of birth"
@@ -99,9 +98,8 @@ const PatientRegisterScreen: FC<PatientRegisterProps> = ({ backFn }) => {
         formik.setFieldError("confirmPassword", "Passwords do not match");
         errorExists = true;
       }
-      console.log("ERROR EXISTS: ", errorExists);
-      // console.log("CHECKS BOOL: ", checks);
-      console.log("SECTION: ", section);
+
+      //
 
       if (section === 1 && !errorExists) {
         setSection(2);
@@ -113,17 +111,17 @@ const PatientRegisterScreen: FC<PatientRegisterProps> = ({ backFn }) => {
       ///////////////
 
       if (values.gender.trim() === "") {
-        // console.log("gender");
+        //
         formik.setFieldError("gender", "Please enter your gender");
         errorExists = true;
       }
       if (values.mobileNumber.trim() === "") {
-        // console.log("mobilenumb");
+        //
         formik.setFieldError("mobileNumber", "Please enter your mobile number");
         errorExists = true;
       }
       if (values.healthRecords.trim() === "") {
-        // console.log("health");
+        //
         formik.setFieldError(
           "healthRecords",
           "Please enter your health records"
@@ -131,7 +129,7 @@ const PatientRegisterScreen: FC<PatientRegisterProps> = ({ backFn }) => {
         errorExists = true;
       }
       if (values.emergencyContactName.trim() === "") {
-        // console.log("contatc nam");
+        //
         formik.setFieldError(
           "emergencyContactName",
           "Please enter your emergency contact name"
@@ -139,7 +137,7 @@ const PatientRegisterScreen: FC<PatientRegisterProps> = ({ backFn }) => {
         errorExists = true;
       }
       if (values.emergenyContactNumber.trim() === "") {
-        // console.log("contact numbe");
+        //
         formik.setFieldError(
           "emergenyContactNumber",
           "Please enter your emergency contact number"
@@ -148,13 +146,10 @@ const PatientRegisterScreen: FC<PatientRegisterProps> = ({ backFn }) => {
       }
 
       if (!errorExists) {
-        console.log("REGSITERING");
         const dateParts = values.date_of_birth.split("/");
         const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
         const dateObject = new Date(formattedDate);
 
-        console.log("DATE OF BIRTH", values.date_of_birth);
-        console.log("DATE OF BIRTH", dateObject);
         await dispatch(
           regsiterAction({
             name: values.name,
@@ -193,9 +188,7 @@ const PatientRegisterScreen: FC<PatientRegisterProps> = ({ backFn }) => {
   // Section 2:
   // Hourly rate, affiliation, Educational bg
 
-  useEffect(() => {
-    console.log("PATIENT FILES", patientFiles);
-  }, [patientFiles]);
+  useEffect(() => {}, [patientFiles]);
 
   return (
     <div

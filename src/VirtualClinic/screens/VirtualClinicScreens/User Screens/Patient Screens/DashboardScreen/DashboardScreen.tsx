@@ -9,10 +9,7 @@ import { useFunctions } from "hooks/useFunctions";
 
 const DashboardScreen = () => {
   const { userData } = useSelector((state: RootState) => state.userReducer);
-  useEffect(() => {
-    console.log("USER DATAAA DASHBOARD");
-    console.log(userData);
-  }, []);
+  useEffect(() => {}, []);
 
   const { handleDownload } = useFunctions();
 

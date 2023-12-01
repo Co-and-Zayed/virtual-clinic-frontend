@@ -14,10 +14,8 @@ const AnimatedDigitsLarge: FC<AnimatedDigitsLargeProps> = ({ count, size }) => {
   const [currentCount, setCurrentCount] = useState(count);
 
   // const digits = count.toString().split("").map(Number);
-  useEffect(() => {
-    console.log("MAALAK");
-  });
-  // console.log("DIGITS", digits);
+  useEffect(() => {});
+  //
   return (
     <>
       <FlipNumbers

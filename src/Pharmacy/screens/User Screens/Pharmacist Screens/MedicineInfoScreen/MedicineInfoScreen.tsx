@@ -124,7 +124,6 @@ const MedicineInfoScreen: FC = (
         setOtherActiveIngredients(json.otherActiveIngredients);
         setMedicinalUse(json.medicinalUse);
         setAvailableQuantity(json.availableQuantity);
-        console.log(json.picture);
       } catch (err) {}
       setShowMedicine(true);
     };

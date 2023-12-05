@@ -151,7 +151,7 @@ const DoctorInfoScreen = () => {
         selectedFamilyMemberObj?.familyMember?.type === "GUEST"
         ? "GUEST"
         : "PATIENT"
-    );
+    // );
     await dispatch(
       createAppointmentAction({
         patientId: isCheckboxChecked ? selectedFamilyMember : userData._id,

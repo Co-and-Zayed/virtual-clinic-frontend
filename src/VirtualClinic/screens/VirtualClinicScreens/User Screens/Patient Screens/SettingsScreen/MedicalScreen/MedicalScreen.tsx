@@ -11,12 +11,14 @@ import { UPDATE_USER_DATA } from "VirtualClinic/redux/User/loginTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "VirtualClinic/redux/rootReducer";
 import JellyLoader from "VirtualClinic/components/JellyLoader/JellyLoader";
+import api from "VirtualClinic/api";
 import {
   UploadOutlined,
   PaperClipOutlined,
   InfoCircleOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
+import { set } from "mongoose";
 
 const MedicalScreen = () => {
   const [newMedicalHistory, setNewMedicalHistory] = useState<any[]>([]);
@@ -39,6 +41,8 @@ const MedicalScreen = () => {
   }, []);
 
   useEffect(() => {
+    console.log("userData");
+    console.log(userData);
     if (userData?.medicalHistory) {
       setMedicalHistory(userData?.medicalHistory);
     }
@@ -75,6 +79,15 @@ const MedicalScreen = () => {
           <PaperClipOutlined />
           <span>{file?.name ?? file.split("$__$")[1]}</span>
         </p>
+        <DeleteOutlined
+          onClick={async () => {
+            const res = await api.post("patient/deleteMedicalHistory", {
+              deletedItem: file,
+            });
+            setMedicalHistory(res.data.patient?.medicalHistory);
+          }}
+          className={`${styles.deleteIcon}`}
+        />
       </div>
     ));
   };
@@ -107,6 +120,7 @@ const MedicalScreen = () => {
                     createdAt: new Date(),
                   },
                 });
+                setNewMedicalHistory([]);
                 setHistoryLoading(false);
                 updateUserData();
               }}

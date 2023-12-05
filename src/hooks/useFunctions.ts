@@ -29,8 +29,13 @@ export const useFunctions = () => {
     }
 
     const token = store.getState()?.userReducer?.accessToken;
+    // const baseURL = (window.location.pathname.includes("clinic") ? process.env.REACT_APP_BACKEND_CLINIC) : process.env.REACT_APP_BACKEND_PHARMACY;
     return await axios.post(
-      `${process.env.REACT_APP_BACKEND_CLINIC}${form.endpoint}`,
+      `${
+        window.location.pathname.includes("/pharmacy/")
+          ? process.env.REACT_APP_BACKEND_PHARMACY
+          : process.env.REACT_APP_BACKEND_CLINIC
+      }${form.endpoint}`,
       formData,
       {
         headers: {

@@ -37,6 +37,7 @@ const AdminsScreen = () => {
   const handleAddClick = () => {
     formik.setValues({
       username: null,
+      email: null,
       password: null,
     });
     setShowAddFields(true);
@@ -54,6 +55,7 @@ const AdminsScreen = () => {
   const formik = useFormik({
     initialValues: {
       username: null,
+      email: null,
       password: null,
     },
     onSubmit: async (values: AdminModel) => {
@@ -182,6 +184,13 @@ const AdminsScreen = () => {
                 value: formik.values.password,
                 status: formik.errors.password ? "error" : "",
                 error: formik.errors.password,
+              },
+              {
+                title: "Email",
+                name: "email",
+                value: formik.values.email,
+                status: formik.errors.email ? "error" : "",
+                error: formik.errors.email,
               },
             ])}
             <div className="w-full flex justify-end gap-x-2">

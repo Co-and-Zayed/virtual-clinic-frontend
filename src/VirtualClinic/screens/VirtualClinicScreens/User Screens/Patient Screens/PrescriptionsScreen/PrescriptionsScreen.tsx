@@ -307,7 +307,7 @@ const PrescriptionsScreen: React.FC = () => {
       key: "action",
       render: (text: any, record: any) => (
         <Link
-          to={`/prescriptions/${record.key}`}
+          to={`/clinic/prescriptions/${record.key}`}
           type="primary"
           style={{
             backgroundColor: "#1677ff",

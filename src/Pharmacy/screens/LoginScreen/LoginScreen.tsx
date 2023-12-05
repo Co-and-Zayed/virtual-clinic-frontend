@@ -178,7 +178,7 @@ const LoginScreen = () => {
                 <p className="text-[white]">Forgot your password? Click </p>
                 <a
                   className="hover:cursor-pointer greenText"
-                  href="/reset-password"
+                  href="reset-password"
                 >
                   <u>here</u>
                 </a>

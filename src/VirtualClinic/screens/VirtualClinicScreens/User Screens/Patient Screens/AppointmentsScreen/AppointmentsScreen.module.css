@@ -1,45 +1,50 @@
 .filterBtn {
-    /* rounded-md border border-solid */
-    border-radius: 0.3125rem;
-    border: 1.5px solid var(--dark-green);
+  /* rounded-md border border-solid */
+  border-radius: 0.3125rem;
+  border: 1.5px solid var(--dark-green);
 
-    /* text-xs font-normal */
-    font-family: "Cabin", sans-serif;
-    font-size: 0.75rem;
-    font-weight: 400;
-    color: var(--dark-green);
+  /* text-xs font-normal */
+  font-family: "Cabin", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--dark-green);
 
-    padding-inline: 0.5rem;
-    height: 24px;
+  padding-inline: 0.5rem;
+  height: 24px;
 }
 
 .filterBtnActive {
-    /* rounded-md border border-solid */
-    border-radius: 0.3125rem;
-    border: 1.5px solid var(--dark-green);
+  /* rounded-md border border-solid */
+  border-radius: 0.3125rem;
+  border: 1.5px solid var(--dark-green);
 
-    /* text-xs font-normal */
-    font-family: "Cabin", sans-serif;
-    font-size: 0.75rem;
-    font-weight: 400;
-    color: white !important;
-    background-color: var(--dark-green);
-    padding-inline: 0.5rem;
-    height: 24px;
-    
-    opacity: 1;
+  /* text-xs font-normal */
+  font-family: "Cabin", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: white !important;
+  background-color: var(--dark-green);
+  padding-inline: 0.5rem;
+  height: 24px;
+
+  opacity: 1;
 }
 
 /* on hover, background daark green, text white */
 .filterBtnActive:hover {
-    /* color: white !important; */
-    opacity: 0.75;
-    color: white !important;
-    transition: all 0.3s ease-in-out;
-  
-    /* p */
-    /* p {
+  /* color: white !important; */
+  opacity: 0.75;
+  color: white !important;
+  transition: all 0.3s ease-in-out;
+
+  /* p */
+  /* p {
         color: white;
         transition: all 0.3s ease-in-out;
     } */
-  }
+}
+
+.appointmentCardContainer:has(+ .dateDivider) {
+  margin-bottom: 1rem;
+}
+

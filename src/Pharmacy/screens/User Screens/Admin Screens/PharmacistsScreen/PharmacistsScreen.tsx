@@ -88,7 +88,7 @@ const PharmacistsScreen = () => {
   const handlePharmacistRequest = async (username: any, values: any) => {
     if (values === "accept") {
       const res = await fetch(
-        `${process.env.REACT_APP_BACKEND_PHARMACY}adminAPI/sendContract`,
+        `${process.env.REACT_APP_BACKEND_PHARMACY}admin/sendContract`,
         {
           method: "POST",
           headers: {
@@ -102,7 +102,7 @@ const PharmacistsScreen = () => {
       );
     }
     const res = await fetch(
-      `${process.env.REACT_APP_BACKEND_PHARMACY}adminAPI/${values}Pharmacist`,
+      `${process.env.REACT_APP_BACKEND_PHARMACY}admin/${values}Pharmacist`,
       {
         method: "PUT",
         headers: {

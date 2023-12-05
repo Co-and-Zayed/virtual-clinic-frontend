@@ -48,7 +48,7 @@ const PasswordScreen = () => {
         setLoading(true);
         const res = await fetch(
           `${process.env.REACT_APP_BACKEND_CLINIC}${
-            userType === "PATIENT" ? "patient" : "adminAPI"
+            userType === "PATIENT" ? "patient" : "admin"
           }/changePassword`,
           {
             method: "POST",

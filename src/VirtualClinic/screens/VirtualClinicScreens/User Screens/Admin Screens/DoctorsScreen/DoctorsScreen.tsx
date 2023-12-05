@@ -89,7 +89,7 @@ const DoctorsScreen = () => {
   const handleDoctorRequest = async (username: any, values: any) => {
     if (values === "accept") {
       const res = await fetch(
-        `${process.env.REACT_APP_BACKEND_CLINIC}adminAPI/sendContract`,
+        `${process.env.REACT_APP_BACKEND_CLINIC}admin/sendContract`,
         {
           method: "POST",
           headers: {
@@ -103,7 +103,7 @@ const DoctorsScreen = () => {
       );
     }
     const res = await fetch(
-      `${process.env.REACT_APP_BACKEND_CLINIC}adminAPI/${values}Doctor`,
+      `${process.env.REACT_APP_BACKEND_CLINIC}admin/${values}Doctor`,
       {
         method: "PUT",
         headers: {

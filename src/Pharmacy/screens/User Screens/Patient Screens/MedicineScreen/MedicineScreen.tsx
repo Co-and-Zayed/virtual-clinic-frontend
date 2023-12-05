@@ -117,8 +117,6 @@ const MedicineScreen = () => {
   };
 
   const updateCart = async (newCart: any) => {
-    // setHasAdded(false);
-
     try {
       const res = await fetch(
         `${process.env.REACT_APP_BACKEND_PHARMACY}patient/updateCart`,

@@ -103,11 +103,12 @@ const SideBar: FC<SideBarProps> = () => {
   useEffect(() => {
     setCurrentLink(-1);
     for (let i = 0; i < currentNavLinks?.length; i++) {
-      if ("/clinic" + currentNavLinks[i]?.route === window.location.pathname) {
+      if (window.location.pathname.includes(currentNavLinks[i]?.route)) {
         setCurrentLink(i);
         return;
       }
     }
+
     if (window.location.pathname.includes(Routes.SETTINGS_PATH)) {
       setCurrentLink(currentNavLinks?.length + 1);
       return;

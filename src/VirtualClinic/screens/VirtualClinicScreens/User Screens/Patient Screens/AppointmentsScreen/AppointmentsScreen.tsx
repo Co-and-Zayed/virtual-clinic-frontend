@@ -351,7 +351,7 @@ const AppointmentsScreen = () => {
               ease: [0.38, 0.01, 0.39, 1.1],
               delay: idx * 0.08,
             }}
-            className="w-full flex items-center justify-start pb-2 mb-3 border-b-2 border-gray-300"
+            className={`${styles.dateDivider} w-full flex items-center justify-start pb-2 mb-3 border-b-2 border-gray-300`}
           >
             <p className="text-2xl font-semibold">
               {date.format("dddd, D MMMM, YYYY")}
@@ -363,7 +363,7 @@ const AppointmentsScreen = () => {
       }
       components.push(
         <motion.div
-          className="w-full"
+          className={`w-full ${styles.appointmentCardContainer}`}
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
@@ -520,7 +520,7 @@ const AppointmentsScreen = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="w-full h-full flex flex-col items-center justify-start gap-y-4 mt-2"
+            className="w-full h-full flex flex-col items-center justify-start gap-y-4 mt-2 mb-12 pr-5"
             style={{
               height: "calc(100vh - 15rem)",
               overflowY: "auto",

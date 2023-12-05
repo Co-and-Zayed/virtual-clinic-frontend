@@ -37,6 +37,8 @@ const Modal: FC<ModalProps> = ({
     transition: "opacity 0.25s ease-out",
     opacity: open ? 1 : 0,
     zIndex: 1000,
+
+    overflow: "auto",
   };
 
   const OVERLAY_STYLES: React.CSSProperties = {

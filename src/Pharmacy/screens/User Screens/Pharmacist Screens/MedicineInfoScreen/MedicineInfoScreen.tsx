@@ -40,6 +40,7 @@ import Counter from "Pharmacy/components/Counter/Counter";
 import AnimatedDigits from "Pharmacy/components/AnimatedDigits/AnimatedDigits";
 import AnimatedDigitsLarge from "Pharmacy/components/AnimatedDigitsLarge/AnimatedDigitsLarge";
 import { set } from "mongoose";
+import UploadButton from "Pharmacy/components/UploadButton/UploadButton";
 
 //////////////////////////////////// START OF CODE
 interface DataType {
@@ -98,6 +99,8 @@ const MedicineInfoScreen: FC = (
 
   const [loadingEdit, setLoadingEdit] = useState(false);
   const [showMedicine, setShowMedicine] = useState<boolean>(false);
+
+  const { handleUpload } = useFunctions();
 
   // fetch medicine from api using
   useEffect(() => {
@@ -159,37 +162,59 @@ const MedicineInfoScreen: FC = (
     setAvailableQuantity(medicine?.availableQuantity);
   }
 
+  // const [medicineImage, setMedicineImage] = useState<any>(null);
+  const [medicineImage, setMedicineImage] = useState<any[]>([]); // Initialize as an empty array
+
   async function handleEditMedicine() {
     setLoadingEdit(true);
 
     try {
-      const res = await fetch(
-        `${
-          process.env.REACT_APP_BACKEND_PHARMACY
-        }editMedicine/${searchParams.get("id")}`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            name,
-            description,
-            picture,
-            price,
-            mainActiveIngredient,
-            otherActiveIngredients,
-            medicinalUse,
-            availableQuantity,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: userType,
-          },
-        }
-      );
+      const data = {
+        createdAt: new Date(),
+        picture: medicineImage.length === 1 ? null : picture,
+        name,
+        description,
+        price,
+        mainActiveIngredient,
+        otherActiveIngredients,
+        medicinalUse,
+        availableQuantity,
+      };
+
+      const res = await handleUpload({
+        files: medicineImage,
+        endpoint: `editMedicine/${searchParams.get("id")}`,
+        data: data,
+      });
+
+      // const res = await fetch(
+      //   `${
+      //     process.env.REACT_APP_BACKEND_PHARMACY
+      //   }editMedicine/${searchParams.get("id")}`,
+      //   {
+      //     method: "POST",
+      //     body: JSON.stringify({
+      //       name,
+      //       description,
+      //       picture,
+      //       price,
+      //       mainActiveIngredient,
+      //       otherActiveIngredients,
+      //       medicinalUse,
+      //       availableQuantity,
+      //     }),
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       Authorization: userType,
+      //     },
+      //   }
+      // );
+
       if (res.status === 200) {
         setReload(!reload);
       }
-      const json = await res.json();
 
+      // const json = await res.json();
       setLoadingEdit(false);
       setOpenEditModal(false);
       notification.success({
@@ -627,19 +652,11 @@ const MedicineInfoScreen: FC = (
                   <label htmlFor="picture" className={`text-lg`}>
                     Picture
                   </label>
-                  <Upload>
-                    <Button icon={<UploadOutlined />}>Click to Upload</Button>
-                  </Upload>
-                  {/* <Input
-                    id="picture"
-                    type="file"
-                    placeholder="Picture"
-                    defaultValue={medicine?.picture}
-                    value={picture}
-                    onChange={(e) => {
-                      setPicture(e.target.value);
-                    }}
-                  /> */}
+                  <UploadButton
+                    fileList={medicineImage}
+                    setFileList={setMedicineImage}
+                    variant="DARK_GREEN"
+                  />
                 </div>
                 {/* Status
               <div className={`flex flex-col gap-y-1`}>

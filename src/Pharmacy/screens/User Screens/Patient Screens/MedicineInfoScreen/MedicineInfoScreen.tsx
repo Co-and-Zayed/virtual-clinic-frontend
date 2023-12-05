@@ -94,7 +94,7 @@ const MedicineInfoScreen: FC<MedicineInfoScreenProps> = ({
 
   const [loadingEdit, setLoadingEdit] = useState(false);
   const [showMedicine, setShowMedicine] = useState<boolean>(false);
-
+  const [alternativeMedicines, setAlternativeMedicines] = useState<any>([]);
   useEffect(() => {}, []);
 
   // fetch medicine from api using
@@ -112,16 +112,19 @@ const MedicineInfoScreen: FC<MedicineInfoScreenProps> = ({
           }
         );
         const json = await res.json();
+        const medicine = json?.medicine;
+        console.log("AVAILABLE MEDICINES: ", json?.similarAvailableMedicines);
+        setAlternativeMedicines(json?.similarAvailableMedicines);
 
-        setMedicine(json);
-        setName(json.name);
-        setDescription(json.description);
-        setPicture(json.picture);
-        setPrice(json.price);
-        setMainActiveIngredient(json.mainActiveIngredient);
-        setOtherActiveIngredients(json.otherActiveIngredients);
-        setMedicinalUse(json.medicinalUse);
-        setAvailableQuantity(json.availableQuantity);
+        setMedicine(medicine);
+        setName(medicine.name);
+        setDescription(medicine.description);
+        setPicture(medicine.picture);
+        setPrice(medicine.price);
+        setMainActiveIngredient(medicine.mainActiveIngredient);
+        setOtherActiveIngredients(medicine.otherActiveIngredients);
+        setMedicinalUse(medicine.medicinalUse);
+        setAvailableQuantity(medicine.availableQuantity);
       } catch (err) {}
       setShowMedicine(true);
     };
@@ -268,7 +271,9 @@ const MedicineInfoScreen: FC<MedicineInfoScreenProps> = ({
                       >
                         {medicine?.availableQuantity >= 10
                           ? "In "
-                          : `${medicine?.availableQuantity} left in`}{" "}
+                          : medicine?.availableQuantity > 0
+                          ? `${medicine?.availableQuantity} left in`
+                          : "Out of"}{" "}
                         stock
                       </div>
                     </div>
@@ -382,31 +387,59 @@ const MedicineInfoScreen: FC<MedicineInfoScreenProps> = ({
                 )}
               </div>
 
-              <Counter
-                maxAmount={medicine?.availableQuantity}
-                quantity={quantity}
-                setQuantity={setQuantity}
-                width={6}
-              />
-              {/* <AnimatedDigitsLarge count={quantity * medicine?.price} size={20} /> */}
-              <div
-                className={`${
-                  !hasAdded
-                    ? styles.addCartButton
-                    : styles.addCartButtonSelected
-                } w-[15rem] h-[3rem] flex items-center justify-center`}
-                onClick={() => {
-                  if (!hasAdded) {
-                    addToCart({
-                      quantity: quantity,
-                      medicine: searchParams.get("id"),
-                    });
-                  }
-                }}
-              >
-                {!hasAdded ? "Add to cart" : "Added"}
-                {hasAdded && <CheckOutlined className="ml-2" />}
-              </div>
+              {medicine?.availableQuantity > 0 ? (
+                <>
+                  <Counter
+                    maxAmount={medicine?.availableQuantity}
+                    quantity={quantity}
+                    setQuantity={setQuantity}
+                    width={6}
+                  />
+                  {/* <AnimatedDigitsLarge count={quantity * medicine?.price} size={20} /> */}
+                  <div
+                    className={`${
+                      !hasAdded
+                        ? styles.addCartButton
+                        : styles.addCartButtonSelected
+                    } w-[15rem] h-[3rem] flex items-center justify-center`}
+                    onClick={() => {
+                      if (!hasAdded) {
+                        addToCart({
+                          quantity: quantity,
+                          medicine: searchParams.get("id"),
+                        });
+                      }
+                    }}
+                  >
+                    {!hasAdded ? "Add to cart" : "Added"}
+                    {hasAdded && <CheckOutlined className="ml-2" />}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <Popover
+                    placement="bottomRight"
+                    title={
+                      <div className={`${styles.otherIngredients}`}>
+                        {alternativeMedicines?.map((medicine: any) => (
+                          <a href={`/pharmacy/medicine?id=${medicine._id}`}>
+                            {medicine?.name}
+                          </a>
+                        ))}
+                      </div>
+                    }
+                  >
+                    <div
+                      className={`${styles.subItem} ${styles.otherButton}`}
+                      style={{
+                        width: "fit-content",
+                      }}
+                    >
+                      View Alternatives
+                    </div>
+                  </Popover>
+                </>
+              )}
             </div>
           </div>
 
@@ -525,26 +558,6 @@ const MedicineInfoScreen: FC<MedicineInfoScreenProps> = ({
               okType="default"
               okText="Save"
               cancelText="Cancel"
-              // footer={[
-              //   <Button
-              //     key="back"
-              //     onClick={() => {
-              //       setOpenEditModal(false);
-              //     }}
-              //   >
-              //     Cancel
-              //   </Button>,
-              //   <Button
-              //     key="submit"
-              //     type="default"
-              //     loading={false}
-              //     onClick={() => {
-              //       setOpenEditModal(false);
-              //     }}
-              //   >
-              //
-              //   </Button>,
-              // ]}
             >
               {/* Input fields with all the attributes of the medicice */}
               <div className={`flex flex-col gap-y-4`}>
@@ -687,17 +700,6 @@ const MedicineInfoScreen: FC<MedicineInfoScreenProps> = ({
                     }}
                   />
                 </div>
-                {/* Status
-              <div className={`flex flex-col gap-y-1`}>
-                <label htmlFor="status" className={`text-lg`}>
-                  Status
-                </label>
-                <Input
-                  id="status"
-                  placeholder="Status"
-                  defaultValue={medicine?.status}
-                />  
-              </div> */}
               </div>
             </Modal>
           )

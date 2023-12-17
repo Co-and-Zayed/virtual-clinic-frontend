@@ -331,18 +331,15 @@ If you encounter any bugs, issues, or have suggestions, please report them on ou
 Create a new branch for your feature or bug fix.
 
 ```bash
-Copy code
 git checkout -b feature-name
 Make your changes and commit them.
 ```
 ```bash
-Copy code
 git add .
 git commit -m "Description of your changes"
 Push your changes to your fork.
 ```
 ```bash
-Copy code
 git push origin feature-name
 Open a pull request on our GitHub Pull Requests page.
 ```

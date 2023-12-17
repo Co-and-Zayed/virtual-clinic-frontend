@@ -332,17 +332,18 @@ Create a new branch for your feature or bug fix.
 
 ```bash
 git checkout -b feature-name
-Make your changes and commit them.
 ```
+Make your changes and commit them.
 ```bash
 git add .
 git commit -m "Description of your changes"
-Push your changes to your fork.
 ```
+Push your changes to your fork.
 ```bash
 git push origin feature-name
-Open a pull request on our GitHub Pull Requests page.
 ```
+Open a pull request on our GitHub Pull Requests page.
+
 Development Environment
 To set up the development environment, follow the installation instructions provided in the README file. Additionally, adhere to our coding standards and conventions while making changes.
 

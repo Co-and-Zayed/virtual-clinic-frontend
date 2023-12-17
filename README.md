@@ -171,48 +171,294 @@ function authenticateToken(userType = null) {
 
 ## API References
 
-Please note that detailed API references are currently under development and will be provided here once available. For now, here's a brief overview:
-
-### Authentication
-
-- **Route:** `/api/authenticate`
-  - **Method:** POST
-  - **Description:** Authenticate user and generate access and refresh tokens.
-  - **Example Request:**
-    ```json
-    {
-      "username": "example_user",
-      "password": "example_password"
-    }
-    ```
-  - **Example Response:**
-    ```json
-    {
-      "accessToken": "example_access_token",
-      "refreshToken": "example_refresh_token"
-    }
-    ```
+Here are the API endpoints used in the "El7a2ny" platform:
 
 ### User Management
 
-- **Route:** `/api/users`
-  - **Method:** GET
-  - **Description:** Retrieve a list of all users.
-  - **Example Response:**
-    ```json
-    [
-      {
-        "id": 1,
-        "username": "user1",
-        "email": "user1@example.com"
-      },
-      {
-        "id": 2,
-        "username": "user2",
-        "email": "user2@example.com"
-      }
-    ]
-    ```
+#### List All Users
+- **Route:** `/userAPI/getUsers`
+- **Method:** GET
+- **Description:** Retrieve a list of all users.
+
+#### List All Specialities
+- **Route:** `/dropdown/specialities`
+- **Method:** GET
+- **Description:** Retrieve a list of all medical specialities.
+
+#### Add Family Member
+- **Route:** `/patient/addFamilyMember`
+- **Method:** POST
+- **Description:** Add a new family member for a patient.
+
+#### Get Family Members
+- **Route:** `/patient/getFamilyMembers`
+- **Method:** GET
+- **Description:** Retrieve a list of family members for a patient.
+
+### Prescription Management
+
+#### List All Prescriptions
+- **Route:** `/prescriptionAPI/getPrescriptions`
+- **Method:** GET
+- **Description:** Retrieve a list of all prescriptions.
+
+#### View Single Prescription
+- **Route:** `/prescriptionAPI/getPrescription/{prescriptionId}`
+- **Method:** GET
+- **Description:** Retrieve details of a specific prescription.
+
+### Health Package Management
+
+#### List All Packages
+- **Route:** `/admin/getPackages`
+- **Method:** GET
+- **Description:** Retrieve a list of all health packages.
+
+#### Update Package
+- **Route:** `/admin/updatePackage/{packageId}`
+- **Method:** PUT
+- **Description:** Update details of a specific health package.
+
+#### Create Package
+- **Route:** `/admin/createPackage`
+- **Method:** POST
+- **Description:** Create a new health package.
+
+#### Delete Package
+- **Route:** `/admin/deletePackage/{packageId}`
+- **Method:** DELETE
+- **Description:** Delete a specific health package.
+
+#### List All Admins
+- **Route:** `/admin/viewAllAdmins/{adminId}`
+- **Method:** GET
+- **Description:** Retrieve a list of all administrators.
+
+#### Create Admin
+- **Route:** `/admin/createAdmin`
+- **Method:** POST
+- **Description:** Create a new administrator.
+
+#### Delete Admin
+- **Route:** `/admin/deleteAdmin`
+- **Method:** DELETE
+- **Description:** Delete a specific administrator.
+
+#### View Patients
+- **Route:** `/admin/viewPatients`
+- **Method:** GET
+- **Description:** Retrieve a list of all patients.
+
+#### View Pharmacists
+- **Route:** `/admin/viewPharmacists`
+- **Method:** GET
+- **Description:** Retrieve a list of all pharmacists.
+
+#### Delete Patient
+- **Route:** `/admin/deletePatient`
+- **Method:** DELETE
+- **Description:** Delete a specific patient.
+
+#### Delete Pharmacist
+- **Route:** `/admin/deletePharmacist`
+- **Method:** DELETE
+- **Description:** Delete a specific pharmacist.
+
+#### List All Medicines
+- **Route:** `/getMedicines`
+- **Method:** GET
+- **Description:** Retrieve a list of all medicines.
+
+#### List All Medicinal Uses
+- **Route:** `/getMedicinalUses`
+- **Method:** GET
+- **Description:** Retrieve a list of all medicinal uses.
+
+### Order Management
+
+#### List All Orders
+- **Route:** `/orderAPI/getOrders`
+- **Method:** GET
+- **Description:** Retrieve a list of all orders.
+
+#### Cancel Order
+- **Route:** `/orderAPI/cancelOrder/{orderId}`
+- **Method:** DELETE
+- **Description:** Cancel a specific order.
+
+#### Accept Doctor
+- **Route:** `/admin/acceptDoctor`
+- **Method:** PUT
+- **Description:** Accept a doctor's registration request.
+
+#### Reject Doctor
+- **Route:** `/admin/rejectDoctor`
+- **Method:** PUT
+- **Description:** Reject a doctor's registration request.
+
+#### View All Contracts
+- **Route:** `/pharmacist/viewAllContracts`
+- **Method:** GET
+- **Description:** Retrieve a list of all contracts.
+
+### Patient Management
+
+#### Get All Doctors
+- **Route:** `/patient/getDoctors`
+- **Method:** GET
+- **Description:** Retrieve a list of all doctors.
+
+#### Search for Doctors By Name and/or Speciality
+- **Route:** `/patient/getDoctorsByNameSpeciality`
+- **Method:** GET
+- **Description:** Search for doctors based on name and/or speciality.
+
+#### Filter Doctors
+- **Route:** `/patient/filterDoctors`
+- **Method:** GET
+- **Description:** Filter doctors based on criteria.
+
+#### Get Doctor Details
+- **Route:** `/patient/getDoctordetails`
+- **Method:** GET
+- **Description:** Retrieve details of a specific doctor.
+
+### Doctor Management
+
+#### List All Patients
+- **Route:** `/doctor/getPatients`
+- **Method:** GET
+- **Description:** Retrieve a list of all patients.
+
+#### Get Patient Information
+- **Route:** `/doctor/getPatientInfo`
+- **Method:** GET
+- **Description:** Retrieve information about a specific patient.
+
+#### Get Patient By Name
+- **Route:** `/doctor/getPatientByName/{patientName}`
+- **Method:** GET
+- **Description:** Retrieve a patient by name.
+
+#### Get Upcoming Appointments
+- **Route:** `/doctor/getUpcomingAptmnts/{doctorId}`
+- **Method:** GET
+- **Description:** Retrieve upcoming appointments for a doctor.
+
+#### Get Appointments
+- **Route:** `/patient/getAppointments/{userType}`
+- **Method:** GET
+- **Description:** Retrieve appointments for a patient or a doctor.
+
+#### View Settings
+- **Route:** `/doctor/viewSettings`
+- **Method:** GET
+- **Description:** View doctor settings.
+
+#### Edit Settings
+- **Route:** `/doctor/editSettings`
+- **Method:** PUT
+- **Description:** Edit doctor settings.
+
+### Patient/Appointment Management
+
+#### Create Appointment
+- **Route:** `/patient/createAppointment`
+- **Method:** POST
+- **Description:** Create a new appointment.
+
+#### Get Appointments
+- **Route:** `/patient/getAppointments/{type}`
+- **Method:** GET
+- **Description:** Retrieve appointments for a patient or a doctor.
+
+#### Delete Appointment
+- **Route:** `/patient/deleteAppointment/{id}`
+- **Method:** DELETE
+- **Description:** Delete a specific appointment.
+
+#### Update Appointment
+- **Route:** `/patient/updateAppointment/{id}`
+- **Method:** PUT
+- **Description:** Update details of a specific appointment.
+
+#### Add Family Member
+- **Route:** `/patient/addFamilyMember`
+- **Method:** POST
+- **Description:** Add a new family member for a patient.
+
+#### Get Family Members
+- **Route:** `/patient/getFamilyMembers`
+- **Method:** GET
+- **Description:** Retrieve a list of family members for a patient.
+
+### Prescriptions and Health Records
+
+#### List All Prescriptions
+- **Route:** `/prescriptionAPI/getPrescriptions`
+- **Method:** GET
+- **Description:** Retrieve a list of all prescriptions.
+
+#### View Single Prescription
+- **Route:** `/prescriptionAPI/getPrescription/{id}`
+- **Method:** GET
+- **Description:** Retrieve details of a specific prescription.
+
+#### List All Patient Health Records
+- **Route:** `/patient/getHealthRecords`
+- **Method:** GET
+- **Description:** Retrieve health records for a patient.
+
+### Pharmacy Management
+
+#### List All Medicines
+- **Route:** `/getMedicines`
+- **Method:** GET
+- **Description:** Retrieve a list of all medicines.
+
+#### List All Medicinal Uses
+- **Route:** `/getMedicinalUses`
+- **Method:** GET
+- **Description:** Retrieve a list of all medicinal uses.
+
+### Package Management
+
+#### List All Packages
+- **Route:** `/getPackages`
+- **Method:** GET
+- **Description:** Retrieve a list of all health packages.
+
+#### Update Package
+- **Route:** `/admin/updatePackage/{packageId}`
+- **Method:** PUT
+- **Description:** Update details of a specific health package.
+
+#### Create Package
+- **Route:** `/admin/createPackage`
+- **Method:** POST
+- **Description:** Create a new health package.
+
+#### Delete Package
+- **Route:** `/admin/deletePackage/{packageId}`
+- **Method:** DELETE
+- **Description:** Delete a specific health package.
+
+#### View Subscribed Package for Family Member
+- **Route:** `/patient/viewSubscribedPackageforFamilyMember`
+- **Method:** GET
+- **Description:** View subscribed package for a family member.
+
+#### Unsubscribe From Package
+- **Route:** `/patient/unsubscribeFromPackage`
+- **Method:** POST
+- **Description:** Unsubscribe from a health package.
+
+#### Unsubscribe From Package For Family
+- **Route:** `/patient/unsubscribeFromPackageForFamily`
+- **Method:** POST
+- **Description:** Unsubscribe a family member from a health package.
+
+
 ## Tests
 
 We use Postman for testing the "El7a2ny" APIs. Follow the steps below to run the tests:

@@ -19,6 +19,12 @@ When contributing to El7a2ny, please follow these coding conventions to ensure a
 - **Comments**: Add meaningful comments to explain complex logic or algorithms.
 - **Formatting**: Format your code using a code formatter, such as Prettier.
 
+## ScreenShots
+![screenshot](https://i.imgur.com/aBsP7MA.png)
+![screenshot](https://i.imgur.com/7ZqKKZj.png)
+![screenshot](https://i.imgur.com/HuFBSW3.png)
+![screenshot](https://i.imgur.com/vB1ucUi.png)
+
 ## Tech/Framework Used
 
 - **Frontend**: React.ts
